@@ -22,7 +22,7 @@ YELLOW_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_yellow.png'
 backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))
 
 # Canvas Dimensions
-WIDTH, HEIGHT = 600, 600
+WIDTH, HEIGHT = 750, 750
 CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('SPACE INVADERS')
 
@@ -38,21 +38,52 @@ class Ship:
         self.laser_img = None
         self.lasers = []
         self.cool_down_counter = 0
-        self.width = 50
-        self.height = 50
 
     def draw(self, window):
-        pygame.draw.rect(window, (255, 0, 0), (self.x, self.y, self.width, self.height))
+        window.blit(self.ship_img, (self.x, self.y))
+
+    def get_width(self):
+        return self.ship_img.get_width()
+
+    def get_height(self):
+        return self.ship_img.get_height()
+
+class Player(Ship):
+    def __init__(self, x, y, health=100):
+        super().__init__(x, y, health)
+        self.ship_img = YELLOW_SPACE_SHIP
+        self.laser_img = YELLOW_LASER
+        self.mask = pygame.mask.from_surface(self.ship_img)
+        self.max_health = health
+
+class Enemy(Ship):
+    COLOR_MODE = {
+        'red': (RED_SPACE_SHIP, RED_LASER),
+        'blue': (BLUE_SPACE_SHIP, BLUE_LASER),
+        'green': (GREEN_SPACE_SHIP, GREEN_LASER)
+    }
+
+    def __init__(self, x, y, color, health=100):
+        super().__init__(x, y, health)
+        self.ship_img, self.laser_img = self.COLOR_MODE[color]
+        self.mask = pygame.mask.from_surface(self.ship_img)
+
+    def move(self, vel):
+        self.y += vel
 
 def main():
     run = True
     FPS = 60
     lives = 5
-    level = 1
+    level = 0
     player_vel = 5
-    main_font = pygame.font.SysFont('comicsans', 35)
+    main_font = pygame.font.SysFont('comicsans', 50)
 
-    ship = Ship(WIDTH//2 - 25, 500)
+    enemies = []
+    wave_length = 0
+    enemy_vel = 1
+
+    player = Player(300, 625)
 
     clock = pygame.time.Clock()
 
@@ -65,27 +96,51 @@ def main():
         CANVAS.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
         CANVAS.blit(lives_label, (10, 10))
 
-        ship.draw(CANVAS)
+        player.draw(CANVAS)
+
+        for enemyShip in enemies:
+            enemyShip.draw(CANVAS)
 
         pygame.display.update()
 
     while run:
         clock.tick(FPS)
-        redraw_window()
+
+        if len(enemies) == 0:
+            level += 1
+            wave_length += 5
+            for i in range(wave_length):
+                enemy = Enemy(
+                    random.randrange(50, WIDTH - 100),
+                    random.randrange(-1500, -100),
+                    random.choice(['red', 'blue', 'green'])
+                )
+                enemies.append(enemy)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
         keys = pygame.key.get_pressed()
-        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and (ship.x - player_vel) > 0:  # Left Key
-            ship.x -= player_vel
-        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and (ship.x + player_vel + ship.width) < WIDTH:  # Right Key
-            ship.x += player_vel
-        if (keys[pygame.K_UP] or keys[pygame.K_w]) and (ship.y - player_vel) > 0:  # Up Key
-            ship.y -= player_vel
-        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and (ship.y + player_vel + ship.height) < HEIGHT:  # Down Key
-            ship.y += player_vel
+        # Left Key
+        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and (player.x - player_vel) > 0:
+            player.x -= player_vel
+        # Right Key
+        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and (player.x + player_vel + player.get_width()) < WIDTH:
+            player.x += player_vel
+        # Up Key
+        if (keys[pygame.K_UP] or keys[pygame.K_w]) and (player.y - player_vel) > 0:
+            player.y -= player_vel
+        # Down Key
+        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and (player.y + player_vel + player.get_height()) < HEIGHT:
+            player.y += player_vel
 
+        for enemy in enemies[:]:
+            enemy.move(enemy_vel)
+            if enemy.y + enemy.get_height() > HEIGHT:
+                lives -= 1
+                enemies.remove(enemy)
+
+        redraw_window()
 
 main()
