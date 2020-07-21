@@ -2,6 +2,7 @@ import pygame
 import os
 
 from models.laser import Laser
+from constants import HEIGHT
 
 # Load Enemy Ships
 RED_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'pixel_ship_red_small.png'))
@@ -16,8 +17,6 @@ RED_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_red.png'))
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_green.png'))
 YELLOW_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_yellow.png'))
-
-WIDTH, HEIGHT = 750, 750
 
 class Ship:
     COOLDOWN = 30

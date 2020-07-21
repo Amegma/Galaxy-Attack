@@ -4,6 +4,8 @@ import time
 import random
 
 from models.ship import Player, Enemy
+from utils.collide import collide
+from constants import TITLE, WIDTH, HEIGHT
 
 pygame.font.init()
 
@@ -11,19 +13,14 @@ pygame.font.init()
 backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))
 
 # Canvas Dimensions
-WIDTH, HEIGHT = 750, 750
 CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('SPACE INVADERS')
+pygame.display.set_caption(TITLE)
 
 # Set Background Dimensions
 BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
 
-def collide(obj1, obj2):
-    offset_x = obj2.x - obj1.x
-    offset_y = obj2.y - obj1.y
-    return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
-
 def main():
+    print(pygame.font.get_fonts())
     run = True
     FPS = 60
     lives = 5
