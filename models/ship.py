@@ -5,18 +5,18 @@ from models.laser import Laser
 from constants import HEIGHT
 
 # Load Enemy Ships
-RED_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'pixel_ship_red_small.png'))
-BLUE_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'pixel_ship_blue_small.png'))
-GREEN_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'pixel_ship_green_small.png'))
+RED_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'easy.png'))
+BLUE_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'medium.png'))
+GREEN_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'hard.png'))
 
 # Load Player Ship
-YELLOW_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'pixel_ship_yellow.png'))
+YELLOW_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
 
 # Load Lasers
 RED_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_red.png'))
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_green.png'))
-YELLOW_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_yellow.png'))
+YELLOW_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'))
 
 class Ship:
     COOLDOWN = 30

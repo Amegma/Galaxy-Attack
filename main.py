@@ -72,7 +72,7 @@ def main():
         if lives <= 0:
             lost = True
             redraw_window()
-            time.sleep(5)
+            time.sleep(3)
             run = False
 
         if len(enemies) == 0:
