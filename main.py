@@ -20,7 +20,6 @@ pygame.display.set_caption(TITLE)
 BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
 
 def main():
-    print(pygame.font.get_fonts())
     run = True
     FPS = 60
     lives = 5
@@ -29,13 +28,13 @@ def main():
     laser_vel = 10
 
     main_font = pygame.font.SysFont('comicsans', 50)
-    lost_font = pygame.font.SysFont('comicsans', 60)
+    lost_font = pygame.font.SysFont('robotoblack', 60)
 
     enemies = []
     wave_length = 0
     enemy_vel = 1
 
-    player = Player(300, 625)
+    player = Player(300, 585)
 
     clock = pygame.time.Clock()
 
@@ -56,7 +55,7 @@ def main():
             enemyShip.draw(CANVAS)
 
         if lost:
-            lost_label = lost_font.render('You Lost!!', 1, (255, 255, 255))
+            lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
             CANVAS.blit(lost_label, (WIDTH//2 - lost_label.get_width()//2, 350))
 
         pygame.display.update()
@@ -124,17 +123,21 @@ def main():
         player.move_lasers(-laser_vel, enemies)
 
 def main_menu():
-    title_font = pygame.font.SysFont("comicsans", 70)
+    title_font = pygame.font.SysFont('comicsans', 70)
+    sub_title_font = pygame.font.SysFont('robotoblack', 20)
     run = True
     while run:
-        CANVAS.blit(BG, (0,0))
-        title_label = title_font.render("Press the mouse to begin...", 1, (255,255,255))
+        CANVAS.blit(BG, (0, 0))
+        title_label = title_font.render('Start the Game :)', 1, (0, 209, 0))
         CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2, 350))
+        sub_title_label = sub_title_font.render('PRESS ENTER', 1, (249, 166, 2))
+        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 410))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_RETURN]:
                 main()
     pygame.quit()
 
