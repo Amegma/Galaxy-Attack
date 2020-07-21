@@ -211,14 +211,14 @@ def main():
             for i in range(wave_length):
                 enemy = Enemy(
                     random.randrange(50, WIDTH - 100),
-                    random.randrange(-1500, -100),
+                    random.randrange(-1200, -100),
                     random.choice(['red', 'blue', 'green'])
                 )
                 enemies.append(enemy)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                quit()
 
         keys = pygame.key.get_pressed()
         # Left Key
@@ -253,4 +253,19 @@ def main():
 
         player.move_lasers(-laser_vel, enemies)
 
-main()
+def main_menu():
+    title_font = pygame.font.SysFont("comicsans", 70)
+    run = True
+    while run:
+        CANVAS.blit(BG, (0,0))
+        title_label = title_font.render("Press the mouse to begin...", 1, (255,255,255))
+        CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2, 350))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                main()
+    pygame.quit()
+
+main_menu()
