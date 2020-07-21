@@ -40,7 +40,6 @@ def main():
     clock = pygame.time.Clock()
 
     lost = False
-    lost_count = 0
 
     def redraw_window():
         CANVAS.blit(BG, (0, 0))
@@ -66,15 +65,15 @@ def main():
         clock.tick(FPS)
         redraw_window()
 
-        if lives <= 0 or player.health <= 0:
-            lost = True
-            lost_count += 1
+        if lives > 0 >= player.health:
+            lives -= 1
+            player.health = 100
 
-        if lost:
-            if lost_count > FPS * 3:
-                run = False
-            else:
-                continue
+        if lives <= 0:
+            lost = True
+            redraw_window()
+            time.sleep(5)
+            run = False
 
         if len(enemies) == 0:
             level += 1
