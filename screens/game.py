@@ -5,7 +5,7 @@ import random
 from models.ship import Player, Enemy
 from utils.collide import collide
 
-from constants import WIDTH, HEIGHT, BG, CANVAS, heartImage
+from constants import WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list
 
 def game():
     run = True
@@ -16,7 +16,7 @@ def game():
     laser_vel = 10
 
     main_font = pygame.font.SysFont('comicsans', 50)
-    lost_font = pygame.font.SysFont('comicsans', 60)
+    lost_font = pygame.font.SysFont('comicsans', 70)
     win_font = pygame.font.SysFont('comicsans', 70)
 
     enemies = []
@@ -51,10 +51,12 @@ def game():
             enemyShip.draw(CANVAS)
 
         if win:
+            score_list.append(player.get_score())
             win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
             CANVAS.blit(win_label, (WIDTH//2 - win_label.get_width()//2, 350))
 
         if lost:
+            score_list.append(player.get_score())
             lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
             CANVAS.blit(lost_label, (WIDTH//2 - lost_label.get_width()//2, 350))
 

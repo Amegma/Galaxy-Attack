@@ -5,6 +5,8 @@ TITLE = 'SPACE INVADERS'
 WIDTH = 750
 HEIGHT = 750
 
+score_list = []
+
 # Load Controls Image
 startImage = pygame.image.load(os.path.join('assets', 'play.png'))
 controlImage = pygame.image.load(os.path.join('assets', 'joystick.png'))

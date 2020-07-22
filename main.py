@@ -2,6 +2,8 @@ import pygame
 
 from screens.game import game
 from screens.controls import controls
+from screens.score_board import score_board
+
 from constants import TITLE,\
     WIDTH,\
     BOSS_SHIP,\
@@ -58,6 +60,9 @@ def main():
 
         if keys[pygame.K_c]:
             controls()
+
+        if keys[pygame.K_s]:
+            score_board()
 
         if keys[pygame.K_RETURN]:
             game()
