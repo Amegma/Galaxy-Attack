@@ -19,7 +19,7 @@ BLUE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_green.png'))
 
 class Ship:
-    COOLDOWN = 30
+    CoolDown = 30
 
     def __init__(self, x, y, health=100):
         self.x = x
@@ -36,7 +36,7 @@ class Ship:
             laser.draw(window)
 
     def move_lasers(self, vel, obj):
-        self.cooldown()
+        self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
             if laser.off_screen(HEIGHT):
@@ -45,8 +45,8 @@ class Ship:
                 obj.health -= 10
                 self.lasers.remove(laser)
 
-    def cooldown(self):
-        if self.cool_down_counter >= self.COOLDOWN:
+    def coolDown(self):
+        if self.cool_down_counter >= self.CoolDown:
             self.cool_down_counter = 0
         elif self.cool_down_counter > 0:
             self.cool_down_counter += 1
@@ -72,7 +72,7 @@ class Player(Ship):
         self.max_health = health
 
     def move_lasers(self, vel, objs):
-        self.cooldown()
+        self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
             if laser.off_screen(HEIGHT):
