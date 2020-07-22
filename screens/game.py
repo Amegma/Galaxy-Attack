@@ -37,9 +37,11 @@ def game():
         # Draw Text
         level_label = main_font.render(f'Level: {level}', 1, (255, 255, 255))
         lives_label = main_font.render(f'Lives: {lives}', 1, (255, 255, 255))
+        score_label = main_font.render(f'Score: {player.get_score()}', 1, (255, 255, 255))
 
-        CANVAS.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
-        CANVAS.blit(lives_label, (10, 10))
+        CANVAS.blit(level_label, (WIDTH - level_label.get_width() - 15, 15))
+        CANVAS.blit(score_label, (WIDTH//2 - 75, 15))
+        CANVAS.blit(lives_label, (15, 15))
 
         player.draw(CANVAS)
 
@@ -85,7 +87,7 @@ def game():
             run = False
 
         if len(enemies) == 0:
-            level += 5
+            level += 1
             wave_length += 4
 
             for i in range(wave_length if level < 10 else 1):

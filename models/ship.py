@@ -16,6 +16,7 @@ from constants import HEIGHT,\
 class Ship:
     CoolDown = 25
     boss_max_health = 99
+    SCORE = 0
 
     def __init__(self, x, y, health=100):
         self.x = x
@@ -59,6 +60,9 @@ class Ship:
     def get_height(self):
         return self.ship_img.get_height()
 
+    def get_score(self):
+        return self.SCORE
+
 class Player(Ship):
     def __init__(self, x, y, health=100):
         super().__init__(x, y, health)
@@ -76,6 +80,7 @@ class Player(Ship):
             else:
                 for obj in objs:
                     if laser.collision(obj):
+                        self.SCORE += 50
                         if obj.ship_type == 'boss':
                             if self.boss_max_health - 10 <= 0:
                                 objs.remove(obj)
