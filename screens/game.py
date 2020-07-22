@@ -92,6 +92,7 @@ def game():
 
         keys = pygame.key.get_pressed()
 
+        # Return to main page
         if keys[pygame.K_ESCAPE]:
             run = False
 
