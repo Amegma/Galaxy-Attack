@@ -5,10 +5,7 @@ import random
 from models.ship import Player, Enemy
 from utils.collide import collide
 
-from constants import WIDTH,\
-    HEIGHT,\
-    BG,\
-    CANVAS
+from constants import WIDTH, HEIGHT, BG, CANVAS
 
 def game():
     run = True
@@ -67,56 +64,36 @@ def game():
         clock.tick(FPS)
         redraw_window()
 
-        if lives > 0 >= player.health:
-            lives -= 1
-            player.health = 100
-
-        if level >= 10 and boss_entry:
-            redraw_window()
-            time.sleep(2)
-            boss_entry = False
-
-        if level > 10:
-            win = True
-            redraw_window()
-            time.sleep(3)
-            run = False
-
-        if lives <= 0:
+        if lives > 0:
+            if player.health <= 0:
+                lives -= 1
+                player.health = 100
+        else:
             lost = True
             redraw_window()
             time.sleep(3)
             run = False
 
+        if level == 10 and boss_entry:
+            redraw_window()
+            time.sleep(2)
+            boss_entry = False
+        elif level > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            run = False
+
         if len(enemies) == 0:
-            level += 1
+            level += 5
             wave_length += 4
 
-            if level >= 10:
-                enemy = Enemy(
+            for i in range(wave_length if level < 10 else 1):
+                enemies.append(Enemy(
                     random.randrange(50, WIDTH - 100),
                     random.randrange(-1200, -100),
-                    'boss',
-                    100
+                    random.choice(['easy', 'medium', 'hard']) if level < 10 else 'boss')
                 )
-                enemies.append(enemy)
-            else:
-                for i in range(wave_length):
-                    type_damage = {
-                        'easy': 10,
-                        'medium': 18,
-                        'hard': 25
-                    }
-
-                    ship_type = random.choice(['easy', 'medium', 'hard'])
-
-                    enemy = Enemy(
-                        random.randrange(50, WIDTH - 100),
-                        random.randrange(-1200, -100),
-                        ship_type,
-                        type_damage[ship_type]
-                    )
-                    enemies.append(enemy)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -125,7 +102,7 @@ def game():
         keys = pygame.key.get_pressed()
 
         # Return to main page
-        if keys[pygame.K_ESCAPE]:
+        if keys[pygame.K_BACKSPACE]:
             run = False
 
         # Left Key
@@ -148,17 +125,17 @@ def game():
             enemy.move(enemy_vel)
             enemy.move_lasers(laser_vel, player)
 
-            if random.randrange(0, 2 * 60) == 1:
+            if random.randrange(0, 2 * FPS) == 1:
                 enemy.shoot()
 
             if collide(enemy, player):
                 if enemy.ship_type == 'boss':
-                    if enemy.boss_max_health - 20 <= 0:
+                    if enemy.boss_max_health - 5 <= 0:
                         enemies.remove(enemy)
                         enemy.boss_max_health = 100
                         player.health -= 100
                     else:
-                        enemy.boss_max_health -= 20
+                        enemy.boss_max_health -= 5
                         player.health -= 100
                 else:
                     player.health -= 10

@@ -14,7 +14,7 @@ from constants import HEIGHT,\
     GREEN_LASER
 
 class Ship:
-    CoolDown = 30
+    CoolDown = 25
     boss_max_health = 99
 
     def __init__(self, x, y, health=100):
@@ -77,11 +77,11 @@ class Player(Ship):
                 for obj in objs:
                     if laser.collision(obj):
                         if obj.ship_type == 'boss':
-                            if self.boss_max_health - 20 <= 0:
+                            if self.boss_max_health - 10 <= 0:
                                 objs.remove(obj)
                                 self.boss_max_health = 100
                             else:
-                                self.boss_max_health -= 20
+                                self.boss_max_health -= 10
                         else:
                             objs.remove(obj)
 
@@ -104,20 +104,19 @@ class Player(Ship):
 
 class Enemy(Ship):
     TYPE_MODE = {
-        'easy': (EASY_SPACE_SHIP, RED_LASER),
-        'medium': (MEDIUM_SPACE_SHIP, BLUE_LASER),
-        'hard': (HARD_SPACE_SHIP, GREEN_LASER),
-        'boss': (BOSS_SHIP, PURPLE_LASER)
+        'easy': (EASY_SPACE_SHIP, RED_LASER, 10),
+        'medium': (MEDIUM_SPACE_SHIP, BLUE_LASER, 18),
+        'hard': (HARD_SPACE_SHIP, GREEN_LASER, 25),
+        'boss': (BOSS_SHIP, PURPLE_LASER, 100)
     }
 
     ship_type = ''
 
-    def __init__(self, x, y, ship_type, damage=10, health=100):
+    def __init__(self, x, y, ship_type, health=100):
         super().__init__(x, y, health)
         self.ship_type = ship_type
-        self.ship_img, self.laser_img = self.TYPE_MODE[self.ship_type]
+        self.ship_img, self.laser_img, self.damage = self.TYPE_MODE[self.ship_type]
         self.mask = pygame.mask.from_surface(self.ship_img)
-        self.damage = damage
 
     def move(self, vel):
         self.y += vel

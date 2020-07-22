@@ -46,10 +46,10 @@ def controls():
 
         escape_label = control_font.render('Return back to home', 1, (0, 225, 0))
         CANVAS.blit(escape_label, (125, 530))
-        escape_key_label = keys_font.render('[Esc]', 1, (240, 0, 0))
+        escape_key_label = keys_font.render('[backspace]', 1, (240, 0, 0))
         CANVAS.blit(escape_key_label, (470, 530))
 
-        control_title_label = control_font.render('[BackSpace]', 1, (255, 255, 255))
+        control_title_label = control_font.render('[Backspace]', 1, (255, 255, 255))
         CANVAS.blit(control_title_label, (30, 30))
 
         pygame.display.update()

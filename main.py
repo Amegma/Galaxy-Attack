@@ -53,6 +53,9 @@ def main():
                 run = False
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            run = False
+
         if keys[pygame.K_c]:
             controls()
 
