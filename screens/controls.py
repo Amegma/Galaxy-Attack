@@ -1,6 +1,9 @@
 import pygame
 
-from constants import WIDTH, controlImage, BG, CANVAS
+from constants import WIDTH,\
+    controlImage,\
+    BG,\
+    CANVAS
 
 def controls():
     run = True

@@ -1,7 +1,15 @@
 import pygame
 
 from models.laser import Laser
-from constants import HEIGHT, EASY_SPACE_SHIP, MEDIUM_SPACE_SHIP, HARD_SPACE_SHIP, PLAYER_SPACE_SHIP, PLAYER_LASER, RED_LASER, BLUE_LASER, GREEN_LASER
+from constants import HEIGHT,\
+    EASY_SPACE_SHIP,\
+    MEDIUM_SPACE_SHIP,\
+    HARD_SPACE_SHIP,\
+    PLAYER_SPACE_SHIP,\
+    PLAYER_LASER,\
+    RED_LASER,\
+    BLUE_LASER,\
+    GREEN_LASER
 
 class Ship:
     CoolDown = 30
@@ -74,8 +82,14 @@ class Player(Ship):
         self.healthBar(window)
 
     def healthBar(self, window):
-        pygame.draw.rect(window, (255, 0, 0), (self.x, self.y + self.ship_img.get_height() + 10, int(self.ship_img.get_width()), 10))
-        pygame.draw.rect(window, (0, 255, 0), (self.x, self.y + self.ship_img.get_height() + 10, int(self.ship_img.get_width() * (self.health/self.max_health)), 10))
+        pygame.draw.rect(window, (255, 0, 0), (self.x,
+                                               self.y + self.ship_img.get_height() + 10,
+                                               int(self.ship_img.get_width()),
+                                               10))
+        pygame.draw.rect(window, (0, 255, 0), (self.x,
+                                               self.y + self.ship_img.get_height() + 10,
+                                               int(self.ship_img.get_width() * (self.health/self.max_health)),
+                                               10))
 
 class Enemy(Ship):
     TYPE_MODE = {

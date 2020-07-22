@@ -2,7 +2,16 @@ import pygame
 
 from screens.game import game
 from screens.controls import controls
-from constants import TITLE, WIDTH, BOSS_SHIP, PLAYER_SPACE_SHIP, PLAYER_LASER, startImage, controlImage, trophyImage, BG, CANVAS
+from constants import TITLE,\
+    WIDTH,\
+    BOSS_SHIP,\
+    PLAYER_SPACE_SHIP,\
+    PLAYER_LASER,\
+    startImage,\
+    controlImage,\
+    trophyImage,\
+    BG,\
+    CANVAS
 
 pygame.font.init()
 

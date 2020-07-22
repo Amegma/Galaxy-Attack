@@ -5,7 +5,10 @@ import random
 from models.ship import Player, Enemy
 from utils.collide import collide
 
-from constants import WIDTH, HEIGHT, BG, CANVAS
+from constants import WIDTH,\
+    HEIGHT,\
+    BG,\
+    CANVAS
 
 def game():
     run = True
@@ -72,6 +75,7 @@ def game():
                     'medium': 18,
                     'hard': 25,
                 }
+
                 ship_type = random.choice(['easy', 'medium', 'hard'])
 
                 enemy = Enemy(
@@ -87,6 +91,10 @@ def game():
                 quit()
 
         keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_ESCAPE]:
+            run = False
+
         # Left Key
         if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and (player.x - player_vel) > 0:
             player.x -= player_vel
