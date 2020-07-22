@@ -1,22 +1,7 @@
 import pygame
-import os
 
 from models.laser import Laser
-from constants import HEIGHT
-
-# Load Enemy Ships
-EASY_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'easy.png'))
-MEDIUM_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'medium.png'))
-HARD_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'hard.png'))
-
-# Load Player
-PLAYER_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
-PLAYER_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'))
-
-# Load Lasers
-RED_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_red.png'))
-BLUE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_blue.png'))
-GREEN_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_green.png'))
+from constants import HEIGHT, EASY_SPACE_SHIP, MEDIUM_SPACE_SHIP, HARD_SPACE_SHIP, PLAYER_SPACE_SHIP, PLAYER_LASER, RED_LASER, BLUE_LASER, GREEN_LASER
 
 class Ship:
     CoolDown = 30

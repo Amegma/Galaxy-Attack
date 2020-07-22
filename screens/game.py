@@ -1,21 +1,11 @@
 import pygame
-import os
 import time
 import random
 
 from models.ship import Player, Enemy
 from utils.collide import collide
 
-from constants import WIDTH, HEIGHT
-
-# Load Background Image
-backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))
-
-# Set Background Dimensions
-BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
-
-# Canvas Dimensions
-CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
+from constants import WIDTH, HEIGHT, BG, CANVAS
 
 def game():
     run = True
@@ -40,6 +30,7 @@ def game():
 
     def redraw_window():
         CANVAS.blit(BG, (0, 0))
+
         # Draw Text
         level_label = main_font.render(f'Level: {level}', 1, (255, 255, 255))
         lives_label = main_font.render(f'Lives: {lives}', 1, (255, 255, 255))

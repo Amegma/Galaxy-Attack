@@ -1,36 +1,11 @@
 import pygame
-import os
 
 from screens.game import game
 from screens.controls import controls
-from constants import TITLE, WIDTH, HEIGHT
+from constants import TITLE, WIDTH, BOSS_SHIP, PLAYER_SPACE_SHIP, PLAYER_LASER, startImage, controlImage, trophyImage, BG, CANVAS
 
 pygame.font.init()
 
-# Load Control Image
-startImage = pygame.image.load(os.path.join('assets', 'play.png'))
-
-# Load Control Image
-controlImage = pygame.image.load(os.path.join('assets', 'joystick.png'))
-
-# Load ScoreBoard Image
-trophyImage = pygame.image.load(os.path.join('assets', 'trophy.png'))
-
-# Load Boss Ship
-BOSS_SHIP = pygame.image.load(os.path.join('assets', 'boss.png'))
-
-# Load Player
-PLAYER_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
-PLAYER_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'))
-
-# Load Background Image
-backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))
-
-# Set Background Dimensions
-BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
-
-# Canvas Dimensions
-CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
 def main():

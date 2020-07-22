@@ -1,19 +1,6 @@
 import pygame
-import os
 
-from constants import WIDTH, HEIGHT
-
-# Load Control Image
-controlImage = pygame.image.load(os.path.join('assets', 'joystick.png'))
-
-# Load Background Image
-backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))
-
-# Set Background Dimensions
-BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
-
-# Canvas Dimensions
-CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
+from constants import WIDTH, controlImage, BG, CANVAS
 
 def controls():
     run = True
