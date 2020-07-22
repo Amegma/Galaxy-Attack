@@ -30,6 +30,7 @@ PLAYER_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'
 RED_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_red.png'))
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_green.png'))
+PURPLE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_purple.png'))
 
 # Load Background Image
 backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))

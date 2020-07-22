@@ -20,6 +20,7 @@ def game():
 
     main_font = pygame.font.SysFont('comicsans', 50)
     lost_font = pygame.font.SysFont('robotoblack', 60)
+    win_font = pygame.font.SysFont('comicsans', 70)
 
     enemies = []
     wave_length = 0
@@ -30,6 +31,8 @@ def game():
     clock = pygame.time.Clock()
 
     lost = False
+    win = False
+    boss_entry = True
 
     def redraw_window():
         CANVAS.blit(BG, (0, 0))
@@ -46,9 +49,17 @@ def game():
         for enemyShip in enemies:
             enemyShip.draw(CANVAS)
 
+        if win:
+            win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
+            CANVAS.blit(win_label, (WIDTH//2 - win_label.get_width()//2, 350))
+
         if lost:
             lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
             CANVAS.blit(lost_label, (WIDTH//2 - lost_label.get_width()//2, 350))
+
+        if level >= 10 and boss_entry:
+            last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
+            CANVAS.blit(last_label, (WIDTH//2 - last_label.get_width()//2, 350))
 
         pygame.display.update()
 
@@ -60,6 +71,17 @@ def game():
             lives -= 1
             player.health = 100
 
+        if level >= 10 and boss_entry:
+            redraw_window()
+            time.sleep(2)
+            boss_entry = False
+
+        if level > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            run = False
+
         if lives <= 0:
             lost = True
             redraw_window()
@@ -68,23 +90,33 @@ def game():
 
         if len(enemies) == 0:
             level += 1
-            wave_length += 5
-            for i in range(wave_length):
-                type_damage = {
-                    'easy': 10,
-                    'medium': 18,
-                    'hard': 25,
-                }
+            wave_length += 4
 
-                ship_type = random.choice(['easy', 'medium', 'hard'])
-
+            if level >= 10:
                 enemy = Enemy(
                     random.randrange(50, WIDTH - 100),
                     random.randrange(-1200, -100),
-                    ship_type,
-                    type_damage[ship_type]
+                    'boss',
+                    100
                 )
                 enemies.append(enemy)
+            else:
+                for i in range(wave_length):
+                    type_damage = {
+                        'easy': 10,
+                        'medium': 18,
+                        'hard': 25
+                    }
+
+                    ship_type = random.choice(['easy', 'medium', 'hard'])
+
+                    enemy = Enemy(
+                        random.randrange(50, WIDTH - 100),
+                        random.randrange(-1200, -100),
+                        ship_type,
+                        type_damage[ship_type]
+                    )
+                    enemies.append(enemy)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -120,8 +152,17 @@ def game():
                 enemy.shoot()
 
             if collide(enemy, player):
-                player.health -= 10
-                enemies.remove(enemy)
+                if enemy.ship_type == 'boss':
+                    if enemy.boss_max_health - 20 <= 0:
+                        enemies.remove(enemy)
+                        enemy.boss_max_health = 100
+                        player.health -= 100
+                    else:
+                        enemy.boss_max_health -= 20
+                        player.health -= 100
+                else:
+                    player.health -= 10
+                    enemies.remove(enemy)
             elif enemy.y + enemy.get_height() > HEIGHT:
                 lives -= 1
                 enemies.remove(enemy)
