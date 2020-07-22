@@ -5,7 +5,7 @@ import random
 from models.ship import Player, Enemy
 from utils.collide import collide
 
-from constants import WIDTH, HEIGHT, BG, CANVAS
+from constants import WIDTH, HEIGHT, BG, CANVAS, heartImage
 
 def game():
     run = True
@@ -16,7 +16,7 @@ def game():
     laser_vel = 10
 
     main_font = pygame.font.SysFont('comicsans', 50)
-    lost_font = pygame.font.SysFont('robotoblack', 60)
+    lost_font = pygame.font.SysFont('comicsans', 60)
     win_font = pygame.font.SysFont('comicsans', 70)
 
     enemies = []
@@ -34,14 +34,16 @@ def game():
     def redraw_window():
         CANVAS.blit(BG, (0, 0))
 
-        # Draw Text
-        level_label = main_font.render(f'Level: {level}', 1, (255, 255, 255))
-        lives_label = main_font.render(f'Lives: {lives}', 1, (255, 255, 255))
-        score_label = main_font.render(f'Score: {player.get_score()}', 1, (255, 255, 255))
+        # Lives
+        for index in range(1, lives + 1):
+            CANVAS.blit(heartImage, (37 * index - 10, 20))
 
-        CANVAS.blit(level_label, (WIDTH - level_label.get_width() - 15, 15))
-        CANVAS.blit(score_label, (WIDTH//2 - 75, 15))
-        CANVAS.blit(lives_label, (15, 15))
+        # Draw Text
+        level_label = main_font.render(f'{level} / 10', 1, (0, 255, 255))
+        score_label = main_font.render(f'{player.get_score()}', 1, (0, 255, 0))
+
+        CANVAS.blit(level_label, (30, 75))
+        CANVAS.blit(score_label, (WIDTH - score_label.get_width() - 30, 20))
 
         player.draw(CANVAS)
 
@@ -131,6 +133,7 @@ def game():
                 enemy.shoot()
 
             if collide(enemy, player):
+                player.SCORE += 50
                 if enemy.ship_type == 'boss':
                     if enemy.boss_max_health - 5 <= 0:
                         enemies.remove(enemy)

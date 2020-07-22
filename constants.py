@@ -5,14 +5,13 @@ TITLE = 'SPACE INVADERS'
 WIDTH = 750
 HEIGHT = 750
 
-# Load Control Image
+# Load Controls Image
 startImage = pygame.image.load(os.path.join('assets', 'play.png'))
-
-# Load Control Image
 controlImage = pygame.image.load(os.path.join('assets', 'joystick.png'))
-
-# Load ScoreBoard Image
 trophyImage = pygame.image.load(os.path.join('assets', 'trophy.png'))
+
+# Load Hearts
+heartImage = pygame.image.load(os.path.join('assets', 'heart.png'))
 
 # Load Boss Ship
 BOSS_SHIP = pygame.image.load(os.path.join('assets', 'boss.png'))

@@ -19,8 +19,8 @@ pygame.display.set_caption(TITLE)
 
 def main():
     title_font = pygame.font.SysFont('comicsans', 70)
-    sub_title_font = pygame.font.SysFont('robotoblack', 20)
-    control_font = pygame.font.SysFont('segoeuiblack', 30)
+    sub_title_font = pygame.font.SysFont('comicsans', 30)
+    control_font = pygame.font.SysFont('comicsans', 40)
 
     run = True
     while run:
@@ -39,12 +39,12 @@ def main():
 
         # Control Page
         control_label = control_font.render('[c]', 1, (255, 255, 255))
-        CANVAS.blit(control_label, (90, 25))
+        CANVAS.blit(control_label, (90, 35))
         CANVAS.blit(controlImage, (30, 15))
 
         # ScoreBoard Page
         score_label = control_font.render('[s]', 1, (255, 255, 255))
-        CANVAS.blit(score_label, (WIDTH - 67, 25))
+        CANVAS.blit(score_label, (WIDTH - 67, 35))
         CANVAS.blit(trophyImage, (WIDTH - 130, 25))
 
         pygame.display.update()
