@@ -9,14 +9,14 @@ RED_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'easy.png'))
 BLUE_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'medium.png'))
 GREEN_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'hard.png'))
 
-# Load Player Ship
-YELLOW_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
+# Load Player
+PLAYER_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
+PLAYER_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'))
 
 # Load Lasers
 RED_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_red.png'))
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_green.png'))
-YELLOW_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'))
 
 class Ship:
     COOLDOWN = 30
@@ -66,8 +66,8 @@ class Ship:
 class Player(Ship):
     def __init__(self, x, y, health=100):
         super().__init__(x, y, health)
-        self.ship_img = YELLOW_SPACE_SHIP
-        self.laser_img = YELLOW_LASER
+        self.ship_img = PLAYER_SPACE_SHIP
+        self.laser_img = PLAYER_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
 

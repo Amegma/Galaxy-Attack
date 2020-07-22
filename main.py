@@ -12,6 +12,19 @@ pygame.font.init()
 # Load Control Image
 controlImage = pygame.image.load(os.path.join('assets', 'joystick.png'))
 
+# Load ScoreBoard Image
+trophyImage = pygame.image.load(os.path.join('assets', 'trophy.png'))
+
+# Load Control Image
+startImage = pygame.image.load(os.path.join('assets', 'play.png'))
+
+# Load Boss Ship
+BOSS_SHIP = pygame.image.load(os.path.join('assets', 'boss.png'))
+
+# Load Player
+PLAYER_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
+PLAYER_LASER = pygame.image.load(os.path.join('assets', 'pixel_laser_cosmic.png'))
+
 # Load Background Image
 backgroundImage = pygame.image.load(os.path.join('assets', 'background-black.png'))
 
@@ -186,14 +199,26 @@ def main_menu():
     while run:
         CANVAS.blit(BG, (0, 0))
 
-        title_label = title_font.render('Start the Game :)', 1, (0, 209, 0))
-        CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2, 350))
+        title_label = title_font.render('Start the Game', 1, (0, 209, 0))
+        CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2 - 15, 350))
+        CANVAS.blit(startImage, (WIDTH//2 + title_label.get_width()//2, 351))
         sub_title_label = sub_title_font.render('PRESS ENTER', 1, (249, 166, 2))
         CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 410))
 
+        # Ships
+        CANVAS.blit(BOSS_SHIP, (285, 75))
+        CANVAS.blit(PLAYER_SPACE_SHIP, (WIDTH//2 - 50, 575))
+        CANVAS.blit(PLAYER_LASER, (WIDTH//2 - 50, 475))
+
         # Control Page
-        control_label = control_font.render('Controls [c]', 1, (255, 255, 255))
-        CANVAS.blit(control_label, (30, 15))
+        control_label = control_font.render('[c]', 1, (255, 255, 255))
+        CANVAS.blit(control_label, (90, 25))
+        CANVAS.blit(controlImage, (30, 15))
+
+        # ScoreBoard Page
+        score_label = control_font.render('[s]', 1, (255, 255, 255))
+        CANVAS.blit(score_label, (WIDTH - 67, 25))
+        CANVAS.blit(trophyImage, (WIDTH - 130, 25))
 
         pygame.display.update()
         for event in pygame.event.get():
