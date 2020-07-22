@@ -5,9 +5,9 @@ from models.laser import Laser
 from constants import HEIGHT
 
 # Load Enemy Ships
-RED_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'easy.png'))
-BLUE_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'medium.png'))
-GREEN_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'hard.png'))
+EASY_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'easy.png'))
+MEDIUM_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'medium.png'))
+HARD_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'hard.png'))
 
 # Load Player
 PLAYER_SPACE_SHIP = pygame.image.load(os.path.join('assets', 'retro-spaceship.png'))
@@ -93,19 +93,30 @@ class Player(Ship):
         pygame.draw.rect(window, (0, 255, 0), (self.x, self.y + self.ship_img.get_height() + 10, int(self.ship_img.get_width() * (self.health/self.max_health)), 10))
 
 class Enemy(Ship):
-    COLOR_MODE = {
-        'red': (RED_SPACE_SHIP, RED_LASER),
-        'blue': (BLUE_SPACE_SHIP, BLUE_LASER),
-        'green': (GREEN_SPACE_SHIP, GREEN_LASER)
+    TYPE_MODE = {
+        'easy': (EASY_SPACE_SHIP, RED_LASER),
+        'medium': (MEDIUM_SPACE_SHIP, BLUE_LASER),
+        'hard': (HARD_SPACE_SHIP, GREEN_LASER)
     }
 
-    def __init__(self, x, y, color, health=100):
+    def __init__(self, x, y, ship_type, damage=10, health=100):
         super().__init__(x, y, health)
-        self.ship_img, self.laser_img = self.COLOR_MODE[color]
+        self.ship_img, self.laser_img = self.TYPE_MODE[ship_type]
         self.mask = pygame.mask.from_surface(self.ship_img)
+        self.damage = damage
 
     def move(self, vel):
         self.y += vel
+
+    def move_lasers(self, vel, obj):
+        self.coolDown()
+        for laser in self.lasers:
+            laser.move(vel)
+            if laser.off_screen(HEIGHT):
+                self.lasers.remove(laser)
+            elif laser.collision(obj):
+                obj.health -= self.damage
+                self.lasers.remove(laser)
 
     def shoot(self):
         if self.cool_down_counter == 0:

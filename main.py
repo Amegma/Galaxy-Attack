@@ -94,10 +94,18 @@ def main():
             level += 1
             wave_length += 5
             for i in range(wave_length):
+                type_damage = {
+                    'easy': 10,
+                    'medium': 18,
+                    'hard': 25,
+                }
+                ship_type = random.choice(['easy', 'medium', 'hard'])
+
                 enemy = Enemy(
                     random.randrange(50, WIDTH - 100),
                     random.randrange(-1200, -100),
-                    random.choice(['red', 'blue', 'green'])
+                    ship_type,
+                    type_damage[ship_type]
                 )
                 enemies.append(enemy)
 
