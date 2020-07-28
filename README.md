@@ -16,7 +16,9 @@ This project is an inspiration of an Atari game which is Space Invaders with som
 ### Execute
 ```python <file_path>/main.py```
 
-## Demo images
+## DEMO
+
+#### IMAGES:
 
 <img src="/images/start.png" width=340px /><img src="/images/game.png" width=340px />
 <img src="/images/controls.png" width=340px /><img src="/images/scoreboard.png" width=340px />
