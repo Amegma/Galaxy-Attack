@@ -6,6 +6,7 @@ This project is an inspiration of an Atari game which is Space Invaders with som
 
 * Python
 * Framework - PyGame
+* Other modules - Time, os & random
 
 ## Guidelines to setup
 
