@@ -137,7 +137,7 @@ class Enemy(Ship):
                 self.lasers.remove(laser)
 
     def shoot(self):
-        if self.cool_down_counter == 0:
+        if self.cool_down_counter == 0 and self.y > 0:
             laser = Laser(self.x - 10, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1
