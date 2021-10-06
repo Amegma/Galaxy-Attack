@@ -1,17 +1,20 @@
 import pygame
 
 from models.laser import Laser
-from constants import HEIGHT,\
-    EASY_SPACE_SHIP,\
-    MEDIUM_SPACE_SHIP,\
-    HARD_SPACE_SHIP,\
-    PLAYER_SPACE_SHIP,\
-    BOSS_SHIP,\
-    PURPLE_LASER,\
-    PLAYER_LASER,\
-    RED_LASER,\
-    BLUE_LASER,\
-    GREEN_LASER
+from constants import HEIGHT, \
+    EASY_SPACE_SHIP, \
+    MEDIUM_SPACE_SHIP, \
+    HARD_SPACE_SHIP, \
+    PLAYER_SPACE_SHIP, \
+    BOSS_SHIP, \
+    PURPLE_LASER, \
+    PLAYER_LASER, \
+    RED_LASER, \
+    BLUE_LASER, \
+    GREEN_LASER, \
+    OWN_LASER_SOUND, \
+    ENEMY_LASER_SOUND
+
 
 class Ship:
     CoolDown = 25
@@ -50,6 +53,7 @@ class Ship:
 
     def shoot(self):
         if self.cool_down_counter == 0:
+            OWN_LASER_SOUND.play()
             laser = Laser(self.x, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1
@@ -138,6 +142,7 @@ class Enemy(Ship):
 
     def shoot(self):
         if self.cool_down_counter == 0:
+            ENEMY_LASER_SOUND.play()
             laser = Laser(self.x - 10, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1

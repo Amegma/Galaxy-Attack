@@ -7,6 +7,9 @@ HEIGHT = 750
 
 score_list = []
 
+# Initialize Sound System
+pygame.mixer.init()
+
 # Load Controls Image
 startImage = pygame.image.load(os.path.join('assets', 'graphics', 'play.png'))
 controlImage = pygame.image.load(os.path.join('assets', 'graphics', 'joystick.png'))
@@ -32,6 +35,8 @@ RED_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_re
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_green.png'))
 PURPLE_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_purple.png'))
+OWN_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'ownlaser.wav'))
+ENEMY_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'enemylaser.wav'))
 
 # Load Background Image
 backgroundImage = pygame.image.load(os.path.join('assets', 'graphics', 'background-black.png'))
