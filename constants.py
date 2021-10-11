@@ -35,7 +35,7 @@ RED_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_re
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_green.png'))
 PURPLE_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_purple.png'))
-OWN_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'ownlaser.wav'))
+PLAYER_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'ownlaser.wav'))
 ENEMY_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'enemylaser.wav'))
 
 # Load Background Image

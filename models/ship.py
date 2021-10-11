@@ -12,7 +12,7 @@ from constants import HEIGHT, \
     RED_LASER, \
     BLUE_LASER, \
     GREEN_LASER, \
-    OWN_LASER_SOUND, \
+    PLAYER_LASER_SOUND, \
     ENEMY_LASER_SOUND
 
 
@@ -53,7 +53,7 @@ class Ship:
 
     def shoot(self):
         if self.cool_down_counter == 0:
-            OWN_LASER_SOUND.play()
+            PLAYER_LASER_SOUND.play()
             laser = Laser(self.x, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1
