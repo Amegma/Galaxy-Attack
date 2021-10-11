@@ -7,6 +7,38 @@ from utils.collide import collide
 
 from constants import WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list
 
+def get_key_movement():
+    keys = pygame.key.get_pressed()
+
+    return {'LEFT' : keys[pygame.K_LEFT] or keys[pygame.K_a],
+            'RIGHT' : keys[pygame.K_RIGHT] or keys[pygame.K_d],
+            'UP' : keys[pygame.K_UP] or keys[pygame.K_w],
+            'DOWN' : keys[pygame.K_DOWN] or keys[pygame.K_s],
+            'SHOOT': keys[pygame.K_SPACE],
+            'QUIT': keys[pygame.K_BACKSPACE]}
+
+def get_mouse_movement():
+    pos = pygame.mouse.get_rel()
+    button = pygame.mouse.get_pressed()
+
+    
+    keys = pygame.key.get_pressed()
+    return {'LEFT' : pos[0]<0,
+            'RIGHT' : pos[0]>0,
+            'UP' : pos[1]<0,
+            'DOWN' : pos[1]>0,
+            'SHOOT': button[0] or keys[pygame.K_SPACE],
+            'QUIT': button[2] or keys[pygame.K_BACKSPACE]} 
+
+
+def get_action():
+    mouse = True
+    if not mouse:
+        return get_key_movement()
+    else:
+        return get_mouse_movement()
+
+
 def game():
     run = True
     FPS = 60
@@ -109,26 +141,26 @@ def game():
             if event.type == pygame.QUIT:
                 quit()
 
-        keys = pygame.key.get_pressed()
+        action = get_action()
 
         # Return to main page
-        if keys[pygame.K_BACKSPACE]:
+        if action['QUIT']:
             run = False
-
+     
         # Left Key
-        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and (player.x - player_vel) > 0:
+        if action['LEFT'] and (player.x - player_vel) > 0:
             player.x -= player_vel
         # Right Key
-        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and (player.x + player_vel + player.get_width()) < WIDTH:
+        if action['RIGHT'] and (player.x + player_vel + player.get_width()) < WIDTH:
             player.x += player_vel
         # Up Key
-        if (keys[pygame.K_UP] or keys[pygame.K_w]) and (player.y - player_vel) > 0:
+        if action['UP'] and (player.y - player_vel) > 0:
             player.y -= player_vel
         # Down Key
-        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and (player.y + player_vel + player.get_height()) < HEIGHT:
+        if action['DOWN'] and (player.y + player_vel + player.get_height()) < HEIGHT:
             player.y += player_vel
         # Shoot Laser
-        if keys[pygame.K_SPACE]:
+        if action['SHOOT']:
             player.shoot()
 
         for enemy in enemies[:]:
