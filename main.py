@@ -15,6 +15,9 @@ from constants import TITLE,\
     BG,\
     CANVAS
 
+FPS = 60
+framespersec = pygame.time.Clock()
+
 pygame.font.init()
 
 pygame.display.set_caption(TITLE)
@@ -50,12 +53,13 @@ def main():
         CANVAS.blit(trophyImage, (WIDTH - 130, 25))
 
         pygame.display.update()
+        framespersec.tick(FPS) # capping frame rate to 60
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_ESCAPE]:
+        if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
             run = False
 
         if keys[pygame.K_c]:
