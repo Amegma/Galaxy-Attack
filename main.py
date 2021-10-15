@@ -1,7 +1,8 @@
 import pygame
+import argparse
 
 from screens.game import game
-from screens.controls import controls
+from screens.controls import control_volume, controls
 from screens.score_board import score_board
 
 from constants import TITLE,\
@@ -14,6 +15,14 @@ from constants import TITLE,\
     trophyImage,\
     BG,\
     CANVAS
+
+# parsing arguments
+ag = argparse.ArgumentParser()
+ag.add_argument("--mute", help="disable all sounds", action="store_true")
+args = vars(ag.parse_args())
+
+if args["mute"]:
+    control_volume(0)
 
 FPS = 60
 framespersec = pygame.time.Clock()
