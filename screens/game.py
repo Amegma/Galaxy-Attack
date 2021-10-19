@@ -5,11 +5,10 @@ import random
 from models.ship import Player, Enemy
 from utils.collide import collide
 
-from constants import WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list
+from constants import GAME_MUSIC_PATH, MENU_MUSIC_PATH, WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list, framespersec, FPS
 
 def game():
     run = True
-    FPS = 60
     lives = 5
     level = 0
     player_vel = 5
@@ -20,13 +19,15 @@ def game():
     lost_font = pygame.font.SysFont('comicsans', 70)
     win_font = pygame.font.SysFont('comicsans', 70)
 
+    # load and play ingame music
+    pygame.mixer.music.load(GAME_MUSIC_PATH)
+    pygame.mixer.music.play()
+
     enemies = []
     wave_length = 0
     enemy_vel = 1
 
     player = Player(300, 585)
-
-    clock = pygame.time.Clock()
 
     lost = False
     win = False
@@ -71,9 +72,9 @@ def game():
             CANVAS.blit(last_label, (WIDTH//2 - last_label.get_width()//2, 350))
 
         pygame.display.update()
+        framespersec.tick(FPS)
 
     while run:
-        clock.tick(FPS)
         redraw_window()
 
         if lives > 0:
@@ -135,6 +136,8 @@ def game():
 
         # Return to main page
         if keys[pygame.K_BACKSPACE]:
+            pygame.mixer.music.load(MENU_MUSIC_PATH)
+            pygame.mixer.music.play()
             run = False
 
         # Left Key

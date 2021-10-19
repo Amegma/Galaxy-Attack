@@ -1,6 +1,6 @@
 import pygame
 
-from constants import WIDTH, BG, CANVAS, score_list, trophyImage
+from constants import WIDTH, BG, CANVAS, score_list, trophyImage, framespersec, FPS
 
 def score_board():
     run = True
@@ -27,6 +27,7 @@ def score_board():
         back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
         CANVAS.blit(back_label, (30, 30))
 
+        framespersec.tick(FPS)
         pygame.display.update()
 
         for event in pygame.event.get():

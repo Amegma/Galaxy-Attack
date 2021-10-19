@@ -1,10 +1,12 @@
 import pygame
 
-from constants import WIDTH,\
+from constants import VOL_ICON, MUTE_ICON, WIDTH,\
     controlImage,\
     BG,\
     CANVAS, \
-    soundList
+    soundList, \
+    framespersec, \
+    FPS
 
 class AudioControls:
     def __init__(self, soundList):
@@ -13,13 +15,15 @@ class AudioControls:
         self.muted = False
         self.prev_volume = -1
 
+        pygame.mixer.music.set_volume(self.volume / 100)
         for soundItem in self.soundList:
-            soundItem.set_volume(self.volume)
+            soundItem.set_volume(self.volume / 100)
 
     def set_volume(self, level):
         self.volume = level
+        pygame.mixer.music.set_volume(level / 100)
         for soundItem in soundList:
-            soundItem.set_volume(level)
+            soundItem.set_volume(level / 100)
 
     def dec_volume(self, amt):
         amt = max(0, self.volume - amt)
@@ -87,7 +91,18 @@ def controls():
         control_title_label = control_font.render('[Backspace]', 1, (255, 255, 255))
         CANVAS.blit(control_title_label, (30, 30))
 
+        if audio_cfg.muted:
+            CANVAS.blit(MUTE_ICON, (WIDTH//2 - 97, 585))
+            vol_lbl_text = " --"
+        else:
+            CANVAS.blit(VOL_ICON, (WIDTH//2 - 90, 585))
+            vol_lbl_text = str(audio_cfg.volume)
+
+        vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
+        CANVAS.blit(vol_label, (WIDTH // 2 + 10, 605))
+
         pygame.display.update()
+        framespersec.tick(FPS)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -95,11 +110,11 @@ def controls():
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
+                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    audio_cfg.inc_volume(5)
+                if event.key == pygame.K_MINUS:
+                    audio_cfg.dec_volume(5)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_BACKSPACE]:
             run = False
-        if keys[pygame.K_PLUS]:
-            audio_cfg.inc_volume(5)
-        if keys[pygame.K_MINUS]:
-            audio_cfg.dec_volume(5)

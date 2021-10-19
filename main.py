@@ -5,7 +5,7 @@ from screens.game import game
 from screens.controls import audio_cfg, controls
 from screens.score_board import score_board
 
-from constants import TITLE,\
+from constants import MENU_MUSIC_PATH, TITLE,\
     WIDTH,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
@@ -14,7 +14,9 @@ from constants import TITLE,\
     controlImage,\
     trophyImage,\
     BG,\
-    CANVAS
+    CANVAS, \
+    framespersec, \
+    FPS
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -23,9 +25,6 @@ args = vars(ag.parse_args())
 
 if args["mute"]:
     audio_cfg.toggle_mute()
-
-FPS = 60
-framespersec = pygame.time.Clock()
 
 pygame.font.init()
 
@@ -36,6 +35,8 @@ def main():
     sub_title_font = pygame.font.SysFont('comicsans', 30)
     control_font = pygame.font.SysFont('comicsans', 40)
 
+    pygame.mixer.music.load(MENU_MUSIC_PATH)
+    pygame.mixer.music.play()
     run = True
     while run:
         CANVAS.blit(BG, (0, 0))
