@@ -2,7 +2,7 @@ import pygame
 import argparse
 
 from screens.game import game
-from screens.controls import control_volume, controls
+from screens.controls import audio_cfg, controls
 from screens.score_board import score_board
 
 from constants import TITLE,\
@@ -22,7 +22,7 @@ ag.add_argument("--mute", help="disable all sounds", action="store_true")
 args = vars(ag.parse_args())
 
 if args["mute"]:
-    control_volume(0)
+    audio_cfg.toggle_mute()
 
 FPS = 60
 framespersec = pygame.time.Clock()

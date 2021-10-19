@@ -6,9 +6,39 @@ from constants import WIDTH,\
     CANVAS, \
     soundList
 
-def control_volume(level):
-    for soundItem in soundList:
-        soundItem.set_volume(level)
+class AudioControls:
+    def __init__(self, soundList):
+        self.soundList = soundList
+        self.volume = 100
+        self.muted = False
+        self.prev_volume = -1
+
+        for soundItem in self.soundList:
+            soundItem.set_volume(self.volume)
+
+    def set_volume(self, level):
+        self.volume = level
+        for soundItem in soundList:
+            soundItem.set_volume(level)
+
+    def dec_volume(self, amt):
+        amt = max(0, self.volume - amt)
+        self.set_volume(amt)
+
+    def inc_volume(self, amt):
+        amt = min(100, self.volume + amt)
+        self.set_volume(amt)
+
+    def toggle_mute(self):
+        if self.muted:
+            self.set_volume(self.prev_volume)
+            self.muted = False
+        else:
+            self.prev_volume = self.volume
+            self.muted = True
+            self.set_volume(0)
+
+audio_cfg = AudioControls(soundList)
 
 def controls():
     run = True
@@ -62,7 +92,14 @@ def controls():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_m:
+                    audio_cfg.toggle_mute()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_BACKSPACE]:
             run = False
+        if keys[pygame.K_PLUS]:
+            audio_cfg.inc_volume(5)
+        if keys[pygame.K_MINUS]:
+            audio_cfg.dec_volume(5)
