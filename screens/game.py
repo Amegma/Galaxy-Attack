@@ -16,6 +16,7 @@ def game():
     laser_vel = 10
 
     main_font = pygame.font.SysFont('comicsans', 50)
+    sub_font = pygame.font.SysFont('comicsans', 40)
     lost_font = pygame.font.SysFont('comicsans', 70)
     win_font = pygame.font.SysFont('comicsans', 70)
 
@@ -30,6 +31,7 @@ def game():
     lost = False
     win = False
     boss_entry = True
+    pause = False
 
     def redraw_window():
         CANVAS.blit(BG, (0, 0))
@@ -108,8 +110,28 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_p:
+                    pause = True;
 
         keys = pygame.key.get_pressed()
+
+        while pause:
+            pause_label = main_font.render('Game Paused', 1, (0, 255, 255), (0, 0, 0))
+            CANVAS.blit(pause_label, (WIDTH//2 - pause_label.get_width()//2, 350))
+
+            key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255), (0, 0, 0))
+            CANVAS.blit(key_msg, (WIDTH//2 - key_msg.get_width()//2, 400))
+            keys = pygame.key.get_pressed()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_p:
+                        pause = False
+                        break
 
         # Return to main page
         if keys[pygame.K_BACKSPACE]:
