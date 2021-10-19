@@ -31,9 +31,11 @@ class Ship:
         self.cool_down_counter = 0
 
     def draw(self, window):
-        window.blit(self.ship_img, (self.x, self.y))
+        # drawing lasers before the ship so that it doesn't appea
+        # like the lasers appear from above the ship
         for laser in self.lasers:
             laser.draw(window)
+        window.blit(self.ship_img, (self.x, self.y))
 
     def move_lasers(self, vel, obj):
         self.coolDown()

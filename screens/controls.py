@@ -3,7 +3,12 @@ import pygame
 from constants import WIDTH,\
     controlImage,\
     BG,\
-    CANVAS
+    CANVAS, \
+    soundList
+
+def control_volume(level):
+    for soundItem in soundList:
+        soundItem.set_volume(level)
 
 def controls():
     run = True
