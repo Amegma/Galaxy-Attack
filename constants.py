@@ -48,10 +48,6 @@ ENEMY_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'enemyla
 GAME_MUSIC_PATH = os.path.join('assets', 'sounds', 'ingame.wav')
 MENU_MUSIC_PATH = os.path.join('assets', 'sounds', 'menu.wav')
 
-# volume icons
-VOL_ICON = pygame.image.load(os.path.join('assets', 'graphics', 'audio.png'))
-MUTE_ICON = pygame.image.load(os.path.join('assets', 'graphics', 'mute.png'))
-
 # adding sounds to the list
 soundList.append(PLAYER_LASER_SOUND)
 soundList.append(ENEMY_LASER_SOUND)

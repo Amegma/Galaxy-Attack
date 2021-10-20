@@ -62,11 +62,19 @@ def main():
         CANVAS.blit(score_label, (WIDTH - 67, 35))
         CANVAS.blit(trophyImage, (WIDTH - 130, 25))
 
+        audio_cfg.display_volume(CANVAS)
         pygame.display.update()
         framespersec.tick(FPS) # capping frame rate to 60
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_m:
+                    audio_cfg.toggle_mute()
+                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    audio_cfg.inc_volume(5)
+                if event.key == pygame.K_MINUS:
+                    audio_cfg.dec_volume(5)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
