@@ -21,8 +21,7 @@ def game():
     win_font = pygame.font.SysFont('comicsans', 70)
 
     # load and play ingame music
-    pygame.mixer.music.load(GAME_MUSIC_PATH)
-    pygame.mixer.music.play()
+    audio_cfg.play_music(GAME_MUSIC_PATH)
 
     enemies = []
     wave_length = 0
@@ -151,8 +150,7 @@ def game():
 
         # Return to main page
         if keys[pygame.K_BACKSPACE]:
-            pygame.mixer.music.load(MENU_MUSIC_PATH)
-            pygame.mixer.music.play()
+            audio_cfg.play_music(MENU_MUSIC_PATH)
             run = False
 
         # Left Key

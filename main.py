@@ -35,8 +35,7 @@ def main():
     sub_title_font = pygame.font.SysFont('comicsans', 30)
     control_font = pygame.font.SysFont('comicsans', 40)
 
-    pygame.mixer.music.load(MENU_MUSIC_PATH)
-    pygame.mixer.music.play()
+    audio_cfg.play_music(MENU_MUSIC_PATH)
     run = True
     while run:
         CANVAS.blit(BG, (0, 0))

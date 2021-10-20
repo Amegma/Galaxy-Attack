@@ -58,6 +58,10 @@ class AudioControls:
         vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
         CANVAS.blit(vol_label, (70, 702))
 
+    def play_music(self, path):
+        pygame.mixer.music.load(path)
+        pygame.mixer.music.play(-1)
+
 audio_cfg = AudioControls(soundList)
 
 def controls():
