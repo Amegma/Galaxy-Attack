@@ -24,6 +24,11 @@ class AudioControls:
             soundItem.set_volume(self.volume / 100)
 
     def set_volume(self, level):
+        if level == 0:
+            self.muted = True
+        if self.muted and level > 0:
+            self.muted = False
+            self.prev_volume = 50 # if you unmute at zero vol, defaults to 50
         self.volume = level
         pygame.mixer.music.set_volume(level / 100)
         for soundItem in soundList:
