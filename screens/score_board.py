@@ -1,6 +1,7 @@
 import pygame
 
-from constants import WIDTH, BG, CANVAS, score_list, trophyImage
+from constants import WIDTH, BG, CANVAS, score_list, trophyImage, framespersec, FPS
+from .controls import audio_cfg
 
 def score_board():
     run = True
@@ -27,11 +28,20 @@ def score_board():
         back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
         CANVAS.blit(back_label, (30, 30))
 
+        audio_cfg.display_volume(CANVAS)
+        framespersec.tick(FPS)
         pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_m:
+                    audio_cfg.toggle_mute()
+                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    audio_cfg.inc_volume(5)
+                if event.key == pygame.K_MINUS:
+                    audio_cfg.dec_volume(5)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_BACKSPACE]:

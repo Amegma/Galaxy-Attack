@@ -4,20 +4,24 @@ import random
 
 from models.ship import Player, Enemy
 from utils.collide import collide
+from .controls import audio_cfg
 
-from constants import WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list
+from constants import GAME_MUSIC_PATH, MENU_MUSIC_PATH, WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list, framespersec, FPS
 
 def game():
     run = True
-    FPS = 60
     lives = 5
     level = 0
     player_vel = 5
     laser_vel = 10
 
     main_font = pygame.font.SysFont('comicsans', 50)
+    sub_font = pygame.font.SysFont('comicsans', 40)
     lost_font = pygame.font.SysFont('comicsans', 70)
     win_font = pygame.font.SysFont('comicsans', 70)
+
+    # load and play ingame music
+    audio_cfg.play_music(GAME_MUSIC_PATH)
 
     enemies = []
     wave_length = 0
@@ -25,13 +29,12 @@ def game():
 
     player = Player(300, 585)
 
-    clock = pygame.time.Clock()
-
     lost = False
     win = False
     boss_entry = True
+    pause = False
 
-    def redraw_window():
+    def redraw_window(pause = False):
         CANVAS.blit(BG, (0, 0))
 
         # Draw Text
@@ -68,12 +71,19 @@ def game():
             last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
             CANVAS.blit(last_label, (WIDTH//2 - last_label.get_width()//2, 350))
 
+        if pause:
+            # if paused display the "game is paused" screen
+            pause_label = main_font.render('Game Paused', 1, (0, 255, 255))
+            CANVAS.blit(pause_label, (WIDTH//2 - pause_label.get_width()//2, 350))
+
+            key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
+            CANVAS.blit(key_msg, (WIDTH//2 - key_msg.get_width()//2, 400))
+
+        audio_cfg.display_volume(CANVAS)
         pygame.display.update()
+        framespersec.tick(FPS)
 
     while run:
-        clock.tick(FPS)
-        redraw_window()
-
         if lives > 0:
             if player.health <= 0:
                 lives -= 1
@@ -108,11 +118,39 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_p:
+                    pause = True;
+                if event.key == pygame.K_m:
+                    audio_cfg.toggle_mute()
+                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    audio_cfg.inc_volume(5)
+                if event.key == pygame.K_MINUS:
+                    audio_cfg.dec_volume(5)
+
+        while pause:
+            # create a fresh screen
+            redraw_window(pause)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_m:
+                        audio_cfg.toggle_mute()
+                    if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                        audio_cfg.inc_volume(5)
+                    if event.key == pygame.K_MINUS:
+                        audio_cfg.dec_volume(5)
+                    if event.key == pygame.K_p:
+                        pause = False
+                        break
 
         keys = pygame.key.get_pressed()
 
         # Return to main page
         if keys[pygame.K_BACKSPACE]:
+            audio_cfg.play_music(MENU_MUSIC_PATH)
             run = False
 
         # Left Key
@@ -156,3 +194,4 @@ def game():
                 enemies.remove(enemy)
 
         player.move_lasers(-laser_vel, enemies)
+        redraw_window()

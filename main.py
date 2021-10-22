@@ -2,10 +2,10 @@ import pygame
 import argparse
 
 from screens.game import game
-from screens.controls import control_volume, controls
+from screens.controls import audio_cfg, controls
 from screens.score_board import score_board
 
-from constants import TITLE,\
+from constants import MENU_MUSIC_PATH, TITLE,\
     WIDTH,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
@@ -14,7 +14,9 @@ from constants import TITLE,\
     controlImage,\
     trophyImage,\
     BG,\
-    CANVAS
+    CANVAS, \
+    framespersec, \
+    FPS
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -22,10 +24,7 @@ ag.add_argument("--mute", help="disable all sounds", action="store_true")
 args = vars(ag.parse_args())
 
 if args["mute"]:
-    control_volume(0)
-
-FPS = 60
-framespersec = pygame.time.Clock()
+    audio_cfg.toggle_mute()
 
 pygame.font.init()
 
@@ -36,6 +35,7 @@ def main():
     sub_title_font = pygame.font.SysFont('comicsans', 30)
     control_font = pygame.font.SysFont('comicsans', 40)
 
+    audio_cfg.play_music(MENU_MUSIC_PATH)
     run = True
     while run:
         CANVAS.blit(BG, (0, 0))
@@ -61,11 +61,19 @@ def main():
         CANVAS.blit(score_label, (WIDTH - 67, 35))
         CANVAS.blit(trophyImage, (WIDTH - 130, 25))
 
+        audio_cfg.display_volume(CANVAS)
         pygame.display.update()
         framespersec.tick(FPS) # capping frame rate to 60
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_m:
+                    audio_cfg.toggle_mute()
+                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    audio_cfg.inc_volume(5)
+                if event.key == pygame.K_MINUS:
+                    audio_cfg.dec_volume(5)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:

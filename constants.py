@@ -5,6 +5,9 @@ TITLE = 'SPACE INVADERS'
 WIDTH = 750
 HEIGHT = 750
 
+FPS = 60
+framespersec = pygame.time.Clock()
+
 score_list = []
 
 # list of all game sounds
@@ -40,6 +43,10 @@ GREEN_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_
 PURPLE_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_purple.png'))
 PLAYER_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'ownlaser.wav'))
 ENEMY_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'enemylaser.wav'))
+
+# load music
+GAME_MUSIC_PATH = os.path.join('assets', 'sounds', 'ingame.wav')
+MENU_MUSIC_PATH = os.path.join('assets', 'sounds', 'menu.wav')
 
 # adding sounds to the list
 soundList.append(PLAYER_LASER_SOUND)
