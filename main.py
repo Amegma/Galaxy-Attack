@@ -1,3 +1,4 @@
+import os
 import pygame
 import argparse
 
@@ -16,7 +17,8 @@ from constants import MENU_MUSIC_PATH, TITLE,\
     BG,\
     CANVAS, \
     framespersec, \
-    FPS
+    FPS, \
+    FONT_PATH
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -31,9 +33,9 @@ pygame.font.init()
 pygame.display.set_caption(TITLE)
 
 def main():
-    title_font = pygame.font.SysFont('comicsans', 70)
-    sub_title_font = pygame.font.SysFont('comicsans', 30)
-    control_font = pygame.font.SysFont('comicsans', 40)
+    title_font = pygame.font.Font(os.path.join(FONT_PATH, 'editundo.ttf'), 60)
+    sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
+    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
 
     audio_cfg.play_music(MENU_MUSIC_PATH)
     run = True
@@ -42,9 +44,9 @@ def main():
 
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
         CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2 - 15, 350))
-        CANVAS.blit(startImage, (WIDTH//2 + title_label.get_width()//2, 351))
-        sub_title_label = sub_title_font.render('PRESS ENTER', 1, (249, 166, 2))
-        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 410))
+        CANVAS.blit(startImage, (WIDTH//2 + title_label.get_width()//2, 353))
+        sub_title_label = sub_title_font.render('Press Enter', 1, (249, 166, 2))
+        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 420))
 
         # Ships
         CANVAS.blit(BOSS_SHIP, (285, 75))
@@ -53,12 +55,12 @@ def main():
 
         # Control Page
         control_label = control_font.render('[c]', 1, (255, 255, 255))
-        CANVAS.blit(control_label, (90, 35))
+        CANVAS.blit(control_label, (95, 32))
         CANVAS.blit(controlImage, (30, 15))
 
         # ScoreBoard Page
         score_label = control_font.render('[s]', 1, (255, 255, 255))
-        CANVAS.blit(score_label, (WIDTH - 67, 35))
+        CANVAS.blit(score_label, (WIDTH - 67, 30))
         CANVAS.blit(trophyImage, (WIDTH - 130, 25))
 
         audio_cfg.display_volume(CANVAS)

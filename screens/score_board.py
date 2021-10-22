@@ -1,13 +1,14 @@
+import os
 import pygame
 
-from constants import WIDTH, BG, CANVAS, score_list, trophyImage, framespersec, FPS
+from constants import FONT_PATH, WIDTH, BG, CANVAS, score_list, trophyImage, framespersec, FPS
 from .controls import audio_cfg
 
 def score_board():
     run = True
 
-    score_title_font = pygame.font.SysFont('comicsans', 60)
-    score_font = pygame.font.SysFont('comicsans', 55)
+    score_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'editundo.ttf'), 50)
+    score_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 35)
 
     score_list.sort()
     score_list.reverse()
@@ -16,7 +17,7 @@ def score_board():
         CANVAS.blit(BG, (0, 0))
 
         score_title_label = score_title_font.render('Score Board', 1, (0, 229, 0))
-        CANVAS.blit(score_title_label, (WIDTH//2 - score_title_label.get_width()//2 - 30, 175))
+        CANVAS.blit(score_title_label, (WIDTH//2 - score_title_label.get_width()//2 - 30, 168))
         CANVAS.blit(trophyImage, (WIDTH//2 + score_title_label.get_width()//2 - 10, 163))
 
         i = 0

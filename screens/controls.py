@@ -1,7 +1,7 @@
 import os
 import pygame
 
-from constants import WIDTH,\
+from constants import FONT_PATH, WIDTH,\
     controlImage,\
     BG,\
     CANVAS, \
@@ -52,16 +52,16 @@ class AudioControls:
             self.set_volume(0)
 
     def display_volume(self, CANVAS):
-        control_font = pygame.font.SysFont('comicsans', 40)
+        control_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 30)
         if self.muted:
             CANVAS.blit(self.MUTE_ICON, (20, 695))
-            vol_lbl_text = "  --"
+            vol_lbl_text = " --"
         else:
             CANVAS.blit(self.VOL_ICON, (20, 695))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
         vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
-        CANVAS.blit(vol_label, (70, 702))
+        CANVAS.blit(vol_label, (70, 695))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)
@@ -72,15 +72,15 @@ audio_cfg = AudioControls(soundList)
 def controls():
     run = True
 
-    control_title_font = pygame.font.SysFont('comicsans', 60)
-    control_font = pygame.font.SysFont('comicsans', 40)
-    keys_font = pygame.font.SysFont('comicsans', 40)
+    control_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'editundo.ttf'), 50)
+    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
+    keys_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
 
     while run:
         CANVAS.blit(BG, (0, 0))
 
         control_title_label = control_title_font.render('Controls', 1, (0, 0, 209))
-        CANVAS.blit(control_title_label, (WIDTH//2 - control_title_label.get_width()//2 - 30, 135))
+        CANVAS.blit(control_title_label, (WIDTH//2 - control_title_label.get_width()//2 - 30, 130))
         CANVAS.blit(controlImage, (WIDTH//2 + control_title_label.get_width()//2 - 10, 112))
 
         shoot_label = control_font.render('Shoot', 1, (0, 225, 0))
