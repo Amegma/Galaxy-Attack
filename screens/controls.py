@@ -1,9 +1,9 @@
 import os
 import pygame
 
+from .background import slow_bg_obj
 from constants import WIDTH,\
     controlImage,\
-    BG,\
     CANVAS, \
     soundList, \
     framespersec, \
@@ -78,7 +78,8 @@ def controls():
     keys_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
 
     while run:
-        CANVAS.blit(BG, (0, 0))
+        slow_bg_obj.update()
+        slow_bg_obj.render(CANVAS)
 
         control_title_label = control_title_font.render('Controls', 1, (0, 0, 209))
         CANVAS.blit(control_title_label, (WIDTH//2 - control_title_label.get_width()//2 - 30, 130))

@@ -5,6 +5,7 @@ import argparse
 from screens.game import game
 from screens.controls import audio_cfg, controls
 from screens.score_board import score_board
+from screens.background import slow_bg_obj
 
 from constants import MENU_MUSIC_PATH, TITLE,\
     WIDTH,\
@@ -14,7 +15,6 @@ from constants import MENU_MUSIC_PATH, TITLE,\
     startImage,\
     controlImage,\
     trophyImage,\
-    BG,\
     CANVAS, \
     framespersec, \
     FPS, \
@@ -40,7 +40,8 @@ def main():
     audio_cfg.play_music(MENU_MUSIC_PATH)
     run = True
     while run:
-        CANVAS.blit(BG, (0, 0))
+        slow_bg_obj.update()
+        slow_bg_obj.render(CANVAS)
 
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
         CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2 - 15, 350))

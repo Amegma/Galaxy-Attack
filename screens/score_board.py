@@ -2,7 +2,6 @@ import os
 import pygame
 
 from constants import WIDTH, \
-                      BG, \
                       CANVAS, \
                       score_list, \
                       trophyImage, \
@@ -11,6 +10,7 @@ from constants import WIDTH, \
                       FONT_PATH
 
 from .controls import audio_cfg
+from .background import slow_bg_obj
 
 def score_board():
     run = True
@@ -22,7 +22,8 @@ def score_board():
     score_list.reverse()
 
     while run:
-        CANVAS.blit(BG, (0, 0))
+        slow_bg_obj.update()
+        slow_bg_obj.render(CANVAS)
 
         score_title_label = score_title_font.render('Score Board', 1, (0, 229, 0))
         CANVAS.blit(score_title_label, (WIDTH//2 - score_title_label.get_width()//2 - 30, 168))

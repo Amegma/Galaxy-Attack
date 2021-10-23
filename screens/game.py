@@ -6,12 +6,12 @@ import random
 from models.ship import Player, Enemy
 from utils.collide import collide
 from .controls import audio_cfg
+from .background import bg_obj
 
 from constants import GAME_MUSIC_PATH, \
                       MENU_MUSIC_PATH, \
                       WIDTH, \
                       HEIGHT, \
-                      BG, \
                       CANVAS, \
                       heartImage, \
                       score_list, \
@@ -47,7 +47,9 @@ def game():
     pause = False
 
     def redraw_window(pause = False):
-        CANVAS.blit(BG, (0, 0))
+        if not pause:
+            bg_obj.update()
+        bg_obj.render(CANVAS)
 
         # Draw Text
         level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
