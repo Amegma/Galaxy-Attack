@@ -1,13 +1,21 @@
 import os
 import pygame
 
-from constants import FONT_PATH, WIDTH, BG, CANVAS, score_list, trophyImage, framespersec, FPS
+from constants import WIDTH, \
+                      BG, \
+                      CANVAS, \
+                      score_list, \
+                      trophyImage, \
+                      framespersec, \
+                      FPS, \
+                      FONT_PATH
+
 from .controls import audio_cfg
 
 def score_board():
     run = True
 
-    score_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'editundo.ttf'), 50)
+    score_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
     score_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 35)
 
     score_list.sort()

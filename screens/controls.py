@@ -1,13 +1,14 @@
 import os
 import pygame
 
-from constants import FONT_PATH, WIDTH,\
+from constants import WIDTH,\
     controlImage,\
     BG,\
     CANVAS, \
     soundList, \
     framespersec, \
-    FPS
+    FPS, \
+    FONT_PATH
 
 class AudioControls:
     def __init__(self, soundList):
@@ -72,7 +73,7 @@ audio_cfg = AudioControls(soundList)
 def controls():
     run = True
 
-    control_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'editundo.ttf'), 50)
+    control_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
     control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
     keys_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
 
