@@ -16,6 +16,9 @@ soundList = []
 # Initialize Sound System
 pygame.mixer.init()
 
+# font location
+FONT_PATH = os.path.join('assets', 'fonts')
+
 # Load Controls Image
 startImage = pygame.image.load(os.path.join('assets', 'graphics', 'play.png'))
 controlImage = pygame.image.load(os.path.join('assets', 'graphics', 'joystick.png'))

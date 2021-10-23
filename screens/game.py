@@ -1,3 +1,4 @@
+import os
 import pygame
 import time
 import random
@@ -6,7 +7,17 @@ from models.ship import Player, Enemy
 from utils.collide import collide
 from .controls import audio_cfg
 
-from constants import GAME_MUSIC_PATH, MENU_MUSIC_PATH, WIDTH, HEIGHT, BG, CANVAS, heartImage, score_list, framespersec, FPS
+from constants import GAME_MUSIC_PATH, \
+                      MENU_MUSIC_PATH, \
+                      WIDTH, \
+                      HEIGHT, \
+                      BG, \
+                      CANVAS, \
+                      heartImage, \
+                      score_list, \
+                      framespersec, \
+                      FPS, \
+                      FONT_PATH
 
 def game():
     run = True
@@ -15,10 +26,11 @@ def game():
     player_vel = 5
     laser_vel = 10
 
-    main_font = pygame.font.SysFont('comicsans', 50)
-    sub_font = pygame.font.SysFont('comicsans', 40)
-    lost_font = pygame.font.SysFont('comicsans', 70)
-    win_font = pygame.font.SysFont('comicsans', 70)
+    main_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 50)
+    sub_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 40)
+    sub_small_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 35)
+    lost_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 55)
+    win_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 55)
 
     # load and play ingame music
     audio_cfg.play_music(GAME_MUSIC_PATH)
@@ -38,8 +50,8 @@ def game():
         CANVAS.blit(BG, (0, 0))
 
         # Draw Text
-        level_label = main_font.render(f'{level} / 10', 1, (0, 255, 255))
-        score_label = main_font.render(f'{player.get_score()}', 1, (0, 255, 0))
+        level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
+        score_label = sub_font.render(f'{player.get_score()}', 1, (0, 255, 0))
 
         player.draw(CANVAS)
 
@@ -54,7 +66,7 @@ def game():
             CANVAS.blit(heartImage, (37 * index - 10, 20))
 
         # blit stats
-        CANVAS.blit(level_label, (30, 75))
+        CANVAS.blit(level_label, (35, 75))
         CANVAS.blit(score_label, (WIDTH - score_label.get_width() - 30, 20))
 
         if win:
