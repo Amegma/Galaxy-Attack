@@ -98,6 +98,7 @@ def game():
         framespersec.tick(FPS)
 
     while run:
+        redraw_window()
         if lives > 0:
             if player.health <= 0:
                 lives -= 1
@@ -208,4 +209,3 @@ def game():
                 enemies.remove(enemy)
 
         player.move_lasers(-laser_vel, enemies)
-        redraw_window()
