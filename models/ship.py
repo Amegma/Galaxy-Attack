@@ -116,8 +116,9 @@ class Player(Ship):
         button = pygame.mouse.get_pressed()        
         keys = pygame.key.get_pressed()
 
-        # Left Key
-        if cx > 0 and cx < WIDTH and cy >0 and cy < HEIGHT :
+        # Movement
+        if cx > 0 and cx + self.ship_img.get_width() < WIDTH \
+            and cy > 0 and cy + self.ship_img.get_height() < HEIGHT :
             self.x = cx
             self.y = cy
         # Shoot Laser
