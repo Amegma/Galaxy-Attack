@@ -46,8 +46,10 @@ def main():
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
         CANVAS.blit(title_label, (WIDTH//2 - title_label.get_width()//2 - 15, 350))
         CANVAS.blit(startImage, (WIDTH//2 + title_label.get_width()//2, 353))
-        sub_title_label = sub_title_font.render('Press Enter', 1, (249, 166, 2))
-        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 420))
+        sub_title_label = sub_title_font.render('Press ENTER to play with KEYBOARD', 1, (249, 166, 2))
+        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 410))
+        sub_title_label = sub_title_font.render('Click LEFT MOUSE button to play with MOUSE', 1, (249, 166, 2))
+        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 450))
 
         # Ships
         CANVAS.blit(BOSS_SHIP, (285, 75))
@@ -79,6 +81,7 @@ def main():
                     audio_cfg.dec_volume(5)
 
         keys = pygame.key.get_pressed()
+        button = pygame.mouse.get_pressed()    
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
             run = False
 
@@ -90,6 +93,9 @@ def main():
 
         if keys[pygame.K_RETURN]:
             game()
+
+        if button[0]:
+            game(True)
 
     pygame.quit()
 

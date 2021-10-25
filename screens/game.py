@@ -9,7 +9,6 @@ from .controls import audio_cfg
 from .background import bg_obj
 
 from constants import GAME_MUSIC_PATH, \
-                      MENU_MUSIC_PATH, \
                       WIDTH, \
                       HEIGHT, \
                       CANVAS, \
@@ -19,11 +18,9 @@ from constants import GAME_MUSIC_PATH, \
                       FPS, \
                       FONT_PATH
 
-def game():
-    run = True
+def game(isMouse=False):
     lives = 5
     level = 0
-    player_vel = 5
     laser_vel = 10
 
     main_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 50)
@@ -39,7 +36,7 @@ def game():
     wave_length = 0
     enemy_vel = 1
 
-    player = Player(300, 585)
+    player = Player(300, 585, mouse_movement=isMouse)
 
     lost = False
     win = False
@@ -97,7 +94,7 @@ def game():
         pygame.display.update()
         framespersec.tick(FPS)
 
-    while run:
+    while player.run:
         redraw_window()
         if lives > 0:
             if player.health <= 0:
@@ -107,7 +104,7 @@ def game():
             lost = True
             redraw_window()
             time.sleep(3)
-            run = False
+            player.run = False
 
         if level == 10 and boss_entry:
             redraw_window()
@@ -117,7 +114,7 @@ def game():
             win = True
             redraw_window()
             time.sleep(3)
-            run = False
+            player.run = False
 
         if len(enemies) == 0:
             level += 1
@@ -135,7 +132,7 @@ def game():
                 quit()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
-                    pause = True;
+                    pause = True
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
                 if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
@@ -161,28 +158,7 @@ def game():
                         pause = False
                         break
 
-        keys = pygame.key.get_pressed()
-
-        # Return to main page
-        if keys[pygame.K_BACKSPACE]:
-            audio_cfg.play_music(MENU_MUSIC_PATH)
-            run = False
-
-        # Left Key
-        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and (player.x - player_vel) > 0:
-            player.x -= player_vel
-        # Right Key
-        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and (player.x + player_vel + player.get_width()) < WIDTH:
-            player.x += player_vel
-        # Up Key
-        if (keys[pygame.K_UP] or keys[pygame.K_w]) and (player.y - player_vel) > 0:
-            player.y -= player_vel
-        # Down Key
-        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and (player.y + player_vel + player.get_height()) < HEIGHT:
-            player.y += player_vel
-        # Shoot Laser
-        if keys[pygame.K_SPACE]:
-            player.shoot()
+        player.move()
 
         for enemy in enemies[:]:
             enemy.move(enemy_vel)

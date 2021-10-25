@@ -1,7 +1,8 @@
 import pygame
-
 from models.laser import Laser
+from screens.controls import audio_cfg
 from constants import HEIGHT, \
+    WIDTH, \
     EASY_SPACE_SHIP, \
     MEDIUM_SPACE_SHIP, \
     HARD_SPACE_SHIP, \
@@ -13,7 +14,8 @@ from constants import HEIGHT, \
     BLUE_LASER, \
     GREEN_LASER, \
     PLAYER_LASER_SOUND, \
-    ENEMY_LASER_SOUND
+    ENEMY_LASER_SOUND, \
+    MENU_MUSIC_PATH
 
 
 class Ship:
@@ -70,12 +72,70 @@ class Ship:
         return self.SCORE
 
 class Player(Ship):
-    def __init__(self, x, y, health=100):
+    def __init__(self, x, y, health=100, mouse_movement = False):
         super().__init__(x, y, health)
         self.ship_img = PLAYER_SPACE_SHIP
         self.laser_img = PLAYER_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
+        self.mouse_movement = mouse_movement
+        self.run  = True
+        self.vel = 5
+
+    def move_with_keyboard(self):
+        keys = pygame.key.get_pressed()
+        action = {'LEFT' : keys[pygame.K_LEFT] or keys[pygame.K_a],
+                'RIGHT' : keys[pygame.K_RIGHT] or keys[pygame.K_d],
+                'UP' : keys[pygame.K_UP] or keys[pygame.K_w],
+                'DOWN' : keys[pygame.K_DOWN] or keys[pygame.K_s],
+                'SHOOT': keys[pygame.K_SPACE],
+                'QUIT': keys[pygame.K_BACKSPACE]}
+        
+         # Return to main page
+        if action['QUIT']:
+            audio_cfg.play_music(MENU_MUSIC_PATH)
+            self.run = False
+        # Left Key
+        if action['LEFT'] and (self.x - self.vel) > 0:
+            self.x -= self.vel
+        # Right Key
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()) < WIDTH:
+            self.x += self.vel
+        # Up Key
+        if action['UP'] and (self.y - self.vel) > 0:
+            self.y -= self.vel
+        # Down Key
+        if action['DOWN'] and (self.y + self.vel + self.get_height()) < HEIGHT:
+            self.y += self.vel
+        # Shoot Laser
+        if action['SHOOT']:
+            self.shoot()
+
+    def move_with_mouse(self):
+        cx, cy = pygame.mouse.get_pos()
+        button = pygame.mouse.get_pressed()        
+        keys = pygame.key.get_pressed()
+
+        # Movement
+        if cx > 0 and cx + self.ship_img.get_width() < WIDTH \
+            and cy > 0 and cy + self.ship_img.get_height() < HEIGHT :
+            self.x = cx
+            self.y = cy
+        # Shoot Laser
+        if  button[0] or keys[pygame.K_SPACE]:
+            self.shoot()
+        # Return to main page
+        if button[2] or keys[pygame.K_BACKSPACE]:
+            audio_cfg.play_music(MENU_MUSIC_PATH)
+            self.run = False
+
+
+    def move(self):
+        if(self.mouse_movement):
+            self.move_with_mouse()
+        else:
+            self.move_with_keyboard()
+
 
     def move_lasers(self, vel, objs):
         self.coolDown()
