@@ -1,21 +1,32 @@
+import os
 import pygame
 
-from constants import WIDTH, BG, CANVAS, score_list, trophyImage
+from constants import WIDTH, \
+                      CANVAS, \
+                      score_list, \
+                      trophyImage, \
+                      framespersec, \
+                      FPS, \
+                      FONT_PATH
+
+from .controls import audio_cfg
+from .background import slow_bg_obj
 
 def score_board():
     run = True
 
-    score_title_font = pygame.font.SysFont('comicsans', 60)
-    score_font = pygame.font.SysFont('comicsans', 55)
+    score_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
+    score_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 35)
 
     score_list.sort()
     score_list.reverse()
 
     while run:
-        CANVAS.blit(BG, (0, 0))
+        slow_bg_obj.update()
+        slow_bg_obj.render(CANVAS)
 
         score_title_label = score_title_font.render('Score Board', 1, (0, 229, 0))
-        CANVAS.blit(score_title_label, (WIDTH//2 - score_title_label.get_width()//2 - 30, 175))
+        CANVAS.blit(score_title_label, (WIDTH//2 - score_title_label.get_width()//2 - 30, 168))
         CANVAS.blit(trophyImage, (WIDTH//2 + score_title_label.get_width()//2 - 10, 163))
 
         i = 0
@@ -27,11 +38,20 @@ def score_board():
         back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
         CANVAS.blit(back_label, (30, 30))
 
+        audio_cfg.display_volume(CANVAS)
+        framespersec.tick(FPS)
         pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_m:
+                    audio_cfg.toggle_mute()
+                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    audio_cfg.inc_volume(5)
+                if event.key == pygame.K_MINUS:
+                    audio_cfg.dec_volume(5)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_BACKSPACE]:
