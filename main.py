@@ -49,7 +49,7 @@ def main():
         sub_title_label = sub_title_font.render('Press ENTER to play with KEYBOARD', 1, (249, 166, 2))
         CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 410))
         sub_title_label = sub_title_font.render('Click LEFT MOUSE button to play with MOUSE', 1, (249, 166, 2))
-        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 420))
+        CANVAS.blit(sub_title_label, (WIDTH//2 - sub_title_label.get_width()//2, 450))
 
         # Ships
         CANVAS.blit(BOSS_SHIP, (285, 75))

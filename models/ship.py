@@ -1,5 +1,6 @@
 import pygame
 from models.laser import Laser
+from screens.controls import audio_cfg
 from constants import HEIGHT, \
     WIDTH, \
     EASY_SPACE_SHIP, \
@@ -13,7 +14,8 @@ from constants import HEIGHT, \
     BLUE_LASER, \
     GREEN_LASER, \
     PLAYER_LASER_SOUND, \
-    ENEMY_LASER_SOUND
+    ENEMY_LASER_SOUND, \
+    MENU_MUSIC_PATH
 
 
 class Ship:
@@ -91,6 +93,7 @@ class Player(Ship):
         
          # Return to main page
         if action['QUIT']:
+            audio_cfg.play_music(MENU_MUSIC_PATH)
             self.run = False
         # Left Key
         if action['LEFT'] and (self.x - self.vel) > 0:
@@ -122,6 +125,7 @@ class Player(Ship):
             self.shoot()
         # Return to main page
         if button[2] or keys[pygame.K_BACKSPACE]:
+            audio_cfg.play_music(MENU_MUSIC_PATH)
             self.run = False
 
 

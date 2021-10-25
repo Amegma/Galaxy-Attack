@@ -9,7 +9,6 @@ from .controls import audio_cfg
 from .background import bg_obj
 
 from constants import GAME_MUSIC_PATH, \
-                      MENU_MUSIC_PATH, \
                       WIDTH, \
                       HEIGHT, \
                       CANVAS, \
@@ -105,7 +104,7 @@ def game(isMouse=False):
             lost = True
             redraw_window()
             time.sleep(3)
-            run = False
+            player.run = False
 
         if level == 10 and boss_entry:
             redraw_window()
@@ -115,7 +114,7 @@ def game(isMouse=False):
             win = True
             redraw_window()
             time.sleep(3)
-            run = False
+            player.run = False
 
         if len(enemies) == 0:
             level += 1
@@ -133,7 +132,7 @@ def game(isMouse=False):
                 quit()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
-                    pause = True;
+                    pause = True
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
                 if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
