@@ -8,7 +8,7 @@ from constants import HEIGHT, \
     HARD_SPACE_SHIP, \
     PLAYER_SPACE_SHIP, \
     BOSS_SHIP, \
-    PURPLE_LASER, \
+    FLAME_LASER, \
     PLAYER_LASER, \
     RED_LASER, \
     BLUE_LASER, \
@@ -178,7 +178,7 @@ class Enemy(Ship):
         'easy': (EASY_SPACE_SHIP, RED_LASER, 10),
         'medium': (MEDIUM_SPACE_SHIP, BLUE_LASER, 18),
         'hard': (HARD_SPACE_SHIP, GREEN_LASER, 25),
-        'boss': (BOSS_SHIP, PURPLE_LASER, 100)
+        'boss': (BOSS_SHIP, FLAME_LASER, 100)
     }
 
     ship_type = ''
