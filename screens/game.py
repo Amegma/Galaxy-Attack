@@ -180,7 +180,7 @@ def game(isMouse=False):
                 else:
                     player.health -= 10
                     enemies.remove(enemy)
-            elif enemy.y + enemy.get_height() > HEIGHT:
+            elif enemy.y + enemy.get_height()/2 > HEIGHT:
                 lives -= 1
                 enemies.remove(enemy)
 

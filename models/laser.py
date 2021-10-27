@@ -10,7 +10,9 @@ class Laser:
         self.mask = pygame.mask.from_surface(self.img)
 
     def draw(self, window):
-        window.blit(self.img, (self.x, self.y))
+        # making laser's coordinates centered in the sprite
+        x_offset, y_offset = self.img.get_size()
+        window.blit(self.img, (self.x-x_offset/2, self.y-y_offset/2))
 
     def move(self, vel):
         self.y += vel
@@ -20,3 +22,9 @@ class Laser:
 
     def collision(self, obj):
         return collide(self, obj)
+
+    def get_width(self):
+        return self.img.get_width()
+
+    def get_height(self):
+        return self.img.get_height()
