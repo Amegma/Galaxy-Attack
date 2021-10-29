@@ -37,6 +37,7 @@ def game(isMouse=False):
     enemy_vel = 1
 
     player = Player(300, 585, mouse_movement=isMouse)
+    pygame.mouse.set_visible(False)
 
     lost = False
     win = False
@@ -105,6 +106,7 @@ def game(isMouse=False):
             redraw_window()
             time.sleep(3)
             player.run = False
+            pygame.mouse.set_visible(True)
 
         if level == 10 and boss_entry:
             redraw_window()
@@ -132,6 +134,7 @@ def game(isMouse=False):
                 quit()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
+                    pygame.mouse.set_visible(True)
                     pause = True
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
@@ -155,6 +158,7 @@ def game(isMouse=False):
                     if event.key == pygame.K_MINUS:
                         audio_cfg.dec_volume(5)
                     if event.key == pygame.K_p:
+                        pygame.mouse.set_visible(False)
                         pause = False
                         break
 
@@ -180,7 +184,7 @@ def game(isMouse=False):
                 else:
                     player.health -= 10
                     enemies.remove(enemy)
-            elif enemy.y + enemy.get_height() > HEIGHT:
+            elif enemy.y + enemy.get_height()/2 > HEIGHT:
                 lives -= 1
                 enemies.remove(enemy)
 
