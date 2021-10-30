@@ -44,17 +44,17 @@ def game(isMouse=False):
     boss_entry = True
     pause = False
 
-    window_width = CANVAS.get_width()
-    background_width = bg_obj.rectBGimg.width
-    screen_rect = CANVAS.get_rect()
-    center_x = screen_rect.centerx
-    starting_x = center_x - background_width//2
-    ending_x = center_x + background_width//2
-
     def redraw_window(pause = False):
         if not pause:
             bg_obj.update()
         bg_obj.render(CANVAS)
+
+        window_width = CANVAS.get_width()
+        background_width = bg_obj.rectBGimg.width
+        screen_rect = CANVAS.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
+        ending_x = center_x + background_width//2
 
         # Draw Text
         level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
