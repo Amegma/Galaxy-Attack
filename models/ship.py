@@ -1,5 +1,6 @@
 import pygame
 from models.laser import Laser
+from screens.background import slow_bg_obj
 from screens.controls import audio_cfg
 from constants import HEIGHT, \
     WIDTH, \
@@ -39,8 +40,12 @@ class Ship:
             laser.draw(window)
 
         # making ship's coordinates centered in the sprite
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = window.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
         x_offset, y_offset = self.ship_img.get_size()
-        window.blit(self.ship_img, (self.x-x_offset/2, self.y-y_offset/2))
+        window.blit(self.ship_img, (starting_x+self.x-x_offset/2, self.y-y_offset/2))
 
     def move_lasers(self, vel, obj):
         self.coolDown()
@@ -99,10 +104,10 @@ class Player(Ship):
             audio_cfg.play_music(MENU_MUSIC_PATH)
             self.run = False
         # Left Key
-        if action['LEFT'] and (self.x - self.vel) > 0:
+        if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
             self.x -= self.vel
         # Right Key
-        if action['RIGHT'] and (self.x + self.vel + self.get_width()) < WIDTH:
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < WIDTH:
             self.x += self.vel
         # Up Key
         if action['UP'] and (self.y - self.vel) > 0:
@@ -119,7 +124,7 @@ class Player(Ship):
         button = pygame.mouse.get_pressed()        
         keys = pygame.key.get_pressed()
         # Movement
-        if cx > 0 and cx < WIDTH \
+        if cx > self.get_width()/2 and cx < WIDTH - self.get_width()/2 \
             and cy > 0 and cy < HEIGHT :
             self.x = cx
             self.y = cy
@@ -166,12 +171,16 @@ class Player(Ship):
         self.healthBar(window)
 
     def healthBar(self, window):
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = window.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
         x_offset, y_offset = self.ship_img.get_size()
-        pygame.draw.rect(window, (255, 0, 0), (self.x - x_offset/2,
+        pygame.draw.rect(window, (255, 0, 0), (starting_x + self.x - x_offset/2,
                                                self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width()),
                                                10))
-        pygame.draw.rect(window, (0, 255, 0), (self.x - x_offset/2,
+        pygame.draw.rect(window, (0, 255, 0), (starting_x + self.x - x_offset/2,
                                                self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width() * (self.health/self.max_health)),
                                                10))
