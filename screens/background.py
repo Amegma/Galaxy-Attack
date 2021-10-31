@@ -6,10 +6,8 @@ class ScrollBackground():
             self.rectBGimg = self.bgimage.get_rect()
 
             self.bgY1 = 0
-            self.bgX1 = 0
 
             self.bgY2 = - self.rectBGimg.height
-            self.bgX2 = 0
 
             self.moving_speed = moving_speed
 
@@ -22,8 +20,11 @@ class ScrollBackground():
             self.bgY2 = - self.rectBGimg.height
 
       def render(self, CANVAS):
-         CANVAS.blit(self.bgimage, (self.bgX1, self.bgY1))
-         CANVAS.blit(self.bgimage, (self.bgX2, self.bgY2))
+         screen_rect = CANVAS.get_rect()
+         centerx = screen_rect.centerx
+         x = centerx - self.rectBGimg.width / 2
+         CANVAS.blit(self.bgimage, (x, self.bgY1))
+         CANVAS.blit(self.bgimage, (x, self.bgY2))
 
 bg_obj = ScrollBackground(BG)
 slow_bg_obj = ScrollBackground(BG, 1.5)

@@ -1,5 +1,6 @@
 import pygame
 from models.laser import Laser
+from screens.background import slow_bg_obj
 from screens.controls import audio_cfg
 from constants import HEIGHT, \
     WIDTH, \
@@ -8,7 +9,7 @@ from constants import HEIGHT, \
     HARD_SPACE_SHIP, \
     PLAYER_SPACE_SHIP, \
     BOSS_SHIP, \
-    PURPLE_LASER, \
+    FLAME_LASER, \
     PLAYER_LASER, \
     RED_LASER, \
     BLUE_LASER, \
@@ -37,7 +38,14 @@ class Ship:
         # like the lasers appear from above the ship
         for laser in self.lasers:
             laser.draw(window)
-        window.blit(self.ship_img, (self.x, self.y))
+
+        # making ship's coordinates centered in the sprite
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = window.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
+        x_offset, y_offset = self.ship_img.get_size()
+        window.blit(self.ship_img, (starting_x+self.x-x_offset/2, self.y-y_offset/2))
 
     def move_lasers(self, vel, obj):
         self.coolDown()
@@ -96,10 +104,10 @@ class Player(Ship):
             audio_cfg.play_music(MENU_MUSIC_PATH)
             self.run = False
         # Left Key
-        if action['LEFT'] and (self.x - self.vel) > 0:
+        if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
             self.x -= self.vel
         # Right Key
-        if action['RIGHT'] and (self.x + self.vel + self.get_width()) < WIDTH:
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < WIDTH:
             self.x += self.vel
         # Up Key
         if action['UP'] and (self.y - self.vel) > 0:
@@ -115,10 +123,9 @@ class Player(Ship):
         cx, cy = pygame.mouse.get_pos()
         button = pygame.mouse.get_pressed()        
         keys = pygame.key.get_pressed()
-
         # Movement
-        if cx > 0 and cx + self.ship_img.get_width() < WIDTH \
-            and cy > 0 and cy + self.ship_img.get_height() < HEIGHT :
+        if cx > self.get_width()/2 and cx < WIDTH - self.get_width()/2 \
+            and cy > 0 and cy < HEIGHT :
             self.x = cx
             self.y = cy
         # Shoot Laser
@@ -164,12 +171,17 @@ class Player(Ship):
         self.healthBar(window)
 
     def healthBar(self, window):
-        pygame.draw.rect(window, (255, 0, 0), (self.x,
-                                               self.y + self.ship_img.get_height() + 10,
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = window.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
+        x_offset, y_offset = self.ship_img.get_size()
+        pygame.draw.rect(window, (255, 0, 0), (starting_x + self.x - x_offset/2,
+                                               self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width()),
                                                10))
-        pygame.draw.rect(window, (0, 255, 0), (self.x,
-                                               self.y + self.ship_img.get_height() + 10,
+        pygame.draw.rect(window, (0, 255, 0), (starting_x + self.x - x_offset/2,
+                                               self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width() * (self.health/self.max_health)),
                                                10))
 
@@ -178,7 +190,7 @@ class Enemy(Ship):
         'easy': (EASY_SPACE_SHIP, RED_LASER, 10),
         'medium': (MEDIUM_SPACE_SHIP, BLUE_LASER, 18),
         'hard': (HARD_SPACE_SHIP, GREEN_LASER, 25),
-        'boss': (BOSS_SHIP, PURPLE_LASER, 100)
+        'boss': (BOSS_SHIP, FLAME_LASER, 100)
     }
 
     ship_type = ''
@@ -205,6 +217,6 @@ class Enemy(Ship):
     def shoot(self):
         if self.cool_down_counter == 0 and self.y > 0:
             ENEMY_LASER_SOUND.play()
-            laser = Laser(self.x - 10, self.y, self.laser_img)
+            laser = Laser(self.x, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1

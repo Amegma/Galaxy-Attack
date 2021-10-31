@@ -9,7 +9,7 @@ from constants import WIDTH, \
                       FPS, \
                       FONT_PATH
 
-from .controls import audio_cfg
+from .controls import audio_cfg, display_cfg
 from .background import slow_bg_obj
 
 def score_board():
@@ -25,18 +25,24 @@ def score_board():
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 
+        window_width = CANVAS.get_width()
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = CANVAS.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
+
         score_title_label = score_title_font.render('Score Board', 1, (0, 229, 0))
-        CANVAS.blit(score_title_label, (WIDTH//2 - score_title_label.get_width()//2 - 30, 168))
-        CANVAS.blit(trophyImage, (WIDTH//2 + score_title_label.get_width()//2 - 10, 163))
+        CANVAS.blit(score_title_label, (window_width//2 - score_title_label.get_width()//2 - 30, 168))
+        CANVAS.blit(trophyImage, (window_width//2 + score_title_label.get_width()//2 - 10, 163))
 
         i = 0
         for score in score_list[:5]:
             score_label = score_font.render(str(score), 1, (0, 255, 255))
-            CANVAS.blit(score_label, (WIDTH//2 - score_label.get_width() + 20, 250 + i * 40))
+            CANVAS.blit(score_label, (window_width//2 - score_label.get_width() + 20, 250 + i * 40))
             i += 1
 
         back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
-        CANVAS.blit(back_label, (30, 30))
+        CANVAS.blit(back_label, (starting_x + 30, 30))
 
         audio_cfg.display_volume(CANVAS)
         framespersec.tick(FPS)
@@ -52,6 +58,8 @@ def score_board():
                     audio_cfg.inc_volume(5)
                 if event.key == pygame.K_MINUS:
                     audio_cfg.dec_volume(5)
+                if event.key == pygame.K_f:
+                    display_cfg.toggle_full_screen()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_BACKSPACE]:
