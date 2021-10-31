@@ -2,6 +2,8 @@
 
 This project is an inspiration of an Atari game which is Space Invaders with some creativity of my own.
 
+[Demo Game Video](https://youtu.be/ejA89NtTH2k)
+
 ## Technologies Used
 
 * Python
