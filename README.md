@@ -1,4 +1,4 @@
-# Atari Space Invaders
+# Space Invaders
 
 This project is an inspiration of an Atari game which is Space Invaders with some creativity of my own.
 
