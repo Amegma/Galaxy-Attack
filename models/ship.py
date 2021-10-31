@@ -124,7 +124,7 @@ class Player(Ship):
         button = pygame.mouse.get_pressed()        
         keys = pygame.key.get_pressed()
         # Movement
-        if cx > 0 and cx < WIDTH \
+        if cx > self.get_width()/2 and cx < WIDTH - self.get_width()/2 \
             and cy > 0 and cy < HEIGHT :
             self.x = cx
             self.y = cy
