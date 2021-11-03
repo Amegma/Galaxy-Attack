@@ -18,6 +18,7 @@ pygame.mixer.init()
 
 # font location
 FONT_PATH = os.path.join('assets', 'fonts')
+EXPLOSION_PATH = os.path.join('assets', 'graphics', 'explosion')
 
 # Load Controls Image
 startImage = pygame.image.load(os.path.join('assets', 'graphics', 'play.png'))
@@ -44,16 +45,22 @@ RED_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_re
 BLUE_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_blue.png'))
 GREEN_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_green.png'))
 FLAME_LASER = pygame.image.load(os.path.join('assets', 'graphics', 'pixel_laser_flame.png'))
-PLAYER_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'ownlaser.wav'))
-ENEMY_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'enemylaser.wav'))
 
 # load music
 GAME_MUSIC_PATH = os.path.join('assets', 'sounds', 'ingame.wav')
 MENU_MUSIC_PATH = os.path.join('assets', 'sounds', 'menu.wav')
 
+# sfx
+PLAYER_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'ownlaser.wav'))
+ENEMY_LASER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'enemylaser.wav'))
+EXPLODE_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'explode.wav'))
+LASER_HIT_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sounds', 'laser_hit.wav'))
+
 # adding sounds to the list
 soundList.append(PLAYER_LASER_SOUND)
 soundList.append(ENEMY_LASER_SOUND)
+soundList.append(EXPLODE_SOUND)
+soundList.append(LASER_HIT_SOUND)
 
 # Load Background Image
 backgroundImage = pygame.image.load(os.path.join('assets', 'graphics', 'background-black.png'))

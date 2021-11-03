@@ -4,6 +4,7 @@ import time
 import random
 
 from models.ship import Player, Enemy
+from models.explosion import Explosion, explosion_group
 from utils.collide import collide
 from .controls import audio_cfg, display_cfg
 from .background import bg_obj
@@ -43,6 +44,8 @@ def game(isMouse=False):
     win = False
     boss_entry = True
     pause = False
+
+    explosion_group.empty()
 
     def redraw_window(pause = False):
         if not pause:
@@ -97,6 +100,10 @@ def game(isMouse=False):
 
             key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
             CANVAS.blit(key_msg, (window_width//2 - key_msg.get_width()//2, 400))
+
+        # explosion group
+        explosion_group.draw(CANVAS)
+        explosion_group.update()
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
@@ -184,14 +191,24 @@ def game(isMouse=False):
                 player.SCORE += 50
                 if enemy.ship_type == 'boss':
                     if enemy.boss_max_health - 5 <= 0:
+                        # note: this is not seen as game is paused as soon as boss health reaches zero
+                        # should be fixed in future with a short delay in pausing
+                        boss_crash = Explosion(player.x, player.y, size = 100)
+                        explosion_group.add(boss_crash)
+
                         enemies.remove(enemy)
                         enemy.boss_max_health = 100
                         player.health -= 100
                     else:
                         enemy.boss_max_health -= 5
                         player.health -= 100
+                        # player death explosion
+                        crash = Explosion(player.x, player.y)
+                        explosion_group.add(crash)
                 else:
                     player.health -= 10
+                    crash = Explosion(enemy.x, enemy.y)
+                    explosion_group.add(crash)
                     enemies.remove(enemy)
             elif enemy.y + enemy.get_height()/2 > HEIGHT:
                 lives -= 1
