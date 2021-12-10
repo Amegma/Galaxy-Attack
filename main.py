@@ -42,6 +42,7 @@ def main():
 
     run = True
     while run:
+        pygame.mouse.set_visible(True)
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 

@@ -8,15 +8,17 @@ from utils.collide import collide
 from .controls import audio_cfg, display_cfg
 from .background import bg_obj
 
-from constants import GAME_MUSIC_PATH, \
-                      WIDTH, \
-                      HEIGHT, \
-                      CANVAS, \
-                      heartImage, \
-                      score_list, \
-                      framespersec, \
-                      FPS, \
-                      FONT_PATH
+from constants import WIDTH,\
+    HEIGHT,\
+    CANVAS,\
+    heartImage,\
+    score_list,\
+    framespersec,\
+    FPS,\
+    FONT_PATH,\
+    MENU_MUSIC_PATH,\
+    GAME_MUSIC_PATH
+
 
 def game(isMouse=False):
     lives = 5
@@ -44,7 +46,7 @@ def game(isMouse=False):
     boss_entry = True
     pause = False
 
-    def redraw_window(pause = False):
+    def redraw_window(pause=False):
         if not pause:
             bg_obj.update()
         bg_obj.render(CANVAS)
@@ -79,24 +81,29 @@ def game(isMouse=False):
         if win:
             score_list.append(player.get_score())
             win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
-            CANVAS.blit(win_label, (window_width//2 - win_label.get_width()//2, 350))
+            CANVAS.blit(win_label, (window_width//2 -
+                        win_label.get_width()//2, 350))
 
         if lost:
             score_list.append(player.get_score())
             lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
-            CANVAS.blit(lost_label, (window_width//2 - lost_label.get_width()//2, 350))
+            CANVAS.blit(lost_label, (window_width//2 -
+                        lost_label.get_width()//2, 350))
 
         if level >= 10 and boss_entry:
             last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
-            CANVAS.blit(last_label, (window_width//2 - last_label.get_width()//2, 350))
+            CANVAS.blit(last_label, (window_width//2 -
+                        last_label.get_width()//2, 350))
 
         if pause:
             # if paused display the "game is paused" screen
             pause_label = main_font.render('Game Paused', 1, (0, 255, 255))
-            CANVAS.blit(pause_label, (window_width//2 - pause_label.get_width()//2, 350))
+            CANVAS.blit(pause_label, (window_width//2 -
+                        pause_label.get_width()//2, 350))
 
             key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
-            CANVAS.blit(key_msg, (window_width//2 - key_msg.get_width()//2, 400))
+            CANVAS.blit(key_msg, (window_width//2 -
+                        key_msg.get_width()//2, 400))
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
@@ -160,6 +167,11 @@ def game(isMouse=False):
                 if event.type == pygame.QUIT:
                     quit()
                 if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_BACKSPACE:
+                        player.run = False
+                        pause = False
+                        audio_cfg.play_music(MENU_MUSIC_PATH)
+                        break
                     if event.key == pygame.K_m:
                         audio_cfg.toggle_mute()
                     if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
