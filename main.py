@@ -33,6 +33,8 @@ pygame.font.init()
 
 pygame.display.set_caption(TITLE)
 
+click = False
+
 
 def main():
     title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 60)
@@ -52,6 +54,15 @@ def main():
         center_x = screen_rect.centerx
         starting_x = center_x - background_width//2
         ending_x = center_x + background_width//2
+
+        mx, my = pygame.mouse.get_pos()
+
+        button_1 = pygame.Rect(50, 100, 200, 50)
+        if button_1.collidepoint((mx, my)):
+            if click:
+                score_board()
+
+        pygame.draw.rect(CANVAS, (255, 0, 0), button_1)
 
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
         CANVAS.blit(title_label, (window_width//2 -
@@ -85,6 +96,8 @@ def main():
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
         framespersec.tick(FPS)  # capping frame rate to 60
+        click = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -97,6 +110,9 @@ def main():
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     display_cfg.toggle_full_screen()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
 
         keys = pygame.key.get_pressed()
         button = pygame.mouse.get_pressed()
@@ -112,8 +128,8 @@ def main():
         if keys[pygame.K_RETURN]:
             game()
 
-        if button[0]:
-            game(True)
+        # if button[0]:
+        #     game(True)
 
     pygame.quit()
 
