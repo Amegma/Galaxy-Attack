@@ -42,7 +42,10 @@ def main():
     control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
-    greenbtn = Button((7, 8, 16), 120, 225, 195, 66, "MOUSE")
+    mouse_btn = Button((7, 8, 16), (255, 255, 255), "default",
+                       (120, 225), (195, 66), "MOUSE")
+    keyboard_btn = Button((7, 8, 16), (255, 255, 255), "default",
+                          (420, 525), (195, 66), "KEYBOARD")
 
     run = True
     while run:
@@ -59,11 +62,15 @@ def main():
 
         pos = pygame.mouse.get_pos()
 
-        if greenbtn.isOver(pos):
-            if click:
-                game(True)
+        # if mouse_btn.isOver(pos):
+        #     if click:
+        #         game(True)
+        # if keyboard_btn.isOver(pos):
+        #     if click:
+        #         game()
 
-        greenbtn.draw(CANVAS, (255, 255, 255))
+        mouse_btn.draw(CANVAS)
+        keyboard_btn.draw(CANVAS)
 
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
         CANVAS.blit(title_label, (window_width//2 -
@@ -117,18 +124,25 @@ def main():
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    click = True
-                # if greenbtn.isOver(pos):
-                #     click = True
+                    # click = True
+                    if mouse_btn.isOver(pos):
+                        game(True)
+                    if keyboard_btn.isOver(pos):
+                        game()
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
-                if greenbtn.isOver(pos):
-                    greenbtn.color = (255, 0, 0)
+                if mouse_btn.isOver(pos):
+                    mouse_btn.outline = "onover"
                 else:
-                    greenbtn.color = (7, 8, 16)
+                    mouse_btn.outline = "default"
+
+                if keyboard_btn.isOver(pos):
+                    keyboard_btn.outline = "onover"
+                else:
+                    keyboard_btn.outline = "default"
+
         keys = pygame.key.get_pressed()
-        buttonclick = pygame.mouse.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
             run = False
 
@@ -140,10 +154,6 @@ def main():
 
         if keys[pygame.K_RETURN]:
             game()
-
-        # On Hold
-        # if buttonclick[0]:
-        #     game(True)
 
     pygame.quit()
 
