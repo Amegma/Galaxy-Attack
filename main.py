@@ -6,9 +6,9 @@ from screens.game import game
 from screens.controls import audio_cfg, display_cfg, controls
 from screens.score_board import score_board
 from screens.background import slow_bg_obj
+from models.button import Button
 
 from constants import TITLE,\
-    WIDTH,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
@@ -42,6 +42,8 @@ def main():
     control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
+    greenbtn = Button((7, 8, 16), 120, 225, 195, 66, "MOUSE")
+
     run = True
     while run:
         pygame.mouse.set_visible(True)
@@ -55,14 +57,13 @@ def main():
         starting_x = center_x - background_width//2
         ending_x = center_x + background_width//2
 
-        mx, my = pygame.mouse.get_pos()
+        pos = pygame.mouse.get_pos()
 
-        button_1 = pygame.Rect(50, 100, 200, 50)
-        if button_1.collidepoint((mx, my)):
+        if greenbtn.isOver(pos):
             if click:
-                score_board()
+                game(True)
 
-        pygame.draw.rect(CANVAS, (255, 0, 0), button_1)
+        greenbtn.draw(CANVAS, (255, 255, 255))
 
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
         CANVAS.blit(title_label, (window_width//2 -
@@ -101,6 +102,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
+            # Keyboard events
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
@@ -110,12 +113,22 @@ def main():
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     display_cfg.toggle_full_screen()
+
+            # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
+                # if greenbtn.isOver(pos):
+                #     click = True
 
+            # Mouse hover events
+            if event.type == pygame.MOUSEMOTION:
+                if greenbtn.isOver(pos):
+                    greenbtn.color = (255, 0, 0)
+                else:
+                    greenbtn.color = (7, 8, 16)
         keys = pygame.key.get_pressed()
-        button = pygame.mouse.get_pressed()
+        buttonclick = pygame.mouse.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
             run = False
 
@@ -129,7 +142,7 @@ def main():
             game()
 
         # On Hold
-        # if button[0]:
+        # if buttonclick[0]:
         #     game(True)
 
     pygame.quit()
