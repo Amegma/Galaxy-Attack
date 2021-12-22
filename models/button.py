@@ -21,8 +21,8 @@ class Button:
         pygame.draw.rect(win, self.outline_color, self.on_over_outline if self.outline ==
                          "onover" else self.default_outline, 0, 8)
 
-        pygame.draw.rect(win, self.color, (self.pos[0], self.pos[1],
-                         self.size[0], self.size[1]), 0, 7)
+        pygame.draw.rect(win, self.color, (self.pos[0]+1 if self.outline == "onover" else self.pos[0], self.pos[1] if self.outline == "onover" else self.pos[1],
+                         self.size[0] - 2 if self.outline == "onover" else self.size[0], self.size[1] - 2 if self.outline == "outline" else self.size[1]), 0, 7)
 
         if self.text != '':
             font = pygame.font.Font(os.path.join(
