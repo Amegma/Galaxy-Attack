@@ -12,17 +12,23 @@ class Button:
         self.size = size  # size is a tuple (width, height)
         self.text = text
         self.outline = outline
-        self.default_outline = (
+        self.default_outline = pygame.Rect(
             self.pos[0]-5, self.pos[1]-5, self.size[0]+10, self.size[1]+10)
-        self.on_over_outline = (
+        self.on_over_outline = pygame.Rect(
             self.pos[0]-6, self.pos[1]-6, self.size[0]+12, self.size[1]+12)
+        self.rect = self.default_outline
 
     def draw(self, win):
-        pygame.draw.rect(win, self.outline_color, self.on_over_outline if self.outline ==
-                         "onover" else self.default_outline, 0, 8)
+        default_inner_rect = (
+            self.pos[0], self.pos[1], self.size[0], self.size[1])
+        onover_inner_rect = (
+            self.pos[0]+1, self.pos[1]+1, self.size[0]-2, self.size[1]-2)
+        inner_rect = onover_inner_rect if self.outline == "onover" else default_inner_rect
 
-        pygame.draw.rect(win, self.color, (self.pos[0]+1 if self.outline == "onover" else self.pos[0], self.pos[1] if self.outline == "onover" else self.pos[1],
-                         self.size[0] - 2 if self.outline == "onover" else self.size[0], self.size[1] - 2 if self.outline == "outline" else self.size[1]), 0, 7)
+        pygame.draw.rect(win, self.outline_color, self.on_over_outline if self.outline ==
+                         "onover" else self.default_outline, 0, 7)
+
+        pygame.draw.rect(win, self.color, inner_rect, 0, 6)
 
         if self.text != '':
             font = pygame.font.Font(os.path.join(
@@ -31,10 +37,5 @@ class Button:
             win.blit(text, (self.pos[0] + (self.size[0]/2 - text.get_width()/2),
                      self.pos[1] + (self.size[1]/2 - text.get_height()/2)))
 
-    def isOver(self, pos):
-        # Pos is the mouse position or a tuple of (x,y) coordinates
-        if pos[0] > self.pos[0] and pos[0] < self.pos[1] + self.size[0]:
-            if pos[1] > self.pos[1] and pos[1] < self.pos[1] + self.size[1]:
-                return True
-
-        return False
+    def isOver(self):
+        return self.rect.collidepoint(pygame.mouse.get_pos())
