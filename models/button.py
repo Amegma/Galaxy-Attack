@@ -18,11 +18,16 @@ class Button:
             self.pos[0]-6, self.pos[1]-6, self.size[0]+12, self.size[1]+12)
 
     def draw(self, win):
+        default_inner_rect = (
+            self.pos[0], self.pos[1], self.size[0], self.size[1])
+        onover_inner_rect = (
+            self.pos[0]+1, self.pos[1]+1, self.size[0]-2, self.size[1]-2)
+        inner_rect = onover_inner_rect if self.outline == "onover" else default_inner_rect
+
         pygame.draw.rect(win, self.outline_color, self.on_over_outline if self.outline ==
                          "onover" else self.default_outline, 0, 8)
 
-        pygame.draw.rect(win, self.color, (self.pos[0]+1 if self.outline == "onover" else self.pos[0], self.pos[1] if self.outline == "onover" else self.pos[1],
-                         self.size[0] - 2 if self.outline == "onover" else self.size[0], self.size[1] - 2 if self.outline == "outline" else self.size[1]), 0, 7)
+        pygame.draw.rect(win, self.color, inner_rect, 0, 7)
 
         if self.text != '':
             font = pygame.font.Font(os.path.join(
