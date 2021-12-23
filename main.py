@@ -7,6 +7,7 @@ from screens.controls import audio_cfg, display_cfg, controls
 from screens.score_board import score_board
 from screens.background import slow_bg_obj
 from models.button import Button
+from models.icon_button import IconButton
 
 from constants import TITLE,\
     BOSS_SHIP,\
@@ -52,6 +53,8 @@ def main():
                        (center_x - 210, center_y + 22), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255), "default",
                           (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
+    control_btn = IconButton(controlImage, (starting_x + 30, 15))
+    trophy_btn = IconButton(trophyImage, (ending_x - 130, 25))
 
     run = True
     while run:
@@ -59,8 +62,8 @@ def main():
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 
-        mouse_btn.draw(CANVAS)
-        keyboard_btn.draw(CANVAS)
+        mouse_btn.draw()
+        keyboard_btn.draw()
 
         title_label = title_font.render('Start Game', 1, (255, 255, 255))
         CANVAS.blit(title_label, (center_x -
@@ -74,12 +77,15 @@ def main():
         # Control Page
         control_label = control_font.render('[c]', 1, (255, 255, 255))
         CANVAS.blit(control_label, (starting_x + 95, 32))
-        CANVAS.blit(controlImage, (starting_x + 30, 15))
+        # CANVAS.blit(controlImage, (starting_x + 30, 15))
+        control_btn.draw()
 
         # ScoreBoard Page
         score_label = control_font.render('[s]', 1, (255, 255, 255))
         CANVAS.blit(score_label, (ending_x - 67, 30))
-        CANVAS.blit(trophyImage, (ending_x - 130, 25))
+        # CANVAS.blit(trophyImage, (ending_x - 130, 25))
+        trophy_btn.draw()
+        # print(trophy_btn.image.get_rect())
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
