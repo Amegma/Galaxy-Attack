@@ -8,11 +8,11 @@ class IconButton:
     def __init__(self, image, pos):
         self.image = image
         self.pos = pos
+        self.rect = pygame.Rect(
+            self.pos[0], self.pos[1], self.image.get_width(), self.image.get_height())
 
     def draw(self):
-        singleplayer_position = pygame.Rect(self.pos[0], self.pos[1], 100, 100)
+        CANVAS.blit(self.image, self.rect)
 
-        CANVAS.blit(self.image, singleplayer_position)
-        # print(self.image.get_rect())
-        if singleplayer_position.collidepoint(pygame.mouse.get_pos()):
-            print("Working...")
+    def isOver(self):
+        return self.rect.collidepoint(pygame.mouse.get_pos())

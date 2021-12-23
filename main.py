@@ -13,7 +13,6 @@ from constants import TITLE,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
-    startImage,\
     controlImage,\
     trophyImage,\
     CANVAS,\
@@ -54,7 +53,7 @@ def main():
     keyboard_btn = Button((7, 8, 16), (255, 255, 255), "default",
                           (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
     control_btn = IconButton(controlImage, (starting_x + 30, 15))
-    trophy_btn = IconButton(trophyImage, (ending_x - 130, 25))
+    trophy_btn = IconButton(trophyImage, (ending_x - 85, 25))
 
     run = True
     while run:
@@ -75,14 +74,14 @@ def main():
         CANVAS.blit(PLAYER_LASER, (center_x - 50, 475))
 
         # Control Page
-        control_label = control_font.render('[c]', 1, (255, 255, 255))
-        CANVAS.blit(control_label, (starting_x + 95, 32))
+        # control_label = control_font.render('[c]', 1, (255, 255, 255))
+        # CANVAS.blit(control_label, (starting_x + 95, 32))
         # CANVAS.blit(controlImage, (starting_x + 30, 15))
         control_btn.draw()
 
         # ScoreBoard Page
-        score_label = control_font.render('[s]', 1, (255, 255, 255))
-        CANVAS.blit(score_label, (ending_x - 67, 30))
+        # score_label = control_font.render('[s]', 1, (255, 255, 255))
+        # CANVAS.blit(score_label, (ending_x - 67, 30))
         # CANVAS.blit(trophyImage, (ending_x - 130, 25))
         trophy_btn.draw()
         # print(trophy_btn.image.get_rect())
@@ -109,10 +108,14 @@ def main():
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if mouse_btn.rect.collidepoint(pygame.mouse.get_pos()):
+                    if mouse_btn.isOver():
                         game(True)
-                    if keyboard_btn.rect.collidepoint(pygame.mouse.get_pos()):
+                    if keyboard_btn.isOver():
                         game()
+                    if control_btn.isOver():
+                        controls()
+                    if trophy_btn.isOver():
+                        score_board()
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:

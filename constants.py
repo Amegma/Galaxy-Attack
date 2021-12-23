@@ -46,7 +46,6 @@ soundList.append(ENEMY_LASER_SOUND)
 
 # IMAGE VARS
 # Load Screen Button Images
-startImage = pygame.image.load(os.path.join('assets', 'graphics', 'play.png'))
 controlImage = pygame.image.load(
     os.path.join('assets', 'graphics', 'joystick.png'))
 trophyImage = pygame.image.load(
