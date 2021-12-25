@@ -5,7 +5,7 @@ from constants import FONT_PATH, CANVAS
 
 
 class Button:
-    def __init__(self, color, outline_color, outline, pos, size, text=''):
+    def __init__(self, color, outline_color, pos, size, text='', outline="default"):
         self.color = color
         self.outline_color = outline_color
         self.pos = pos  # pos is a tuple (x, y)

@@ -34,28 +34,6 @@ pygame.font.init()
 pygame.display.set_caption(TITLE)
 
 
-def perfect_outline(img, loc):
-    mask = pygame.mask.from_surface(img)
-    mask_outline = mask.outline()
-    mask_surf = pygame.Surface(img.get_size())
-    for pixel in mask_outline:
-        mask_surf.set_at(pixel, (255, 255, 255))
-    mask_surf.set_colorkey((0, 0, 0))
-
-    CANVAS.blit(mask_surf, (loc[0], loc[1]+2))
-    CANVAS.blit(mask_surf, (loc[0], loc[1]+1))
-    CANVAS.blit(mask_surf, (loc[0], loc[1]-1))
-    CANVAS.blit(mask_surf, (loc[0], loc[1]-2))
-    CANVAS.blit(mask_surf, (loc[0]+2, loc[1]))
-    CANVAS.blit(mask_surf, (loc[0]+1, loc[1]))
-    CANVAS.blit(mask_surf, (loc[0]-1, loc[1]))
-    CANVAS.blit(mask_surf, (loc[0]-2, loc[1]))
-    CANVAS.blit(mask_surf, (loc[0]+1, loc[1]+1))
-    CANVAS.blit(mask_surf, (loc[0]+1, loc[1]-1))
-    CANVAS.blit(mask_surf, (loc[0]-1, loc[1]+1))
-    CANVAS.blit(mask_surf, (loc[0]-1, loc[1]-1))
-
-
 def main():
     title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 82)
     # sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
@@ -70,9 +48,9 @@ def main():
     starting_x = center_x - background_width//2
     ending_x = center_x + background_width//2
 
-    mouse_btn = Button((7, 8, 16), (255, 255, 255), "default",
+    mouse_btn = Button((7, 8, 16), (255, 255, 255),
                        (center_x - 210, center_y + 22), (195, 66), "MOUSE")
-    keyboard_btn = Button((7, 8, 16), (255, 255, 255), "default",
+    keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
     control_btn = IconButton(controlImage, (starting_x + 30, 15))
     trophy_btn = IconButton(trophyImage, (ending_x - 85, 25))
@@ -96,11 +74,9 @@ def main():
         CANVAS.blit(PLAYER_LASER, (center_x - 50, 475))
 
         # Control Page
-        perfect_outline(controlImage, (starting_x + 30, 15))
         control_btn.draw()
 
         # ScoreBoard Page
-        perfect_outline(trophyImage, (ending_x - 85, 25))
         trophy_btn.draw()
 
         audio_cfg.display_volume(CANVAS)
@@ -145,6 +121,16 @@ def main():
                     keyboard_btn.outline = "onover"
                 else:
                     keyboard_btn.outline = "default"
+
+                if control_btn.isOver():
+                    control_btn.outline = "onover"
+                else:
+                    control_btn.outline = "default"
+
+                if trophy_btn.isOver():
+                    trophy_btn.outline = "onover"
+                else:
+                    trophy_btn.outline = "default"
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
