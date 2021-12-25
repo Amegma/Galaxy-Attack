@@ -7,12 +7,12 @@ from screens.controls import audio_cfg, display_cfg, controls
 from screens.score_board import score_board
 from screens.background import slow_bg_obj
 from models.button import Button
+from models.icon_button import IconButton
 
 from constants import TITLE,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
-    startImage,\
     controlImage,\
     trophyImage,\
     CANVAS,\
@@ -37,7 +37,7 @@ pygame.display.set_caption(TITLE)
 def main():
     title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 82)
     # sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
-    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
+    # control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
     # window_width = CANVAS.get_width()
@@ -48,10 +48,12 @@ def main():
     starting_x = center_x - background_width//2
     ending_x = center_x + background_width//2
 
-    mouse_btn = Button((7, 8, 16), (255, 255, 255), "default",
+    mouse_btn = Button((7, 8, 16), (255, 255, 255),
                        (center_x - 210, center_y + 22), (195, 66), "MOUSE")
-    keyboard_btn = Button((7, 8, 16), (255, 255, 255), "default",
+    keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
+    control_btn = IconButton(controlImage, (starting_x + 30, 15))
+    trophy_btn = IconButton(trophyImage, (ending_x - 85, 25))
 
     run = True
     while run:
@@ -59,8 +61,8 @@ def main():
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 
-        mouse_btn.draw(CANVAS)
-        keyboard_btn.draw(CANVAS)
+        mouse_btn.draw()
+        keyboard_btn.draw()
 
         title_label = title_font.render('Start Game', 1, (255, 255, 255))
         CANVAS.blit(title_label, (center_x -
@@ -72,14 +74,10 @@ def main():
         CANVAS.blit(PLAYER_LASER, (center_x - 50, 475))
 
         # Control Page
-        control_label = control_font.render('[c]', 1, (255, 255, 255))
-        CANVAS.blit(control_label, (starting_x + 95, 32))
-        CANVAS.blit(controlImage, (starting_x + 30, 15))
+        control_btn.draw()
 
         # ScoreBoard Page
-        score_label = control_font.render('[s]', 1, (255, 255, 255))
-        CANVAS.blit(score_label, (ending_x - 67, 30))
-        CANVAS.blit(trophyImage, (ending_x - 130, 25))
+        trophy_btn.draw()
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
@@ -103,10 +101,14 @@ def main():
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if mouse_btn.rect.collidepoint(pygame.mouse.get_pos()):
+                    if mouse_btn.isOver():
                         game(True)
-                    if keyboard_btn.rect.collidepoint(pygame.mouse.get_pos()):
+                    if keyboard_btn.isOver():
                         game()
+                    if control_btn.isOver():
+                        controls()
+                    if trophy_btn.isOver():
+                        score_board()
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
@@ -119,6 +121,16 @@ def main():
                     keyboard_btn.outline = "onover"
                 else:
                     keyboard_btn.outline = "default"
+
+                if control_btn.isOver():
+                    control_btn.outline = "onover"
+                else:
+                    control_btn.outline = "default"
+
+                if trophy_btn.isOver():
+                    trophy_btn.outline = "onover"
+                else:
+                    trophy_btn.outline = "default"
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
