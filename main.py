@@ -96,20 +96,12 @@ def main():
         CANVAS.blit(PLAYER_LASER, (center_x - 50, 475))
 
         # Control Page
-        # control_label = control_font.render('[c]', 1, (255, 255, 255))
-        # CANVAS.blit(control_label, (starting_x + 95, 32))
-        perfect_outline(trophyImage, (ending_x - 85, 25))
         perfect_outline(controlImage, (starting_x + 30, 15))
-        # my_mask = pygame.mask.from_surface(controlImage)
-        # CANVAS.blit(my_mask.to_surface(), (center_x + 30, 15))
         control_btn.draw()
 
         # ScoreBoard Page
-        # score_label = control_font.render('[s]', 1, (255, 255, 255))
-        # CANVAS.blit(score_label, (ending_x - 67, 30))
-        # CANVAS.blit(trophyImage, (ending_x - 130, 25))
+        perfect_outline(trophyImage, (ending_x - 85, 25))
         trophy_btn.draw()
-        # print(trophy_btn.image.get_rect())
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
