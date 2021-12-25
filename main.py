@@ -34,10 +34,32 @@ pygame.font.init()
 pygame.display.set_caption(TITLE)
 
 
+def perfect_outline(img, loc):
+    mask = pygame.mask.from_surface(img)
+    mask_outline = mask.outline()
+    mask_surf = pygame.Surface(img.get_size())
+    for pixel in mask_outline:
+        mask_surf.set_at(pixel, (255, 255, 255))
+    mask_surf.set_colorkey((0, 0, 0))
+
+    CANVAS.blit(mask_surf, (loc[0], loc[1]+2))
+    CANVAS.blit(mask_surf, (loc[0], loc[1]+1))
+    CANVAS.blit(mask_surf, (loc[0], loc[1]-1))
+    CANVAS.blit(mask_surf, (loc[0], loc[1]-2))
+    CANVAS.blit(mask_surf, (loc[0]+2, loc[1]))
+    CANVAS.blit(mask_surf, (loc[0]+1, loc[1]))
+    CANVAS.blit(mask_surf, (loc[0]-1, loc[1]))
+    CANVAS.blit(mask_surf, (loc[0]-2, loc[1]))
+    CANVAS.blit(mask_surf, (loc[0]+1, loc[1]+1))
+    CANVAS.blit(mask_surf, (loc[0]+1, loc[1]-1))
+    CANVAS.blit(mask_surf, (loc[0]-1, loc[1]+1))
+    CANVAS.blit(mask_surf, (loc[0]-1, loc[1]-1))
+
+
 def main():
     title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 82)
     # sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
-    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
+    # control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
     # window_width = CANVAS.get_width()
@@ -76,7 +98,10 @@ def main():
         # Control Page
         # control_label = control_font.render('[c]', 1, (255, 255, 255))
         # CANVAS.blit(control_label, (starting_x + 95, 32))
-        # CANVAS.blit(controlImage, (starting_x + 30, 15))
+        perfect_outline(trophyImage, (ending_x - 85, 25))
+        perfect_outline(controlImage, (starting_x + 30, 15))
+        # my_mask = pygame.mask.from_surface(controlImage)
+        # CANVAS.blit(my_mask.to_surface(), (center_x + 30, 15))
         control_btn.draw()
 
         # ScoreBoard Page
