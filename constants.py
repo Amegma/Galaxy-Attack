@@ -57,6 +57,11 @@ controlImage = pygame.image.load(
 trophyImage = pygame.image.load(
     os.path.join('assets', 'graphics', 'trophy.png'))
 
+goBackImage = pygame.image.load(
+    os.path.join('assets', 'graphics', 'back2.png'))
+# goBackImage = pygame.transform.scale()
+goBackImage = pygame.transform.scale(goBackImage, (34*2.4, 19*2.4))
+
 # Load Hearts
 heartImage = pygame.image.load(os.path.join('assets', 'graphics', 'heart.png'))
 

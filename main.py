@@ -19,7 +19,9 @@ from constants import TITLE,\
     framespersec,\
     FPS,\
     FONT_PATH,\
-    MENU_MUSIC_PATH, center_x, center_y
+    MENU_MUSIC_PATH,\
+    center_x,\
+    center_y
 
 # parsing arguments
 ag = argparse.ArgumentParser()

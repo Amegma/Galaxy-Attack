@@ -2,8 +2,10 @@ import os
 import pygame
 
 from .background import slow_bg_obj
+from models.icon_button import IconButton
 from constants import WIDTH,\
     controlImage,\
+    goBackImage, \
     CANVAS, \
     soundList, \
     framespersec, \
@@ -98,20 +100,22 @@ display_cfg = DisplayControls
 def controls():
     run = True
 
+    window_width = CANVAS.get_width()
+    background_width = slow_bg_obj.rectBGimg.width
+    screen_rect = CANVAS.get_rect()
+    center_x = screen_rect.centerx
+    starting_x = center_x - background_width//2
+
     control_title_font = pygame.font.Font(
         os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
     control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
     keys_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
 
+    go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
+
     while run:
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
-
-        window_width = CANVAS.get_width()
-        background_width = slow_bg_obj.rectBGimg.width
-        screen_rect = CANVAS.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
 
         control_title_label = control_title_font.render(
             'Controls', 1, (0, 0, 209))
@@ -166,9 +170,10 @@ def controls():
         sfx_key_label = keys_font.render('[f]', 1, (240, 0, 0))
         CANVAS.blit(sfx_key_label, (starting_x + 470, 655))
 
-        control_title_label = control_font.render(
-            '[Backspace]', 1, (255, 255, 255))
-        CANVAS.blit(control_title_label, (starting_x + 30, 30))
+        # control_title_label = control_font.render(
+        #     '[Backspace]', 1, (255, 255, 255))
+        # CANVAS.blit(control_title_label, (starting_x + 30, 30))
+        go_back_btn.draw()
 
         audio_cfg.display_volume(CANVAS)
 
@@ -187,7 +192,22 @@ def controls():
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     display_cfg.toggle_full_screen()
+                if event.key == pygame.K_BACKSPACE:
+                    run = False
 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_BACKSPACE]:
-            run = False
+            # Mouse click events
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if go_back_btn.isOver():
+                        run = False
+
+            # Mouse hover events
+            if event.type == pygame.MOUSEMOTION:
+                if go_back_btn.isOver():
+                    go_back_btn.outline = "onover"
+                else:
+                    go_back_btn.outline = "default"
+
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_BACKSPACE]:
+        #     run = False
