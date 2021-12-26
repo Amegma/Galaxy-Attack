@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['D:\\Mayank\\Repos\\Atari-Space-Invaders'],
+             pathex=[],
              binaries=[],
              datas=[],
              hiddenimports=[],
