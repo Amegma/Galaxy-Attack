@@ -1,7 +1,7 @@
 import os
 import pygame
 
-from constants import EXPLOSION_PATH, EXPLODE_SOUND, LASER_HIT_SOUND
+from constants import EXPLOSION_PATH, EXPLODE_SOUND, LASER_HIT_SOUND, resource_path
 
 explosion_group = pygame.sprite.Group()
 
@@ -10,7 +10,7 @@ class Explosion(pygame.sprite.Sprite):
         super().__init__()
         self.images = []
         for num in range(1, 6):
-            img = pygame.image.load(os.path.join(EXPLOSION_PATH, f"exp{num}.png"))
+            img = pygame.image.load(resource_path(os.path.join(EXPLOSION_PATH, f"exp{num}.png")))
             img = pygame.transform.scale(img, (size, size))
             self.images.append(img)
         self.index = 0
