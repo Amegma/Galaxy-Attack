@@ -7,7 +7,7 @@ from screens.controls import audio_cfg, display_cfg, controls
 from screens.score_board import score_board
 from screens.background import slow_bg_obj
 
-from constants import MENU_MUSIC_PATH, TITLE,\
+from constants import TITLE,\
     WIDTH,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
@@ -15,10 +15,11 @@ from constants import MENU_MUSIC_PATH, TITLE,\
     startImage,\
     controlImage,\
     trophyImage,\
-    CANVAS, \
-    framespersec, \
-    FPS, \
-    FONT_PATH
+    CANVAS,\
+    framespersec,\
+    FPS,\
+    FONT_PATH,\
+    MENU_MUSIC_PATH
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -32,14 +33,16 @@ pygame.font.init()
 
 pygame.display.set_caption(TITLE)
 
+
 def main():
     title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 60)
     sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
     control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
-
     audio_cfg.play_music(MENU_MUSIC_PATH)
+
     run = True
     while run:
+        pygame.mouse.set_visible(True)
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 
@@ -51,12 +54,18 @@ def main():
         ending_x = center_x + background_width//2
 
         title_label = title_font.render('Start the Game', 1, (0, 209, 0))
-        CANVAS.blit(title_label, (window_width//2 - title_label.get_width()//2 - 15, 350))
-        CANVAS.blit(startImage, (window_width//2 + title_label.get_width()//2, 353))
-        sub_title_label = sub_title_font.render('Press ENTER to play with KEYBOARD', 1, (249, 166, 2))
-        CANVAS.blit(sub_title_label, (window_width//2 - sub_title_label.get_width()//2, 410))
-        sub_title_label = sub_title_font.render('Click LEFT MOUSE button to play with MOUSE', 1, (249, 166, 2))
-        CANVAS.blit(sub_title_label, (window_width//2 - sub_title_label.get_width()//2, 450))
+        CANVAS.blit(title_label, (window_width//2 -
+                    title_label.get_width()//2 - 15, 350))
+        CANVAS.blit(startImage, (window_width//2 +
+                    title_label.get_width()//2, 353))
+        sub_title_label = sub_title_font.render(
+            'Press ENTER to play with KEYBOARD', 1, (249, 166, 2))
+        CANVAS.blit(sub_title_label, (window_width//2 -
+                    sub_title_label.get_width()//2, 410))
+        sub_title_label = sub_title_font.render(
+            'Click LEFT MOUSE button to play with MOUSE', 1, (249, 166, 2))
+        CANVAS.blit(sub_title_label, (window_width//2 -
+                    sub_title_label.get_width()//2, 450))
 
         # Ships
         CANVAS.blit(BOSS_SHIP, (starting_x + 285, 75))
@@ -75,7 +84,7 @@ def main():
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
-        framespersec.tick(FPS) # capping frame rate to 60
+        framespersec.tick(FPS)  # capping frame rate to 60
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -90,7 +99,7 @@ def main():
                     display_cfg.toggle_full_screen()
 
         keys = pygame.key.get_pressed()
-        button = pygame.mouse.get_pressed()    
+        button = pygame.mouse.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
             run = False
 
@@ -107,5 +116,6 @@ def main():
             game(True)
 
     pygame.quit()
+
 
 main()
