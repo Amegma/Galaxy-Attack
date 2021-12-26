@@ -2,24 +2,29 @@ import os
 import pygame
 
 from constants import WIDTH, \
-                      CANVAS, \
-                      score_list, \
-                      trophyImage, \
-                      framespersec, \
-                      FPS, \
-                      FONT_PATH
+    CANVAS, \
+    score_list, \
+    trophyImage, \
+    framespersec, \
+    FPS, \
+    FONT_PATH
 
 from .controls import audio_cfg, display_cfg
 from .background import slow_bg_obj
+from models.icon_button import IconButton
+
 
 def score_board():
     run = True
 
-    score_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
+    score_title_font = pygame.font.Font(
+        os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
     score_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 35)
 
     score_list.sort()
     score_list.reverse()
+
+    # trophy_btn = IconButton(trophyImage, (ending_x - 85, 25))
 
     while run:
         slow_bg_obj.update()
@@ -31,14 +36,18 @@ def score_board():
         center_x = screen_rect.centerx
         starting_x = center_x - background_width//2
 
-        score_title_label = score_title_font.render('Score Board', 1, (0, 229, 0))
-        CANVAS.blit(score_title_label, (window_width//2 - score_title_label.get_width()//2 - 30, 168))
-        CANVAS.blit(trophyImage, (window_width//2 + score_title_label.get_width()//2 - 10, 163))
+        score_title_label = score_title_font.render(
+            'Score Board', 1, (0, 229, 0))
+        CANVAS.blit(score_title_label, (window_width//2 -
+                    score_title_label.get_width()//2 - 30, 168))
+        CANVAS.blit(trophyImage, (window_width//2 +
+                    score_title_label.get_width()//2 - 10, 163))
 
         i = 0
         for score in score_list[:5]:
             score_label = score_font.render(str(score), 1, (0, 255, 255))
-            CANVAS.blit(score_label, (window_width//2 - score_label.get_width() + 20, 250 + i * 40))
+            CANVAS.blit(score_label, (window_width//2 -
+                        score_label.get_width() + 20, 250 + i * 40))
             i += 1
 
         back_label = score_font.render('[Backspace]', 1, (255, 255, 255))

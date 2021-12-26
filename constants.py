@@ -1,6 +1,8 @@
 import pygame
 import os
 
+# from screens.background import slow_bg_obj
+
 # ROOT VARS
 TITLE = 'SPACE INVADERS'
 WIDTH = 750
@@ -8,6 +10,10 @@ HEIGHT = 750
 
 # Canvas Dimensions
 CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
+
+screen_rect = CANVAS.get_rect()
+center_x = screen_rect.centerx
+center_y = screen_rect.centery
 
 # Load Background Image
 backgroundImage = pygame.image.load(os.path.join(

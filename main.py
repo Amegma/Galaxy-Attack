@@ -19,7 +19,7 @@ from constants import TITLE,\
     framespersec,\
     FPS,\
     FONT_PATH,\
-    MENU_MUSIC_PATH
+    MENU_MUSIC_PATH, center_x, center_y
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -42,9 +42,6 @@ def main():
 
     # window_width = CANVAS.get_width()
     background_width = slow_bg_obj.rectBGimg.width
-    screen_rect = CANVAS.get_rect()
-    center_x = screen_rect.centerx
-    center_y = screen_rect.centery
     starting_x = center_x - background_width//2
     ending_x = center_x + background_width//2
 
