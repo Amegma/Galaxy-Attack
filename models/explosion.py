@@ -9,13 +9,8 @@ class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y, size=60, num_frames=8):
         super().__init__()
         self.images = []
-<<<<<<< HEAD
         for num in range(0, num_frames):
             img = pygame.image.load(os.path.join(EXPLOSION_PATH, f"tile{num:03}.png"))
-=======
-        for num in range(1, 6):
-            img = pygame.image.load(resource_path(os.path.join(EXPLOSION_PATH, f"exp{num}.png")))
->>>>>>> c2a84a98074b9b2669e2ddf7680926eb2db4d23b
             img = pygame.transform.scale(img, (size, size))
             self.images.append(img)
         self.index = 0
