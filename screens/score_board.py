@@ -17,7 +17,7 @@ def score_board():
     run = True
 
     score_title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
-    score_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 35)
+    score_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 35)
 
     score_list.sort()
     score_list.reverse()

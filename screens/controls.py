@@ -91,8 +91,8 @@ def controls():
     run = True
 
     control_title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
-    control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 30)
-    keys_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 30)
+    control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    keys_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
 
     while run:
         slow_bg_obj.update()
