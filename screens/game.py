@@ -17,18 +17,19 @@ from constants import GAME_MUSIC_PATH, \
                       score_list, \
                       framespersec, \
                       FPS, \
-                      FONT_PATH
+                      FONT_PATH, \
+                      resource_path
 
 def game(isMouse=False):
     lives = 5
     level = 0
     laser_vel = 10
 
-    main_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 50)
-    sub_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 40)
-    sub_small_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 35)
-    lost_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 55)
-    win_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 55)
+    main_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "edit_undo.ttf")), 50)
+    sub_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "neue.ttf")), 40)
+    sub_small_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "neue.ttf")), 35)
+    lost_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "edit_undo.ttf")), 55)
+    win_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "edit_undo.ttf")), 55)
 
     # load and play ingame music
     audio_cfg.play_music(GAME_MUSIC_PATH)
@@ -145,7 +146,7 @@ def game(isMouse=False):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
                     pygame.mouse.set_visible(True)

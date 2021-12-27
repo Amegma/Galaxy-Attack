@@ -18,7 +18,8 @@ from constants import MENU_MUSIC_PATH, TITLE,\
     CANVAS, \
     framespersec, \
     FPS, \
-    FONT_PATH
+    FONT_PATH, \
+    resource_path
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -28,14 +29,14 @@ args = vars(ag.parse_args())
 if args["mute"]:
     audio_cfg.toggle_mute()
 
-pygame.font.init()
+pygame.init()
 
 pygame.display.set_caption(TITLE)
 
 def main():
-    title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 60)
-    sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
-    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
+    title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 60)
+    sub_title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 36)
 
     audio_cfg.play_music(MENU_MUSIC_PATH)
     run = True
