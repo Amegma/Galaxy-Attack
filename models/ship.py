@@ -216,7 +216,7 @@ class Enemy(Ship):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 # display collisions if enemy lasers hit the player
-                sm_explosion = Explosion(laser.x, laser.y, size=20)
+                sm_explosion = Explosion(laser.x, laser.y, size=30)
                 explosion_group.add(sm_explosion)
                 obj.health -= self.damage
                 self.lasers.remove(laser)
