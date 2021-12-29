@@ -6,6 +6,7 @@ import random
 from models.ship import Player, Enemy
 from models.explosion import Explosion, explosion_group
 from utils.collide import collide
+from utils.resource_path import resource_path
 from .controls import audio_cfg, display_cfg
 from .background import bg_obj
 
@@ -18,8 +19,7 @@ from constants import WIDTH,\
     FPS,\
     FONT_PATH,\
     MENU_MUSIC_PATH,\
-    GAME_MUSIC_PATH, \
-    resource_path
+    GAME_MUSIC_PATH
 
 
 def game(isMouse=False):
@@ -55,7 +55,7 @@ def game(isMouse=False):
 
     explosion_group.empty()
 
-    def redraw_window(pause = False):
+    def redraw_window(pause=False):
         if not pause:
             bg_obj.update()
         bg_obj.render(CANVAS)
@@ -211,7 +211,7 @@ def game(isMouse=False):
                     if enemy.boss_max_health - 5 <= 0:
                         # note: this is not seen as game is paused as soon as boss health reaches zero
                         # should be fixed in future with a short delay in pausing
-                        boss_crash = Explosion(player.x, player.y, size = 100)
+                        boss_crash = Explosion(player.x, player.y, size=100)
                         explosion_group.add(boss_crash)
 
                         enemies.remove(enemy)

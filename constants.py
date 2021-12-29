@@ -1,18 +1,8 @@
 import pygame
 import os
-import sys
 
-
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
+from utils.resource_path import resource_path
 # from screens.background import slow_bg_obj
-
 
 # ROOT VARS
 TITLE = 'SPACE INVADERS'
@@ -27,8 +17,8 @@ center_x = screen_rect.centerx
 center_y = screen_rect.centery
 
 # Load Background Image
-backgroundImage = pygame.image.load(os.path.join(
-    'assets', 'graphics', 'background-black.png'))
+backgroundImage = pygame.image.load(resource_path(os.path.join(
+    'assets', 'graphics', 'background-black.png')))
 
 # Set Background Dimensions
 BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
@@ -54,8 +44,8 @@ controlImage = pygame.image.load(resource_path(
 trophyImage = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'trophy.png')))
 
-goBackImage = pygame.image.load(
-    os.path.join('assets', 'graphics', 'back2.png'))
+goBackImage = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'back2.png')))
 # goBackImage = pygame.transform.scale()
 goBackImage = pygame.transform.scale(goBackImage, (34*2.4, 19*2.4))
 
@@ -93,7 +83,7 @@ FLAME_LASER = pygame.image.load(resource_path(
 GAME_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'ingame.wav'))
 MENU_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'menu.wav'))
 
-# sfx
+# SFX VARS
 PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
     os.path.join('assets', 'sounds', 'ownlaser.wav')))
 ENEMY_LASER_SOUND = pygame.mixer.Sound(resource_path(

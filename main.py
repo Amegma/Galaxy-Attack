@@ -8,6 +8,7 @@ from screens.score_board import score_board
 from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
+from utils.resource_path import resource_path
 
 from constants import TITLE,\
     BOSS_SHIP,\
@@ -19,7 +20,6 @@ from constants import TITLE,\
     framespersec, \
     FPS, \
     FONT_PATH, \
-    resource_path, \
     MENU_MUSIC_PATH, \
     center_x,\
     center_y
