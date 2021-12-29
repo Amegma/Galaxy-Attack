@@ -3,6 +3,7 @@
 __pycache__/
 /models/__pycache__
 /utils/__pycache__
+/screens/__pycache__
 todo.md
 build/
 dist/

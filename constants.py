@@ -1,13 +1,8 @@
 import pygame
-import os, sys
+import os
 
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
+from utils.resource_path import resource_path
+# from screens.background import slow_bg_obj
 
 # ROOT VARS
 TITLE = 'SPACE INVADERS'
@@ -17,9 +12,13 @@ HEIGHT = 750
 # Canvas Dimensions
 CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
 
+screen_rect = CANVAS.get_rect()
+center_x = screen_rect.centerx
+center_y = screen_rect.centery
+
 # Load Background Image
-backgroundImage = pygame.image.load(os.path.join(
-    'assets', 'graphics', 'background-black.png'))
+backgroundImage = pygame.image.load(resource_path(os.path.join(
+    'assets', 'graphics', 'background-black.png')))
 
 # Set Background Dimensions
 BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
@@ -40,20 +39,19 @@ FONT_PATH = os.path.join('assets', 'fonts')
 EXPLOSION_PATH = os.path.join('assets', 'graphics', 'explosion')
 
 # Load Controls Image
-startImage = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'play.png')))
 controlImage = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'joystick.png')))
 trophyImage = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'trophy.png')))
 
+goBackImage = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'back2.png')))
+# goBackImage = pygame.transform.scale()
+goBackImage = pygame.transform.scale(goBackImage, (34*2.4, 19*2.4))
+
 # Load Hearts
 heartImage = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'heart.png')))
-
-# Load Boss Ship
-BOSS_SHIP = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'boss.png')))
 
 # Load Enemy Ships
 EASY_SPACE_SHIP = pygame.image.load(resource_path(
@@ -62,6 +60,8 @@ MEDIUM_SPACE_SHIP = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'medium.png')))
 HARD_SPACE_SHIP = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'hard.png')))
+BOSS_SHIP = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'boss.png')))
 
 # Load Player
 PLAYER_SPACE_SHIP = pygame.image.load(resource_path(
@@ -83,7 +83,7 @@ FLAME_LASER = pygame.image.load(resource_path(
 GAME_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'ingame.wav'))
 MENU_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'menu.wav'))
 
-# sfx
+# SFX VARS
 PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
     os.path.join('assets', 'sounds', 'ownlaser.wav')))
 ENEMY_LASER_SOUND = pygame.mixer.Sound(resource_path(
@@ -98,7 +98,3 @@ soundList.append(PLAYER_LASER_SOUND)
 soundList.append(ENEMY_LASER_SOUND)
 soundList.append(EXPLODE_SOUND)
 soundList.append(LASER_HIT_SOUND)
-
-# Load Background Image
-backgroundImage = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'background-black.png')))

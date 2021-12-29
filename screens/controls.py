@@ -2,14 +2,18 @@ import os
 import pygame
 
 from .background import slow_bg_obj
+from models.icon_button import IconButton
+from utils.resource_path import resource_path
+
 from constants import WIDTH,\
     controlImage,\
-    resource_path, \
+    goBackImage, \
     CANVAS, \
     soundList, \
     framespersec, \
     FPS, \
     FONT_PATH
+
 
 class AudioControls:
     def __init__(self, soundList):
@@ -17,9 +21,12 @@ class AudioControls:
         self.volume = 100
         self.muted = False
         self.prev_volume = -1
+
         # volume icons
-        self.VOL_ICON = pygame.image.load(resource_path(os.path.join('assets', 'graphics', 'audio.png')))
-        self.MUTE_ICON = pygame.image.load(resource_path(os.path.join('assets', 'graphics', 'mute.png')))
+        self.VOL_ICON = pygame.image.load(resource_path(
+            os.path.join('assets', 'graphics', 'audio.png')))
+        self.MUTE_ICON = pygame.image.load(resource_path(
+            os.path.join('assets', 'graphics', 'mute.png')))
 
         pygame.mixer.music.set_volume(self.volume / 100)
         for soundItem in self.soundList:
@@ -30,7 +37,7 @@ class AudioControls:
             self.muted = True
         if self.muted and level > 0:
             self.muted = False
-            self.prev_volume = 50 # if you unmute at zero vol, defaults to 50
+            self.prev_volume = 50  # if you unmute at zero vol, defaults to 50
         self.volume = level
         pygame.mixer.music.set_volume(level / 100)
         for soundItem in soundList:
@@ -59,7 +66,9 @@ class AudioControls:
         center_x = screen_rect.centerx
         starting_x = center_x - background_width//2
 
-        control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "neue.ttf")), 30)
+        control_font = pygame.font.Font(resource_path(
+            os.path.join(FONT_PATH, "neue.ttf")), 30)
+
         if self.muted:
             CANVAS.blit(self.MUTE_ICON, (starting_x + 20, 695))
             vol_lbl_text = " --"
@@ -74,39 +83,52 @@ class AudioControls:
         pygame.mixer.music.load(path)
         pygame.mixer.music.play(-1)
 
+
 audio_cfg = AudioControls(soundList)
 
+
 class DisplayControls:
-     def toggle_full_screen():
+    def toggle_full_screen():
         screen = pygame.display.get_surface()
         if (screen.get_flags() & pygame.FULLSCREEN):
             pygame.display.set_mode((750, 750))
         else:
             info = pygame.display.Info()
-            pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSCREEN)
+            pygame.display.set_mode(
+                (info.current_w, info.current_h), pygame.FULLSCREEN)
+
 
 display_cfg = DisplayControls
+
 
 def controls():
     run = True
 
-    control_title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
-    control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
-    keys_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    window_width = CANVAS.get_width()
+    background_width = slow_bg_obj.rectBGimg.width
+    screen_rect = CANVAS.get_rect()
+    center_x = screen_rect.centerx
+    starting_x = center_x - background_width//2
+
+    control_title_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
+    control_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    keys_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'neue.ttf')), 30)
+
+    go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
 
     while run:
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 
-        window_width = CANVAS.get_width()
-        background_width = slow_bg_obj.rectBGimg.width
-        screen_rect = CANVAS.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
-
-        control_title_label = control_title_font.render('Controls', 1, (0, 0, 209))
-        CANVAS.blit(control_title_label, (window_width//2 - control_title_label.get_width()//2 - 30, 130))
-        CANVAS.blit(controlImage, (window_width//2 + control_title_label.get_width()//2 - 10, 112))
+        control_title_label = control_title_font.render(
+            'Controls', 1, (0, 0, 209))
+        CANVAS.blit(control_title_label, (window_width//2 -
+                    control_title_label.get_width()//2 - 30, 130))
+        CANVAS.blit(controlImage, (window_width//2 +
+                    control_title_label.get_width()//2 - 10, 112))
 
         shoot_label = control_font.render('Shoot', 1, (0, 225, 0))
         CANVAS.blit(shoot_label, (starting_x + 125, 215))
@@ -133,7 +155,8 @@ def controls():
         up_key_label = keys_font.render('[up] or [w]', 1, (240, 0, 0))
         CANVAS.blit(up_key_label, (starting_x + 470, 435))
 
-        escape_label = control_font.render('Return back to home', 1, (0, 225, 0))
+        escape_label = control_font.render(
+            'Return back to home', 1, (0, 225, 0))
         CANVAS.blit(escape_label, (starting_x + 125, 490))
         escape_key_label = keys_font.render('[backspace]', 1, (240, 0, 0))
         CANVAS.blit(escape_key_label, (starting_x + 470, 490))
@@ -147,14 +170,16 @@ def controls():
         CANVAS.blit(sfx_label, (starting_x + 125, 600))
         sfx_key_label = keys_font.render('[+]/[-]', 1, (240, 0, 0))
         CANVAS.blit(sfx_key_label, (starting_x + 470, 600))
-        
+
         sfx_label = control_font.render('Toggle Full Screen', 1, (0, 225, 0))
         CANVAS.blit(sfx_label, (starting_x + 125, 655))
         sfx_key_label = keys_font.render('[f]', 1, (240, 0, 0))
         CANVAS.blit(sfx_key_label, (starting_x + 470, 655))
 
-        control_title_label = control_font.render('[Backspace]', 1, (255, 255, 255))
-        CANVAS.blit(control_title_label, (starting_x + 30, 30))
+        # control_title_label = control_font.render(
+        #     '[Backspace]', 1, (255, 255, 255))
+        # CANVAS.blit(control_title_label, (starting_x + 30, 30))
+        go_back_btn.draw()
 
         audio_cfg.display_volume(CANVAS)
 
@@ -173,7 +198,22 @@ def controls():
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     display_cfg.toggle_full_screen()
+                if event.key == pygame.K_BACKSPACE:
+                    run = False
 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_BACKSPACE]:
-            run = False
+            # Mouse click events
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if go_back_btn.isOver():
+                        run = False
+
+            # Mouse hover events
+            if event.type == pygame.MOUSEMOTION:
+                if go_back_btn.isOver():
+                    go_back_btn.outline = "onover"
+                else:
+                    go_back_btn.outline = "default"
+
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_BACKSPACE]:
+        #     run = False
