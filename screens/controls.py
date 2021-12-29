@@ -109,12 +109,10 @@ def controls():
     center_x = screen_rect.centerx
     starting_x = center_x - background_width//2
 
-    control_title_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'edit_undo.ttf'), 50))
-    control_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'neue.ttf'), 30))
-    keys_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'neue.ttf'), 30))
+    control_title_font = pygame.font.Font(
+        os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
+    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
+    keys_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
 
     go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
 

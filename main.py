@@ -39,7 +39,7 @@ pygame.display.set_caption(TITLE)
 
 def main():
     title_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'edit_undo.ttf')), 60)
+        os.path.join(FONT_PATH, 'edit_undo.ttf')), 82)
     # sub_title_font = pygame.font.Font(resource_path(
     #     os.path.join(FONT_PATH, 'neue.ttf')), 30)
     # control_font = pygame.font.Font(resource_path(
