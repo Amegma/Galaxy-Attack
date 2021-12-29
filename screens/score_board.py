@@ -1,19 +1,19 @@
+from models.icon_button import IconButton
+from .background import slow_bg_obj
+from .controls import audio_cfg, display_cfg
 import os
 import pygame
 
 from constants import WIDTH, \
     CANVAS, \
+    goBackImage, \
+    center_x, \
+    resource_path, \
     score_list, \
     trophyImage, \
-    goBackImage, \
     framespersec, \
     FPS, \
-    FONT_PATH, \
-    center_x
-
-from .controls import audio_cfg, display_cfg
-from .background import slow_bg_obj
-from models.icon_button import IconButton
+    FONT_PATH
 
 
 def score_board():
@@ -21,9 +21,10 @@ def score_board():
     background_width = slow_bg_obj.rectBGimg.width
     starting_x = center_x - background_width//2
 
-    score_title_font = pygame.font.Font(
-        os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
-    score_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 35)
+    score_title_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
+    score_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'neue.ttf')), 35)
 
     score_list.sort()
     score_list.reverse()
@@ -38,9 +39,9 @@ def score_board():
         score_title_label = score_title_font.render(
             'Score Board', 1, (0, 229, 0))
         CANVAS.blit(score_title_label, (window_width//2 -
-                    score_title_label.get_width()//2 - 30, 168))
+                                        score_title_label.get_width()//2 - 30, 168))
         CANVAS.blit(trophyImage, (window_width//2 +
-                    score_title_label.get_width()//2 - 10, 163))
+                                  score_title_label.get_width()//2 - 10, 163))
 
         i = 0
         for score in score_list[:5]:
@@ -49,8 +50,8 @@ def score_board():
                         score_label.get_width() + 20, 250 + i * 40))
             i += 1
 
-        # back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
-        # CANVAS.blit(back_label, (starting_x + 30, 30))
+            # back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
+            # CANVAS.blit(back_label, (starting_x + 30, 30))
         go_back_btn.draw()
 
         audio_cfg.display_volume(CANVAS)

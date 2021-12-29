@@ -15,11 +15,12 @@ from constants import TITLE,\
     PLAYER_LASER,\
     controlImage,\
     trophyImage,\
-    CANVAS,\
-    framespersec,\
-    FPS,\
-    FONT_PATH,\
-    MENU_MUSIC_PATH,\
+    CANVAS, \
+    framespersec, \
+    FPS, \
+    FONT_PATH, \
+    resource_path, \
+    MENU_MUSIC_PATH, \
     center_x,\
     center_y
 
@@ -37,9 +38,13 @@ pygame.display.set_caption(TITLE)
 
 
 def main():
-    title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 82)
-    # sub_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
-    # control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 36)
+    title_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'edit_undo.ttf')), 60)
+    # sub_title_font = pygame.font.Font(resource_path(
+    #     os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    # control_font = pygame.font.Font(resource_path(
+    #     os.path.join(FONT_PATH, 'neue.ttf')), 36)
+
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
     # window_width = CANVAS.get_width()
