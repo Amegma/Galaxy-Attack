@@ -4,6 +4,7 @@ import pygame
 from .background import slow_bg_obj
 from constants import WIDTH,\
     controlImage,\
+    resource_path, \
     CANVAS, \
     soundList, \
     framespersec, \
@@ -17,8 +18,8 @@ class AudioControls:
         self.muted = False
         self.prev_volume = -1
         # volume icons
-        self.VOL_ICON = pygame.image.load(os.path.join('assets', 'graphics', 'audio.png'))
-        self.MUTE_ICON = pygame.image.load(os.path.join('assets', 'graphics', 'mute.png'))
+        self.VOL_ICON = pygame.image.load(resource_path(os.path.join('assets', 'graphics', 'audio.png')))
+        self.MUTE_ICON = pygame.image.load(resource_path(os.path.join('assets', 'graphics', 'mute.png')))
 
         pygame.mixer.music.set_volume(self.volume / 100)
         for soundItem in self.soundList:
@@ -58,7 +59,7 @@ class AudioControls:
         center_x = screen_rect.centerx
         starting_x = center_x - background_width//2
 
-        control_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 30)
+        control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, "neue.ttf")), 30)
         if self.muted:
             CANVAS.blit(self.MUTE_ICON, (starting_x + 20, 695))
             vol_lbl_text = " --"
@@ -89,9 +90,9 @@ display_cfg = DisplayControls
 def controls():
     run = True
 
-    control_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
-    control_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
-    keys_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 30)
+    control_title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
+    control_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    keys_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 30)
 
     while run:
         slow_bg_obj.update()

@@ -3,6 +3,7 @@ import pygame
 
 from constants import WIDTH, \
                       CANVAS, \
+                      resource_path, \
                       score_list, \
                       trophyImage, \
                       framespersec, \
@@ -15,8 +16,8 @@ from .background import slow_bg_obj
 def score_board():
     run = True
 
-    score_title_font = pygame.font.Font(os.path.join(FONT_PATH, 'edit_undo.ttf'), 50)
-    score_font = pygame.font.Font(os.path.join(FONT_PATH, 'neue.ttf'), 35)
+    score_title_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
+    score_font = pygame.font.Font(resource_path(os.path.join(FONT_PATH, 'neue.ttf')), 35)
 
     score_list.sort()
     score_list.reverse()

@@ -1,5 +1,6 @@
 import pygame
 from models.laser import Laser
+from models.explosion import Explosion, explosion_group
 from screens.background import slow_bg_obj
 from screens.controls import audio_cfg
 from constants import HEIGHT, \
@@ -161,6 +162,9 @@ class Player(Ship):
                             else:
                                 self.boss_max_health -= 10
                         else:
+                            # enemy ship death explosion
+                            explosion = Explosion(obj.x, obj.y)
+                            explosion_group.add(explosion)
                             objs.remove(obj)
 
                         if laser in self.lasers:
@@ -213,6 +217,9 @@ class Enemy(Ship):
             if laser.off_screen(HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
+                # display collisions if enemy lasers hit the player
+                sm_explosion = Explosion(laser.x, laser.y, size=30)
+                explosion_group.add(sm_explosion)
                 obj.health -= self.damage
                 self.lasers.remove(laser)
 

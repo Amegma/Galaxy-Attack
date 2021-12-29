@@ -4,6 +4,7 @@ import time
 import random
 
 from models.ship import Player, Enemy
+from models.explosion import Explosion, explosion_group
 from utils.collide import collide
 from .controls import audio_cfg, display_cfg
 from .background import bg_obj
@@ -17,7 +18,8 @@ from constants import WIDTH,\
     FPS,\
     FONT_PATH,\
     MENU_MUSIC_PATH,\
-    GAME_MUSIC_PATH
+    GAME_MUSIC_PATH, \
+    resource_path
 
 
 def game(isMouse=False):
@@ -25,11 +27,16 @@ def game(isMouse=False):
     level = 0
     laser_vel = 10
 
-    main_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 50)
-    sub_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 40)
-    sub_small_font = pygame.font.Font(os.path.join(FONT_PATH, "neue.ttf"), 35)
-    lost_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 55)
-    win_font = pygame.font.Font(os.path.join(FONT_PATH, "edit_undo.ttf"), 55)
+    main_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, "edit_undo.ttf")), 50)
+    sub_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, "neue.ttf")), 40)
+    sub_small_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, "neue.ttf")), 35)
+    lost_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, "edit_undo.ttf")), 55)
+    win_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, "edit_undo.ttf")), 55)
 
     # load and play ingame music
     audio_cfg.play_music(GAME_MUSIC_PATH)
@@ -46,7 +53,9 @@ def game(isMouse=False):
     boss_entry = True
     pause = False
 
-    def redraw_window(pause=False):
+    explosion_group.empty()
+
+    def redraw_window(pause = False):
         if not pause:
             bg_obj.update()
         bg_obj.render(CANVAS)
@@ -105,6 +114,10 @@ def game(isMouse=False):
             CANVAS.blit(key_msg, (window_width//2 -
                         key_msg.get_width()//2, 400))
 
+        # explosion group
+        explosion_group.draw(CANVAS)
+        explosion_group.update()
+
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
         framespersec.tick(FPS)
@@ -145,7 +158,7 @@ def game(isMouse=False):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
                     pygame.mouse.set_visible(True)
@@ -196,14 +209,24 @@ def game(isMouse=False):
                 player.SCORE += 50
                 if enemy.ship_type == 'boss':
                     if enemy.boss_max_health - 5 <= 0:
+                        # note: this is not seen as game is paused as soon as boss health reaches zero
+                        # should be fixed in future with a short delay in pausing
+                        boss_crash = Explosion(player.x, player.y, size = 100)
+                        explosion_group.add(boss_crash)
+
                         enemies.remove(enemy)
                         enemy.boss_max_health = 100
                         player.health -= 100
                     else:
                         enemy.boss_max_health -= 5
                         player.health -= 100
+                        # player death explosion
+                        crash = Explosion(player.x, player.y)
+                        explosion_group.add(crash)
                 else:
                     player.health -= 10
+                    crash = Explosion(enemy.x, enemy.y)
+                    explosion_group.add(crash)
                     enemies.remove(enemy)
             elif enemy.y + enemy.get_height()/2 > HEIGHT:
                 lives -= 1
