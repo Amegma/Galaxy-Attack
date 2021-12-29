@@ -1,6 +1,7 @@
 import os
 import pygame
 
+from utils.resource_path import resource_path
 from constants import FONT_PATH, CANVAS
 
 
@@ -31,8 +32,8 @@ class Button:
         pygame.draw.rect(CANVAS, self.color, inner_rect, 0, 6)
 
         if self.text != '':
-            font = pygame.font.Font(os.path.join(
-                FONT_PATH, 'neue.ttf'), 40)
+            font = pygame.font.Font(resource_path(os.path.join(
+                FONT_PATH, 'neue.ttf')), 40)
             text = font.render(self.text, 1, (255, 255, 255))
             CANVAS.blit(text, (self.pos[0] + (self.size[0]/2 - text.get_width()/2),
                                self.pos[1] + (self.size[1]/2 - text.get_height()/2)))
