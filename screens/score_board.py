@@ -1,9 +1,9 @@
 import os
 import pygame
 
-from models.icon_button import IconButton
 from .background import slow_bg_obj
-from .controls import audio_cfg, display_cfg
+from models.icon_button import IconButton
+from models.controls import audio_cfg, display_cfg
 from utils.resource_path import resource_path
 
 from constants import WIDTH, \

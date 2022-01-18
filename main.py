@@ -3,11 +3,12 @@ import pygame
 import argparse
 
 from screens.game import game
-from screens.controls import audio_cfg, display_cfg, controls
+from screens.controls import controls
 from screens.score_board import score_board
 from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
+from models.controls import audio_cfg, display_cfg
 from utils.resource_path import resource_path
 
 from constants import TITLE,\

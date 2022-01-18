@@ -5,9 +5,9 @@ import random
 
 from models.ship import Player, Enemy
 from models.explosion import Explosion, explosion_group
+from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
 from utils.resource_path import resource_path
-from .controls import audio_cfg, display_cfg
 from .background import bg_obj
 
 from constants import WIDTH,\

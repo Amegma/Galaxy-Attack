@@ -2,7 +2,7 @@ import pygame
 from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from screens.background import slow_bg_obj
-from screens.controls import audio_cfg
+from models.controls import audio_cfg
 from constants import HEIGHT, \
     WIDTH, \
     EASY_SPACE_SHIP, \
