@@ -2,8 +2,7 @@ import os
 import pygame
 
 from screens.background import slow_bg_obj
-from constants import soundList, FONT_PATH
-from utils.resource_path import resource_path
+from constants import soundList, neue_font, VOL_ICON, MUTE_ICON
 
 
 class AudioControls:
@@ -12,12 +11,6 @@ class AudioControls:
         self.volume = 100
         self.muted = False
         self.prev_volume = -1
-
-        # volume icons
-        self.VOL_ICON = pygame.image.load(resource_path(
-            os.path.join('assets', 'graphics', 'audio.png')))
-        self.MUTE_ICON = pygame.image.load(resource_path(
-            os.path.join('assets', 'graphics', 'mute.png')))
 
         pygame.mixer.music.set_volume(self.volume / 100)
         for soundItem in self.soundList:
@@ -57,14 +50,13 @@ class AudioControls:
         center_x = screen_rect.centerx
         starting_x = center_x - background_width//2
 
-        control_font = pygame.font.Font(resource_path(
-            os.path.join(FONT_PATH, "neue.ttf")), 30)
+        control_font = pygame.font.Font(neue_font, 30)
 
         if self.muted:
-            CANVAS.blit(self.MUTE_ICON, (starting_x + 20, 695))
+            CANVAS.blit(MUTE_ICON, (starting_x + 20, 695))
             vol_lbl_text = " --"
         else:
-            CANVAS.blit(self.VOL_ICON, (starting_x + 20, 695))
+            CANVAS.blit(VOL_ICON, (starting_x + 20, 695))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
         vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))

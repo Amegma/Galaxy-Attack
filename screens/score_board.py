@@ -4,7 +4,6 @@ import pygame
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from utils.resource_path import resource_path
 
 from constants import WIDTH, \
     CANVAS, \
@@ -14,7 +13,8 @@ from constants import WIDTH, \
     trophyImage, \
     framespersec, \
     FPS, \
-    FONT_PATH
+    neue_font, \
+    edit_undo_font
 
 
 def score_board():
@@ -22,10 +22,8 @@ def score_board():
     background_width = slow_bg_obj.rectBGimg.width
     starting_x = center_x - background_width//2
 
-    score_title_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
-    score_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'neue.ttf')), 35)
+    score_title_font = pygame.font.Font(edit_undo_font, 50)
+    score_font = pygame.font.Font(neue_font, 35)
 
     score_list.sort()
     score_list.reverse()

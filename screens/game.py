@@ -7,7 +7,6 @@ from models.ship import Player, Enemy
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
-from utils.resource_path import resource_path
 from .background import bg_obj
 
 from constants import WIDTH,\
@@ -17,7 +16,8 @@ from constants import WIDTH,\
     score_list,\
     framespersec,\
     FPS,\
-    FONT_PATH,\
+    neue_font,\
+    edit_undo_font,\
     MENU_MUSIC_PATH,\
     GAME_MUSIC_PATH
 
@@ -27,16 +27,11 @@ def game(isMouse=False):
     level = 0
     laser_vel = 10
 
-    main_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, "edit_undo.ttf")), 50)
-    sub_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, "neue.ttf")), 40)
-    sub_small_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, "neue.ttf")), 35)
-    lost_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, "edit_undo.ttf")), 55)
-    win_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, "edit_undo.ttf")), 55)
+    main_font = pygame.font.Font(edit_undo_font, 50)
+    sub_font = pygame.font.Font(neue_font, 40)
+    sub_small_font = pygame.font.Font(neue_font, 35)
+    lost_font = pygame.font.Font(edit_undo_font, 55)
+    win_font = pygame.font.Font(edit_undo_font, 55)
 
     # load and play ingame music
     audio_cfg.play_music(GAME_MUSIC_PATH)

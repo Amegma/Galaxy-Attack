@@ -9,7 +9,6 @@ from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from utils.resource_path import resource_path
 
 from constants import TITLE,\
     BOSS_SHIP,\
@@ -20,10 +19,11 @@ from constants import TITLE,\
     CANVAS, \
     framespersec, \
     FPS, \
-    FONT_PATH, \
     MENU_MUSIC_PATH, \
-    center_x,\
-    center_y
+    center_x, \
+    center_y, \
+    edit_undo_font, \
+    neue_font
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -39,12 +39,9 @@ pygame.display.set_caption(TITLE)
 
 
 def main():
-    title_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'edit_undo.ttf')), 82)
-    # sub_title_font = pygame.font.Font(resource_path(
-    #     os.path.join(FONT_PATH, 'neue.ttf')), 30)
-    # control_font = pygame.font.Font(resource_path(
-    #     os.path.join(FONT_PATH, 'neue.ttf')), 36)
+    title_font = pygame.font.Font(edit_undo_font, 82)
+    # sub_title_font = pygame.font.Font(neue_font, 30)
+    # control_font = pygame.font.Font(neue_font, 36)
 
     audio_cfg.play_music(MENU_MUSIC_PATH)
 

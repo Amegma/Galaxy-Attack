@@ -38,6 +38,10 @@ pygame.mixer.init()
 FONT_PATH = os.path.join('assets', 'fonts')
 EXPLOSION_PATH = os.path.join('assets', 'graphics', 'explosion')
 
+# FONT VARS
+edit_undo_font = resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf'))
+neue_font = resource_path(os.path.join(FONT_PATH, 'neue.ttf'))
+
 # Load Controls Image
 controlImage = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'joystick.png')))
@@ -78,6 +82,12 @@ GREEN_LASER = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'pixel_laser_green.png')))
 FLAME_LASER = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'pixel_laser_flame.png')))
+
+# Load audio image
+VOL_ICON = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'audio.png')))
+MUTE_ICON = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'mute.png')))
 
 # load music
 GAME_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'ingame.wav'))

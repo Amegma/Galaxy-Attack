@@ -4,14 +4,14 @@ import pygame
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from utils.resource_path import resource_path
 
 from constants import controlImage,\
     goBackImage, \
     CANVAS, \
     framespersec, \
     FPS, \
-    FONT_PATH
+    edit_undo_font, \
+    neue_font
 
 
 def controls():
@@ -23,12 +23,9 @@ def controls():
     center_x = screen_rect.centerx
     starting_x = center_x - background_width//2
 
-    control_title_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
-    control_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'neue.ttf')), 30)
-    keys_font = pygame.font.Font(resource_path(
-        os.path.join(FONT_PATH, 'neue.ttf')), 30)
+    control_title_font = pygame.font.Font(edit_undo_font, 50)
+    control_font = pygame.font.Font(neue_font, 30)
+    keys_font = pygame.font.Font(neue_font, 30)
 
     go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
 
