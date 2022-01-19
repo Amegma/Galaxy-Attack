@@ -12,7 +12,7 @@ from .background import bg_obj
 from constants import WIDTH,\
     HEIGHT,\
     CANVAS,\
-    heartImage,\
+    HEART_IMAGE,\
     score_list,\
     framespersec,\
     FPS,\
@@ -76,7 +76,7 @@ def game(isMouse=False):
 
         # Lives
         for index in range(1, lives + 1):
-            CANVAS.blit(heartImage, (starting_x + 37 * index - 10, 20))
+            CANVAS.blit(HEART_IMAGE, (starting_x + 37 * index - 10, 20))
 
         # blit stats
         CANVAS.blit(level_label, (starting_x + 35, 75))

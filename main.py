@@ -15,8 +15,8 @@ from constants import TITLE,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
     FLAME_LASER,\
-    controlImage,\
-    trophyImage,\
+    CONTROL_IMAGE,\
+    TROPHY_IMAGE,\
     CANVAS, \
     framespersec, \
     FPS, \
@@ -52,8 +52,9 @@ def main():
                        (center_x - 210, center_y + 22), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
-    control_btn = IconButton(controlImage, (starting_x + 30, 15))
-    trophy_btn = IconButton(trophyImage, (ending_x - 85, 25))
+    control_btn = IconButton(CONTROL_IMAGE, (starting_x + 30, 15))
+    # characters_btn = IconButton(CONTROL_IMAGE, (starting_x + 30, 15))
+    trophy_btn = IconButton(TROPHY_IMAGE, (ending_x - 85, 25))
 
     run = True
     while run:

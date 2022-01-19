@@ -7,10 +7,10 @@ from models.controls import audio_cfg, display_cfg
 
 from constants import WIDTH, \
     CANVAS, \
-    goBackImage, \
+    GO_BACK_IMAGE, \
     center_x, \
     score_list, \
-    trophyImage, \
+    TROPHY_IMAGE, \
     framespersec, \
     FPS, \
     neue_font, \
@@ -28,7 +28,7 @@ def score_board():
     score_list.sort()
     score_list.reverse()
 
-    go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
+    go_back_btn = IconButton(GO_BACK_IMAGE, (starting_x + 30, 30))
 
     run = True
     while run:
@@ -39,8 +39,8 @@ def score_board():
             'Score Board', 1, (0, 229, 0))
         CANVAS.blit(score_title_label, (window_width//2 -
                                         score_title_label.get_width()//2 - 30, 168))
-        CANVAS.blit(trophyImage, (window_width//2 +
-                                  score_title_label.get_width()//2 - 10, 163))
+        CANVAS.blit(TROPHY_IMAGE, (window_width//2 +
+                                   score_title_label.get_width()//2 - 10, 163))
 
         i = 0
         for score in score_list[:5]:

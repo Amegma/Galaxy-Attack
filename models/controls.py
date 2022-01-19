@@ -8,7 +8,7 @@ from constants import soundList, neue_font, VOL_ICON, MUTE_ICON
 class AudioControls:
     def __init__(self, soundList):
         self.soundList = soundList
-        self.volume = 100
+        self.volume = 0
         self.muted = True if self.volume == 0 else False
         self.prev_volume = -1
 

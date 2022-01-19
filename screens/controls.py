@@ -5,8 +5,8 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 
-from constants import controlImage,\
-    goBackImage, \
+from constants import CONTROL_IMAGE,\
+    GO_BACK_IMAGE, \
     CANVAS, \
     framespersec, \
     FPS, \
@@ -27,7 +27,7 @@ def controls():
     control_font = pygame.font.Font(neue_font, 30)
     keys_font = pygame.font.Font(neue_font, 30)
 
-    go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
+    go_back_btn = IconButton(GO_BACK_IMAGE, (starting_x + 30, 30))
 
     while run:
         slow_bg_obj.update()
@@ -37,7 +37,7 @@ def controls():
             'Controls', 1, (0, 0, 209))
         CANVAS.blit(control_title_label, (window_width//2 -
                     control_title_label.get_width()//2 - 30, 130))
-        CANVAS.blit(controlImage, (window_width//2 +
+        CANVAS.blit(CONTROL_IMAGE, (window_width//2 +
                     control_title_label.get_width()//2 - 10, 112))
 
         shoot_label = control_font.render('Shoot', 1, (0, 225, 0))

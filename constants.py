@@ -43,18 +43,18 @@ edit_undo_font = resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf'))
 neue_font = resource_path(os.path.join(FONT_PATH, 'neue.ttf'))
 
 # Load Controls Image
-controlImage = pygame.image.load(resource_path(
+CONTROL_IMAGE = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'joystick.png')))
-trophyImage = pygame.image.load(resource_path(
+TROPHY_IMAGE = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'trophy.png')))
 
-goBackImage = pygame.image.load(resource_path(
+GO_BACK_IMAGE = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'back2.png')))
-# goBackImage = pygame.transform.scale()
-goBackImage = pygame.transform.scale(goBackImage, (34*2.4, 19*2.4))
+# GO_BACK_IMAGE = pygame.transform.scale()
+GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
 
 # Load Hearts
-heartImage = pygame.image.load(resource_path(
+HEART_IMAGE = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'heart.png')))
 
 # Load Enemy Ships
