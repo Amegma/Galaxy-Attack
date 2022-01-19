@@ -43,15 +43,17 @@ def characters():
         CANVAS.blit(CHARACTERS_IMAGE_2, (center_x -
                                          CHARACTERS_IMAGE.get_width()//2 + 170, 129))
 
-        CANVAS.blit(PLAYER_SPACE_SHIP, (center_x -
-                    PLAYER_SPACE_SHIP.get_width()//2, 310))
         CANVAS.blit(EASY_SPACE_SHIP, (center_x -
-                    EASY_SPACE_SHIP.get_width()//2, 310))
+                    EASY_SPACE_SHIP.get_width()//2 - 240, 220))
         CANVAS.blit(MEDIUM_SPACE_SHIP, (center_x -
-                    MEDIUM_SPACE_SHIP.get_width()//2, 310))
+                    MEDIUM_SPACE_SHIP.get_width()//2 - 240, 315))
         CANVAS.blit(HARD_SPACE_SHIP, (center_x -
-                    HARD_SPACE_SHIP.get_width()//2, 310))
-        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2, 310))
+                    HARD_SPACE_SHIP.get_width()//2 - 240, 435))
+
+        CANVAS.blit(PLAYER_SPACE_SHIP, (center_x -
+                    PLAYER_SPACE_SHIP.get_width()//2 + 135, 270))
+
+        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2 + 30, 450))
 
         go_back_btn.draw()
 
