@@ -9,7 +9,7 @@ class AudioControls:
     def __init__(self, soundList):
         self.soundList = soundList
         self.volume = 100
-        self.muted = False
+        self.muted = True if self.volume == 0 else False
         self.prev_volume = -1
 
         pygame.mixer.music.set_volume(self.volume / 100)
@@ -22,8 +22,10 @@ class AudioControls:
         if self.muted and level > 0:
             self.muted = False
             self.prev_volume = 50  # if you unmute at zero vol, defaults to 50
+
         self.volume = level
         pygame.mixer.music.set_volume(level / 100)
+
         for soundItem in soundList:
             soundItem.set_volume(level / 100)
 
@@ -38,10 +40,8 @@ class AudioControls:
     def toggle_mute(self):
         if self.muted:
             self.set_volume(self.prev_volume)
-            self.muted = False
         else:
             self.prev_volume = self.volume
-            self.muted = True
             self.set_volume(0)
 
     def display_volume(self, CANVAS):

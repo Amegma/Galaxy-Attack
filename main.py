@@ -14,6 +14,7 @@ from constants import TITLE,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
+    FLAME_LASER,\
     controlImage,\
     trophyImage,\
     CANVAS, \
@@ -22,8 +23,7 @@ from constants import TITLE,\
     MENU_MUSIC_PATH, \
     center_x, \
     center_y, \
-    edit_undo_font, \
-    neue_font
+    edit_undo_font
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -40,8 +40,6 @@ pygame.display.set_caption(TITLE)
 
 def main():
     title_font = pygame.font.Font(edit_undo_font, 82)
-    # sub_title_font = pygame.font.Font(neue_font, 30)
-    # control_font = pygame.font.Font(neue_font, 36)
 
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
@@ -63,17 +61,18 @@ def main():
         slow_bg_obj.update()
         slow_bg_obj.render(CANVAS)
 
+        # Ships
+        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2-30, 50))
+        CANVAS.blit(FLAME_LASER, (center_x-FLAME_LASER.get_width()//2-30, 310))
+        CANVAS.blit(PLAYER_SPACE_SHIP, (center_x-50, 575))
+        CANVAS.blit(PLAYER_LASER, (center_x-PLAYER_LASER.get_width()//2, 475))
+
         mouse_btn.draw()
         keyboard_btn.draw()
 
         title_label = title_font.render('Start Game', 1, (255, 255, 255))
-        CANVAS.blit(title_label, (center_x -
-                    title_label.get_width()//2, center_y-title_label.get_height() + 5))
-
-        # Ships
-        CANVAS.blit(BOSS_SHIP, (starting_x + 285, 75))
-        CANVAS.blit(PLAYER_SPACE_SHIP, (center_x - 50, 575))
-        CANVAS.blit(PLAYER_LASER, (center_x - 50, 475))
+        CANVAS.blit(title_label, (center_x-title_label.get_width()//2,
+                    center_y-title_label.get_height() + 5))
 
         # Control Page
         control_btn.draw()
