@@ -5,6 +5,7 @@ import argparse
 from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
+from screens.characters import characters
 from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
@@ -16,6 +17,7 @@ from constants import TITLE,\
     PLAYER_LASER,\
     FLAME_LASER,\
     CONTROL_IMAGE,\
+    CHARACTERS_IMAGE,\
     TROPHY_IMAGE,\
     CANVAS, \
     framespersec, \
@@ -53,7 +55,7 @@ def main():
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
     control_btn = IconButton(CONTROL_IMAGE, (starting_x + 30, 15))
-    # characters_btn = IconButton(CONTROL_IMAGE, (starting_x + 30, 15))
+    characters_btn = IconButton(CHARACTERS_IMAGE, (starting_x + 30, 110))
     trophy_btn = IconButton(TROPHY_IMAGE, (ending_x - 85, 25))
 
     run = True
@@ -63,8 +65,8 @@ def main():
         slow_bg_obj.render(CANVAS)
 
         # Ships
-        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2-30, 50))
-        CANVAS.blit(FLAME_LASER, (center_x-FLAME_LASER.get_width()//2-30, 310))
+        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2, 50))
+        CANVAS.blit(FLAME_LASER, (center_x-FLAME_LASER.get_width()//2, 310))
         CANVAS.blit(PLAYER_SPACE_SHIP, (center_x-50, 575))
         CANVAS.blit(PLAYER_LASER, (center_x-PLAYER_LASER.get_width()//2, 475))
 
@@ -80,6 +82,9 @@ def main():
 
         # ScoreBoard Page
         trophy_btn.draw()
+
+        # Characters Page
+        characters_btn.draw()
 
         audio_cfg.display_volume(CANVAS)
         pygame.display.update()
@@ -111,6 +116,8 @@ def main():
                         controls()
                     if trophy_btn.isOver():
                         score_board()
+                    if characters_btn.isOver():
+                        characters()
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
@@ -133,6 +140,11 @@ def main():
                     trophy_btn.outline = "onover"
                 else:
                     trophy_btn.outline = "default"
+
+                if characters_btn.isOver():
+                    characters_btn.outline = "onover"
+                else:
+                    characters_btn.outline = "default"
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:

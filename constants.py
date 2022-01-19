@@ -42,21 +42,6 @@ EXPLOSION_PATH = os.path.join('assets', 'graphics', 'explosion')
 edit_undo_font = resource_path(os.path.join(FONT_PATH, 'edit_undo.ttf'))
 neue_font = resource_path(os.path.join(FONT_PATH, 'neue.ttf'))
 
-# Load Controls Image
-CONTROL_IMAGE = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'joystick.png')))
-TROPHY_IMAGE = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'trophy.png')))
-
-GO_BACK_IMAGE = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'back2.png')))
-# GO_BACK_IMAGE = pygame.transform.scale()
-GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
-
-# Load Hearts
-HEART_IMAGE = pygame.image.load(resource_path(
-    os.path.join('assets', 'graphics', 'heart.png')))
-
 # Load Enemy Ships
 EASY_SPACE_SHIP = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'easy.png')))
@@ -88,6 +73,23 @@ VOL_ICON = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'audio.png')))
 MUTE_ICON = pygame.image.load(resource_path(
     os.path.join('assets', 'graphics', 'mute.png')))
+
+# Load Controls Image
+CONTROL_IMAGE = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'joystick.png')))
+TROPHY_IMAGE = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'trophy.png')))
+CHARACTERS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
+CHARACTERS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
+
+GO_BACK_IMAGE = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'back2.png')))
+# GO_BACK_IMAGE = pygame.transform.scale()
+GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
+
+# Load Hearts
+HEART_IMAGE = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'heart.png')))
 
 # load music
 GAME_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'ingame.wav'))
