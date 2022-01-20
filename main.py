@@ -11,7 +11,7 @@ from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 
-from constants import TITLE,\
+from constants import Config,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
@@ -19,12 +19,7 @@ from constants import TITLE,\
     CONTROL_IMAGE,\
     CHARACTERS_IMAGE,\
     TROPHY_IMAGE,\
-    CANVAS, \
-    framespersec, \
-    FPS, \
     MENU_MUSIC_PATH, \
-    center_x, \
-    center_y, \
     edit_undo_font
 
 # parsing arguments
@@ -37,7 +32,7 @@ if args["mute"]:
 
 pygame.font.init()
 
-pygame.display.set_caption(TITLE)
+pygame.display.set_caption(Config.TITLE)
 
 
 def main():
@@ -47,13 +42,13 @@ def main():
 
     # window_width = CANVAS.get_width()
     background_width = slow_bg_obj.rectBGimg.width
-    starting_x = center_x - background_width//2
-    ending_x = center_x + background_width//2
+    starting_x = Config.center_x - background_width//2
+    ending_x = Config.center_x + background_width//2
 
     mouse_btn = Button((7, 8, 16), (255, 255, 255),
-                       (center_x - 210, center_y + 22), (195, 66), "MOUSE")
+                       (Config.center_x - 210, Config.center_y + 22), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
-                          (center_x + 15, center_y + 22), (195, 66), "KEYBOARD")
+                          (Config.center_x + 15, Config.center_y + 22), (195, 66), "KEYBOARD")
     control_btn = IconButton(CONTROL_IMAGE, (starting_x + 30, 15))
     characters_btn = IconButton(CHARACTERS_IMAGE, (starting_x + 30, 110))
     trophy_btn = IconButton(TROPHY_IMAGE, (ending_x - 85, 25))
@@ -62,20 +57,23 @@ def main():
     while run:
         pygame.mouse.set_visible(True)
         slow_bg_obj.update()
-        slow_bg_obj.render(CANVAS)
+        slow_bg_obj.render(Config.CANVAS)
 
         # Ships
-        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2, 50))
-        CANVAS.blit(FLAME_LASER, (center_x-FLAME_LASER.get_width()//2, 310))
-        CANVAS.blit(PLAYER_SPACE_SHIP, (center_x-50, 575))
-        CANVAS.blit(PLAYER_LASER, (center_x-PLAYER_LASER.get_width()//2, 475))
+        Config.CANVAS.blit(BOSS_SHIP, (Config.center_x -
+                           BOSS_SHIP.get_width()//2, 50))
+        Config.CANVAS.blit(FLAME_LASER, (Config.center_x -
+                           FLAME_LASER.get_width()//2, 310))
+        Config.CANVAS.blit(PLAYER_SPACE_SHIP, (Config.center_x-50, 575))
+        Config.CANVAS.blit(PLAYER_LASER, (Config.center_x -
+                           PLAYER_LASER.get_width()//2, 475))
 
         mouse_btn.draw()
         keyboard_btn.draw()
 
         title_label = title_font.render('Start Game', 1, (255, 255, 255))
-        CANVAS.blit(title_label, (center_x-title_label.get_width()//2,
-                    center_y-title_label.get_height() + 5))
+        Config.CANVAS.blit(title_label, (Config.center_x-title_label.get_width()//2,
+                                         Config.center_y-title_label.get_height() + 5))
 
         # Control Page
         control_btn.draw()
@@ -86,9 +84,9 @@ def main():
         # Characters Page
         characters_btn.draw()
 
-        audio_cfg.display_volume(CANVAS)
+        audio_cfg.display_volume(Config.CANVAS)
         pygame.display.update()
-        framespersec.tick(FPS)  # capping frame rate to 60
+        Config.framespersec.tick(Config.FPS)  # capping frame rate to 60
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

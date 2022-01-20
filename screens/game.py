@@ -9,13 +9,9 @@ from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
 from .background import bg_obj
 
-from constants import WIDTH,\
-    HEIGHT,\
-    CANVAS,\
+from constants import Config, \
     HEART_IMAGE,\
     score_list,\
-    framespersec,\
-    FPS,\
     neue_font,\
     edit_undo_font,\
     MENU_MUSIC_PATH,\
@@ -53,11 +49,11 @@ def game(isMouse=False):
     def redraw_window(pause=False):
         if not pause:
             bg_obj.update()
-        bg_obj.render(CANVAS)
+        bg_obj.render(Config.CANVAS)
 
-        window_width = CANVAS.get_width()
+        window_width = Config.CANVAS.get_width()
         background_width = bg_obj.rectBGimg.width
-        screen_rect = CANVAS.get_rect()
+        screen_rect = Config.CANVAS.get_rect()
         center_x = screen_rect.centerx
         starting_x = center_x - background_width//2
         ending_x = center_x + background_width//2
@@ -66,56 +62,57 @@ def game(isMouse=False):
         level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
         score_label = sub_font.render(f'{player.get_score()}', 1, (0, 255, 0))
 
-        player.draw(CANVAS)
+        player.draw(Config.CANVAS)
 
         for enemyShip in enemies:
-            enemyShip.draw(CANVAS)
+            enemyShip.draw(Config.CANVAS)
 
         # blit player stats after enemyShips to prevent the later
         # from being drawn over the stats
 
         # Lives
         for index in range(1, lives + 1):
-            CANVAS.blit(HEART_IMAGE, (starting_x + 37 * index - 10, 20))
+            Config.CANVAS.blit(HEART_IMAGE, (starting_x + 37 * index - 10, 20))
 
         # blit stats
-        CANVAS.blit(level_label, (starting_x + 35, 75))
-        CANVAS.blit(score_label, (ending_x - score_label.get_width() - 30, 20))
+        Config.CANVAS.blit(level_label, (starting_x + 35, 75))
+        Config.CANVAS.blit(
+            score_label, (ending_x - score_label.get_width() - 30, 20))
 
         if win:
             score_list.append(player.get_score())
             win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
-            CANVAS.blit(win_label, (window_width//2 -
-                        win_label.get_width()//2, 350))
+            Config.CANVAS.blit(win_label, (window_width//2 -
+                                           win_label.get_width()//2, 350))
 
         if lost:
             score_list.append(player.get_score())
             lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
-            CANVAS.blit(lost_label, (window_width//2 -
-                        lost_label.get_width()//2, 350))
+            Config.CANVAS.blit(lost_label, (window_width//2 -
+                                            lost_label.get_width()//2, 350))
 
         if level >= 10 and boss_entry:
             last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
-            CANVAS.blit(last_label, (window_width//2 -
-                        last_label.get_width()//2, 350))
+            Config.CANVAS.blit(last_label, (window_width//2 -
+                                            last_label.get_width()//2, 350))
 
         if pause:
             # if paused display the "game is paused" screen
             pause_label = main_font.render('Game Paused', 1, (0, 255, 255))
-            CANVAS.blit(pause_label, (window_width//2 -
-                        pause_label.get_width()//2, 350))
+            Config.CANVAS.blit(pause_label, (window_width//2 -
+                                             pause_label.get_width()//2, 350))
 
             key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
-            CANVAS.blit(key_msg, (window_width//2 -
-                        key_msg.get_width()//2, 400))
+            Config.CANVAS.blit(key_msg, (window_width//2 -
+                                         key_msg.get_width()//2, 400))
 
         # explosion group
-        explosion_group.draw(CANVAS)
+        explosion_group.draw(Config.CANVAS)
         explosion_group.update()
 
-        audio_cfg.display_volume(CANVAS)
+        audio_cfg.display_volume(Config.CANVAS)
         pygame.display.update()
-        framespersec.tick(FPS)
+        Config.framespersec.tick(Config.FPS)
 
     while player.run:
         redraw_window()
@@ -146,7 +143,7 @@ def game(isMouse=False):
 
             for i in range(wave_length if level < 10 else 1):
                 enemies.append(Enemy(
-                    random.randrange(50, WIDTH - 100),
+                    random.randrange(50, Config.WIDTH - 100),
                     random.randrange(-1200, -100),
                     random.choice(['easy', 'medium', 'hard']) if level < 10 else 'boss')
                 )
@@ -197,7 +194,7 @@ def game(isMouse=False):
             enemy.move(enemy_vel)
             enemy.move_lasers(laser_vel, player)
 
-            if random.randrange(0, 2 * FPS) == 1:
+            if random.randrange(0, 2 * Config.FPS) == 1:
                 enemy.shoot()
 
             if collide(enemy, player):
@@ -223,7 +220,7 @@ def game(isMouse=False):
                     crash = Explosion(enemy.x, enemy.y)
                     explosion_group.add(crash)
                     enemies.remove(enemy)
-            elif enemy.y + enemy.get_height()/2 > HEIGHT:
+            elif enemy.y + enemy.get_height()/2 > Config.HEIGHT:
                 lives -= 1
                 enemies.remove(enemy)
 

@@ -1,4 +1,4 @@
-from constants import BG
+from constants import Config
 
 
 class ScrollBackground():
@@ -28,5 +28,5 @@ class ScrollBackground():
         CANVAS.blit(self.bgimage, (x, self.bgY2))
 
 
-bg_obj = ScrollBackground(BG)
-slow_bg_obj = ScrollBackground(BG, 1.5)
+bg_obj = ScrollBackground(Config.BG)
+slow_bg_obj = ScrollBackground(Config.BG, 1.5)

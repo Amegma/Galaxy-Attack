@@ -5,10 +5,7 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 
-from constants import WIDTH, \
-    CANVAS, \
-    center_x, \
-    FPS, \
+from constants import Config, \
     edit_undo_font, \
     GO_BACK_IMAGE, \
     CHARACTERS_IMAGE, \
@@ -17,13 +14,12 @@ from constants import WIDTH, \
     PLAYER_SPACE_SHIP,\
     EASY_SPACE_SHIP,\
     MEDIUM_SPACE_SHIP,\
-    HARD_SPACE_SHIP,\
-    framespersec
+    HARD_SPACE_SHIP
 
 
 def characters():
     background_width = slow_bg_obj.rectBGimg.width
-    starting_x = center_x - background_width//2
+    starting_x = Config.center_x - background_width//2
 
     characters_title_font = pygame.font.Font(edit_undo_font, 50)
 
@@ -32,33 +28,34 @@ def characters():
     run = True
     while run:
         slow_bg_obj.update()
-        slow_bg_obj.render(CANVAS)
+        slow_bg_obj.render(Config.CANVAS)
 
         characters_title_label = characters_title_font.render(
             'Characters', 1, (0, 255, 255))
-        CANVAS.blit(characters_title_label, (center_x -
-                                             characters_title_label.get_width()//2, 130))
-        CANVAS.blit(CHARACTERS_IMAGE, (center_x -
-                                       CHARACTERS_IMAGE.get_width()//2 - 170, 120))
-        CANVAS.blit(CHARACTERS_IMAGE_2, (center_x -
-                                         CHARACTERS_IMAGE.get_width()//2 + 170, 129))
+        Config.CANVAS.blit(characters_title_label, (Config.center_x -
+                                                    characters_title_label.get_width()//2, 130))
+        Config.CANVAS.blit(CHARACTERS_IMAGE, (Config.center_x -
+                                              CHARACTERS_IMAGE.get_width()//2 - 170, 120))
+        Config.CANVAS.blit(CHARACTERS_IMAGE_2, (Config.center_x -
+                                                CHARACTERS_IMAGE.get_width()//2 + 170, 129))
 
-        CANVAS.blit(EASY_SPACE_SHIP, (center_x -
-                    EASY_SPACE_SHIP.get_width()//2 - 240, 220))
-        CANVAS.blit(MEDIUM_SPACE_SHIP, (center_x -
-                    MEDIUM_SPACE_SHIP.get_width()//2 - 240, 315))
-        CANVAS.blit(HARD_SPACE_SHIP, (center_x -
-                    HARD_SPACE_SHIP.get_width()//2 - 240, 435))
+        Config.CANVAS.blit(EASY_SPACE_SHIP, (Config.center_x -
+                                             EASY_SPACE_SHIP.get_width()//2 - 240, 220))
+        Config.CANVAS.blit(MEDIUM_SPACE_SHIP, (Config.center_x -
+                                               MEDIUM_SPACE_SHIP.get_width()//2 - 240, 315))
+        Config.CANVAS.blit(HARD_SPACE_SHIP, (Config.center_x -
+                                             HARD_SPACE_SHIP.get_width()//2 - 240, 435))
 
-        CANVAS.blit(PLAYER_SPACE_SHIP, (center_x -
-                    PLAYER_SPACE_SHIP.get_width()//2 + 135, 270))
+        Config.CANVAS.blit(PLAYER_SPACE_SHIP, (Config.center_x -
+                                               PLAYER_SPACE_SHIP.get_width()//2 + 135, 270))
 
-        CANVAS.blit(BOSS_SHIP, (center_x-BOSS_SHIP.get_width()//2 + 30, 450))
+        Config.CANVAS.blit(BOSS_SHIP, (Config.center_x -
+                           BOSS_SHIP.get_width()//2 + 30, 450))
 
         go_back_btn.draw()
 
-        audio_cfg.display_volume(CANVAS)
-        framespersec.tick(FPS)
+        audio_cfg.display_volume(Config.CANVAS)
+        Config.framespersec.tick(Config.FPS)
         pygame.display.update()
 
         for event in pygame.event.get():

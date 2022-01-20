@@ -3,8 +3,7 @@ from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from screens.background import slow_bg_obj
 from models.controls import audio_cfg
-from constants import HEIGHT, \
-    WIDTH, \
+from constants import Config, \
     EASY_SPACE_SHIP, \
     MEDIUM_SPACE_SHIP, \
     HARD_SPACE_SHIP, \
@@ -53,7 +52,7 @@ class Ship:
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(HEIGHT):
+            if laser.off_screen(Config.HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 obj.health -= 10
@@ -110,13 +109,13 @@ class Player(Ship):
         if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
             self.x -= self.vel
         # Right Key
-        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < WIDTH:
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < Config.WIDTH:
             self.x += self.vel
         # Up Key
         if action['UP'] and (self.y - self.vel) > 0:
             self.y -= self.vel
         # Down Key
-        if action['DOWN'] and (self.y + self.vel + self.get_height()) < HEIGHT:
+        if action['DOWN'] and (self.y + self.vel + self.get_height()) < Config.HEIGHT:
             self.y += self.vel
         # Shoot Laser
         if action['SHOOT']:
@@ -127,8 +126,8 @@ class Player(Ship):
         button = pygame.mouse.get_pressed()
         keys = pygame.key.get_pressed()
         # Movement
-        if cx > self.get_width()/2 and cx < WIDTH - self.get_width()/2 \
-                and cy > 0 and cy < HEIGHT:
+        if cx > self.get_width()/2 and cx < Config.WIDTH - self.get_width()/2 \
+                and cy > 0 and cy < Config.HEIGHT:
             self.x = cx
             self.y = cy
         # Shoot Laser
@@ -149,7 +148,7 @@ class Player(Ship):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(HEIGHT):
+            if laser.off_screen(Config.HEIGHT):
                 self.lasers.remove(laser)
             else:
                 for obj in objs:
@@ -214,7 +213,7 @@ class Enemy(Ship):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(HEIGHT):
+            if laser.off_screen(Config.HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 # display collisions if enemy lasers hit the player
