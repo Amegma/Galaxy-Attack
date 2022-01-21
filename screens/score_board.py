@@ -4,13 +4,13 @@ import pygame
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-
-from constants import Config, Image, score_list, neue_font, edit_undo_font
+from config import Config
+from constants import Image, score_list, Font
 
 
 def score_board():
-    score_title_font = pygame.font.Font(edit_undo_font, 50)
-    score_font = pygame.font.Font(neue_font, 35)
+    score_title_font = pygame.font.Font(Font.edit_undo_font, 50)
+    score_font = pygame.font.Font(Font.neue_font, 35)
 
     score_list.sort()
     score_list.reverse()

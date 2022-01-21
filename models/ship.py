@@ -1,9 +1,10 @@
 import pygame
+
 from models.laser import Laser
 from models.explosion import Explosion, explosion_group
-from screens.background import slow_bg_obj
 from models.controls import audio_cfg
-from constants import Config, Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND
+from config import Config
+from constants import Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND
 
 
 class Ship:

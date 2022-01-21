@@ -1,7 +1,8 @@
 import os
 import pygame
 
-from constants import Config, neue_font
+from config import Config
+from constants import Font
 
 
 class Button:
@@ -31,7 +32,7 @@ class Button:
         pygame.draw.rect(Config.CANVAS, self.color, inner_rect, 0, 6)
 
         if self.text != '':
-            font = pygame.font.Font(neue_font, 40)
+            font = pygame.font.Font(Font.neue_font, 40)
             text = font.render(self.text, 1, (255, 255, 255))
             Config.CANVAS.blit(text, (self.pos[0] + (self.size[0]/2 - text.get_width()/2),
                                self.pos[1] + (self.size[1]/2 - text.get_height()/2)))

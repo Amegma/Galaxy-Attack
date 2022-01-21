@@ -1,6 +1,6 @@
 import pygame
 
-from constants import Config
+from config import Config
 
 
 def outline_image(image, pos):

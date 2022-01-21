@@ -9,10 +9,8 @@ from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
 from .background import bg_obj
 
-from constants import Config, Path, Image, \
-    score_list,\
-    neue_font,\
-    edit_undo_font
+from config import Config
+from constants import Path, Image, score_list, Font
 
 
 def game(isMouse=False):
@@ -20,11 +18,11 @@ def game(isMouse=False):
     level = 0
     laser_vel = 10
 
-    main_font = pygame.font.Font(edit_undo_font, 50)
-    sub_font = pygame.font.Font(neue_font, 40)
-    sub_small_font = pygame.font.Font(neue_font, 35)
-    lost_font = pygame.font.Font(edit_undo_font, 55)
-    win_font = pygame.font.Font(edit_undo_font, 55)
+    main_font = pygame.font.Font(Font.edit_undo_font, 50)
+    sub_font = pygame.font.Font(Font.neue_font, 40)
+    sub_small_font = pygame.font.Font(Font.neue_font, 35)
+    lost_font = pygame.font.Font(Font.edit_undo_font, 55)
+    win_font = pygame.font.Font(Font.edit_undo_font, 55)
 
     # load and play ingame music
     audio_cfg.play_music(Path.GAME_MUSIC_PATH)

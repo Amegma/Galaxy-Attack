@@ -1,4 +1,4 @@
-from constants import Config
+from config import Config
 
 
 class ScrollBackground():

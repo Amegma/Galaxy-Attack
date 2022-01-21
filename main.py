@@ -10,8 +10,8 @@ from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-
-from constants import Config, Path, Image, edit_undo_font
+from config import Config
+from constants import Path, Image, Font
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -27,7 +27,7 @@ pygame.display.set_caption(Config.TITLE)
 
 
 def main():
-    title_font = pygame.font.Font(edit_undo_font, 82)
+    title_font = pygame.font.Font(Font.edit_undo_font, 82)
 
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 

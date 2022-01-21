@@ -1,7 +1,6 @@
 import pygame
-from screens.background import slow_bg_obj
 
-from constants import Config
+from config import Config
 from utils.collide import collide
 
 

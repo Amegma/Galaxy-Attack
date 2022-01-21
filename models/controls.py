@@ -1,7 +1,8 @@
 import os
 import pygame
 
-from constants import Config, Image, soundList, neue_font
+from config import Config
+from constants import Image, soundList, Font
 
 
 class AudioControls:
@@ -44,7 +45,7 @@ class AudioControls:
             self.set_volume(0)
 
     def display_volume(self, CANVAS):
-        control_font = pygame.font.Font(neue_font, 30)
+        control_font = pygame.font.Font(Font.neue_font, 30)
 
         if self.muted:
             CANVAS.blit(Image.MUTE_ICON, (Config.starting_x + 20, 695))

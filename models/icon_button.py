@@ -1,7 +1,7 @@
 import os
 import pygame
 
-from constants import Config
+from config import Config
 from utils.outline_image import outline_image
 
 
