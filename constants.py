@@ -26,7 +26,8 @@ class Path:
 
 class Font:
     # FONT VARS
-    edit_undo_font = resource_path(os.path.join(Path.FONT_PATH, 'edit_undo.ttf'))
+    edit_undo_font = resource_path(
+        os.path.join(Path.FONT_PATH, 'edit_undo.ttf'))
     neue_font = resource_path(os.path.join(Path.FONT_PATH, 'neue.ttf'))
 
 
@@ -62,6 +63,11 @@ class Image:
         os.path.join(Path.GRAPHICS_PATH, 'audio.png')))
     MUTE_ICON = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'mute.png')))
+
+    DEMON_ICON = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'demon.png')))
+    DEMON_ICON = pygame.transform.scale(
+        DEMON_ICON, (DEMON_ICON.get_width()/11, DEMON_ICON.get_height()/11))
 
     # Load Controls Image
     CONTROL_IMAGE = pygame.image.load(resource_path(
