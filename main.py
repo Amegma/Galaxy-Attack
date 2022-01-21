@@ -11,15 +11,7 @@ from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 
-from constants import Config, Path,\
-    BOSS_SHIP,\
-    PLAYER_SPACE_SHIP,\
-    PLAYER_LASER,\
-    FLAME_LASER,\
-    CONTROL_IMAGE,\
-    CHARACTERS_IMAGE,\
-    TROPHY_IMAGE,\
-    edit_undo_font
+from constants import Config, Path, Image, edit_undo_font
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -43,10 +35,10 @@ def main():
                        (Config.center_x - 210, Config.center_y + 22), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (Config.center_x + 15, Config.center_y + 22), (195, 66), "KEYBOARD")
-    control_btn = IconButton(CONTROL_IMAGE, (Config.starting_x + 30, 15))
+    control_btn = IconButton(Image.CONTROL_IMAGE, (Config.starting_x + 30, 15))
     characters_btn = IconButton(
-        CHARACTERS_IMAGE, (Config.starting_x + 30, 110))
-    trophy_btn = IconButton(TROPHY_IMAGE, (Config.ending_x - 85, 25))
+        Image.CHARACTERS_IMAGE, (Config.starting_x + 30, 110))
+    trophy_btn = IconButton(Image.TROPHY_IMAGE, (Config.ending_x - 85, 25))
 
     run = True
     while run:
@@ -55,13 +47,13 @@ def main():
         slow_bg_obj.render(Config.CANVAS)
 
         # Ships
-        Config.CANVAS.blit(BOSS_SHIP, (Config.center_x -
-                           BOSS_SHIP.get_width()//2, 50))
-        Config.CANVAS.blit(FLAME_LASER, (Config.center_x -
-                           FLAME_LASER.get_width()//2, 310))
-        Config.CANVAS.blit(PLAYER_SPACE_SHIP, (Config.center_x-50, 575))
-        Config.CANVAS.blit(PLAYER_LASER, (Config.center_x -
-                           PLAYER_LASER.get_width()//2, 475))
+        Config.CANVAS.blit(Image.BOSS_SHIP, (Config.center_x -
+                           Image.BOSS_SHIP.get_width()//2, 50))
+        Config.CANVAS.blit(Image.FLAME_LASER, (Config.center_x -
+                           Image.FLAME_LASER.get_width()//2, 310))
+        Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x-50, 575))
+        Config.CANVAS.blit(Image.PLAYER_LASER, (Config.center_x -
+                           Image.PLAYER_LASER.get_width()//2, 475))
 
         mouse_btn.draw()
         keyboard_btn.draw()

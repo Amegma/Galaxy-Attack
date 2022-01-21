@@ -9,8 +9,7 @@ from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
 from .background import bg_obj
 
-from constants import Config, Path, \
-    HEART_IMAGE,\
+from constants import Config, Path, Image, \
     score_list,\
     neue_font,\
     edit_undo_font
@@ -64,7 +63,7 @@ def game(isMouse=False):
         # Lives
         for index in range(1, lives + 1):
             Config.CANVAS.blit(
-                HEART_IMAGE, (Config.starting_x + 37 * index - 10, 20))
+                Image.HEART_IMAGE, (Config.starting_x + 37 * index - 10, 20))
 
         # blit stats
         Config.CANVAS.blit(level_label, (Config.starting_x + 35, 75))
