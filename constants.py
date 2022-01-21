@@ -109,7 +109,12 @@ class Config:
 
     screen_rect = CANVAS.get_rect()
     center_x = screen_rect.centerx
+    starting_x = 0
+    ending_x = WIDTH
+
     center_y = screen_rect.centery
+    starting_y = 0
+    ending_y = HEIGHT
 
     # Set Background Dimensions
     BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))

@@ -2,7 +2,7 @@ import os
 import pygame
 
 from screens.background import slow_bg_obj
-from constants import soundList, neue_font, VOL_ICON, MUTE_ICON
+from constants import Config, soundList, neue_font, VOL_ICON, MUTE_ICON
 
 
 class AudioControls:
@@ -45,22 +45,17 @@ class AudioControls:
             self.set_volume(0)
 
     def display_volume(self, CANVAS):
-        background_width = slow_bg_obj.rectBGimg.width
-        screen_rect = CANVAS.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
-
         control_font = pygame.font.Font(neue_font, 30)
 
         if self.muted:
-            CANVAS.blit(MUTE_ICON, (starting_x + 20, 695))
+            CANVAS.blit(MUTE_ICON, (Config.starting_x + 20, 695))
             vol_lbl_text = " --"
         else:
-            CANVAS.blit(VOL_ICON, (starting_x + 20, 695))
+            CANVAS.blit(VOL_ICON, (Config.starting_x + 20, 695))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
         vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
-        CANVAS.blit(vol_label, (starting_x + 70, 695))
+        CANVAS.blit(vol_label, (Config.starting_x + 70, 695))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)

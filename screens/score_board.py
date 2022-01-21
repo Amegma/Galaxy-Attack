@@ -14,17 +14,13 @@ from constants import Config, \
 
 
 def score_board():
-    window_width = Config.CANVAS.get_width()
-    background_width = slow_bg_obj.rectBGimg.width
-    starting_x = Config.center_x - background_width//2
-
     score_title_font = pygame.font.Font(edit_undo_font, 50)
     score_font = pygame.font.Font(neue_font, 35)
 
     score_list.sort()
     score_list.reverse()
 
-    go_back_btn = IconButton(GO_BACK_IMAGE, (starting_x + 30, 30))
+    go_back_btn = IconButton(GO_BACK_IMAGE, (Config.starting_x + 30, 30))
 
     run = True
     while run:
@@ -33,15 +29,15 @@ def score_board():
 
         score_title_label = score_title_font.render(
             'Score Board', 1, (0, 229, 0))
-        Config.CANVAS.blit(score_title_label, (window_width//2 -
+        Config.CANVAS.blit(score_title_label, (Config.center_x -
                                                score_title_label.get_width()//2 - 30, 168))
-        Config.CANVAS.blit(TROPHY_IMAGE, (window_width//2 +
+        Config.CANVAS.blit(TROPHY_IMAGE, (Config.center_x +
                                           score_title_label.get_width()//2 - 10, 163))
 
         i = 0
         for score in score_list[:5]:
             score_label = score_font.render(str(score), 1, (0, 255, 255))
-            Config.CANVAS.blit(score_label, (window_width//2 -
+            Config.CANVAS.blit(score_label, (Config.center_x -
                                              score_label.get_width() + 20, 250 + i * 40))
             i += 1
 

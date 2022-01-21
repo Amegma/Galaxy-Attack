@@ -18,12 +18,9 @@ from constants import Config, \
 
 
 def characters():
-    background_width = slow_bg_obj.rectBGimg.width
-    starting_x = Config.center_x - background_width//2
-
     characters_title_font = pygame.font.Font(edit_undo_font, 50)
 
-    go_back_btn = IconButton(GO_BACK_IMAGE, (starting_x + 30, 30))
+    go_back_btn = IconButton(GO_BACK_IMAGE, (Config.starting_x + 30, 30))
 
     run = True
     while run:

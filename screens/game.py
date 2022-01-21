@@ -51,13 +51,6 @@ def game(isMouse=False):
             bg_obj.update()
         bg_obj.render(Config.CANVAS)
 
-        window_width = Config.CANVAS.get_width()
-        background_width = bg_obj.rectBGimg.width
-        screen_rect = Config.CANVAS.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
-        ending_x = center_x + background_width//2
-
         # Draw Text
         level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
         score_label = sub_font.render(f'{player.get_score()}', 1, (0, 255, 0))
@@ -72,38 +65,39 @@ def game(isMouse=False):
 
         # Lives
         for index in range(1, lives + 1):
-            Config.CANVAS.blit(HEART_IMAGE, (starting_x + 37 * index - 10, 20))
+            Config.CANVAS.blit(
+                HEART_IMAGE, (Config.starting_x + 37 * index - 10, 20))
 
         # blit stats
-        Config.CANVAS.blit(level_label, (starting_x + 35, 75))
+        Config.CANVAS.blit(level_label, (Config.starting_x + 35, 75))
         Config.CANVAS.blit(
-            score_label, (ending_x - score_label.get_width() - 30, 20))
+            score_label, (Config.ending_x - score_label.get_width() - 30, 20))
 
         if win:
             score_list.append(player.get_score())
             win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
-            Config.CANVAS.blit(win_label, (window_width//2 -
+            Config.CANVAS.blit(win_label, (Config.center_x -
                                            win_label.get_width()//2, 350))
 
         if lost:
             score_list.append(player.get_score())
             lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
-            Config.CANVAS.blit(lost_label, (window_width//2 -
+            Config.CANVAS.blit(lost_label, (Config.center_x -
                                             lost_label.get_width()//2, 350))
 
         if level >= 10 and boss_entry:
             last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
-            Config.CANVAS.blit(last_label, (window_width//2 -
+            Config.CANVAS.blit(last_label, (Config.center_x -
                                             last_label.get_width()//2, 350))
 
         if pause:
             # if paused display the "game is paused" screen
             pause_label = main_font.render('Game Paused', 1, (0, 255, 255))
-            Config.CANVAS.blit(pause_label, (window_width//2 -
+            Config.CANVAS.blit(pause_label, (Config.center_x -
                                              pause_label.get_width()//2, 350))
 
             key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
-            Config.CANVAS.blit(key_msg, (window_width//2 -
+            Config.CANVAS.blit(key_msg, (Config.center_x -
                                          key_msg.get_width()//2, 400))
 
         # explosion group

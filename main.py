@@ -40,18 +40,14 @@ def main():
 
     audio_cfg.play_music(MENU_MUSIC_PATH)
 
-    # window_width = CANVAS.get_width()
-    background_width = slow_bg_obj.rectBGimg.width
-    starting_x = Config.center_x - background_width//2
-    ending_x = Config.center_x + background_width//2
-
     mouse_btn = Button((7, 8, 16), (255, 255, 255),
                        (Config.center_x - 210, Config.center_y + 22), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (Config.center_x + 15, Config.center_y + 22), (195, 66), "KEYBOARD")
-    control_btn = IconButton(CONTROL_IMAGE, (starting_x + 30, 15))
-    characters_btn = IconButton(CHARACTERS_IMAGE, (starting_x + 30, 110))
-    trophy_btn = IconButton(TROPHY_IMAGE, (ending_x - 85, 25))
+    control_btn = IconButton(CONTROL_IMAGE, (Config.starting_x + 30, 15))
+    characters_btn = IconButton(
+        CHARACTERS_IMAGE, (Config.starting_x + 30, 110))
+    trophy_btn = IconButton(TROPHY_IMAGE, (Config.ending_x - 85, 25))
 
     run = True
     while run:

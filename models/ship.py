@@ -40,12 +40,8 @@ class Ship:
             laser.draw(window)
 
         # making ship's coordinates centered in the sprite
-        background_width = slow_bg_obj.rectBGimg.width
-        screen_rect = window.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
         x_offset, y_offset = self.ship_img.get_size()
-        window.blit(self.ship_img, (starting_x+self.x -
+        window.blit(self.ship_img, (Config.starting_x+self.x -
                     x_offset/2, self.y-y_offset/2))
 
     def move_lasers(self, vel, obj):
@@ -174,16 +170,12 @@ class Player(Ship):
         self.healthBar(window)
 
     def healthBar(self, window):
-        background_width = slow_bg_obj.rectBGimg.width
-        screen_rect = window.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
         x_offset, y_offset = self.ship_img.get_size()
-        pygame.draw.rect(window, (255, 0, 0), (starting_x + self.x - x_offset/2,
+        pygame.draw.rect(window, (255, 0, 0), (Config.starting_x + self.x - x_offset/2,
                                                self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width()),
                                                10))
-        pygame.draw.rect(window, (0, 255, 0), (starting_x + self.x - x_offset/2,
+        pygame.draw.rect(window, (0, 255, 0), (Config.starting_x + self.x - x_offset/2,
                                                self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width() *
                                                    (self.health/self.max_health)),
