@@ -9,13 +9,11 @@ from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
 from .background import bg_obj
 
-from constants import Config, \
+from constants import Config, Path, \
     HEART_IMAGE,\
     score_list,\
     neue_font,\
-    edit_undo_font,\
-    MENU_MUSIC_PATH,\
-    GAME_MUSIC_PATH
+    edit_undo_font
 
 
 def game(isMouse=False):
@@ -30,7 +28,7 @@ def game(isMouse=False):
     win_font = pygame.font.Font(edit_undo_font, 55)
 
     # load and play ingame music
-    audio_cfg.play_music(GAME_MUSIC_PATH)
+    audio_cfg.play_music(Path.GAME_MUSIC_PATH)
 
     enemies = []
     wave_length = 0
@@ -169,7 +167,7 @@ def game(isMouse=False):
                     if event.key == pygame.K_BACKSPACE:
                         player.run = False
                         pause = False
-                        audio_cfg.play_music(MENU_MUSIC_PATH)
+                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
                         break
                     if event.key == pygame.K_m:
                         audio_cfg.toggle_mute()

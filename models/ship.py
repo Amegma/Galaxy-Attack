@@ -3,7 +3,7 @@ from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from screens.background import slow_bg_obj
 from models.controls import audio_cfg
-from constants import Config, \
+from constants import Config, Path, \
     EASY_SPACE_SHIP, \
     MEDIUM_SPACE_SHIP, \
     HARD_SPACE_SHIP, \
@@ -15,8 +15,7 @@ from constants import Config, \
     GREEN_LASER, \
     FLAME_LASER, \
     PLAYER_LASER_SOUND, \
-    ENEMY_LASER_SOUND, \
-    MENU_MUSIC_PATH
+    ENEMY_LASER_SOUND
 
 
 class Ship:
@@ -99,7 +98,7 @@ class Player(Ship):
 
         # Return to main page
         if action['QUIT']:
-            audio_cfg.play_music(MENU_MUSIC_PATH)
+            audio_cfg.play_music(Path.MENU_MUSIC_PATH)
             self.run = False
         # Left Key
         if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
@@ -131,7 +130,7 @@ class Player(Ship):
             self.shoot()
         # Return to main page
         if button[2] or keys[pygame.K_BACKSPACE]:
-            audio_cfg.play_music(MENU_MUSIC_PATH)
+            audio_cfg.play_music(Path.MENU_MUSIC_PATH)
             self.run = False
 
     def move(self):

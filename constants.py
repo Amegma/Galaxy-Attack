@@ -19,10 +19,10 @@ class Path:
     GRAPHICS_PATH = os.path.join('assets', 'graphics')
     SOUND_PATH = os.path.join('assets', 'sounds')
 
+    # load music
+    GAME_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'ingame.wav'))
+    MENU_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'menu.wav'))
 
-# Load Background Image
-backgroundImage = pygame.image.load(resource_path(os.path.join(
-    Path.GRAPHICS_PATH, 'background-black.png')))
 
 # FONT VARS
 edit_undo_font = resource_path(os.path.join(Path.FONT_PATH, 'edit_undo.ttf'))
@@ -77,10 +77,6 @@ GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
 HEART_IMAGE = pygame.image.load(resource_path(
     os.path.join(Path.GRAPHICS_PATH, 'heart.png')))
 
-# load music
-GAME_MUSIC_PATH = resource_path(os.path.join(Path.SOUND_PATH, 'ingame.wav'))
-MENU_MUSIC_PATH = resource_path(os.path.join(Path.SOUND_PATH, 'menu.wav'))
-
 # SFX VARS
 PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
     os.path.join(Path.SOUND_PATH, 'ownlaser.wav')))
@@ -115,6 +111,10 @@ class Config:
     center_y = screen_rect.centery
     starting_y = 0
     ending_y = HEIGHT
+
+    # Load Background Image
+    backgroundImage = pygame.image.load(resource_path(os.path.join(
+        Path.GRAPHICS_PATH, 'background-black.png')))
 
     # Set Background Dimensions
     BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))

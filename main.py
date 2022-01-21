@@ -11,7 +11,7 @@ from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 
-from constants import Config,\
+from constants import Config, Path,\
     BOSS_SHIP,\
     PLAYER_SPACE_SHIP,\
     PLAYER_LASER,\
@@ -19,7 +19,6 @@ from constants import Config,\
     CONTROL_IMAGE,\
     CHARACTERS_IMAGE,\
     TROPHY_IMAGE,\
-    MENU_MUSIC_PATH, \
     edit_undo_font
 
 # parsing arguments
@@ -38,7 +37,7 @@ pygame.display.set_caption(Config.TITLE)
 def main():
     title_font = pygame.font.Font(edit_undo_font, 82)
 
-    audio_cfg.play_music(MENU_MUSIC_PATH)
+    audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
     mouse_btn = Button((7, 8, 16), (255, 255, 255),
                        (Config.center_x - 210, Config.center_y + 22), (195, 66), "MOUSE")
