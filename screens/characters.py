@@ -33,72 +33,72 @@ def characters():
 
         # Name: Easy Spaceship; Health: 100; Damage: 10;
         Config.CANVAS.blit(Image.EASY_SPACE_SHIP, (Config.center_x -
-                                                   Image.EASY_SPACE_SHIP.get_width()//2 - 240, 220))
+                                                   Image.EASY_SPACE_SHIP.get_width()//2 - 270, 220))
         easy_ship_label = characters_info_font.render(
             'Easy Spaceship', 1, (0, 0, 255))
-        Config.CANVAS.blit(easy_ship_label, (Config.center_x - 180, 220))
+        Config.CANVAS.blit(easy_ship_label, (Config.center_x - 210, 220))
         easy_ship_label = characters_info_font.render(
             'Health: 100', 1, (0, 255, 0))
-        Config.CANVAS.blit(easy_ship_label, (Config.center_x - 180, 247))
+        Config.CANVAS.blit(easy_ship_label, (Config.center_x - 210, 247))
         easy_ship_label = characters_info_font.render(
             'Damage: 10', 1, (255, 0, 0))
-        Config.CANVAS.blit(easy_ship_label, (Config.center_x - 180, 274))
+        Config.CANVAS.blit(easy_ship_label, (Config.center_x - 210, 274))
 
         # Name: Medium Spaceship; Health: 100; Damage: 18;
         Config.CANVAS.blit(Image.MEDIUM_SPACE_SHIP, (Config.center_x -
-                                                     Image.MEDIUM_SPACE_SHIP.get_width()//2 - 240, 315))
+                                                     Image.MEDIUM_SPACE_SHIP.get_width()//2 - 270, 315))
         medium_ship_label = characters_info_font.render(
             'Medium Spaceship', 1, (0, 0, 255))
-        Config.CANVAS.blit(medium_ship_label, (Config.center_x - 180, 315))
+        Config.CANVAS.blit(medium_ship_label, (Config.center_x - 210, 315))
         medium_ship_label = characters_info_font.render(
             'Health: 100', 1, (0, 255, 0))
-        Config.CANVAS.blit(medium_ship_label, (Config.center_x - 180, 342))
+        Config.CANVAS.blit(medium_ship_label, (Config.center_x - 210, 342))
         medium_ship_label = characters_info_font.render(
             'Damage: 18', 1, (255, 0, 0))
-        Config.CANVAS.blit(medium_ship_label, (Config.center_x - 180, 369))
+        Config.CANVAS.blit(medium_ship_label, (Config.center_x - 210, 369))
 
         # Name: Hard Spaceship; Health: 100; Damage: 25;
         Config.CANVAS.blit(Image.HARD_SPACE_SHIP, (Config.center_x -
-                                                   Image.HARD_SPACE_SHIP.get_width()//2 - 240, 435))
+                                                   Image.HARD_SPACE_SHIP.get_width()//2 - 270, 435))
         hard_ship_label = characters_info_font.render(
             'Hard Spaceship', 1, (0, 0, 255))
-        Config.CANVAS.blit(hard_ship_label, (Config.center_x - 180, 425))
+        Config.CANVAS.blit(hard_ship_label, (Config.center_x - 210, 425))
         hard_ship_label = characters_info_font.render(
             'Health: 100', 1, (0, 255, 0))
-        Config.CANVAS.blit(hard_ship_label, (Config.center_x - 180, 452))
+        Config.CANVAS.blit(hard_ship_label, (Config.center_x - 210, 452))
         hard_ship_label = characters_info_font.render(
             'Damage: 25', 1, (255, 0, 0))
-        Config.CANVAS.blit(hard_ship_label, (Config.center_x - 180, 479))
+        Config.CANVAS.blit(hard_ship_label, (Config.center_x - 210, 479))
 
         # Name: Your Spaceship; Lives: 5; Health: 100; Damage: 100
         Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x -
-                                                     Image.PLAYER_SPACE_SHIP.get_width()//2 + 240, 280))
+                           Image.PLAYER_SPACE_SHIP.get_width()//2 + 250, 280))
         player_ship_label = characters_info_font.render(
             'Your Spaceship', 1, (0, 0, 255))
-        Config.CANVAS.blit(player_ship_label, (Config.center_x + 100, 305))
+        Config.CANVAS.blit(player_ship_label, (Config.center_x + 70, 285))
         for index in range(1, 6):
             Config.CANVAS.blit(
-                NEW_HEART_IMAGE, (Config.center_x + 75 + 25 * index, 332))
+                NEW_HEART_IMAGE, (Config.center_x + 41 + 25 * index, 312))
         player_ship_label = characters_info_font.render(
             'Health: 100', 1, (0, 255, 0))
-        Config.CANVAS.blit(player_ship_label, (Config.center_x + 100, 359))
+        Config.CANVAS.blit(player_ship_label, (Config.center_x + 70, 339))
         player_ship_label = characters_info_font.render(
             'Damage: 100', 1, (255, 0, 0))
-        Config.CANVAS.blit(player_ship_label, (Config.center_x + 100, 386))
+        Config.CANVAS.blit(player_ship_label, (Config.center_x + 70, 366))
 
         # Name: Boss Spaceship; Health: 1980; Damage: 100;
         Config.CANVAS.blit(Image.BOSS_SHIP, (Config.center_x -
-                           Image.BOSS_SHIP.get_width()//2 + 20, 450))
-        Config.CANVAS.blit(Image.DEMON_ICON, (Config.center_x + 140, 520))
+                           Image.BOSS_SHIP.get_width()//2, 450))
+        # Config.CANVAS.blit(Image.DEMON_ICON, (Config.center_x + 140, 520))
         boss_ship_label = characters_info_font.render(
             'Boss Spaceship', 1, (0, 0, 255))
-        Config.CANVAS.blit(boss_ship_label, (Config.center_x + 180, 525))
+        Config.CANVAS.blit(boss_ship_label, (Config.center_x + 150, 525))
         boss_ship_label = characters_info_font.render(
             'Health: 1980', 1, (0, 255, 0))
-        Config.CANVAS.blit(boss_ship_label, (Config.center_x + 180, 552))
+        Config.CANVAS.blit(boss_ship_label, (Config.center_x + 150, 552))
         boss_ship_label = characters_info_font.render(
             'Damage: 100', 1, (255, 0, 0))
-        Config.CANVAS.blit(boss_ship_label, (Config.center_x + 180, 579))
+        Config.CANVAS.blit(boss_ship_label, (Config.center_x + 150, 579))
 
         go_back_btn.draw()
 

@@ -42,6 +42,11 @@ class Image:
     BOSS_SHIP = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'boss.png')))
 
+    UFO_SPACE_SHIP = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'ufo.png')))
+    UFO_SPACE_SHIP = pygame.transform.scale(
+        UFO_SPACE_SHIP, (UFO_SPACE_SHIP.get_width()/7, UFO_SPACE_SHIP.get_height()/7))
+
     # Load Player
     PLAYER_SPACE_SHIP = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'retro-spaceship.png')))
