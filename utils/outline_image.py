@@ -1,6 +1,6 @@
 import pygame
 
-from constants import CANVAS
+from config import Config
 
 
 def outline_image(image, pos):
@@ -11,15 +11,15 @@ def outline_image(image, pos):
         mask_surf.set_at(pixel, (255, 255, 255))
     mask_surf.set_colorkey((0, 0, 0))
 
-    CANVAS.blit(mask_surf, (pos[0], pos[1]+2))
-    CANVAS.blit(mask_surf, (pos[0], pos[1]+1))
-    CANVAS.blit(mask_surf, (pos[0], pos[1]-1))
-    CANVAS.blit(mask_surf, (pos[0], pos[1]-2))
-    CANVAS.blit(mask_surf, (pos[0]+2, pos[1]))
-    CANVAS.blit(mask_surf, (pos[0]+1, pos[1]))
-    CANVAS.blit(mask_surf, (pos[0]-1, pos[1]))
-    CANVAS.blit(mask_surf, (pos[0]-2, pos[1]))
-    CANVAS.blit(mask_surf, (pos[0]+1, pos[1]+1))
-    CANVAS.blit(mask_surf, (pos[0]+1, pos[1]-1))
-    CANVAS.blit(mask_surf, (pos[0]-1, pos[1]+1))
-    CANVAS.blit(mask_surf, (pos[0]-1, pos[1]-1))
+    Config.CANVAS.blit(mask_surf, (pos[0], pos[1]+2))
+    Config.CANVAS.blit(mask_surf, (pos[0], pos[1]+1))
+    Config.CANVAS.blit(mask_surf, (pos[0], pos[1]-1))
+    Config.CANVAS.blit(mask_surf, (pos[0], pos[1]-2))
+    Config.CANVAS.blit(mask_surf, (pos[0]+2, pos[1]))
+    Config.CANVAS.blit(mask_surf, (pos[0]+1, pos[1]))
+    Config.CANVAS.blit(mask_surf, (pos[0]-1, pos[1]))
+    Config.CANVAS.blit(mask_surf, (pos[0]-2, pos[1]))
+    Config.CANVAS.blit(mask_surf, (pos[0]+1, pos[1]+1))
+    Config.CANVAS.blit(mask_surf, (pos[0]+1, pos[1]-1))
+    Config.CANVAS.blit(mask_surf, (pos[0]-1, pos[1]+1))
+    Config.CANVAS.blit(mask_surf, (pos[0]-1, pos[1]-1))
