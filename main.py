@@ -24,6 +24,7 @@ if args["mute"]:
 pygame.font.init()
 
 pygame.display.set_caption(Config.TITLE)
+pygame.display.set_icon(Image.PLAYER_SPACE_SHIP)
 
 
 def main():
