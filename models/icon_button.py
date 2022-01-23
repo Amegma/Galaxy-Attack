@@ -1,7 +1,7 @@
 import os
 import pygame
 
-from constants import CANVAS
+from config import Config
 from utils.outline_image import outline_image
 
 
@@ -17,7 +17,7 @@ class IconButton:
         if self.outline == "onover":
             outline_image(self.image, self.pos)
 
-        CANVAS.blit(self.image, self.rect)
+        Config.CANVAS.blit(self.image, self.rect)
 
     def isOver(self):
         return self.rect.collidepoint(pygame.mouse.get_pos())
