@@ -49,7 +49,7 @@ def main():
     while run:
         pygame.mouse.set_visible(True)
         slow_bg_obj.update()
-        slow_bg_obj.render(Config.CANVAS)
+        slow_bg_obj.render()
 
         # Ships
         Config.CANVAS.blit(Image.BOSS_SHIP, (Config.center_x -
@@ -79,7 +79,7 @@ def main():
         # Characters Page
         characters_btn.draw()
 
-        audio_cfg.display_volume(Config.CANVAS)
+        audio_cfg.display_volume()
 
         exit_btn.draw()
 

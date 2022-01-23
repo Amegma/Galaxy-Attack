@@ -43,16 +43,16 @@ def game(isMouse=False):
     def redraw_window(pause=False):
         if not pause:
             bg_obj.update()
-        bg_obj.render(Config.CANVAS)
+        bg_obj.render()
 
         # Draw Text
         level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
         score_label = sub_font.render(f'{player.get_score()}', 1, (0, 255, 0))
 
-        player.draw(Config.CANVAS)
+        player.draw()
 
         for enemyShip in enemies:
-            enemyShip.draw(Config.CANVAS)
+            enemyShip.draw()
 
         # blit player stats after enemyShips to prevent the later
         # from being drawn over the stats
@@ -98,7 +98,7 @@ def game(isMouse=False):
         explosion_group.draw(Config.CANVAS)
         explosion_group.update()
 
-        audio_cfg.display_volume(Config.CANVAS)
+        audio_cfg.display_volume()
         pygame.display.update()
         Config.framespersec.tick(Config.FPS)
 

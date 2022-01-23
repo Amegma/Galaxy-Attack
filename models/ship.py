@@ -21,16 +21,16 @@ class Ship:
         self.lasers = []
         self.cool_down_counter = 0
 
-    def draw(self, window):
+    def draw(self):
         # drawing lasers before the ship so that it doesn't appea
         # like the lasers appear from above the ship
         for laser in self.lasers:
-            laser.draw(window)
+            laser.draw()
 
         # making ship's coordinates centered in the sprite
         x_offset, y_offset = self.ship_img.get_size()
-        window.blit(self.ship_img, (Config.starting_x+self.x -
-                    x_offset/2, self.y-y_offset/2))
+        Config.CANVAS.blit(self.ship_img, (Config.starting_x+self.x -
+                                           x_offset/2, self.y-y_offset/2))
 
     def move_lasers(self, vel, obj):
         self.coolDown()
@@ -153,21 +153,21 @@ class Player(Ship):
                         if laser in self.lasers:
                             self.lasers.remove(laser)
 
-    def draw(self, window):
-        super().draw(window)
-        self.healthBar(window)
+    def draw(self):
+        super().draw()
+        self.healthBar()
 
-    def healthBar(self, window):
+    def healthBar(self):
         x_offset, y_offset = self.ship_img.get_size()
-        pygame.draw.rect(window, (255, 0, 0), (Config.starting_x + self.x - x_offset/2,
-                                               self.y + y_offset/2 + 10,
-                                               int(self.ship_img.get_width()),
-                                               10))
-        pygame.draw.rect(window, (0, 255, 0), (Config.starting_x + self.x - x_offset/2,
-                                               self.y + y_offset/2 + 10,
-                                               int(self.ship_img.get_width() *
-                                                   (self.health/self.max_health)),
-                                               10))
+        pygame.draw.rect(Config.CANVAS, (255, 0, 0), (Config.starting_x + self.x - x_offset/2,
+                                                      self.y + y_offset/2 + 10,
+                                                      int(self.ship_img.get_width()),
+                                                      10))
+        pygame.draw.rect(Config.CANVAS, (0, 255, 0), (Config.starting_x + self.x - x_offset/2,
+                                                      self.y + y_offset/2 + 10,
+                                                      int(self.ship_img.get_width() *
+                                                          (self.health/self.max_health)),
+                                                      10))
 
 
 class Enemy(Ship):

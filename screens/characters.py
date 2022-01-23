@@ -20,7 +20,7 @@ def characters():
     run = True
     while run:
         slow_bg_obj.update()
-        slow_bg_obj.render(Config.CANVAS)
+        slow_bg_obj.render()
 
         characters_title_label = characters_title_font.render(
             "Characters", 1, (0, 255, 255))
@@ -102,7 +102,7 @@ def characters():
 
         go_back_btn.draw()
 
-        audio_cfg.display_volume(Config.CANVAS)
+        audio_cfg.display_volume()
         Config.framespersec.tick(Config.FPS)
         pygame.display.update()
 

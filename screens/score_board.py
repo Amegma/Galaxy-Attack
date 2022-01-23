@@ -20,7 +20,7 @@ def score_board():
     run = True
     while run:
         slow_bg_obj.update()
-        slow_bg_obj.render(Config.CANVAS)
+        slow_bg_obj.render()
 
         score_title_label = score_title_font.render(
             'Score Board', 1, (0, 229, 0))
@@ -44,7 +44,7 @@ def score_board():
 
         go_back_btn.draw()
 
-        audio_cfg.display_volume(Config.CANVAS)
+        audio_cfg.display_volume()
         Config.framespersec.tick(Config.FPS)
         pygame.display.update()
 

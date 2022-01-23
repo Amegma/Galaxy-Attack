@@ -19,7 +19,7 @@ def controls():
 
     while run:
         slow_bg_obj.update()
-        slow_bg_obj.render(Config.CANVAS)
+        slow_bg_obj.render()
 
         control_title_label = control_title_font.render(
             'Controls', 1, (0, 0, 209))
@@ -79,7 +79,7 @@ def controls():
         # CANVAS.blit(control_title_label, (starting_x + 30, 30))
         go_back_btn.draw()
 
-        audio_cfg.display_volume(Config.CANVAS)
+        audio_cfg.display_volume()
 
         pygame.display.update()
         Config.framespersec.tick(Config.FPS)

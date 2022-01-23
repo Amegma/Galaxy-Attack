@@ -20,10 +20,10 @@ class ScrollBackground():
         if self.bgY2 >= self.rectBGimg.height:
             self.bgY2 = - self.rectBGimg.height
 
-    def render(self, CANVAS):
+    def render(self):
         x = Config.center_x - self.rectBGimg.width / 2
-        CANVAS.blit(self.bgimage, (x, self.bgY1))
-        CANVAS.blit(self.bgimage, (x, self.bgY2))
+        Config.CANVAS.blit(self.bgimage, (x, self.bgY1))
+        Config.CANVAS.blit(self.bgimage, (x, self.bgY2))
 
 
 bg_obj = ScrollBackground(Config.BG)
