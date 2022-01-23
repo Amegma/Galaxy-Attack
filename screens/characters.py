@@ -78,7 +78,7 @@ def characters():
         Config.CANVAS.blit(player_ship_label, (Config.center_x + 70, 285))
         for index in range(1, 6):
             Config.CANVAS.blit(
-                NEW_HEART_IMAGE, (Config.center_x + 41 + 25 * index, 312))
+                NEW_HEART_IMAGE, (Config.center_x + 45 + 25 * index, 312))
         player_ship_label = characters_info_font.render(
             'Health: 100', 1, (0, 255, 0))
         Config.CANVAS.blit(player_ship_label, (Config.center_x + 70, 339))

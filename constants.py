@@ -96,6 +96,11 @@ class Image:
     # GO_BACK_IMAGE = pygame.transform.scale()
     GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
 
+    EXIT_IMAGE = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'exit.png')))
+    EXIT_IMAGE = pygame.transform.scale(
+        EXIT_IMAGE, (EXIT_IMAGE.get_width()/3, EXIT_IMAGE.get_height()/3))
+
     # Load Hearts
     HEART_IMAGE = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'heart.png')))

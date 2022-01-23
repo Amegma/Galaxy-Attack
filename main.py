@@ -42,6 +42,9 @@ def main():
     trophy_btn = IconButton(Image.TROPHY_IMAGE, (Config.ending_x - 85, 25))
     settings_btn = IconButton(Image.TOOLBOX_IMAGE, (Config.ending_x - 85, 110))
 
+    exit_btn = IconButton(
+        Image.EXIT_IMAGE, (Config.ending_x - 75, Config.ending_y - 65))
+
     run = True
     while run:
         pygame.mouse.set_visible(True)
@@ -78,6 +81,8 @@ def main():
 
         audio_cfg.display_volume(Config.CANVAS)
 
+        exit_btn.draw()
+
         Config.CANVAS.blit(Image.TITLE_LOGO, (Config.center_x -
                            Image.TITLE_LOGO.get_width()//2, 50))
 
@@ -112,6 +117,10 @@ def main():
                         score_board()
                     if characters_btn.isOver():
                         characters()
+                    if settings_btn.isOver():
+                        characters()
+                    if exit_btn.isOver():
+                        run = False
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
@@ -144,6 +153,11 @@ def main():
                     characters_btn.outline = "onover"
                 else:
                     characters_btn.outline = "default"
+
+                if exit_btn.isOver():
+                    exit_btn.outline = "onover"
+                else:
+                    exit_btn.outline = "default"
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
