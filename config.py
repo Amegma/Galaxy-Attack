@@ -7,7 +7,7 @@ from constants import Path
 
 class Config:
     # ROOT VARS
-    TITLE = 'SPACE INVADERS'
+    TITLE = 'GALAXY ATTACK'
     WIDTH = 750
     HEIGHT = 750
 
