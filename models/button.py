@@ -1,4 +1,3 @@
-import os
 import pygame
 
 from config import Config

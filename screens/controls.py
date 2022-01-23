@@ -1,5 +1,5 @@
-import os
 import pygame
+import sys
 
 from .background import slow_bg_obj
 from models.icon_button import IconButton
@@ -86,7 +86,8 @@ def controls():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
+                sys.exit(0)
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()

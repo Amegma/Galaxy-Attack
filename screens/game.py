@@ -1,4 +1,3 @@
-import os
 import pygame
 import time
 import random
@@ -159,7 +158,7 @@ def game(isMouse=False):
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    quit()
+                    pygame.quit()
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_BACKSPACE:
                         player.run = False

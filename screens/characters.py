@@ -1,5 +1,5 @@
-import os
 import pygame
+import sys
 
 from .background import slow_bg_obj
 from models.icon_button import IconButton
@@ -33,7 +33,7 @@ def characters():
 
         # Name: Easy Spaceship; Health: 100; Damage: 10;
         Config.CANVAS.blit(Image.EASY_SPACE_SHIP, (Config.center_x -
-                                                   Image.EASY_SPACE_SHIP.get_width()//2 - 270, 220))
+                                                   Image.EASY_SPACE_SHIP.get_width()//2 - 270, 235))
         easy_ship_label = characters_info_font.render(
             'Easy Spaceship', 1, (0, 0, 255))
         Config.CANVAS.blit(easy_ship_label, (Config.center_x - 210, 220))
@@ -46,7 +46,7 @@ def characters():
 
         # Name: Medium Spaceship; Health: 100; Damage: 18;
         Config.CANVAS.blit(Image.MEDIUM_SPACE_SHIP, (Config.center_x -
-                                                     Image.MEDIUM_SPACE_SHIP.get_width()//2 - 270, 315))
+                                                     Image.MEDIUM_SPACE_SHIP.get_width()//2 - 270, 320))
         medium_ship_label = characters_info_font.render(
             'Medium Spaceship', 1, (0, 0, 255))
         Config.CANVAS.blit(medium_ship_label, (Config.center_x - 210, 315))
@@ -72,7 +72,7 @@ def characters():
 
         # Name: Your Spaceship; Lives: 5; Health: 100; Damage: 100
         Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x -
-                           Image.PLAYER_SPACE_SHIP.get_width()//2 + 250, 280))
+                           Image.PLAYER_SPACE_SHIP.get_width()//2 + 260, 290))
         player_ship_label = characters_info_font.render(
             'Your Spaceship', 1, (0, 0, 255))
         Config.CANVAS.blit(player_ship_label, (Config.center_x + 70, 285))
@@ -108,7 +108,8 @@ def characters():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
+                sys.exit(0)
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()

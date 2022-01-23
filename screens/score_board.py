@@ -1,5 +1,5 @@
-import os
 import pygame
+import sys
 
 from .background import slow_bg_obj
 from models.icon_button import IconButton
@@ -29,6 +29,12 @@ def score_board():
         Config.CANVAS.blit(Image.TROPHY_IMAGE, (Config.center_x +
                                                 score_title_label.get_width()//2 - 10, 163))
 
+        if len(score_list) == 0:
+            score_label = score_font.render(
+                'You Haven\'t Played Yet!', 1, (0, 255, 255))
+            Config.CANVAS.blit(score_label, (Config.center_x -
+                                             score_label.get_width()//2, 250))
+
         i = 0
         for score in score_list[:5]:
             score_label = score_font.render(str(score), 1, (0, 255, 255))
@@ -36,8 +42,6 @@ def score_board():
                                              score_label.get_width() + 20, 250 + i * 40))
             i += 1
 
-            # back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
-            # CANVAS.blit(back_label, (starting_x + 30, 30))
         go_back_btn.draw()
 
         audio_cfg.display_volume(Config.CANVAS)
@@ -46,7 +50,8 @@ def score_board():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
+                sys.exit(0)
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()

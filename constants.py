@@ -86,6 +86,10 @@ class Image:
         os.path.join(Path.GRAPHICS_PATH, 'trophy.png')))
     CHARACTERS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
     CHARACTERS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
+    TOOLBOX_IMAGE = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'toolbox.png')))
+    TOOLBOX_IMAGE = pygame.transform.scale(
+        TOOLBOX_IMAGE, (TOOLBOX_IMAGE.get_width()/2, TOOLBOX_IMAGE.get_height()/2))
 
     GO_BACK_IMAGE = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'back2.png')))

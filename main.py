@@ -1,4 +1,4 @@
-import os
+import sys
 import pygame
 import argparse
 
@@ -36,10 +36,11 @@ def main():
                        (Config.center_x - 210, Config.center_y + 42), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
                           (Config.center_x + 15, Config.center_y + 42), (195, 66), "KEYBOARD")
-    control_btn = IconButton(Image.CONTROL_IMAGE, (Config.starting_x + 30, 15))
+    control_btn = IconButton(Image.CONTROL_IMAGE, (Config.starting_x + 35, 23))
     characters_btn = IconButton(
-        Image.CHARACTERS_IMAGE, (Config.starting_x + 30, 110))
+        Image.CHARACTERS_IMAGE, (Config.starting_x+30, 110))
     trophy_btn = IconButton(Image.TROPHY_IMAGE, (Config.ending_x - 85, 25))
+    settings_btn = IconButton(Image.TOOLBOX_IMAGE, (Config.ending_x - 85, 110))
 
     run = True
     while run:
@@ -52,7 +53,7 @@ def main():
                            Image.BOSS_SHIP.get_width()//2, 110))
         Config.CANVAS.blit(Image.FLAME_LASER, (Config.center_x -
                            Image.FLAME_LASER.get_width()//2, 360))
-        Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x-50, 575))
+        Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x-46, 575))
         Config.CANVAS.blit(Image.PLAYER_LASER, (Config.center_x -
                            Image.PLAYER_LASER.get_width()//2, 490))
 
@@ -68,6 +69,9 @@ def main():
 
         # ScoreBoard Page
         trophy_btn.draw()
+
+        # Settings Page
+        settings_btn.draw()
 
         # Characters Page
         characters_btn.draw()
@@ -131,6 +135,11 @@ def main():
                 else:
                     trophy_btn.outline = "default"
 
+                if settings_btn.isOver():
+                    settings_btn.outline = "onover"
+                else:
+                    settings_btn.outline = "default"
+
                 if characters_btn.isOver():
                     characters_btn.outline = "onover"
                 else:
@@ -147,6 +156,7 @@ def main():
             score_board()
 
     pygame.quit()
+    sys.exit(0)
 
 
 main()
