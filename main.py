@@ -33,9 +33,9 @@ def main():
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
     mouse_btn = Button((7, 8, 16), (255, 255, 255),
-                       (Config.center_x - 210, Config.center_y + 22), (195, 66), "MOUSE")
+                       (Config.center_x - 210, Config.center_y + 42), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
-                          (Config.center_x + 15, Config.center_y + 22), (195, 66), "KEYBOARD")
+                          (Config.center_x + 15, Config.center_y + 42), (195, 66), "KEYBOARD")
     control_btn = IconButton(Image.CONTROL_IMAGE, (Config.starting_x + 30, 15))
     characters_btn = IconButton(
         Image.CHARACTERS_IMAGE, (Config.starting_x + 30, 110))
@@ -49,19 +49,19 @@ def main():
 
         # Ships
         Config.CANVAS.blit(Image.BOSS_SHIP, (Config.center_x -
-                           Image.BOSS_SHIP.get_width()//2, 50))
+                           Image.BOSS_SHIP.get_width()//2 - 75, 120))
         Config.CANVAS.blit(Image.FLAME_LASER, (Config.center_x -
-                           Image.FLAME_LASER.get_width()//2, 310))
+                           Image.FLAME_LASER.get_width()//2, 350))
         Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x-50, 575))
         Config.CANVAS.blit(Image.PLAYER_LASER, (Config.center_x -
-                           Image.PLAYER_LASER.get_width()//2, 475))
+                           Image.PLAYER_LASER.get_width()//2, 490))
 
         mouse_btn.draw()
         keyboard_btn.draw()
 
         title_label = title_font.render('Start Game', 1, (255, 255, 255))
         Config.CANVAS.blit(title_label, (Config.center_x-title_label.get_width()//2,
-                                         Config.center_y-title_label.get_height() + 5))
+                                         Config.center_y-title_label.get_height() + 25))
 
         # Control Page
         control_btn.draw()
@@ -73,6 +73,10 @@ def main():
         characters_btn.draw()
 
         audio_cfg.display_volume(Config.CANVAS)
+
+        Config.CANVAS.blit(Image.TITLE_LOGO, (Config.center_x -
+                           Image.TITLE_LOGO.get_width()//2, 50))
+
         pygame.display.update()
         Config.framespersec.tick(Config.FPS)  # capping frame rate to 60
 
