@@ -35,7 +35,7 @@ class Image:
     TITLE_LOGO = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'title_logo.png')))
     TITLE_LOGO = pygame.transform.scale(
-        TITLE_LOGO, (TITLE_LOGO.get_width()/3, TITLE_LOGO.get_height()/3))
+        TITLE_LOGO, (TITLE_LOGO.get_width()*2/7, TITLE_LOGO.get_height()*2/7))
 
     # Load Enemy Ships
     EASY_SPACE_SHIP = pygame.image.load(resource_path(

@@ -49,9 +49,9 @@ def main():
 
         # Ships
         Config.CANVAS.blit(Image.BOSS_SHIP, (Config.center_x -
-                           Image.BOSS_SHIP.get_width()//2 - 75, 120))
+                           Image.BOSS_SHIP.get_width()//2, 110))
         Config.CANVAS.blit(Image.FLAME_LASER, (Config.center_x -
-                           Image.FLAME_LASER.get_width()//2, 350))
+                           Image.FLAME_LASER.get_width()//2, 360))
         Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x-50, 575))
         Config.CANVAS.blit(Image.PLAYER_LASER, (Config.center_x -
                            Image.PLAYER_LASER.get_width()//2, 490))
