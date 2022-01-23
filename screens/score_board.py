@@ -1,47 +1,62 @@
 import os
 import pygame
 
-from .background import slow_bg_obj
 from models.icon_button import IconButton
-from models.controls import audio_cfg, display_cfg
-from config import Config
-from constants import Image, score_list, Font
+from .background import slow_bg_obj
+from .controls import audio_cfg, display_cfg
+from utils.resource_path import resource_path
+
+from constants import WIDTH, \
+    CANVAS, \
+    goBackImage, \
+    center_x, \
+    score_list, \
+    trophyImage, \
+    framespersec, \
+    FPS, \
+    FONT_PATH
 
 
 def score_board():
-    score_title_font = pygame.font.Font(Font.edit_undo_font, 50)
-    score_font = pygame.font.Font(Font.neue_font, 35)
+    window_width = CANVAS.get_width()
+    background_width = slow_bg_obj.rectBGimg.width
+    starting_x = center_x - background_width//2
+
+    score_title_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'edit_undo.ttf')), 50)
+    score_font = pygame.font.Font(resource_path(
+        os.path.join(FONT_PATH, 'neue.ttf')), 35)
 
     score_list.sort()
     score_list.reverse()
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (Config.starting_x + 30, 30))
+    go_back_btn = IconButton(goBackImage, (starting_x + 30, 30))
 
     run = True
     while run:
         slow_bg_obj.update()
-        slow_bg_obj.render(Config.CANVAS)
+        slow_bg_obj.render(CANVAS)
 
         score_title_label = score_title_font.render(
             'Score Board', 1, (0, 229, 0))
-        Config.CANVAS.blit(score_title_label, (Config.center_x -
-                                               score_title_label.get_width()//2 - 30, 168))
-        Config.CANVAS.blit(Image.TROPHY_IMAGE, (Config.center_x +
-                                                score_title_label.get_width()//2 - 10, 163))
+        CANVAS.blit(score_title_label, (window_width//2 -
+                                        score_title_label.get_width()//2 - 30, 168))
+        CANVAS.blit(trophyImage, (window_width//2 +
+                                  score_title_label.get_width()//2 - 10, 163))
 
         i = 0
         for score in score_list[:5]:
             score_label = score_font.render(str(score), 1, (0, 255, 255))
-            Config.CANVAS.blit(score_label, (Config.center_x -
-                                             score_label.get_width() + 20, 250 + i * 40))
+            CANVAS.blit(score_label, (window_width//2 -
+                        score_label.get_width() + 20, 250 + i * 40))
             i += 1
 
             # back_label = score_font.render('[Backspace]', 1, (255, 255, 255))
             # CANVAS.blit(back_label, (starting_x + 30, 30))
         go_back_btn.draw()
 
-        audio_cfg.display_volume(Config.CANVAS)
-        Config.framespersec.tick(Config.FPS)
+        audio_cfg.display_volume(CANVAS)
+        framespersec.tick(FPS)
         pygame.display.update()
 
         for event in pygame.event.get():

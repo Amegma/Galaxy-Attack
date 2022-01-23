@@ -2,6 +2,29 @@ import pygame
 import os
 
 from utils.resource_path import resource_path
+# from screens.background import slow_bg_obj
+
+# ROOT VARS
+TITLE = 'SPACE INVADERS'
+WIDTH = 750
+HEIGHT = 750
+
+# Canvas Dimensions
+CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
+
+screen_rect = CANVAS.get_rect()
+center_x = screen_rect.centerx
+center_y = screen_rect.centery
+
+# Load Background Image
+backgroundImage = pygame.image.load(resource_path(os.path.join(
+    'assets', 'graphics', 'background-black.png')))
+
+# Set Background Dimensions
+BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
+
+FPS = 60
+framespersec = pygame.time.Clock()
 
 score_list = []
 
@@ -11,101 +34,64 @@ soundList = []
 # Initialize Sound System
 pygame.mixer.init()
 
+# PATH VARS
+FONT_PATH = os.path.join('assets', 'fonts')
+EXPLOSION_PATH = os.path.join('assets', 'graphics', 'explosion')
 
-class Path:
-    # PATH VARS
-    FONT_PATH = os.path.join('assets', 'fonts')
-    EXPLOSION_PATH = os.path.join('assets', 'graphics', 'explosion')
-    GRAPHICS_PATH = os.path.join('assets', 'graphics')
-    SOUND_PATH = os.path.join('assets', 'sounds')
+# Load Controls Image
+controlImage = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'joystick.png')))
+trophyImage = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'trophy.png')))
 
-    # load music
-    GAME_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'ingame.wav'))
-    MENU_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'menu.wav'))
+goBackImage = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'back2.png')))
+# goBackImage = pygame.transform.scale()
+goBackImage = pygame.transform.scale(goBackImage, (34*2.4, 19*2.4))
 
+# Load Hearts
+heartImage = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'heart.png')))
 
-class Font:
-    # FONT VARS
-    edit_undo_font = resource_path(
-        os.path.join(Path.FONT_PATH, 'edit_undo.ttf'))
-    neue_font = resource_path(os.path.join(Path.FONT_PATH, 'neue.ttf'))
+# Load Enemy Ships
+EASY_SPACE_SHIP = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'easy.png')))
+MEDIUM_SPACE_SHIP = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'medium.png')))
+HARD_SPACE_SHIP = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'hard.png')))
+BOSS_SHIP = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'boss.png')))
 
+# Load Player
+PLAYER_SPACE_SHIP = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'retro-spaceship.png')))
+PLAYER_LASER = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'pixel_laser_cosmic.png')))
 
-class Image:
-    TITLE_LOGO = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'title_logo.png')))
-    TITLE_LOGO = pygame.transform.scale(
-        TITLE_LOGO, (TITLE_LOGO.get_width()/3, TITLE_LOGO.get_height()/3))
+# Load Lasers
+RED_LASER = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'pixel_laser_red.png')))
+BLUE_LASER = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'pixel_laser_blue.png')))
+GREEN_LASER = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'pixel_laser_green.png')))
+FLAME_LASER = pygame.image.load(resource_path(
+    os.path.join('assets', 'graphics', 'pixel_laser_flame.png')))
 
-    # Load Enemy Ships
-    EASY_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'easy.png')))
-    MEDIUM_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'medium.png')))
-    HARD_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'hard.png')))
-    BOSS_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'boss.png')))
-
-    UFO_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'ufo.png')))
-    UFO_SPACE_SHIP = pygame.transform.scale(
-        UFO_SPACE_SHIP, (UFO_SPACE_SHIP.get_width()/7, UFO_SPACE_SHIP.get_height()/7))
-
-    # Load Player
-    PLAYER_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'retro-spaceship.png')))
-    PLAYER_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_cosmic.png')))
-
-    # Load Lasers
-    RED_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_red.png')))
-    BLUE_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_blue.png')))
-    GREEN_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_green.png')))
-    FLAME_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_flame.png')))
-
-    # Load audio image
-    VOL_ICON = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'audio.png')))
-    MUTE_ICON = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'mute.png')))
-
-    DEMON_ICON = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'demon.png')))
-    DEMON_ICON = pygame.transform.scale(
-        DEMON_ICON, (DEMON_ICON.get_width()/11, DEMON_ICON.get_height()/11))
-
-    # Load Controls Image
-    CONTROL_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'joystick.png')))
-    TROPHY_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'trophy.png')))
-    CHARACTERS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
-    CHARACTERS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
-
-    GO_BACK_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'back2.png')))
-    # GO_BACK_IMAGE = pygame.transform.scale()
-    GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
-
-    # Load Hearts
-    HEART_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'heart.png')))
-
+# load music
+GAME_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'ingame.wav'))
+MENU_MUSIC_PATH = resource_path(os.path.join('assets', 'sounds', 'menu.wav'))
 
 # SFX VARS
 PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'ownlaser.wav')))
+    os.path.join('assets', 'sounds', 'ownlaser.wav')))
 ENEMY_LASER_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'enemylaser.wav')))
+    os.path.join('assets', 'sounds', 'enemylaser.wav')))
 EXPLODE_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'explode.wav')))
+    os.path.join('assets', 'sounds', 'explode.wav')))
 LASER_HIT_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'laser_hit.wav')))
+    os.path.join('assets', 'sounds', 'laser_hit.wav')))
 
 # adding sounds to the list
 soundList.append(PLAYER_LASER_SOUND)

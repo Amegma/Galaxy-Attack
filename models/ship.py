@@ -1,10 +1,23 @@
 import pygame
-
 from models.laser import Laser
 from models.explosion import Explosion, explosion_group
-from models.controls import audio_cfg
-from config import Config
-from constants import Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND
+from screens.background import slow_bg_obj
+from screens.controls import audio_cfg
+from constants import HEIGHT, \
+    WIDTH, \
+    EASY_SPACE_SHIP, \
+    MEDIUM_SPACE_SHIP, \
+    HARD_SPACE_SHIP, \
+    PLAYER_SPACE_SHIP, \
+    BOSS_SHIP, \
+    PLAYER_LASER, \
+    RED_LASER, \
+    BLUE_LASER, \
+    GREEN_LASER, \
+    FLAME_LASER, \
+    PLAYER_LASER_SOUND, \
+    ENEMY_LASER_SOUND, \
+    MENU_MUSIC_PATH
 
 
 class Ship:
@@ -28,15 +41,19 @@ class Ship:
             laser.draw(window)
 
         # making ship's coordinates centered in the sprite
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = window.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
         x_offset, y_offset = self.ship_img.get_size()
-        window.blit(self.ship_img, (Config.starting_x+self.x -
+        window.blit(self.ship_img, (starting_x+self.x -
                     x_offset/2, self.y-y_offset/2))
 
     def move_lasers(self, vel, obj):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(Config.HEIGHT):
+            if laser.off_screen(HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 obj.health -= 10
@@ -68,8 +85,8 @@ class Ship:
 class Player(Ship):
     def __init__(self, x, y, health=100, mouse_movement=False):
         super().__init__(x, y, health)
-        self.ship_img = Image.PLAYER_SPACE_SHIP
-        self.laser_img = Image.PLAYER_LASER
+        self.ship_img = PLAYER_SPACE_SHIP
+        self.laser_img = PLAYER_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
         self.mouse_movement = mouse_movement
@@ -87,19 +104,19 @@ class Player(Ship):
 
         # Return to main page
         if action['QUIT']:
-            audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+            audio_cfg.play_music(MENU_MUSIC_PATH)
             self.run = False
         # Left Key
         if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
             self.x -= self.vel
         # Right Key
-        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < Config.WIDTH:
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < WIDTH:
             self.x += self.vel
         # Up Key
         if action['UP'] and (self.y - self.vel) > 0:
             self.y -= self.vel
         # Down Key
-        if action['DOWN'] and (self.y + self.vel + self.get_height()) < Config.HEIGHT:
+        if action['DOWN'] and (self.y + self.vel + self.get_height()) < HEIGHT:
             self.y += self.vel
         # Shoot Laser
         if action['SHOOT']:
@@ -110,8 +127,8 @@ class Player(Ship):
         button = pygame.mouse.get_pressed()
         keys = pygame.key.get_pressed()
         # Movement
-        if cx > self.get_width()/2 and cx < Config.WIDTH - self.get_width()/2 \
-                and cy > 0 and cy < Config.HEIGHT:
+        if cx > self.get_width()/2 and cx < WIDTH - self.get_width()/2 \
+                and cy > 0 and cy < HEIGHT:
             self.x = cx
             self.y = cy
         # Shoot Laser
@@ -119,7 +136,7 @@ class Player(Ship):
             self.shoot()
         # Return to main page
         if button[2] or keys[pygame.K_BACKSPACE]:
-            audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+            audio_cfg.play_music(MENU_MUSIC_PATH)
             self.run = False
 
     def move(self):
@@ -132,7 +149,7 @@ class Player(Ship):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(Config.HEIGHT):
+            if laser.off_screen(HEIGHT):
                 self.lasers.remove(laser)
             else:
                 for obj in objs:
@@ -158,12 +175,16 @@ class Player(Ship):
         self.healthBar(window)
 
     def healthBar(self, window):
+        background_width = slow_bg_obj.rectBGimg.width
+        screen_rect = window.get_rect()
+        center_x = screen_rect.centerx
+        starting_x = center_x - background_width//2
         x_offset, y_offset = self.ship_img.get_size()
-        pygame.draw.rect(window, (255, 0, 0), (Config.starting_x + self.x - x_offset/2,
+        pygame.draw.rect(window, (255, 0, 0), (starting_x + self.x - x_offset/2,
                                                self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width()),
                                                10))
-        pygame.draw.rect(window, (0, 255, 0), (Config.starting_x + self.x - x_offset/2,
+        pygame.draw.rect(window, (0, 255, 0), (starting_x + self.x - x_offset/2,
                                                self.y + y_offset/2 + 10,
                                                int(self.ship_img.get_width() *
                                                    (self.health/self.max_health)),
@@ -172,10 +193,10 @@ class Player(Ship):
 
 class Enemy(Ship):
     TYPE_MODE = {
-        'easy': (Image.EASY_SPACE_SHIP, Image.RED_LASER, 10),
-        'medium': (Image.MEDIUM_SPACE_SHIP, Image.BLUE_LASER, 18),
-        'hard': (Image.HARD_SPACE_SHIP, Image.GREEN_LASER, 25),
-        'boss': (Image.BOSS_SHIP, Image.FLAME_LASER, 100)
+        'easy': (EASY_SPACE_SHIP, RED_LASER, 10),
+        'medium': (MEDIUM_SPACE_SHIP, BLUE_LASER, 18),
+        'hard': (HARD_SPACE_SHIP, GREEN_LASER, 25),
+        'boss': (BOSS_SHIP, FLAME_LASER, 100)
     }
 
     ship_type = ''
@@ -193,7 +214,7 @@ class Enemy(Ship):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(Config.HEIGHT):
+            if laser.off_screen(HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 # display collisions if enemy lasers hit the player
