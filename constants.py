@@ -91,6 +91,12 @@ class Image:
     TOOLBOX_IMAGE = pygame.transform.scale(
         TOOLBOX_IMAGE, (TOOLBOX_IMAGE.get_width()/2, TOOLBOX_IMAGE.get_height()/2))
 
+    TOOLS_IMAGE = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'tools.png')))
+    TOOLS_IMAGE = pygame.transform.scale(
+        TOOLS_IMAGE, (TOOLS_IMAGE.get_width()/4, TOOLS_IMAGE.get_height()/4))
+    TOOLS_IMAGE = pygame.transform.rotate(TOOLS_IMAGE, -45)
+
     GO_BACK_IMAGE = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'back2.png')))
     # GO_BACK_IMAGE = pygame.transform.scale()

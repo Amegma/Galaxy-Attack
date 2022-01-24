@@ -74,9 +74,6 @@ def controls():
         sfx_key_label = keys_font.render('[f]', 1, (240, 0, 0))
         config.CANVAS.blit(sfx_key_label, (config.starting_x + 470, 655))
 
-        # control_title_label = control_font.render(
-        #     '[Backspace]', 1, (255, 255, 255))
-        # CANVAS.blit(control_title_label, (starting_x + 30, 30))
         go_back_btn.draw()
 
         audio_cfg.display_volume()

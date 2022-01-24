@@ -6,6 +6,7 @@ from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
 from screens.characters import characters
+from screens.settings import settings
 from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
@@ -125,7 +126,7 @@ def main():
                     if characters_btn.isOver():
                         characters()
                     if settings_btn.isOver():
-                        characters()
+                        settings()
                     if exit_btn.isOver():
                         run = False
 
