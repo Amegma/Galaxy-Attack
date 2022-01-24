@@ -1,4 +1,4 @@
-from config import Config
+from config import config
 
 
 class ScrollBackground():
@@ -21,10 +21,10 @@ class ScrollBackground():
             self.bgY2 = - self.rectBGimg.height
 
     def render(self):
-        x = Config.center_x - self.rectBGimg.width / 2
-        Config.CANVAS.blit(self.bgimage, (x, self.bgY1))
-        Config.CANVAS.blit(self.bgimage, (x, self.bgY2))
+        x = config.center_x - self.rectBGimg.width / 2
+        config.CANVAS.blit(self.bgimage, (x, self.bgY1))
+        config.CANVAS.blit(self.bgimage, (x, self.bgY2))
 
 
-bg_obj = ScrollBackground(Config.BG)
-slow_bg_obj = ScrollBackground(Config.BG, 1.5)
+bg_obj = ScrollBackground(config.BG)
+slow_bg_obj = ScrollBackground(config.BG, 1.5)

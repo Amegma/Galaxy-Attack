@@ -6,29 +6,34 @@ from constants import Path
 
 
 class Config:
-    # ROOT VARS
-    TITLE = 'GALAXY ATTACK'
-    WIDTH = 750
-    HEIGHT = 750
+    def __init__(self):
+        # ROOT VARS
+        self.TITLE = 'GALAXY ATTACK'
+        self.WIDTH = 750
+        self.HEIGHT = 750
 
-    # Canvas Dimensions
-    CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
+        # Load Background Image
+        self.backgroundImage = pygame.image.load(resource_path(os.path.join(
+            Path.GRAPHICS_PATH, 'background-black.png')))
 
-    screen_rect = CANVAS.get_rect()
-    center_x = screen_rect.centerx
-    starting_x = 0
-    ending_x = WIDTH
+        # Set Background Dimensions
+        self.BG = pygame.transform.scale(
+            self.backgroundImage, (self.WIDTH, self.HEIGHT))
 
-    center_y = screen_rect.centery
-    starting_y = 0
-    ending_y = HEIGHT
+        self.FPS = 60
+        self.framespersec = pygame.time.Clock()
 
-    # Load Background Image
-    backgroundImage = pygame.image.load(resource_path(os.path.join(
-        Path.GRAPHICS_PATH, 'background-black.png')))
+        self.CANVAS = pygame.display.set_mode(
+            (self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
 
-    # Set Background Dimensions
-    BG = pygame.transform.scale(backgroundImage, (WIDTH, HEIGHT))
+        self.screen_rect = self.CANVAS.get_rect()
+        self.center_x = self.screen_rect.centerx
+        self.starting_x = 0
+        self.ending_x = self.WIDTH
 
-    FPS = 60
-    framespersec = pygame.time.Clock()
+        self.center_y = self.screen_rect.centery
+        self.starting_y = 0
+        self.ending_y = self.HEIGHT
+
+
+config = Config()

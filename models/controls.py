@@ -1,6 +1,6 @@
 import pygame
 
-from config import Config
+from config import config
 from constants import Image, soundList, Font
 
 
@@ -47,16 +47,17 @@ class AudioControls:
         control_font = pygame.font.Font(Font.neue_font, 30)
 
         if self.muted:
-            Config.CANVAS.blit(Image.MUTE_ICON,
-                        (Config.starting_x + 20, Config.ending_y - 52))
+            config.CANVAS.blit(Image.MUTE_ICON,
+                               (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = " --"
         else:
-            Config.CANVAS.blit(Image.VOL_ICON,
-                        (Config.starting_x + 20, Config.ending_y - 52))
+            config.CANVAS.blit(Image.VOL_ICON,
+                               (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
         vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
-        Config.CANVAS.blit(vol_label, (Config.starting_x + 70, Config.ending_y - 57))
+        config.CANVAS.blit(
+            vol_label, (config.starting_x + 70, config.ending_y - 57))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)
@@ -67,7 +68,7 @@ class DisplayControls:
     def toggle_full_screen():
         screen = pygame.display.get_surface()
         if (screen.get_flags() & pygame.FULLSCREEN):
-            pygame.display.set_mode((Config.WIDTH, Config.HEIGHT))
+            pygame.display.set_mode((config.WIDTH, config.HEIGHT))
         else:
             info = pygame.display.Info()
             pygame.display.set_mode(

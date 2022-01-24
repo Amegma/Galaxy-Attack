@@ -4,7 +4,7 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from config import Config
+from config import config
 from constants import Image, Font
 
 
@@ -15,7 +15,7 @@ def controls():
     control_font = pygame.font.Font(Font.neue_font, 30)
     keys_font = pygame.font.Font(Font.neue_font, 30)
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (Config.starting_x + 30, 30))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 30, 30))
 
     while run:
         slow_bg_obj.update()
@@ -23,56 +23,56 @@ def controls():
 
         control_title_label = control_title_font.render(
             'Controls', 1, (0, 0, 209))
-        Config.CANVAS.blit(control_title_label, (Config.center_x -
+        config.CANVAS.blit(control_title_label, (config.center_x -
                                                  control_title_label.get_width()//2 - 30, 130))
-        Config.CANVAS.blit(Image.CONTROL_IMAGE, (Config.center_x +
+        config.CANVAS.blit(Image.CONTROL_IMAGE, (config.center_x +
                                                  control_title_label.get_width()//2 - 10, 112))
 
         shoot_label = control_font.render('Shoot', 1, (0, 225, 0))
-        Config.CANVAS.blit(shoot_label, (Config.starting_x + 125, 215))
+        config.CANVAS.blit(shoot_label, (config.starting_x + 125, 215))
         shoot_key_label = keys_font.render('[spacebar]', 1, (240, 0, 0))
-        Config.CANVAS.blit(shoot_key_label, (Config.starting_x + 470, 215))
+        config.CANVAS.blit(shoot_key_label, (config.starting_x + 470, 215))
 
         left_label = control_font.render('Move Left', 1, (0, 225, 0))
-        Config.CANVAS.blit(left_label, (Config.starting_x + 125, 270))
+        config.CANVAS.blit(left_label, (config.starting_x + 125, 270))
         left_key_label = keys_font.render('[left] or [a]', 1, (240, 0, 0))
-        Config.CANVAS.blit(left_key_label, (Config.starting_x + 470, 270))
+        config.CANVAS.blit(left_key_label, (config.starting_x + 470, 270))
 
         right_label = control_font.render('Move Right', 1, (0, 225, 0))
-        Config.CANVAS.blit(right_label, (Config.starting_x + 125, 325))
+        config.CANVAS.blit(right_label, (config.starting_x + 125, 325))
         right_key_label = keys_font.render('[right] or [d]', 1, (240, 0, 0))
-        Config.CANVAS.blit(right_key_label, (Config.starting_x + 470, 325))
+        config.CANVAS.blit(right_key_label, (config.starting_x + 470, 325))
 
         down_label = control_font.render('Move Down', 1, (0, 225, 0))
-        Config.CANVAS.blit(down_label, (Config.starting_x + 125, 380))
+        config.CANVAS.blit(down_label, (config.starting_x + 125, 380))
         down_key_label = keys_font.render('[down] or [s]', 1, (240, 0, 0))
-        Config.CANVAS.blit(down_key_label, (Config.starting_x + 470, 380))
+        config.CANVAS.blit(down_key_label, (config.starting_x + 470, 380))
 
         up_label = control_font.render('Move Up', 1, (0, 225, 0))
-        Config.CANVAS.blit(up_label, (Config.starting_x + 125, 435))
+        config.CANVAS.blit(up_label, (config.starting_x + 125, 435))
         up_key_label = keys_font.render('[up] or [w]', 1, (240, 0, 0))
-        Config.CANVAS.blit(up_key_label, (Config.starting_x + 470, 435))
+        config.CANVAS.blit(up_key_label, (config.starting_x + 470, 435))
 
         escape_label = control_font.render(
             'Return back to home', 1, (0, 225, 0))
-        Config.CANVAS.blit(escape_label, (Config.starting_x + 125, 490))
+        config.CANVAS.blit(escape_label, (config.starting_x + 125, 490))
         escape_key_label = keys_font.render('[backspace]', 1, (240, 0, 0))
-        Config.CANVAS.blit(escape_key_label, (Config.starting_x + 470, 490))
+        config.CANVAS.blit(escape_key_label, (config.starting_x + 470, 490))
 
         mute_label = control_font.render('Mute Audio', 1, (0, 225, 0))
-        Config.CANVAS.blit(mute_label, (Config.starting_x + 125, 545))
+        config.CANVAS.blit(mute_label, (config.starting_x + 125, 545))
         mute_key_label = keys_font.render('[m]', 1, (240, 0, 0))
-        Config.CANVAS.blit(mute_key_label, (Config.starting_x + 470, 545))
+        config.CANVAS.blit(mute_key_label, (config.starting_x + 470, 545))
 
         sfx_label = control_font.render('Volume Up/Down', 1, (0, 225, 0))
-        Config.CANVAS.blit(sfx_label, (Config.starting_x + 125, 600))
+        config.CANVAS.blit(sfx_label, (config.starting_x + 125, 600))
         sfx_key_label = keys_font.render('[+]/[-]', 1, (240, 0, 0))
-        Config.CANVAS.blit(sfx_key_label, (Config.starting_x + 470, 600))
+        config.CANVAS.blit(sfx_key_label, (config.starting_x + 470, 600))
 
         sfx_label = control_font.render('Toggle Full Screen', 1, (0, 225, 0))
-        Config.CANVAS.blit(sfx_label, (Config.starting_x + 125, 655))
+        config.CANVAS.blit(sfx_label, (config.starting_x + 125, 655))
         sfx_key_label = keys_font.render('[f]', 1, (240, 0, 0))
-        Config.CANVAS.blit(sfx_key_label, (Config.starting_x + 470, 655))
+        config.CANVAS.blit(sfx_key_label, (config.starting_x + 470, 655))
 
         # control_title_label = control_font.render(
         #     '[Backspace]', 1, (255, 255, 255))
@@ -82,7 +82,7 @@ def controls():
         audio_cfg.display_volume()
 
         pygame.display.update()
-        Config.framespersec.tick(Config.FPS)
+        config.framespersec.tick(config.FPS)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

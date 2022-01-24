@@ -3,7 +3,7 @@ import pygame
 from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg
-from config import Config
+from config import config
 from constants import Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND
 
 
@@ -29,14 +29,14 @@ class Ship:
 
         # making ship's coordinates centered in the sprite
         x_offset, y_offset = self.ship_img.get_size()
-        Config.CANVAS.blit(self.ship_img, (Config.starting_x+self.x -
+        config.CANVAS.blit(self.ship_img, (config.starting_x+self.x -
                                            x_offset/2, self.y-y_offset/2))
 
     def move_lasers(self, vel, obj):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(Config.HEIGHT):
+            if laser.off_screen(config.HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 obj.health -= 10
@@ -93,13 +93,13 @@ class Player(Ship):
         if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
             self.x -= self.vel
         # Right Key
-        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < Config.WIDTH:
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < config.WIDTH:
             self.x += self.vel
         # Up Key
         if action['UP'] and (self.y - self.vel) > 0:
             self.y -= self.vel
         # Down Key
-        if action['DOWN'] and (self.y + self.vel + self.get_height()) < Config.HEIGHT:
+        if action['DOWN'] and (self.y + self.vel + self.get_height()) < config.HEIGHT:
             self.y += self.vel
         # Shoot Laser
         if action['SHOOT']:
@@ -110,8 +110,8 @@ class Player(Ship):
         button = pygame.mouse.get_pressed()
         keys = pygame.key.get_pressed()
         # Movement
-        if cx > self.get_width()/2 and cx < Config.WIDTH - self.get_width()/2 \
-                and cy > 0 and cy < Config.HEIGHT:
+        if cx > self.get_width()/2 and cx < config.WIDTH - self.get_width()/2 \
+                and cy > 0 and cy < config.HEIGHT:
             self.x = cx
             self.y = cy
         # Shoot Laser
@@ -132,7 +132,7 @@ class Player(Ship):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(Config.HEIGHT):
+            if laser.off_screen(config.HEIGHT):
                 self.lasers.remove(laser)
             else:
                 for obj in objs:
@@ -159,11 +159,11 @@ class Player(Ship):
 
     def healthBar(self):
         x_offset, y_offset = self.ship_img.get_size()
-        pygame.draw.rect(Config.CANVAS, (255, 0, 0), (Config.starting_x + self.x - x_offset/2,
+        pygame.draw.rect(config.CANVAS, (255, 0, 0), (config.starting_x + self.x - x_offset/2,
                                                       self.y + y_offset/2 + 10,
                                                       int(self.ship_img.get_width()),
                                                       10))
-        pygame.draw.rect(Config.CANVAS, (0, 255, 0), (Config.starting_x + self.x - x_offset/2,
+        pygame.draw.rect(config.CANVAS, (0, 255, 0), (config.starting_x + self.x - x_offset/2,
                                                       self.y + y_offset/2 + 10,
                                                       int(self.ship_img.get_width() *
                                                           (self.health/self.max_health)),
@@ -193,7 +193,7 @@ class Enemy(Ship):
         self.coolDown()
         for laser in self.lasers:
             laser.move(vel)
-            if laser.off_screen(Config.HEIGHT):
+            if laser.off_screen(config.HEIGHT):
                 self.lasers.remove(laser)
             elif laser.collision(obj):
                 # display collisions if enemy lasers hit the player

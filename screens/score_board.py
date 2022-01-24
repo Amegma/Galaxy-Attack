@@ -4,7 +4,7 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from config import Config
+from config import config
 from constants import Image, score_list, Font
 
 
@@ -15,7 +15,7 @@ def score_board():
     score_list.sort()
     score_list.reverse()
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (Config.starting_x + 30, 30))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 30, 30))
 
     run = True
     while run:
@@ -24,28 +24,28 @@ def score_board():
 
         score_title_label = score_title_font.render(
             'Score Board', 1, (0, 229, 0))
-        Config.CANVAS.blit(score_title_label, (Config.center_x -
+        config.CANVAS.blit(score_title_label, (config.center_x -
                                                score_title_label.get_width()//2 - 30, 168))
-        Config.CANVAS.blit(Image.TROPHY_IMAGE, (Config.center_x +
+        config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x +
                                                 score_title_label.get_width()//2 - 10, 163))
 
         if len(score_list) == 0:
             score_label = score_font.render(
                 'You Haven\'t Played Yet!', 1, (0, 255, 255))
-            Config.CANVAS.blit(score_label, (Config.center_x -
+            config.CANVAS.blit(score_label, (config.center_x -
                                              score_label.get_width()//2, 250))
 
         i = 0
         for score in score_list[:5]:
             score_label = score_font.render(str(score), 1, (0, 255, 255))
-            Config.CANVAS.blit(score_label, (Config.center_x -
+            config.CANVAS.blit(score_label, (config.center_x -
                                              score_label.get_width() + 20, 250 + i * 40))
             i += 1
 
         go_back_btn.draw()
 
         audio_cfg.display_volume()
-        Config.framespersec.tick(Config.FPS)
+        config.framespersec.tick(config.FPS)
         pygame.display.update()
 
         for event in pygame.event.get():

@@ -8,7 +8,7 @@ from models.controls import audio_cfg, display_cfg
 from utils.collide import collide
 from .background import bg_obj
 
-from config import Config
+from config import config
 from constants import Path, Image, score_list, Font
 
 
@@ -59,48 +59,48 @@ def game(isMouse=False):
 
         # Lives
         for index in range(1, lives + 1):
-            Config.CANVAS.blit(
-                Image.HEART_IMAGE, (Config.starting_x + 37 * index - 10, 20))
+            config.CANVAS.blit(
+                Image.HEART_IMAGE, (config.starting_x + 37 * index - 10, 20))
 
         # blit stats
-        Config.CANVAS.blit(level_label, (Config.starting_x + 35, 75))
-        Config.CANVAS.blit(
-            score_label, (Config.ending_x - score_label.get_width() - 30, 20))
+        config.CANVAS.blit(level_label, (config.starting_x + 35, 75))
+        config.CANVAS.blit(
+            score_label, (config.ending_x - score_label.get_width() - 30, 20))
 
         if win:
             score_list.append(player.get_score())
             win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
-            Config.CANVAS.blit(win_label, (Config.center_x -
+            config.CANVAS.blit(win_label, (config.center_x -
                                            win_label.get_width()//2, 350))
 
         if lost:
             score_list.append(player.get_score())
             lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
-            Config.CANVAS.blit(lost_label, (Config.center_x -
+            config.CANVAS.blit(lost_label, (config.center_x -
                                             lost_label.get_width()//2, 350))
 
         if level >= 10 and boss_entry:
             last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
-            Config.CANVAS.blit(last_label, (Config.center_x -
+            config.CANVAS.blit(last_label, (config.center_x -
                                             last_label.get_width()//2, 350))
 
         if pause:
             # if paused display the "game is paused" screen
             pause_label = main_font.render('Game Paused', 1, (0, 255, 255))
-            Config.CANVAS.blit(pause_label, (Config.center_x -
+            config.CANVAS.blit(pause_label, (config.center_x -
                                              pause_label.get_width()//2, 350))
 
             key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
-            Config.CANVAS.blit(key_msg, (Config.center_x -
+            config.CANVAS.blit(key_msg, (config.center_x -
                                          key_msg.get_width()//2, 400))
 
         # explosion group
-        explosion_group.draw(Config.CANVAS)
+        explosion_group.draw(config.CANVAS)
         explosion_group.update()
 
         audio_cfg.display_volume()
         pygame.display.update()
-        Config.framespersec.tick(Config.FPS)
+        config.framespersec.tick(config.FPS)
 
     while player.run:
         redraw_window()
@@ -131,7 +131,7 @@ def game(isMouse=False):
 
             for i in range(wave_length if level < 10 else 1):
                 enemies.append(Enemy(
-                    random.randrange(50, Config.WIDTH - 100),
+                    random.randrange(50, config.WIDTH - 100),
                     random.randrange(-1200, -100),
                     random.choice(['easy', 'medium', 'hard']) if level < 10 else 'boss')
                 )
@@ -182,7 +182,7 @@ def game(isMouse=False):
             enemy.move(enemy_vel)
             enemy.move_lasers(laser_vel, player)
 
-            if random.randrange(0, 2 * Config.FPS) == 1:
+            if random.randrange(0, 2 * config.FPS) == 1:
                 enemy.shoot()
 
             if collide(enemy, player):
@@ -208,7 +208,7 @@ def game(isMouse=False):
                     crash = Explosion(enemy.x, enemy.y)
                     explosion_group.add(crash)
                     enemies.remove(enemy)
-            elif enemy.y + enemy.get_height()/2 > Config.HEIGHT:
+            elif enemy.y + enemy.get_height()/2 > config.HEIGHT:
                 lives -= 1
                 enemies.remove(enemy)
 

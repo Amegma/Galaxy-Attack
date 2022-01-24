@@ -10,7 +10,7 @@ from screens.background import slow_bg_obj
 from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from config import Config
+from config import config
 from constants import Path, Image, Font
 
 # parsing arguments
@@ -23,7 +23,7 @@ if args["mute"]:
 
 pygame.font.init()
 
-pygame.display.set_caption(Config.TITLE)
+pygame.display.set_caption(config.TITLE)
 pygame.display.set_icon(Image.PLAYER_SPACE_SHIP)
 
 
@@ -33,39 +33,40 @@ def main():
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
     mouse_btn = Button((7, 8, 16), (255, 255, 255),
-                       (Config.center_x - 210, Config.center_y + 42), (195, 66), "MOUSE")
+                       (config.center_x - 210, config.center_y + 42), (195, 66), "MOUSE")
     keyboard_btn = Button((7, 8, 16), (255, 255, 255),
-                          (Config.center_x + 15, Config.center_y + 42), (195, 66), "KEYBOARD")
-    control_btn = IconButton(Image.CONTROL_IMAGE, (Config.starting_x + 35, 23))
+                          (config.center_x + 15, config.center_y + 42), (195, 66), "KEYBOARD")
+    control_btn = IconButton(Image.CONTROL_IMAGE, (config.starting_x + 35, 23))
     characters_btn = IconButton(
-        Image.CHARACTERS_IMAGE, (Config.starting_x+30, 110))
-    trophy_btn = IconButton(Image.TROPHY_IMAGE, (Config.ending_x - 85, 25))
-    settings_btn = IconButton(Image.TOOLBOX_IMAGE, (Config.ending_x - 85, 110))
+        Image.CHARACTERS_IMAGE, (config.starting_x+30, 110))
+    trophy_btn = IconButton(Image.TROPHY_IMAGE, (config.ending_x - 85, 25))
+    settings_btn = IconButton(Image.TOOLBOX_IMAGE, (config.ending_x - 85, 110))
 
     exit_btn = IconButton(
-        Image.EXIT_IMAGE, (Config.ending_x - 75, Config.ending_y - 65))
+        Image.EXIT_IMAGE, (config.ending_x - 75, config.ending_y - 65))
 
     run = True
     while run:
+        print(config.screen_rect)
         pygame.mouse.set_visible(True)
         slow_bg_obj.update()
         slow_bg_obj.render()
 
         # Ships
-        Config.CANVAS.blit(Image.BOSS_SHIP, (Config.center_x -
+        config.CANVAS.blit(Image.BOSS_SHIP, (config.center_x -
                            Image.BOSS_SHIP.get_width()//2, 110))
-        Config.CANVAS.blit(Image.FLAME_LASER, (Config.center_x -
+        config.CANVAS.blit(Image.FLAME_LASER, (config.center_x -
                            Image.FLAME_LASER.get_width()//2, 360))
-        Config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (Config.center_x-46, 575))
-        Config.CANVAS.blit(Image.PLAYER_LASER, (Config.center_x -
+        config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (config.center_x-46, 575))
+        config.CANVAS.blit(Image.PLAYER_LASER, (config.center_x -
                            Image.PLAYER_LASER.get_width()//2, 490))
 
         mouse_btn.draw()
         keyboard_btn.draw()
 
         title_label = title_font.render('Start Game', 1, (255, 255, 255))
-        Config.CANVAS.blit(title_label, (Config.center_x-title_label.get_width()//2,
-                                         Config.center_y-title_label.get_height() + 25))
+        config.CANVAS.blit(title_label, (config.center_x-title_label.get_width()//2,
+                                         config.center_y-title_label.get_height() + 25))
 
         # Control Page
         control_btn.draw()
@@ -83,15 +84,20 @@ def main():
 
         exit_btn.draw()
 
-        Config.CANVAS.blit(Image.TITLE_LOGO, (Config.center_x -
+        config.CANVAS.blit(Image.TITLE_LOGO, (config.center_x -
                            Image.TITLE_LOGO.get_width()//2, 50))
 
         pygame.display.update()
-        Config.framespersec.tick(Config.FPS)  # capping frame rate to 60
+        config.framespersec.tick(config.FPS)  # capping frame rate to 60
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
+            if event.type == pygame.VIDEORESIZE:
+                config.CANVAS = pygame.display.set_mode(
+                    (event.w, event.h), pygame.RESIZABLE)
+                config.screen_rect = config.CANVAS.get_rect()
 
             # Keyboard events
             if event.type == pygame.KEYUP:
