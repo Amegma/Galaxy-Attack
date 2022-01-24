@@ -47,7 +47,7 @@ def main():
 
     run = True
     while run:
-        print(config.screen_rect)
+        # print(config.ending_x, config.ending_y)
         pygame.mouse.set_visible(True)
         slow_bg_obj.update()
         slow_bg_obj.render()
@@ -95,9 +95,10 @@ def main():
                 run = False
 
             if event.type == pygame.VIDEORESIZE:
-                config.CANVAS = pygame.display.set_mode(
-                    (event.w, event.h), pygame.RESIZABLE)
-                config.screen_rect = config.CANVAS.get_rect()
+                if not display_cfg.fullscreen:
+                    config.CANVAS = pygame.display.set_mode(
+                        (event.w, event.h), pygame.RESIZABLE)
+                    config.update(event.w, event.h)
 
             # Keyboard events
             if event.type == pygame.KEYUP:

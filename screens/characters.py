@@ -117,8 +117,8 @@ def characters():
                     audio_cfg.inc_volume(5)
                 if event.key == pygame.K_MINUS:
                     audio_cfg.dec_volume(5)
-                if event.key == pygame.K_f:
-                    display_cfg.toggle_full_screen()
+                # if event.key == pygame.K_f:
+                #     display_cfg.toggle_full_screen()
                 if event.key == pygame.K_BACKSPACE:
                     run = False
 

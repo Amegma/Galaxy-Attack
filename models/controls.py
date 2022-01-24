@@ -65,15 +65,18 @@ class AudioControls:
 
 
 class DisplayControls:
-    def toggle_full_screen():
-        screen = pygame.display.get_surface()
-        if (screen.get_flags() & pygame.FULLSCREEN):
-            pygame.display.set_mode((config.WIDTH, config.HEIGHT))
+    def __init__(self):
+        self.fullscreen = False
+
+    def toggle_full_screen(self):
+        self.fullscreen = not self.fullscreen
+        if self.fullscreen:
+            config.CANVAS = pygame.display.set_mode(
+                config.monitor_size, pygame.FULLSCREEN)
         else:
-            info = pygame.display.Info()
-            pygame.display.set_mode(
-                (info.current_w, info.current_h), pygame.FULLSCREEN)
+            config.CANVAS = pygame.display.set_mode(
+                (config.WIDTH, config.HEIGHT), pygame.RESIZABLE)
 
 
 audio_cfg = AudioControls(soundList)
-display_cfg = DisplayControls
+display_cfg = DisplayControls()
