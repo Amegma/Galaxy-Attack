@@ -140,6 +140,15 @@ class Colors:
     YELLOW = (255, 255, 0)
     CYAN = (0, 255, 255)  # CYAN
     MAGENTA = (255, 0, 255)
-    ORANGE = (200, 100, 50)
+    PURPLE = (131, 1, 123)
+    ORANGE = (238, 98, 17)
     GREY = (200, 200, 200)
     TRANS = (1, 1, 1)
+
+
+class Text:
+    SHIPS = 'SHIPS'
+    SETTINGS = 'SETTINGS'
+    CONTROLS = 'CONTROLS'
+    SCOREBOARD = 'SCOREBOARD'
+    SCOREBOARD_2 = 'SCORE BOARD'

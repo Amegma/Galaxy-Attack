@@ -5,7 +5,7 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Image, score_list, Font
+from constants import Image, score_list, Font, Text
 
 
 def score_board():
@@ -15,7 +15,7 @@ def score_board():
     score_list.sort()
     score_list.reverse()
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 30, 30))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
 
     run = True
     while run:
@@ -23,7 +23,7 @@ def score_board():
         slow_bg_obj.render()
 
         score_title_label = score_title_font.render(
-            'Score Board', 1, (0, 229, 0))
+            Text.SCOREBOARD_2, 1, (0, 229, 0))
         config.CANVAS.blit(score_title_label, (config.center_x -
                                                score_title_label.get_width()//2 - 30, 168))
         config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x +

@@ -5,14 +5,14 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Image, Font, Colors
+from constants import Image, Font, Colors, Text
 
 
 def ships():
     ships_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     ships_info_font = pygame.font.Font(Font.neue_font, 22)
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 30, 30))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
 
     NEW_HEART_IMAGE = pygame.transform.scale(
         Image.HEART_IMAGE, (Image.HEART_IMAGE.get_width()*3/4, Image.HEART_IMAGE.get_height()*3/4))
@@ -23,7 +23,7 @@ def ships():
         slow_bg_obj.render()
 
         ships_title_label = ships_title_font.render(
-            "Ships", 1, Colors.CYAN)
+            Text.SHIPS, 1, Colors.CYAN)
         config.CANVAS.blit(ships_title_label, (config.center_x -
                                                ships_title_label.get_width()//2, 130))
         config.CANVAS.blit(Image.SHIPS_IMAGE, (config.center_x -

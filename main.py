@@ -12,7 +12,7 @@ from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Path, Image, Font, Colors
+from constants import Path, Image, Font, Colors, Text
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -37,14 +37,17 @@ def main():
                        (config.center_x - 210, config.center_y + 42), (195, 66), "MOUSE")
     keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
                           (config.center_x + 15, config.center_y + 42), (195, 66), "KEYBOARD")
-    control_btn = IconButton(Image.CONTROL_IMAGE, (config.starting_x + 35, 23))
+    control_btn = IconButton(
+        Image.CONTROL_IMAGE, (config.starting_x + 65, 53), Text.CONTROLS)
     ships_btn = IconButton(
-        Image.SHIPS_IMAGE, (config.starting_x+30, 110))
-    trophy_btn = IconButton(Image.TROPHY_IMAGE, (config.ending_x - 85, 25))
-    settings_btn = IconButton(Image.TOOLBOX_IMAGE, (config.ending_x - 85, 110))
+        Image.SHIPS_IMAGE, (config.starting_x+65, 165), Text.SHIPS)
+    trophy_btn = IconButton(
+        Image.TROPHY_IMAGE, (config.ending_x - 65, 55), Text.SCOREBOARD)
+    settings_btn = IconButton(
+        Image.TOOLBOX_IMAGE, (config.ending_x - 65, 165), Text.SETTINGS)
 
     exit_btn = IconButton(
-        Image.EXIT_IMAGE, (config.ending_x - 75, config.ending_y - 65))
+        Image.EXIT_IMAGE, (config.ending_x - 45, config.ending_y - 40))
 
     run = True
     while run:

@@ -5,33 +5,33 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Image, Font, Colors
+from constants import Image, Font, Colors, Text
 
 from models.slider import Slider
 
-pen = Slider("Pen", 10, 100, 1, 100)
+pen = Slider("Pen", 10, 100, 0, 100)
 
 
 def settings():
-    characters_title_font = pygame.font.Font(Font.edit_undo_font, 50)
+    settings_title_font = pygame.font.Font(Font.edit_undo_font, 50)
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 30, 30))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
 
     run = True
     while run:
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        characters_title_label = characters_title_font.render(
-            "Settings", 1, Colors.YELLOW)
-        config.CANVAS.blit(characters_title_label, (config.center_x -
-                                                    characters_title_label.get_width()//2, 130))
+        settings_title_label = settings_title_font.render(
+            Text.SETTINGS, 1, Colors.YELLOW)
+        config.CANVAS.blit(settings_title_label, (config.center_x -
+                                                  settings_title_label.get_width()//2, 130))
         config.CANVAS.blit(Image.TOOLS_IMAGE, (config.center_x -
                                                Image.TOOLS_IMAGE.get_width()//2 - 150, 120))
         config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
                                                  Image.TOOLBOX_IMAGE.get_width()//2 + 150, 129))
 
-        pen_value = characters_title_font.render(
+        pen_value = settings_title_font.render(
             f'{pen.val}', 1, Colors.YELLOW)
         config.CANVAS.blit(pen_value, (config.center_x -
                                        pen_value.get_width()//2, 230))
