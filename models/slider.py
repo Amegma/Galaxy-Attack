@@ -3,7 +3,7 @@ from constants import Font, Colors
 import pygame
 pygame.init()
 
-# characters_title_font = pygame.font.Font(Font.edit_undo_font, 50)
+# ships_title_font = pygame.font.Font(Font.edit_undo_font, 50)
 font = pygame.font.SysFont("Verdana", 12)
 
 

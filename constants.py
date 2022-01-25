@@ -84,8 +84,8 @@ class Image:
         os.path.join(Path.GRAPHICS_PATH, 'joystick.png')))
     TROPHY_IMAGE = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'trophy.png')))
-    CHARACTERS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
-    CHARACTERS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
+    SHIPS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
+    SHIPS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
     TOOLBOX_IMAGE = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'toolbox.png')))
     TOOLBOX_IMAGE = pygame.transform.scale(

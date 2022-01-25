@@ -5,7 +5,7 @@ import argparse
 from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
-from screens.characters import characters
+from screens.ships import ships
 from screens.settings import settings
 from screens.background import slow_bg_obj
 from models.button import Button
@@ -38,8 +38,8 @@ def main():
     keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
                           (config.center_x + 15, config.center_y + 42), (195, 66), "KEYBOARD")
     control_btn = IconButton(Image.CONTROL_IMAGE, (config.starting_x + 35, 23))
-    characters_btn = IconButton(
-        Image.CHARACTERS_IMAGE, (config.starting_x+30, 110))
+    ships_btn = IconButton(
+        Image.SHIPS_IMAGE, (config.starting_x+30, 110))
     trophy_btn = IconButton(Image.TROPHY_IMAGE, (config.ending_x - 85, 25))
     settings_btn = IconButton(Image.TOOLBOX_IMAGE, (config.ending_x - 85, 110))
 
@@ -78,8 +78,8 @@ def main():
         # Settings Page
         settings_btn.draw()
 
-        # Characters Page
-        characters_btn.draw()
+        # Ships Page
+        ships_btn.draw()
 
         audio_cfg.display_volume()
 
@@ -123,8 +123,8 @@ def main():
                         controls()
                     if trophy_btn.isOver():
                         score_board()
-                    if characters_btn.isOver():
-                        characters()
+                    if ships_btn.isOver():
+                        ships()
                     if settings_btn.isOver():
                         settings()
                     if exit_btn.isOver():
@@ -157,10 +157,10 @@ def main():
                 else:
                     settings_btn.outline = "default"
 
-                if characters_btn.isOver():
-                    characters_btn.outline = "onover"
+                if ships_btn.isOver():
+                    ships_btn.outline = "onover"
                 else:
-                    characters_btn.outline = "default"
+                    ships_btn.outline = "default"
 
                 if exit_btn.isOver():
                     exit_btn.outline = "onover"

@@ -27,9 +27,9 @@ def settings():
         config.CANVAS.blit(characters_title_label, (config.center_x -
                                                     characters_title_label.get_width()//2, 130))
         config.CANVAS.blit(Image.TOOLS_IMAGE, (config.center_x -
-                                               Image.TOOLS_IMAGE.get_width()//2 - 170, 120))
+                                               Image.TOOLS_IMAGE.get_width()//2 - 150, 120))
         config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
-                                                 Image.TOOLBOX_IMAGE.get_width()//2 + 170, 129))
+                                                 Image.TOOLBOX_IMAGE.get_width()//2 + 150, 129))
 
         pen_value = characters_title_font.render(
             f'{pen.val}', 1, Colors.YELLOW)
