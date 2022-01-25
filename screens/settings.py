@@ -7,6 +7,10 @@ from models.controls import audio_cfg, display_cfg
 from config import config
 from constants import Image, Font
 
+from models.slider import Slider
+
+pen = Slider("Pen", 10, 100, 1, 100)
+
 
 def settings():
     characters_title_font = pygame.font.Font(Font.edit_undo_font, 50)
@@ -27,7 +31,17 @@ def settings():
         config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
                                                  Image.TOOLBOX_IMAGE.get_width()//2 + 170, 129))
 
+        pen_value = characters_title_font.render(
+            f'{pen.val}', 1, (255, 255, 0))
+        config.CANVAS.blit(pen_value, (config.center_x -
+                                       pen_value.get_width()//2, 230))
+
+        # pen_value = Font.neue_font.render(f'{pen.val}', 1, (255, 255, 255))
+        # config.CANVAS.blit(pen_value, (100, 100))
+
         go_back_btn.draw()
+
+        pen.draw()
 
         audio_cfg.display_volume()
         config.framespersec.tick(config.FPS)
@@ -49,6 +63,12 @@ def settings():
                 if event.key == pygame.K_BACKSPACE:
                     run = False
 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                if pen.button_rect.collidepoint(pos):
+                    pen.hit = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pen.hit = False
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -65,3 +85,5 @@ def settings():
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_BACKSPACE]:
             #     run = False
+        if pen.hit:
+            pen.move()
