@@ -1,7 +1,7 @@
 import pygame
 
 from config import config
-from constants import Image, soundList, Font
+from constants import Image, soundList, Font, Colors
 
 
 class AudioControls:
@@ -55,7 +55,7 @@ class AudioControls:
                                (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
-        vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
+        vol_label = control_font.render(vol_lbl_text, 1, Colors.WHITE)
         config.CANVAS.blit(
             vol_label, (config.starting_x + 70, config.ending_y - 57))
 

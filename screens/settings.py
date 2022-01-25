@@ -5,7 +5,7 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Image, Font
+from constants import Image, Font, Colors
 
 from models.slider import Slider
 
@@ -23,7 +23,7 @@ def settings():
         slow_bg_obj.render()
 
         characters_title_label = characters_title_font.render(
-            "Settings", 1, (255, 255, 0))
+            "Settings", 1, Colors.YELLOW)
         config.CANVAS.blit(characters_title_label, (config.center_x -
                                                     characters_title_label.get_width()//2, 130))
         config.CANVAS.blit(Image.TOOLS_IMAGE, (config.center_x -
@@ -32,11 +32,11 @@ def settings():
                                                  Image.TOOLBOX_IMAGE.get_width()//2 + 170, 129))
 
         pen_value = characters_title_font.render(
-            f'{pen.val}', 1, (255, 255, 0))
+            f'{pen.val}', 1, Colors.YELLOW)
         config.CANVAS.blit(pen_value, (config.center_x -
                                        pen_value.get_width()//2, 230))
 
-        # pen_value = Font.neue_font.render(f'{pen.val}', 1, (255, 255, 255))
+        # pen_value = Font.neue_font.render(f'{pen.val}', 1, Colors.WHITE)
         # config.CANVAS.blit(pen_value, (100, 100))
 
         go_back_btn.draw()

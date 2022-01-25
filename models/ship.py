@@ -4,7 +4,7 @@ from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg
 from config import config
-from constants import Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND
+from constants import Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND, Colors
 
 
 class Ship:
@@ -159,15 +159,10 @@ class Player(Ship):
 
     def healthBar(self):
         x_offset, y_offset = self.ship_img.get_size()
-        pygame.draw.rect(config.CANVAS, (255, 0, 0), (config.starting_x + self.x - x_offset/2,
-                                                      self.y + y_offset/2 + 10,
-                                                      int(self.ship_img.get_width()),
-                                                      10))
-        pygame.draw.rect(config.CANVAS, (0, 255, 0), (config.starting_x + self.x - x_offset/2,
-                                                      self.y + y_offset/2 + 10,
-                                                      int(self.ship_img.get_width() *
-                                                          (self.health/self.max_health)),
-                                                      10))
+        pygame.draw.rect(config.CANVAS, Colors.RED, (config.starting_x + self.x -
+                         x_offset/2, self.y + y_offset/2 + 10, int(self.ship_img.get_width()), 10))
+        pygame.draw.rect(config.CANVAS, Colors.GREEN, (config.starting_x + self.x - x_offset/2, self.y +
+                         y_offset/2 + 10, int(self.ship_img.get_width() * (self.health/self.max_health)), 10))
 
 
 class Enemy(Ship):

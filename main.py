@@ -12,7 +12,7 @@ from models.button import Button
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Path, Image, Font
+from constants import Path, Image, Font, Colors
 
 # parsing arguments
 ag = argparse.ArgumentParser()
@@ -33,9 +33,9 @@ def main():
 
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
-    mouse_btn = Button((7, 8, 16), (255, 255, 255),
+    mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
                        (config.center_x - 210, config.center_y + 42), (195, 66), "MOUSE")
-    keyboard_btn = Button((7, 8, 16), (255, 255, 255),
+    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
                           (config.center_x + 15, config.center_y + 42), (195, 66), "KEYBOARD")
     control_btn = IconButton(Image.CONTROL_IMAGE, (config.starting_x + 35, 23))
     characters_btn = IconButton(
@@ -65,7 +65,7 @@ def main():
         mouse_btn.draw()
         keyboard_btn.draw()
 
-        title_label = title_font.render('Start Game', 1, (255, 255, 255))
+        title_label = title_font.render('Start Game', 1, Colors.WHITE)
         config.CANVAS.blit(title_label, (config.center_x-title_label.get_width()//2,
                                          config.center_y-title_label.get_height() + 25))
 

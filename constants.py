@@ -127,3 +127,19 @@ soundList.append(PLAYER_LASER_SOUND)
 soundList.append(ENEMY_LASER_SOUND)
 soundList.append(EXPLODE_SOUND)
 soundList.append(LASER_HIT_SOUND)
+
+
+class Colors:
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
+    BACKGROUND_BLACK = (7, 8, 16)
+    BLUE = (0, 0, 255)
+    GREEN = (0, 255, 0)
+    GREEN2 = (0, 209, 0)
+    RED = (255, 0, 0)
+    YELLOW = (255, 255, 0)
+    CYAN = (0, 255, 255)  # CYAN
+    MAGENTA = (255, 0, 255)
+    ORANGE = (200, 100, 50)
+    GREY = (200, 200, 200)
+    TRANS = (1, 1, 1)

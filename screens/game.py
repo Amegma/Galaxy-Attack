@@ -9,7 +9,7 @@ from utils.collide import collide
 from .background import bg_obj
 
 from config import config
-from constants import Path, Image, score_list, Font
+from constants import Path, Image, score_list, Font, Colors
 
 
 def game(isMouse=False):
@@ -46,8 +46,9 @@ def game(isMouse=False):
         bg_obj.render()
 
         # Draw Text
-        level_label = sub_small_font.render(f'{level} / 10', 1, (0, 255, 255))
-        score_label = sub_font.render(f'{player.get_score()}', 1, (0, 255, 0))
+        level_label = sub_small_font.render(
+            f'{level} / 10', 1, Colors.CYAN)
+        score_label = sub_font.render(f'{player.get_score()}', 1, Colors.GREEN)
 
         player.draw()
 
@@ -69,28 +70,28 @@ def game(isMouse=False):
 
         if win:
             score_list.append(player.get_score())
-            win_label = win_font.render('WINNER :)', 1, (0, 209, 0))
+            win_label = win_font.render('WINNER :)', 1, Colors.GREEN2)
             config.CANVAS.blit(win_label, (config.center_x -
                                            win_label.get_width()//2, 350))
 
         if lost:
             score_list.append(player.get_score())
-            lost_label = lost_font.render('GAME OVER :(', 1, (255, 0, 0))
+            lost_label = lost_font.render('GAME OVER :(', 1, Colors.RED)
             config.CANVAS.blit(lost_label, (config.center_x -
                                             lost_label.get_width()//2, 350))
 
         if level >= 10 and boss_entry:
-            last_label = lost_font.render('BOSS LEVEL!!', 1, (255, 0, 0))
+            last_label = lost_font.render('BOSS LEVEL!!', 1, Colors.RED)
             config.CANVAS.blit(last_label, (config.center_x -
                                             last_label.get_width()//2, 350))
 
         if pause:
             # if paused display the "game is paused" screen
-            pause_label = main_font.render('Game Paused', 1, (0, 255, 255))
+            pause_label = main_font.render('Game Paused', 1, Colors.CYAN)
             config.CANVAS.blit(pause_label, (config.center_x -
                                              pause_label.get_width()//2, 350))
 
-            key_msg = sub_font.render('Press [p] to unpause', 1, (0, 0, 255))
+            key_msg = sub_font.render('Press [p] to unpause', 1, Colors.BLUE)
             config.CANVAS.blit(key_msg, (config.center_x -
                                          key_msg.get_width()//2, 400))
 
