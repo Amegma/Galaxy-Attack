@@ -5,6 +5,7 @@ import random
 from models.ship import Player, Enemy
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
+from models.icon_button import IconButton
 from utils.collide import collide
 from .background import bg_obj
 
@@ -38,6 +39,9 @@ def game(isMouse=False):
     boss_entry = True
     pause = False
 
+    pause_btn = IconButton(
+        Image.PAUSE_IMAGE, (config.center_x, 50))
+
     explosion_group.empty()
 
     def redraw_window(pause=False):
@@ -55,13 +59,15 @@ def game(isMouse=False):
         for enemyShip in enemies:
             enemyShip.draw()
 
+        pause_btn.draw()
+
         # blit player stats after enemyShips to prevent the later
         # from being drawn over the stats
 
         # Lives
         for index in range(1, lives + 1):
             config.CANVAS.blit(
-                Image.HEART_IMAGE, (config.starting_x + 37 * index - 10, 20))
+                Image.HEART_IMAGE, (config.starting_x + 37 * index - 10, 30))
 
         # blit stats
         config.CANVAS.blit(level_label, (config.starting_x + 35, 75))
@@ -140,6 +146,19 @@ def game(isMouse=False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if pause_btn.isOver():
+                        pygame.mouse.set_visible(True)
+                        pause = True
+
+            if event.type == pygame.MOUSEMOTION:
+                if pause_btn.isOver():
+                    pause_btn.outline = True
+                else:
+                    pause_btn.outline = False
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
                     pygame.mouse.set_visible(True)

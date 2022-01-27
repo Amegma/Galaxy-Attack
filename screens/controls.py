@@ -106,9 +106,9 @@ def controls():
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
                 if go_back_btn.isOver():
-                    go_back_btn.outline = "onover"
+                    go_back_btn.outline = True
                 else:
-                    go_back_btn.outline = "default"
+                    go_back_btn.outline = False
 
         # keys = pygame.key.get_pressed()
         # if keys[pygame.K_BACKSPACE]:

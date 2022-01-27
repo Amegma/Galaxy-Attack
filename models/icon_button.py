@@ -12,13 +12,13 @@ class IconButton:
         self.pos = pos
         self.new_pos = (pos[0] - image.get_width()//2,
                         pos[1] - image.get_height()//2)
-        self.outline = 'default'
+        self.outline = False
         self.subtitle = subtitle
         self.rect = pygame.Rect(
             self.new_pos[0], self.new_pos[1], self.image.get_width(), self.image.get_height())
 
     def draw(self):
-        if self.outline == "onover":
+        if self.outline == True:
             outline_image(self.image, self.new_pos)
 
         config.CANVAS.blit(self.image, self.rect)

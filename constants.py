@@ -122,6 +122,11 @@ class Image:
     MINUS_IMAGE = pygame.transform.scale(
         MINUS_IMAGE, (MINUS_IMAGE.get_width()/6, MINUS_IMAGE.get_height()/6))
 
+    PAUSE_IMAGE = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'pause.png')))
+    PAUSE_IMAGE = pygame.transform.scale(
+        PAUSE_IMAGE, (PAUSE_IMAGE.get_width()/7, PAUSE_IMAGE.get_height()/7))
+
 
 class Sound:
     PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(

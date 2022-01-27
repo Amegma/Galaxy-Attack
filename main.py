@@ -146,29 +146,29 @@ def main():
                     keyboard_btn.outline = "default"
 
                 if control_btn.isOver():
-                    control_btn.outline = "onover"
+                    control_btn.outline = True
                 else:
-                    control_btn.outline = "default"
+                    control_btn.outline = False
 
                 if trophy_btn.isOver():
-                    trophy_btn.outline = "onover"
+                    trophy_btn.outline = True
                 else:
-                    trophy_btn.outline = "default"
+                    trophy_btn.outline = False
 
                 if settings_btn.isOver():
-                    settings_btn.outline = "onover"
+                    settings_btn.outline = True
                 else:
-                    settings_btn.outline = "default"
+                    settings_btn.outline = False
 
                 if ships_btn.isOver():
-                    ships_btn.outline = "onover"
+                    ships_btn.outline = True
                 else:
-                    ships_btn.outline = "default"
+                    ships_btn.outline = False
 
                 if exit_btn.isOver():
-                    exit_btn.outline = "onover"
+                    exit_btn.outline = True
                 else:
-                    exit_btn.outline = "default"
+                    exit_btn.outline = False
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE] or keys[pygame.K_q]:
