@@ -29,6 +29,8 @@ class Font:
     edit_undo_font = resource_path(
         os.path.join(Path.FONT_PATH, 'edit_undo.ttf'))
     neue_font = resource_path(os.path.join(Path.FONT_PATH, 'neue.ttf'))
+    karmatic_arcade_font = resource_path(
+        os.path.join(Path.FONT_PATH, 'karmatic_arcade.ttf'))
 
 
 class Image:
@@ -110,6 +112,15 @@ class Image:
     # Load Hearts
     HEART_IMAGE = pygame.image.load(resource_path(
         os.path.join(Path.GRAPHICS_PATH, 'heart.png')))
+
+    PLUS_IMAGE = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'plus.png')))
+    PLUS_IMAGE = pygame.transform.scale(
+        PLUS_IMAGE, (PLUS_IMAGE.get_width()/6, PLUS_IMAGE.get_height()/6))
+    MINUS_IMAGE = pygame.image.load(resource_path(
+        os.path.join(Path.GRAPHICS_PATH, 'minus.png')))
+    MINUS_IMAGE = pygame.transform.scale(
+        MINUS_IMAGE, (MINUS_IMAGE.get_width()/6, MINUS_IMAGE.get_height()/6))
 
 
 # SFX VARS

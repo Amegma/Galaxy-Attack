@@ -5,7 +5,7 @@ from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
-from constants import Image, score_list, Font, Text
+from constants import Image, score_list, Font, Text, Colors
 
 
 def score_board():
@@ -23,7 +23,7 @@ def score_board():
         slow_bg_obj.render()
 
         score_title_label = score_title_font.render(
-            Text.SCOREBOARD_2, 1, (0, 229, 0))
+            Text.SCOREBOARD_2, 1, Colors.GREEN)
         config.CANVAS.blit(score_title_label, (config.center_x -
                                                score_title_label.get_width()//2 - 30, 168))
         config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x +
@@ -31,7 +31,7 @@ def score_board():
 
         if len(score_list) == 0:
             score_label = score_font.render(
-                'You Haven\'t Played Yet!', 1, (0, 255, 255))
+                'You Haven\'t Played Yet!', 1, Colors.CYAN)
             config.CANVAS.blit(score_label, (config.center_x -
                                              score_label.get_width()//2, 250))
 

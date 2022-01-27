@@ -9,13 +9,16 @@ from constants import Image, Font, Colors, Text
 
 from models.slider import Slider
 
-pen = Slider("Pen", 10, 100, 0, 100)
-
 
 def settings():
     settings_title_font = pygame.font.Font(Font.edit_undo_font, 50)
+    settings_right_font = pygame.font.Font(Font.edit_undo_font, 50)
+    settings_left_font = pygame.font.Font(Font.edit_undo_font, 46)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
+
+    plus_btn = IconButton(Image.PLUS_IMAGE, (config.center_x + 235, 260))
+    minus_btn = IconButton(Image.MINUS_IMAGE, (config.center_x + 70, 260))
 
     run = True
     while run:
@@ -31,19 +34,22 @@ def settings():
         config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
                                                  Image.TOOLBOX_IMAGE.get_width()//2 + 150, 129))
 
-        pen_value = settings_title_font.render(
-            f'{pen.val}', 1, Colors.YELLOW)
-        config.CANVAS.blit(pen_value, (config.center_x -
-                                       pen_value.get_width()//2, 230))
-
-        # pen_value = Font.neue_font.render(f'{pen.val}', 1, Colors.WHITE)
-        # config.CANVAS.blit(pen_value, (100, 100))
+        settings_left_label = settings_left_font.render(
+            'VOLUME', 1, Colors.GREEN)
+        config.CANVAS.blit(settings_left_label, (config.center_x -
+                                                 settings_left_label.get_width()//2 - 160, 240))
+        settings_right_label = settings_right_font.render(
+            f'{audio_cfg.volume}', 1, Colors.WHITE)
+        config.CANVAS.blit(settings_right_label, (config.center_x -
+                                                  settings_right_label.get_width()//2 + 155, 240))
 
         go_back_btn.draw()
 
-        pen.draw()
+        minus_btn.draw()
 
-        audio_cfg.display_volume()
+        plus_btn.draw()
+
+        # audio_cfg.display_volume()
         config.framespersec.tick(config.FPS)
         pygame.display.update()
 
@@ -52,28 +58,20 @@ def settings():
                 pygame.quit()
                 sys.exit(0)
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_m:
-                    audio_cfg.toggle_mute()
-                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
-                    audio_cfg.inc_volume(5)
-                if event.key == pygame.K_MINUS:
-                    audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     display_cfg.toggle_full_screen()
                 if event.key == pygame.K_BACKSPACE:
                     run = False
 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                if pen.button_rect.collidepoint(pos):
-                    pen.hit = True
-            elif event.type == pygame.MOUSEBUTTONUP:
-                pen.hit = False
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if go_back_btn.isOver():
                         run = False
+                    if plus_btn.isOver():
+                        audio_cfg.inc_volume(5)
+                    if minus_btn.isOver():
+                        audio_cfg.dec_volume(5)
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
@@ -85,5 +83,3 @@ def settings():
             # keys = pygame.key.get_pressed()
             # if keys[pygame.K_BACKSPACE]:
             #     run = False
-        if pen.hit:
-            pen.move()
