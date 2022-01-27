@@ -123,21 +123,22 @@ class Image:
         MINUS_IMAGE, (MINUS_IMAGE.get_width()/6, MINUS_IMAGE.get_height()/6))
 
 
-# SFX VARS
-PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'ownlaser.wav')))
-ENEMY_LASER_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'enemylaser.wav')))
-EXPLODE_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'explode.wav')))
-LASER_HIT_SOUND = pygame.mixer.Sound(resource_path(
-    os.path.join(Path.SOUND_PATH, 'laser_hit.wav')))
+class Sound:
+    PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
+        os.path.join(Path.SOUND_PATH, 'ownlaser.wav')))
+    ENEMY_LASER_SOUND = pygame.mixer.Sound(resource_path(
+        os.path.join(Path.SOUND_PATH, 'enemylaser.wav')))
+    EXPLODE_SOUND = pygame.mixer.Sound(resource_path(
+        os.path.join(Path.SOUND_PATH, 'explode.wav')))
+    LASER_HIT_SOUND = pygame.mixer.Sound(resource_path(
+        os.path.join(Path.SOUND_PATH, 'laser_hit.wav')))
+
 
 # adding sounds to the list
-soundList.append(PLAYER_LASER_SOUND)
-soundList.append(ENEMY_LASER_SOUND)
-soundList.append(EXPLODE_SOUND)
-soundList.append(LASER_HIT_SOUND)
+soundList.append(Sound.PLAYER_LASER_SOUND)
+soundList.append(Sound.ENEMY_LASER_SOUND)
+soundList.append(Sound.EXPLODE_SOUND)
+soundList.append(Sound.LASER_HIT_SOUND)
 
 
 class Colors:

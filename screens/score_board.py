@@ -37,7 +37,7 @@ def score_board():
 
         i = 0
         for score in score_list[:5]:
-            score_label = score_font.render(str(score), 1, (0, 255, 255))
+            score_label = score_font.render(str(score), 1, Colors.CYAN)
             config.CANVAS.blit(score_label, (config.center_x -
                                              score_label.get_width() + 20, 250 + i * 40))
             i += 1

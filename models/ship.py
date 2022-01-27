@@ -4,7 +4,7 @@ from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg
 from config import config
-from constants import Path, Image, PLAYER_LASER_SOUND, ENEMY_LASER_SOUND, Colors
+from constants import Path, Image, Colors, Sound
 
 
 class Ship:
@@ -50,7 +50,7 @@ class Ship:
 
     def shoot(self):
         if self.cool_down_counter == 0:
-            PLAYER_LASER_SOUND.play()
+            Sound.PLAYER_LASER_SOUND.play()
             laser = Laser(self.x, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1
@@ -199,7 +199,7 @@ class Enemy(Ship):
 
     def shoot(self):
         if self.cool_down_counter == 0 and self.y > 0:
-            ENEMY_LASER_SOUND.play()
+            Sound.ENEMY_LASER_SOUND.play()
             laser = Laser(self.x, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1

@@ -2,7 +2,7 @@ import os
 import pygame
 
 from utils.resource_path import resource_path
-from constants import Path, EXPLODE_SOUND, LASER_HIT_SOUND
+from constants import Path, Sound
 
 explosion_group = pygame.sprite.Group()
 
@@ -23,9 +23,9 @@ class Explosion(pygame.sprite.Sprite):
         self.counter = 0
         # different sound based on explosion size
         if size < 40:
-            LASER_HIT_SOUND.play()
+            Sound.LASER_HIT_SOUND.play()
         else:
-            EXPLODE_SOUND.play()
+            Sound.EXPLODE_SOUND.play()
 
     def update(self):
         explosion_speed = 4
