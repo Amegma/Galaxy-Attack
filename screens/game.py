@@ -12,13 +12,15 @@ from .background import bg_obj
 from config import config
 from constants import Path, Image, score_list, Font, Colors
 
+pause = False
+
 
 def game(isMouse=False):
+    global pause
     lives = 5
     level = 0
     laser_vel = 10
 
-    main_font = pygame.font.Font(Font.edit_undo_font, 50)
     sub_font = pygame.font.Font(Font.neue_font, 40)
     sub_small_font = pygame.font.Font(Font.neue_font, 35)
     lost_font = pygame.font.Font(Font.edit_undo_font, 55)
@@ -37,16 +39,14 @@ def game(isMouse=False):
     lost = False
     win = False
     boss_entry = True
-    pause = False
 
     pause_btn = IconButton(
         Image.PAUSE_IMAGE, (config.center_x, 50))
 
     explosion_group.empty()
 
-    def redraw_window(pause=False):
-        if not pause:
-            bg_obj.update()
+    def redraw_window():
+        bg_obj.update()
         bg_obj.render()
 
         # Draw Text
@@ -60,9 +60,6 @@ def game(isMouse=False):
             enemyShip.draw()
 
         pause_btn.draw()
-
-        # blit player stats after enemyShips to prevent the later
-        # from being drawn over the stats
 
         # Lives
         for index in range(1, lives + 1):
@@ -90,16 +87,6 @@ def game(isMouse=False):
             last_label = lost_font.render('BOSS LEVEL!!', 1, Colors.RED)
             config.CANVAS.blit(last_label, (config.center_x -
                                             last_label.get_width()//2, 350))
-
-        if pause:
-            # if paused display the "game is paused" screen
-            pause_label = main_font.render('Game Paused', 1, Colors.CYAN)
-            config.CANVAS.blit(pause_label, (config.center_x -
-                                             pause_label.get_width()//2, 350))
-
-            key_msg = sub_font.render('Press [p] to unpause', 1, Colors.BLUE)
-            config.CANVAS.blit(key_msg, (config.center_x -
-                                         key_msg.get_width()//2, 400))
 
         # explosion group
         explosion_group.draw(config.CANVAS)
@@ -152,6 +139,7 @@ def game(isMouse=False):
                     if pause_btn.isOver():
                         pygame.mouse.set_visible(True)
                         pause = True
+                        paused(player)
 
             if event.type == pygame.MOUSEMOTION:
                 if pause_btn.isOver():
@@ -159,10 +147,7 @@ def game(isMouse=False):
                 else:
                     pause_btn.outline = False
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_p:
-                    pygame.mouse.set_visible(True)
-                    pause = True
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
                 if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
@@ -171,30 +156,10 @@ def game(isMouse=False):
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     display_cfg.toggle_full_screen()
-
-        while pause:
-            # create a fresh screen
-            redraw_window(pause)
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_BACKSPACE:
-                        player.run = False
-                        pause = False
-                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
-                        break
-                    if event.key == pygame.K_m:
-                        audio_cfg.toggle_mute()
-                    if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
-                        audio_cfg.inc_volume(5)
-                    if event.key == pygame.K_MINUS:
-                        audio_cfg.dec_volume(5)
-                    if event.key == pygame.K_p:
-                        pygame.mouse.set_visible(False)
-                        pause = False
-                        break
+                if event.key == pygame.K_p:
+                    pygame.mouse.set_visible(True)
+                    pause = True
+                    paused(player)
 
         player.move()
 
@@ -233,3 +198,39 @@ def game(isMouse=False):
                 enemies.remove(enemy)
 
         player.move_lasers(-laser_vel, enemies)
+
+
+def paused(player):
+    main_font = pygame.font.Font(Font.edit_undo_font, 50)
+    sub_font = pygame.font.Font(Font.neue_font, 40)
+
+    pause_label = main_font.render('Game Paused', 1, Colors.CYAN)
+    config.CANVAS.blit(pause_label, (config.center_x -
+                                     pause_label.get_width()//2, 350))
+
+    key_msg = sub_font.render('Press [p] to unpause', 1, Colors.BLUE)
+    config.CANVAS.blit(key_msg, (config.center_x -
+                                 key_msg.get_width()//2, 400))
+
+    while pause:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    pygame.mouse.set_visible(False)
+                    unpause()
+                if event.key == pygame.K_BACKSPACE:
+                    player.run = False
+                    unpause()
+                    audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+
+        pygame.display.update()
+        config.framespersec.tick(15)
+
+
+def unpause():
+    global pause
+    pause = False

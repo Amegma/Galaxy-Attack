@@ -105,7 +105,7 @@ def main():
                     config.update(event.w, event.h)
 
             # Keyboard events
-            if event.type == pygame.KEYUP:
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
                 if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
