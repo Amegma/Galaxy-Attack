@@ -1,5 +1,6 @@
 import pygame
 
+from utils.draw import draw_text
 from config import config
 from constants import Font, Colors
 
@@ -32,9 +33,8 @@ class Button:
 
         if self.text != '':
             font = pygame.font.Font(Font.neue_font, 40)
-            text = font.render(self.text, 1, Colors.WHITE)
-            config.CANVAS.blit(text, (self.pos[0] + (self.size[0]/2 - text.get_width()/2),
-                               self.pos[1] + (self.size[1]/2 - text.get_height()/2)))
+            draw_text(self.text, font, Colors.WHITE,
+                      (self.pos[0] + self.size[0]/2, self.pos[1] + self.size[1]/2), True, True)
 
     def isOver(self):
         return self.rect.collidepoint(pygame.mouse.get_pos())

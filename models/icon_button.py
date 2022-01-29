@@ -4,6 +4,7 @@ import pygame
 from config import config
 from constants import Colors, Font
 from utils.outline_image import outline_image
+from utils.draw import draw_text
 
 
 class IconButton:
@@ -26,10 +27,8 @@ class IconButton:
         subtitle_font = pygame.font.Font(Font.neue_font, 20)
 
         if self.subtitle != '':
-            subtitle_label = subtitle_font.render(
-                self.subtitle, 1, Colors.WHITE)
-            config.CANVAS.blit(subtitle_label, (self.pos[0]-subtitle_label.get_width()//2,
-                                                self.pos[1] + 35))
+            draw_text(self.subtitle, subtitle_font, Colors.WHITE,
+                      (self.pos[0], self.pos[1] + 35), True)
 
     def isOver(self):
         return self.rect.collidepoint(pygame.mouse.get_pos())

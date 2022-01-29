@@ -1,5 +1,6 @@
 import pygame
 
+from utils.draw import draw_text
 from config import config
 from constants import Image, soundList, Font, Colors
 
@@ -7,7 +8,7 @@ from constants import Image, soundList, Font, Colors
 class AudioControls:
     def __init__(self, soundList):
         self.soundList = soundList
-        self.volume = 100
+        self.volume = 0
         self.muted = True if self.volume == 0 else False
         self.prev_volume = -1
 
@@ -55,9 +56,8 @@ class AudioControls:
                                (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
-        vol_label = control_font.render(vol_lbl_text, 1, Colors.WHITE)
-        config.CANVAS.blit(
-            vol_label, (config.starting_x + 70, config.ending_y - 57))
+        draw_text(vol_lbl_text, control_font, Colors.WHITE,
+                  (config.starting_x + 70, config.ending_y - 57))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)

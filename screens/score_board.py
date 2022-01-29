@@ -4,6 +4,7 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
+from utils.draw import draw_text
 from config import config
 from constants import Image, score_list, Font, Text, Colors
 
@@ -22,30 +23,24 @@ def score_board():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        score_title_label = score_title_font.render(
-            Text.SCOREBOARD_2, 1, Colors.GREEN)
-        config.CANVAS.blit(score_title_label, (config.center_x -
-                                               score_title_label.get_width()//2 - 30, 168))
-        config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x +
-                                                score_title_label.get_width()//2 - 10, 163))
+        draw_text(Text.SCOREBOARD_2, score_title_font, Colors.GREEN,
+                  (config.center_x - 30, 168), True)
+        config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
 
         if len(score_list) == 0:
-            score_label = score_font.render(
-                'You Haven\'t Played Yet!', 1, Colors.CYAN)
-            config.CANVAS.blit(score_label, (config.center_x -
-                                             score_label.get_width()//2, 250))
+            draw_text('You Haven\'t Played Yet!', score_font, Colors.CYAN,
+                      (config.center_x, 250), True)
 
         i = 0
         for score in score_list[:5]:
-            score_label = score_font.render(str(score), 1, Colors.CYAN)
-            config.CANVAS.blit(score_label, (config.center_x -
-                                             score_label.get_width() + 20, 250 + i * 40))
+            draw_text(str(score), score_font, Colors.CYAN,
+                      (config.center_x-20, 250 + i * 40), True)
             i += 1
 
         go_back_btn.draw()
 
         audio_cfg.display_volume()
-        config.framespersec.tick(config.FPS)
+        config.clock.tick(config.FPS)
         pygame.display.update()
 
         for event in pygame.event.get():

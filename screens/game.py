@@ -7,6 +7,7 @@ from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
 from models.icon_button import IconButton
 from utils.collide import collide
+from utils.draw import draw_text
 from .background import bg_obj
 
 from config import config
@@ -49,11 +50,6 @@ def game(isMouse=False):
         bg_obj.update()
         bg_obj.render()
 
-        # Draw Text
-        level_label = sub_small_font.render(
-            f'{level} / 10', 1, Colors.CYAN)
-        score_label = sub_font.render(f'{player.get_score()}', 1, Colors.GREEN)
-
         player.draw()
 
         for enemyShip in enemies:
@@ -66,27 +62,25 @@ def game(isMouse=False):
             config.CANVAS.blit(
                 Image.HEART_IMAGE, (config.starting_x + 37 * index - 10, 30))
 
-        # blit stats
-        config.CANVAS.blit(level_label, (config.starting_x + 35, 75))
-        config.CANVAS.blit(
-            score_label, (config.ending_x - score_label.get_width() - 30, 20))
+        # Draw Text
+        draw_text(f'{level} / 10', sub_small_font, Colors.CYAN,
+                  (config.starting_x + 35, 75))
+        draw_text(f'{player.get_score()}', sub_font, Colors.GREEN,
+                  (config.ending_x - 40, 20), True)
 
         if win:
             score_list.append(player.get_score())
-            win_label = win_font.render('WINNER :)', 1, Colors.GREEN2)
-            config.CANVAS.blit(win_label, (config.center_x -
-                                           win_label.get_width()//2, 350))
+            draw_text('WINNER :)', win_font, Colors.GREEN2,
+                      (config.center_x, 350), True)
 
         if lost:
             score_list.append(player.get_score())
-            lost_label = lost_font.render('GAME OVER :(', 1, Colors.RED)
-            config.CANVAS.blit(lost_label, (config.center_x -
-                                            lost_label.get_width()//2, 350))
+            draw_text('GAME OVER :(', lost_font, Colors.RED,
+                      (config.center_x, 350), True)
 
         if level >= 10 and boss_entry:
-            last_label = lost_font.render('BOSS LEVEL!!', 1, Colors.RED)
-            config.CANVAS.blit(last_label, (config.center_x -
-                                            last_label.get_width()//2, 350))
+            draw_text('BOSS LEVEL!!', lost_font, Colors.RED,
+                      (config.center_x, 350), True)
 
         # explosion group
         explosion_group.draw(config.CANVAS)
@@ -94,7 +88,7 @@ def game(isMouse=False):
 
         audio_cfg.display_volume()
         pygame.display.update()
-        config.framespersec.tick(config.FPS)
+        config.clock.tick(config.FPS)
 
     while player.run:
         redraw_window()
@@ -204,13 +198,11 @@ def paused(player):
     main_font = pygame.font.Font(Font.edit_undo_font, 50)
     sub_font = pygame.font.Font(Font.neue_font, 40)
 
-    pause_label = main_font.render('Game Paused', 1, Colors.CYAN)
-    config.CANVAS.blit(pause_label, (config.center_x -
-                                     pause_label.get_width()//2, 350))
+    draw_text('Game Paused', main_font, Colors.CYAN,
+              (config.center_x, 350), True)
 
-    key_msg = sub_font.render('Press [p] to unpause', 1, Colors.BLUE)
-    config.CANVAS.blit(key_msg, (config.center_x -
-                                 key_msg.get_width()//2, 400))
+    draw_text('Press [p] to unpause', sub_font, Colors.BLUE,
+              (config.center_x, 400), True)
 
     while pause:
         for event in pygame.event.get():
@@ -228,7 +220,7 @@ def paused(player):
                     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
         pygame.display.update()
-        config.framespersec.tick(15)
+        config.clock.tick(15)
 
 
 def unpause():

@@ -4,10 +4,11 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
+from utils.draw import draw_text
 from config import config
 from constants import Image, Font, Colors, Text
 
-from models.slider import Slider
+# from models.slider import Slider
 
 
 def settings():
@@ -25,23 +26,17 @@ def settings():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        settings_title_label = settings_title_font.render(
-            Text.SETTINGS, 1, Colors.YELLOW)
-        config.CANVAS.blit(settings_title_label, (config.center_x -
-                                                  settings_title_label.get_width()//2, 130))
+        draw_text(Text.SETTINGS, settings_title_font, Colors.YELLOW,
+                  (config.center_x, 130), True)
         config.CANVAS.blit(Image.TOOLS_IMAGE, (config.center_x -
                                                Image.TOOLS_IMAGE.get_width()//2 - 150, 120))
         config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
                                                  Image.TOOLBOX_IMAGE.get_width()//2 + 150, 129))
 
-        settings_left_label = settings_left_font.render(
-            'VOLUME', 1, Colors.GREEN)
-        config.CANVAS.blit(settings_left_label, (config.center_x -
-                                                 settings_left_label.get_width()//2 - 160, 240))
-        settings_right_label = settings_right_font.render(
-            f'{audio_cfg.volume}', 1, Colors.WHITE)
-        config.CANVAS.blit(settings_right_label, (config.center_x -
-                                                  settings_right_label.get_width()//2 + 155, 240))
+        draw_text('VOLUME', settings_left_font, Colors.GREEN,
+                  (config.center_x - 160, 240), True)
+        draw_text(f'{audio_cfg.volume}', settings_right_font, Colors.WHITE,
+                  (config.center_x + 155, 240), True)
 
         go_back_btn.draw()
 
@@ -50,7 +45,7 @@ def settings():
         plus_btn.draw()
 
         # audio_cfg.display_volume()
-        config.framespersec.tick(config.FPS)
+        config.clock.tick(config.FPS)
         pygame.display.update()
 
         for event in pygame.event.get():

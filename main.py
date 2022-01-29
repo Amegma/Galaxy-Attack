@@ -2,6 +2,7 @@ import sys
 import pygame
 import argparse
 
+from utils.draw import draw_text
 from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
@@ -68,9 +69,8 @@ def main():
         mouse_btn.draw()
         keyboard_btn.draw()
 
-        title_label = title_font.render('Start Game', 1, Colors.WHITE)
-        config.CANVAS.blit(title_label, (config.center_x-title_label.get_width()//2,
-                                         config.center_y-title_label.get_height() + 25))
+        draw_text('Start Game', title_font, Colors.WHITE,
+                  (config.center_x, config.center_y-10), True, True)
 
         # Control Page
         control_btn.draw()
@@ -92,7 +92,7 @@ def main():
                            Image.TITLE_LOGO.get_width()//2, 50))
 
         pygame.display.update()
-        config.framespersec.tick(config.FPS)  # capping frame rate to 60
+        config.clock.tick(config.FPS)  # capping frame rate to 60
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

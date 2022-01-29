@@ -21,7 +21,7 @@ class Config:
             backgroundImage, (self.WIDTH, self.HEIGHT))
 
         self.FPS = 60
-        self.framespersec = pygame.time.Clock()
+        self.clock = pygame.time.Clock()
 
         self.CANVAS = pygame.display.set_mode(
             (self.WIDTH, self.HEIGHT), pygame.RESIZABLE)

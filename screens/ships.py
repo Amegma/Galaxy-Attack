@@ -4,6 +4,7 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
+from utils.draw import draw_text
 from config import config
 from constants import Image, Font, Colors, Text
 
@@ -22,10 +23,8 @@ def ships():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        ships_title_label = ships_title_font.render(
-            Text.SHIPS, 1, Colors.CYAN)
-        config.CANVAS.blit(ships_title_label, (config.center_x -
-                                               ships_title_label.get_width()//2, 130))
+        draw_text(Text.SHIPS, ships_title_font, Colors.CYAN,
+                  (config.center_x, 130), True)
         config.CANVAS.blit(Image.SHIPS_IMAGE, (config.center_x -
                                                Image.SHIPS_IMAGE.get_width()//2 - 110, 120))
         config.CANVAS.blit(Image.SHIPS_IMAGE_2, (config.center_x -
@@ -34,76 +33,60 @@ def ships():
         # Name: Easy Spaceship; Health: 100; Damage: 10;
         config.CANVAS.blit(Image.EASY_SPACE_SHIP, (config.center_x -
                                                    Image.EASY_SPACE_SHIP.get_width()//2 - 270, 235))
-        easy_ship_label = ships_info_font.render(
-            'Easy Spaceship', 1, Colors.BLUE)
-        config.CANVAS.blit(easy_ship_label, (config.center_x - 210, 220))
-        easy_ship_label = ships_info_font.render(
-            'Health: 100', 1, Colors.GREEN)
-        config.CANVAS.blit(easy_ship_label, (config.center_x - 210, 247))
-        easy_ship_label = ships_info_font.render(
-            'Damage: 10', 1, Colors.RED)
-        config.CANVAS.blit(easy_ship_label, (config.center_x - 210, 274))
+        draw_text('Easy Spaceship', ships_info_font, Colors.BLUE,
+                  (config.center_x - 210, 220))
+        draw_text('Health: 100', ships_info_font,
+                  Colors.GREEN, (config.center_x - 210, 247))
+        draw_text('Damage: 10', ships_info_font,
+                  Colors.RED, (config.center_x - 210, 274))
 
         # Name: Medium Spaceship; Health: 100; Damage: 18;
         config.CANVAS.blit(Image.MEDIUM_SPACE_SHIP, (config.center_x -
                                                      Image.MEDIUM_SPACE_SHIP.get_width()//2 - 270, 320))
-        medium_ship_label = ships_info_font.render(
-            'Medium Spaceship', 1, Colors.BLUE)
-        config.CANVAS.blit(medium_ship_label, (config.center_x - 210, 315))
-        medium_ship_label = ships_info_font.render(
-            'Health: 100', 1, Colors.GREEN)
-        config.CANVAS.blit(medium_ship_label, (config.center_x - 210, 342))
-        medium_ship_label = ships_info_font.render(
-            'Damage: 18', 1, Colors.RED)
-        config.CANVAS.blit(medium_ship_label, (config.center_x - 210, 369))
+        draw_text('Medium Spaceship', ships_info_font, Colors.BLUE,
+                  (config.center_x - 210, 315))
+        draw_text('Health: 100', ships_info_font,
+                  Colors.GREEN, (config.center_x - 210, 342))
+        draw_text('Damage: 18', ships_info_font,
+                  Colors.RED, (config.center_x - 210, 369))
 
         # Name: Hard Spaceship; Health: 100; Damage: 25;
         config.CANVAS.blit(Image.HARD_SPACE_SHIP, (config.center_x -
                                                    Image.HARD_SPACE_SHIP.get_width()//2 - 270, 435))
-        hard_ship_label = ships_info_font.render(
-            'Hard Spaceship', 1, Colors.BLUE)
-        config.CANVAS.blit(hard_ship_label, (config.center_x - 210, 425))
-        hard_ship_label = ships_info_font.render(
-            'Health: 100', 1, Colors.GREEN)
-        config.CANVAS.blit(hard_ship_label, (config.center_x - 210, 452))
-        hard_ship_label = ships_info_font.render(
-            'Damage: 25', 1, Colors.RED)
-        config.CANVAS.blit(hard_ship_label, (config.center_x - 210, 479))
+        draw_text('Hard Spaceship', ships_info_font, Colors.BLUE,
+                  (config.center_x - 210, 425))
+        draw_text('Health: 100', ships_info_font,
+                  Colors.GREEN, (config.center_x - 210, 452))
+        draw_text('Damage: 25', ships_info_font,
+                  Colors.RED, (config.center_x - 210, 479))
 
         # Name: Your Spaceship; Lives: 5; Health: 100; Damage: 100
         config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (config.center_x -
                            Image.PLAYER_SPACE_SHIP.get_width()//2 + 260, 290))
-        player_ship_label = ships_info_font.render(
-            'Your Spaceship', 1, Colors.BLUE)
-        config.CANVAS.blit(player_ship_label, (config.center_x + 70, 285))
+        draw_text('Your Spaceship', ships_info_font, Colors.BLUE,
+                  (config.center_x + 70, 285))
         for index in range(1, 6):
             config.CANVAS.blit(
                 NEW_HEART_IMAGE, (config.center_x + 45 + 25 * index, 312))
-        player_ship_label = ships_info_font.render(
-            'Health: 100', 1, Colors.GREEN)
-        config.CANVAS.blit(player_ship_label, (config.center_x + 70, 339))
-        player_ship_label = ships_info_font.render(
-            'Damage: 100', 1, Colors.RED)
-        config.CANVAS.blit(player_ship_label, (config.center_x + 70, 366))
+        draw_text('Health: 100', ships_info_font,
+                  Colors.GREEN, (config.center_x + 70, 339))
+        draw_text('Damage: 100', ships_info_font,
+                  Colors.RED, (config.center_x + 70, 366))
 
         # Name: Boss Spaceship; Health: 1980; Damage: 100;
         config.CANVAS.blit(Image.BOSS_SHIP, (config.center_x -
                            Image.BOSS_SHIP.get_width()//2, 450))
-        # config.CANVAS.blit(Image.DEMON_ICON, (config.center_x + 140, 520))
-        boss_ship_label = ships_info_font.render(
-            'Boss Spaceship', 1, Colors.BLUE)
-        config.CANVAS.blit(boss_ship_label, (config.center_x + 150, 525))
-        boss_ship_label = ships_info_font.render(
-            'Health: 1980', 1, Colors.GREEN)
-        config.CANVAS.blit(boss_ship_label, (config.center_x + 150, 552))
-        boss_ship_label = ships_info_font.render(
-            'Damage: 100', 1, Colors.RED)
-        config.CANVAS.blit(boss_ship_label, (config.center_x + 150, 579))
+        draw_text('Boss Spaceship', ships_info_font, Colors.BLUE,
+                  (config.center_x + 150, 525))
+        draw_text('Health: 1980', ships_info_font,
+                  Colors.GREEN, (config.center_x + 150, 552))
+        draw_text('Damage: 100', ships_info_font,
+                  Colors.RED, (config.center_x + 150, 579))
 
         go_back_btn.draw()
 
         audio_cfg.display_volume()
-        config.framespersec.tick(config.FPS)
+        config.clock.tick(config.FPS)
         pygame.display.update()
 
         for event in pygame.event.get():
