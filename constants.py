@@ -37,8 +37,7 @@ class Font:
 
 class Image:
     TITLE_LOGO = Assets.image.load(Path.GRAPHICS_PATH, 'title_logo.png')
-    TITLE_LOGO = pygame.transform.scale(
-        TITLE_LOGO, (TITLE_LOGO.get_width()*2/7, TITLE_LOGO.get_height()*2/7))
+    TITLE_LOGO = Assets.image.scale(TITLE_LOGO, 2/7)
 
     # Load Enemy Ships
     EASY_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'easy.png')
@@ -47,8 +46,7 @@ class Image:
     BOSS_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'boss.png')
 
     UFO_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'ufo.png')
-    UFO_SPACE_SHIP = pygame.transform.scale(
-        UFO_SPACE_SHIP, (UFO_SPACE_SHIP.get_width()/7, UFO_SPACE_SHIP.get_height()/7))
+    UFO_SPACE_SHIP = Assets.image.scale(UFO_SPACE_SHIP, 1/7)
 
     # Load Player
     PLAYER_SPACE_SHIP = Assets.image.load(
@@ -69,42 +67,36 @@ class Image:
     MUTE_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'mute.png')
 
     DEMON_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'demon.png')
-    DEMON_ICON = pygame.transform.scale(
-        DEMON_ICON, (DEMON_ICON.get_width()/11, DEMON_ICON.get_height()/11))
+    DEMON_ICON = Assets.image.scale(DEMON_ICON, 1/11)
 
     # Load Controls Image
     CONTROL_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'joystick.png')
     TROPHY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'trophy.png')
-    SHIPS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
-    SHIPS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
+    SHIPS_IMAGE = Assets.image.scale(MEDIUM_SPACE_SHIP, 5/6)
+    SHIPS_IMAGE_2 = Assets.image.scale(HARD_SPACE_SHIP, 3/4)
     TOOLBOX_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'toolbox.png')
     TOOLBOX_IMAGE = Assets.image.scale(TOOLBOX_IMAGE, 1/2)
 
     TOOLS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'tools.png')
-    TOOLS_IMAGE = pygame.transform.scale(
-        TOOLS_IMAGE, (TOOLS_IMAGE.get_width()/4, TOOLS_IMAGE.get_height()/4))
+    TOOLS_IMAGE = Assets.image.scale(TOOLS_IMAGE, 1/4)
     TOOLS_IMAGE = pygame.transform.rotate(TOOLS_IMAGE, -45)
 
     GO_BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back2.png')
-    GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
+    GO_BACK_IMAGE = Assets.image.scale(GO_BACK_IMAGE, 6/25)
 
     EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'exit.png')
-    EXIT_IMAGE = pygame.transform.scale(
-        EXIT_IMAGE, (EXIT_IMAGE.get_width()/3, EXIT_IMAGE.get_height()/3))
+    EXIT_IMAGE = Assets.image.scale(EXIT_IMAGE, 1/3)
 
     # Load Hearts
     HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
 
     PLUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'plus.png')
-    PLUS_IMAGE = pygame.transform.scale(
-        PLUS_IMAGE, (PLUS_IMAGE.get_width()/6, PLUS_IMAGE.get_height()/6))
+    PLUS_IMAGE = Assets.image.scale(PLUS_IMAGE, 1/6)
     MINUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'minus.png')
-    MINUS_IMAGE = pygame.transform.scale(
-        MINUS_IMAGE, (MINUS_IMAGE.get_width()/6, MINUS_IMAGE.get_height()/6))
+    MINUS_IMAGE = Assets.image.scale(MINUS_IMAGE, 1/6)
 
     PAUSE_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'pause.png')
-    PAUSE_IMAGE = pygame.transform.scale(
-        PAUSE_IMAGE, (PAUSE_IMAGE.get_width()/7, PAUSE_IMAGE.get_height()/7))
+    PAUSE_IMAGE = Assets.image.scale(PAUSE_IMAGE, 1/7)
 
 
 class Sound:
