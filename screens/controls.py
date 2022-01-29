@@ -2,7 +2,7 @@ import pygame
 import sys
 
 from .background import slow_bg_obj
-from utils.draw import draw_text
+from utils.draw import text
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from config import config
@@ -22,54 +22,54 @@ def controls():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        draw_text(Text.CONTROLS, control_title_font, Colors.BLUE,
-                  (config.center_x - 30, 130), True)
+        text.draw(Text.CONTROLS, control_title_font, Colors.BLUE,
+                         (config.center_x - 30, 130), True)
         config.CANVAS.blit(Image.CONTROL_IMAGE, (config.center_x + 95, 120))
 
-        draw_text('Shoot', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 215))
-        draw_text('[spacebar]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 215))
+        text.draw('Shoot', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 215))
+        text.draw('[spacebar]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 215))
 
-        draw_text('Move Left', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 270))
-        draw_text('[left] or [a]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 270))
+        text.draw('Move Left', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 270))
+        text.draw('[left] or [a]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 270))
 
-        draw_text('Move Right', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 325))
-        draw_text('[right] or [d]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 325))
+        text.draw('Move Right', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 325))
+        text.draw('[right] or [d]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 325))
 
-        draw_text('Move Down', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 380))
-        draw_text('[down] or [s]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 380))
+        text.draw('Move Down', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 380))
+        text.draw('[down] or [s]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 380))
 
-        draw_text('Move Up', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 435))
-        draw_text('[up] or [w]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 435))
+        text.draw('Move Up', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 435))
+        text.draw('[up] or [w]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 435))
 
-        draw_text('Return back to home', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 490))
-        draw_text('[backspace]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 490))
+        text.draw('Return back to home', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 490))
+        text.draw('[backspace]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 490))
 
-        draw_text('Mute Audio', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 545))
-        draw_text('[m]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 545))
+        text.draw('Mute Audio', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 545))
+        text.draw('[m]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 545))
 
-        draw_text('Volume Up/Down', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 600))
-        draw_text('[+]/[-]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 600))
+        text.draw('Volume Up/Down', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 600))
+        text.draw('[+]/[-]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 600))
 
-        draw_text('Toggle Full Screen', control_font, Colors.GREEN,
-                  (config.starting_x + 125, 655))
-        draw_text('[f]', keys_font, Colors.RED,
-                  (config.starting_x + 470, 655))
+        text.draw('Toggle Full Screen', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 655))
+        text.draw('[f]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 655))
 
         go_back_btn.draw()
 

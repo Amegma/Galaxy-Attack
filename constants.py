@@ -1,7 +1,9 @@
+from json import load
 import pygame
 import os
 
 from utils.resource_path import resource_path
+from utils.assets import Assets
 
 score_list = []
 
@@ -34,96 +36,73 @@ class Font:
 
 
 class Image:
-    TITLE_LOGO = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'title_logo.png')))
+    TITLE_LOGO = Assets.image.load(Path.GRAPHICS_PATH, 'title_logo.png')
     TITLE_LOGO = pygame.transform.scale(
         TITLE_LOGO, (TITLE_LOGO.get_width()*2/7, TITLE_LOGO.get_height()*2/7))
 
     # Load Enemy Ships
-    EASY_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'easy.png')))
-    MEDIUM_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'medium.png')))
-    HARD_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'hard.png')))
-    BOSS_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'boss.png')))
+    EASY_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'easy.png')
+    MEDIUM_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'medium.png')
+    HARD_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'hard.png')
+    BOSS_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'boss.png')
 
-    UFO_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'ufo.png')))
+    UFO_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'ufo.png')
     UFO_SPACE_SHIP = pygame.transform.scale(
         UFO_SPACE_SHIP, (UFO_SPACE_SHIP.get_width()/7, UFO_SPACE_SHIP.get_height()/7))
 
     # Load Player
-    PLAYER_SPACE_SHIP = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'retro-spaceship.png')))
-    PLAYER_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_cosmic.png')))
+    PLAYER_SPACE_SHIP = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship.png')
+    PLAYER_LASER = Assets.image.load(
+        Path.GRAPHICS_PATH, 'pixel_laser_cosmic.png')
 
     # Load Lasers
-    RED_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_red.png')))
-    BLUE_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_blue.png')))
-    GREEN_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_green.png')))
-    FLAME_LASER = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pixel_laser_flame.png')))
+    RED_LASER = Assets.image.load(Path.GRAPHICS_PATH, 'pixel_laser_red.png')
+    BLUE_LASER = Assets.image.load(Path.GRAPHICS_PATH, 'pixel_laser_blue.png')
+    GREEN_LASER = Assets.image.load(
+        Path.GRAPHICS_PATH, 'pixel_laser_green.png')
+    FLAME_LASER = Assets.image.load(
+        Path.GRAPHICS_PATH, 'pixel_laser_flame.png')
 
     # Load audio image
-    VOL_ICON = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'audio.png')))
-    MUTE_ICON = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'mute.png')))
+    VOL_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'audio.png')
+    MUTE_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'mute.png')
 
-    DEMON_ICON = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'demon.png')))
+    DEMON_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'demon.png')
     DEMON_ICON = pygame.transform.scale(
         DEMON_ICON, (DEMON_ICON.get_width()/11, DEMON_ICON.get_height()/11))
 
     # Load Controls Image
-    CONTROL_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'joystick.png')))
-    TROPHY_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'trophy.png')))
+    CONTROL_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'joystick.png')
+    TROPHY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'trophy.png')
     SHIPS_IMAGE = pygame.transform.scale(MEDIUM_SPACE_SHIP, (60, 60))
     SHIPS_IMAGE_2 = pygame.transform.scale(HARD_SPACE_SHIP, (60, 66*0.75))
-    TOOLBOX_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'toolbox.png')))
-    TOOLBOX_IMAGE = pygame.transform.scale(
-        TOOLBOX_IMAGE, (TOOLBOX_IMAGE.get_width()/2, TOOLBOX_IMAGE.get_height()/2))
+    TOOLBOX_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'toolbox.png')
+    TOOLBOX_IMAGE = Assets.image.scale(TOOLBOX_IMAGE, 1/2)
 
-    TOOLS_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'tools.png')))
+    TOOLS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'tools.png')
     TOOLS_IMAGE = pygame.transform.scale(
         TOOLS_IMAGE, (TOOLS_IMAGE.get_width()/4, TOOLS_IMAGE.get_height()/4))
     TOOLS_IMAGE = pygame.transform.rotate(TOOLS_IMAGE, -45)
 
-    GO_BACK_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'back2.png')))
-    # GO_BACK_IMAGE = pygame.transform.scale()
+    GO_BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back2.png')
     GO_BACK_IMAGE = pygame.transform.scale(GO_BACK_IMAGE, (34*2.4, 19*2.4))
 
-    EXIT_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'exit.png')))
+    EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'exit.png')
     EXIT_IMAGE = pygame.transform.scale(
         EXIT_IMAGE, (EXIT_IMAGE.get_width()/3, EXIT_IMAGE.get_height()/3))
 
     # Load Hearts
-    HEART_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'heart.png')))
+    HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
 
-    PLUS_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'plus.png')))
+    PLUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'plus.png')
     PLUS_IMAGE = pygame.transform.scale(
         PLUS_IMAGE, (PLUS_IMAGE.get_width()/6, PLUS_IMAGE.get_height()/6))
-    MINUS_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'minus.png')))
+    MINUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'minus.png')
     MINUS_IMAGE = pygame.transform.scale(
         MINUS_IMAGE, (MINUS_IMAGE.get_width()/6, MINUS_IMAGE.get_height()/6))
 
-    PAUSE_IMAGE = pygame.image.load(resource_path(
-        os.path.join(Path.GRAPHICS_PATH, 'pause.png')))
+    PAUSE_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'pause.png')
     PAUSE_IMAGE = pygame.transform.scale(
         PAUSE_IMAGE, (PAUSE_IMAGE.get_width()/7, PAUSE_IMAGE.get_height()/7))
 

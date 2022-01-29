@@ -2,7 +2,7 @@ import sys
 import pygame
 import argparse
 
-from utils.draw import draw_text
+from utils.draw import text
 from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
@@ -69,7 +69,7 @@ def main():
         mouse_btn.draw()
         keyboard_btn.draw()
 
-        draw_text('Start Game', title_font, Colors.WHITE,
+        text.draw('Start Game', title_font, Colors.WHITE,
                   (config.center_x, config.center_y-10), True, True)
 
         # Control Page

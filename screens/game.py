@@ -7,7 +7,8 @@ from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
 from models.icon_button import IconButton
 from utils.collide import collide
-from utils.draw import draw_text
+from utils.draw import text
+from utils.draw import text
 from .background import bg_obj
 
 from config import config
@@ -24,8 +25,7 @@ def game(isMouse=False):
 
     sub_font = pygame.font.Font(Font.neue_font, 40)
     sub_small_font = pygame.font.Font(Font.neue_font, 35)
-    lost_font = pygame.font.Font(Font.edit_undo_font, 55)
-    win_font = pygame.font.Font(Font.edit_undo_font, 55)
+    pop_up_font = pygame.font.Font(Font.edit_undo_font, 55)
 
     # load and play ingame music
     audio_cfg.play_music(Path.GAME_MUSIC_PATH)
@@ -63,24 +63,24 @@ def game(isMouse=False):
                 Image.HEART_IMAGE, (config.starting_x + 37 * index - 10, 30))
 
         # Draw Text
-        draw_text(f'{level} / 10', sub_small_font, Colors.CYAN,
-                  (config.starting_x + 35, 75))
-        draw_text(f'{player.get_score()}', sub_font, Colors.GREEN,
-                  (config.ending_x - 40, 20), True)
+        text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
+                         (config.starting_x + 35, 75))
+        text.draw(f'{player.get_score()}', sub_font, Colors.GREEN,
+                         (config.ending_x - 40, 20), True)
 
         if win:
             score_list.append(player.get_score())
-            draw_text('WINNER :)', win_font, Colors.GREEN2,
-                      (config.center_x, 350), True)
+            text.draw('WINNER :)', pop_up_font, Colors.GREEN2,
+                             (config.center_x, 350), True)
 
         if lost:
             score_list.append(player.get_score())
-            draw_text('GAME OVER :(', lost_font, Colors.RED,
-                      (config.center_x, 350), True)
+            text.draw('GAME OVER :(', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
 
         if level >= 10 and boss_entry:
-            draw_text('BOSS LEVEL!!', lost_font, Colors.RED,
-                      (config.center_x, 350), True)
+            text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
 
         # explosion group
         explosion_group.draw(config.CANVAS)
@@ -198,11 +198,11 @@ def paused(player):
     main_font = pygame.font.Font(Font.edit_undo_font, 50)
     sub_font = pygame.font.Font(Font.neue_font, 40)
 
-    draw_text('Game Paused', main_font, Colors.CYAN,
-              (config.center_x, 350), True)
+    text.draw('Game Paused', main_font, Colors.CYAN,
+                     (config.center_x, 350), True)
 
-    draw_text('Press [p] to unpause', sub_font, Colors.BLUE,
-              (config.center_x, 400), True)
+    text.draw('Press [p] to unpause', sub_font, Colors.BLUE,
+                     (config.center_x, 400), True)
 
     while pause:
         for event in pygame.event.get():

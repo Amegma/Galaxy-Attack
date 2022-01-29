@@ -3,8 +3,8 @@ import pygame
 
 from config import config
 from constants import Colors, Font
-from utils.outline_image import outline_image
-from utils.draw import draw_text
+from utils.outlineImage import outlineImage
+from utils.draw import text
 
 
 class IconButton:
@@ -20,14 +20,14 @@ class IconButton:
 
     def draw(self):
         if self.outline == True:
-            outline_image(self.image, self.new_pos)
+            outlineImage(self.image, self.new_pos)
 
         config.CANVAS.blit(self.image, self.rect)
 
         subtitle_font = pygame.font.Font(Font.neue_font, 20)
 
         if self.subtitle != '':
-            draw_text(self.subtitle, subtitle_font, Colors.WHITE,
+            text.draw(self.subtitle, subtitle_font, Colors.WHITE,
                       (self.pos[0], self.pos[1] + 35), True)
 
     def isOver(self):

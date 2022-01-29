@@ -4,7 +4,7 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from utils.draw import draw_text
+from utils.draw import text
 from config import config
 from constants import Image, score_list, Font, Text, Colors
 
@@ -23,18 +23,18 @@ def score_board():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        draw_text(Text.SCOREBOARD_2, score_title_font, Colors.GREEN,
-                  (config.center_x - 30, 168), True)
+        text.draw(Text.SCOREBOARD_2, score_title_font, Colors.GREEN,
+                         (config.center_x - 30, 168), True)
         config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
 
         if len(score_list) == 0:
-            draw_text('You Haven\'t Played Yet!', score_font, Colors.CYAN,
-                      (config.center_x, 250), True)
+            text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
+                             (config.center_x, 250), True)
 
         i = 0
         for score in score_list[:5]:
-            draw_text(str(score), score_font, Colors.CYAN,
-                      (config.center_x-20, 250 + i * 40), True)
+            text.draw(str(score), score_font, Colors.CYAN,
+                             (config.center_x-20, 250 + i * 40), True)
             i += 1
 
         go_back_btn.draw()

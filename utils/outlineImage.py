@@ -4,7 +4,7 @@ from config import config
 from constants import Colors
 
 
-def outline_image(image, pos):
+def outlineImage(image, pos):
     mask = pygame.mask.from_surface(image)
     mask_outline = mask.outline()
     mask_surf = pygame.Surface(image.get_size())

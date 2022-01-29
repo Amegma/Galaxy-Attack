@@ -2,6 +2,7 @@ import os
 import pygame
 
 from utils.resource_path import resource_path
+from utils.assets import Assets
 from constants import Path, Sound
 
 explosion_group = pygame.sprite.Group()
@@ -12,8 +13,7 @@ class Explosion(pygame.sprite.Sprite):
         super().__init__()
         self.images = []
         for num in range(0, num_frames):
-            img = pygame.image.load(resource_path(os.path.join(
-                Path.EXPLOSION_PATH, f"tile{num:03}.png")))
+            img = Assets.image.load(Path.EXPLOSION_PATH, f"tile{num:03}.png")
             img = pygame.transform.scale(img, (size, size))
             self.images.append(img)
         self.index = 0
