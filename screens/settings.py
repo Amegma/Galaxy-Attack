@@ -4,11 +4,9 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
-from utils.draw import text
+from utils.assets import Assets
 from config import config
 from constants import Image, Font, Colors, Text
-
-# from models.slider import Slider
 
 
 def settings():
@@ -26,16 +24,16 @@ def settings():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        text.draw(Text.SETTINGS, settings_title_font, Colors.YELLOW,
+        Assets.text.draw(Text.SETTINGS, settings_title_font, Colors.YELLOW,
                   (config.center_x, 130), True)
         config.CANVAS.blit(Image.TOOLS_IMAGE, (config.center_x -
                                                Image.TOOLS_IMAGE.get_width()//2 - 150, 120))
         config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
                                                  Image.TOOLBOX_IMAGE.get_width()//2 + 150, 129))
 
-        text.draw('VOLUME', settings_left_font, Colors.GREEN,
+        Assets.text.draw('VOLUME', settings_left_font, Colors.GREEN,
                   (config.center_x - 160, 240), True)
-        text.draw(f'{audio_cfg.volume}', settings_right_font, Colors.WHITE,
+        Assets.text.draw(f'{audio_cfg.volume}', settings_right_font, Colors.WHITE,
                   (config.center_x + 155, 240), True)
 
         go_back_btn.draw()

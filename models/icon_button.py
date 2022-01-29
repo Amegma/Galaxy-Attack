@@ -1,10 +1,9 @@
-import os
 import pygame
 
 from config import config
 from constants import Colors, Font
 from utils.outlineImage import outlineImage
-from utils.draw import text
+from utils.assets import Assets
 
 
 class IconButton:
@@ -27,7 +26,7 @@ class IconButton:
         subtitle_font = pygame.font.Font(Font.neue_font, 20)
 
         if self.subtitle != '':
-            text.draw(self.subtitle, subtitle_font, Colors.WHITE,
+            Assets.text.draw(self.subtitle, subtitle_font, Colors.WHITE,
                       (self.pos[0], self.pos[1] + 35), True)
 
     def isOver(self):

@@ -2,7 +2,6 @@ import pygame
 import os
 
 from utils.resource_path import resource_path
-from constants import Path
 
 
 class Config:
@@ -13,8 +12,8 @@ class Config:
         self.HEIGHT = 750
 
         # Load Background Image
-        backgroundImage = pygame.image.load(resource_path(os.path.join(
-            Path.GRAPHICS_PATH, 'background-black.png')))
+        backgroundImage = pygame.image.load(resource_path(
+            os.path.join('assets', 'graphics', 'background-black.png')))
 
         # Set Background Dimensions
         self.BG = pygame.transform.scale(

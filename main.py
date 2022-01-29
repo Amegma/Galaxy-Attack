@@ -2,7 +2,7 @@ import sys
 import pygame
 import argparse
 
-from utils.draw import text
+from utils.assets import Assets
 from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
@@ -69,8 +69,8 @@ def main():
         mouse_btn.draw()
         keyboard_btn.draw()
 
-        text.draw('Start Game', title_font, Colors.WHITE,
-                  (config.center_x, config.center_y-10), True, True)
+        Assets.text.draw('Start Game', title_font, Colors.WHITE,
+                         (config.center_x, config.center_y-10), True, True)
 
         # Control Page
         control_btn.draw()

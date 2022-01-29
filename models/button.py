@@ -1,6 +1,6 @@
 import pygame
 
-from utils.draw import text
+from utils.assets import Assets
 from config import config
 from constants import Font, Colors
 
@@ -33,7 +33,7 @@ class Button:
 
         if self.text != '':
             font = pygame.font.Font(Font.neue_font, 40)
-            text.draw(self.text, font, Colors.WHITE,
+            Assets.text.draw(self.text, font, Colors.WHITE,
                       (self.pos[0] + self.size[0]/2, self.pos[1] + self.size[1]/2), True, True)
 
     def isOver(self):

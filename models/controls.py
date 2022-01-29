@@ -1,6 +1,6 @@
 import pygame
 
-from utils.draw import text
+from utils.assets import Assets
 from config import config
 from constants import Image, soundList, Font, Colors
 
@@ -56,8 +56,8 @@ class AudioControls:
                                (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
-        text.draw(vol_lbl_text, control_font, Colors.WHITE,
-                         (config.starting_x + 70, config.ending_y - 57))
+        Assets.text.draw(vol_lbl_text, control_font, Colors.WHITE,
+                  (config.starting_x + 70, config.ending_y - 57))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)

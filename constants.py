@@ -1,4 +1,3 @@
-from json import load
 import pygame
 import os
 
@@ -100,14 +99,10 @@ class Image:
 
 
 class Sound:
-    PLAYER_LASER_SOUND = pygame.mixer.Sound(resource_path(
-        os.path.join(Path.SOUND_PATH, 'ownlaser.wav')))
-    ENEMY_LASER_SOUND = pygame.mixer.Sound(resource_path(
-        os.path.join(Path.SOUND_PATH, 'enemylaser.wav')))
-    EXPLODE_SOUND = pygame.mixer.Sound(resource_path(
-        os.path.join(Path.SOUND_PATH, 'explode.wav')))
-    LASER_HIT_SOUND = pygame.mixer.Sound(resource_path(
-        os.path.join(Path.SOUND_PATH, 'laser_hit.wav')))
+    PLAYER_LASER_SOUND = Assets.sound.load(Path.SOUND_PATH, 'ownlaser.wav')
+    ENEMY_LASER_SOUND = Assets.sound.load(Path.SOUND_PATH, 'enemylaser.wav')
+    EXPLODE_SOUND = Assets.sound.load(Path.SOUND_PATH, 'explode.wav')
+    LASER_HIT_SOUND = Assets.sound.load(Path.SOUND_PATH, 'laser_hit.wav')
 
 
 # adding sounds to the list
