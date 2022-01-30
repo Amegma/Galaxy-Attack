@@ -1,6 +1,5 @@
 import pygame
 
-from config import config
 from constants import Colors
 from utils.assets import Assets
 

@@ -67,7 +67,7 @@ class Image:
     DEMON_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'demon.png')
     DEMON_ICON = Assets.image.scale(DEMON_ICON, 1/11)
 
-    # Load Controls Image
+    # Screen Images
     CONTROL_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'joystick.png')
     TROPHY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'trophy.png')
     SHIPS_IMAGE = Assets.image.scale(MEDIUM_SPACE_SHIP, 5/6)
@@ -85,7 +85,7 @@ class Image:
     EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'exit.png')
     EXIT_IMAGE = Assets.image.scale(EXIT_IMAGE, 1/3)
 
-    # Load Hearts
+    # Other Images
     HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
 
     PLUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'plus.png')

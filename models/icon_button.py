@@ -1,6 +1,5 @@
 import pygame
 
-from config import config
 from constants import Colors, Font
 from utils.outlineImage import outlineImage
 from utils.assets import Assets

@@ -96,8 +96,6 @@ def main():
 
             if event.type == pygame.VIDEORESIZE:
                 if not display_cfg.fullscreen:
-                    config.CANVAS = pygame.display.set_mode(
-                        (event.w, event.h), pygame.RESIZABLE)
                     config.update(event.w, event.h)
 
             # Keyboard events
@@ -109,6 +107,8 @@ def main():
                 if event.key == pygame.K_MINUS:
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
+                    config.update(
+                        config.monitor_size[0], config.monitor_size[1])
                     display_cfg.toggle_full_screen()
 
             # Mouse click events

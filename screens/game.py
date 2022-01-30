@@ -1,4 +1,5 @@
 import pygame
+import sys
 import time
 import random
 
@@ -65,11 +66,11 @@ def game(isMouse=False):
         Assets.text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
                          (config.starting_x + 35, 75))
         Assets.text.draw(f'{player.get_score()}', sub_font, Colors.GREEN,
-                         (config.ending_x - 40, 20), True)
+                         (config.ending_x - 50, 20))
 
         if win:
             score_list.append(player.get_score())
-            Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN2,
+            Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
 
         if lost:
@@ -126,6 +127,7 @@ def game(isMouse=False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit(0)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:

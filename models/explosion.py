@@ -1,7 +1,6 @@
 import os
 import pygame
 
-from utils.resource_path import resource_path
 from utils.assets import Assets
 from constants import Path, Sound
 

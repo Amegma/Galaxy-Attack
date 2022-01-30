@@ -1,5 +1,5 @@
 from config import config
-from constants import Font, Colors
+from constants import Colors
 import pygame
 pygame.init()
 
