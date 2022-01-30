@@ -48,7 +48,7 @@ def main():
         Image.TOOLBOX_IMAGE, (config.ending_x - 65, 165), Text.SETTINGS)
 
     exit_btn = IconButton(
-        Image.EXIT_IMAGE, (config.ending_x - 45, config.ending_y - 40))
+        Image.EXIT_IMAGE, (config.ending_x - 75, config.ending_y - 40))
 
     run = True
     while run:

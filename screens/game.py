@@ -208,31 +208,24 @@ def game(isMouse=False):
 
 
 def paused(player, isMouse):
-    main_font = pygame.font.Font(Font.edit_undo_font, 50)
-    sub_font = pygame.font.Font(Font.neue_font, 40)
+    main_font = pygame.font.Font(Font.edit_undo_font, 60)
 
     Assets.text.draw('Game Paused', main_font, Colors.CYAN,
                      (config.center_x, 300), True)
-    Assets.text.draw('Press [p] to unpause', sub_font, Colors.BLUE,
-                     (config.center_x, 350), True)
 
-    home_btn = IconButton(Image.HOME_IMAGE, (config.center_x, 450), '', True)
+    play_2_btn = IconButton(
+        Image.PLAY_IMAGE_2, (config.center_x-106, 400), '')
+    home_btn = IconButton(
+        Image.HOME_IMAGE, (config.center_x+91, 400), '')
 
     home_btn.draw()
+    play_2_btn.draw()
 
     while pause:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
-             # Mouse click events
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    if home_btn.isOver():
-                        player.run = False
-                        unpause()
-                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -242,6 +235,16 @@ def paused(player, isMouse):
                         elif isMouse == False:
                             pygame.mouse.set_visible(True)
                         unpause()
+                    if play_2_btn.isOver():
+                        if isMouse == True:
+                            pygame.mouse.set_visible(False)
+                        elif isMouse == False:
+                            pygame.mouse.set_visible(True)
+                        unpause()
+                    if home_btn.isOver():
+                        player.run = False
+                        unpause()
+                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:

@@ -82,7 +82,7 @@ class Image:
     GO_BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back2.png')
     GO_BACK_IMAGE = Assets.image.scale(GO_BACK_IMAGE, 6/25)
 
-    EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'exit.png')
+    EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'ExitButton.png')
     EXIT_IMAGE = Assets.image.scale(EXIT_IMAGE, 1/3)
 
     # Other Images
@@ -97,9 +97,11 @@ class Image:
     PAUSE_IMAGE = Assets.image.scale(PAUSE_IMAGE, 2/7)
     PLAY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'play.png')
     PLAY_IMAGE = Assets.image.scale(PLAY_IMAGE, 2/7)
+    PLAY_IMAGE_2 = Assets.image.load(Path.GRAPHICS_PATH, 'play.png')
+    PLAY_IMAGE_2 = Assets.image.scale(PLAY_IMAGE_2, 1/2.9)
 
     HOME_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'home.png')
-    HOME_IMAGE = Assets.image.scale(HOME_IMAGE, 1/3)
+    HOME_IMAGE = Assets.image.scale(HOME_IMAGE, 2/5)
 
 
 class Sound:
