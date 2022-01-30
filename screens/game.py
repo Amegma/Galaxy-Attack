@@ -9,12 +9,15 @@ from models.controls import audio_cfg, display_cfg
 from models.icon_button import IconButton
 from utils.collide import collide
 from utils.assets import Assets
+from utils.outlineImage import outlineImage
 from .background import bg_obj
 
 from config import config
 from constants import Path, Image, score_list, Font, Colors
 
 pause = False
+
+play_btn = IconButton(Image.PLAY_IMAGE, (config.center_x, 45))
 
 
 def game(isMouse=False):
@@ -35,14 +38,16 @@ def game(isMouse=False):
     enemy_vel = 1
 
     player = Player(300, 585, mouse_movement=isMouse)
-    pygame.mouse.set_visible(False)
+    if isMouse == True:
+        pygame.mouse.set_visible(False)
+    elif isMouse == False:
+        pygame.mouse.set_visible(True)
 
     lost = False
     win = False
     boss_entry = True
 
-    pause_btn = IconButton(
-        Image.PAUSE_IMAGE, (config.center_x, 50))
+    pause_btn = IconButton(Image.PAUSE_IMAGE, (config.center_x, 45))
 
     explosion_group.empty()
 
@@ -55,7 +60,10 @@ def game(isMouse=False):
         for enemyShip in enemies:
             enemyShip.draw()
 
-        pause_btn.draw()
+        if pause == True:
+            play_btn.draw()
+        else:
+            pause_btn.draw()
 
         # Lives
         for index in range(1, lives + 1):
@@ -65,8 +73,10 @@ def game(isMouse=False):
         # Draw Text
         Assets.text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
                          (config.starting_x + 35, 75))
-        Assets.text.draw(f'{player.get_score()}', sub_font, Colors.GREEN,
-                         (config.ending_x - 50, 20))
+        score_label = Assets.text.render(
+            f'{player.get_score()}', sub_font, Colors.GREEN)
+        Assets.text.drawSurface(
+            score_label, (config.ending_x - score_label.get_width() - 30, 20))
 
         if win:
             score_list.append(player.get_score())
@@ -129,18 +139,17 @@ def game(isMouse=False):
                 pygame.quit()
                 sys.exit(0)
 
+            if event.type == pygame.VIDEORESIZE:
+                if not display_cfg.fullscreen:
+                    config.update(event.w, event.h)
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if pause_btn.isOver():
                         pygame.mouse.set_visible(True)
                         pause = True
-                        paused(player)
-
-            if event.type == pygame.MOUSEMOTION:
-                if pause_btn.isOver():
-                    pause_btn.outline = True
-                else:
-                    pause_btn.outline = False
+                        redraw_window()
+                        paused(player, isMouse)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
@@ -150,11 +159,14 @@ def game(isMouse=False):
                 if event.key == pygame.K_MINUS:
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
+                    config.update(
+                        config.monitor_size[0], config.monitor_size[1])
                     display_cfg.toggle_full_screen()
                 if event.key == pygame.K_p:
                     pygame.mouse.set_visible(True)
                     pause = True
-                    paused(player)
+                    redraw_window()
+                    paused(player, isMouse)
 
         player.move()
 
@@ -195,15 +207,18 @@ def game(isMouse=False):
         player.move_lasers(-laser_vel, enemies)
 
 
-def paused(player):
+def paused(player, isMouse):
     main_font = pygame.font.Font(Font.edit_undo_font, 50)
     sub_font = pygame.font.Font(Font.neue_font, 40)
 
     Assets.text.draw('Game Paused', main_font, Colors.CYAN,
+                     (config.center_x, 300), True)
+    Assets.text.draw('Press [p] to unpause', sub_font, Colors.BLUE,
                      (config.center_x, 350), True)
 
-    Assets.text.draw('Press [p] to unpause', sub_font, Colors.BLUE,
-                     (config.center_x, 400), True)
+    home_btn = IconButton(Image.HOME_IMAGE, (config.center_x, 450), '', True)
+
+    home_btn.draw()
 
     while pause:
         for event in pygame.event.get():
@@ -211,9 +226,29 @@ def paused(player):
                 pygame.quit()
                 quit()
 
+             # Mouse click events
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if home_btn.isOver():
+                        player.run = False
+                        unpause()
+                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if play_btn.isOver():
+                        if isMouse == True:
+                            pygame.mouse.set_visible(False)
+                        elif isMouse == False:
+                            pygame.mouse.set_visible(True)
+                        unpause()
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
-                    pygame.mouse.set_visible(False)
+                    if isMouse == True:
+                        pygame.mouse.set_visible(False)
+                    elif isMouse == False:
+                        pygame.mouse.set_visible(True)
                     unpause()
                 if event.key == pygame.K_BACKSPACE:
                     player.run = False

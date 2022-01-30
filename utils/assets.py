@@ -7,6 +7,9 @@ from config import config
 
 class Assets:
     class text:
+        def render(text, font, color):
+            return font.render(text, 1, color)
+
         def draw(text, font, color, pos, isCenterX=False, isCenterY=False):
             text_label = font.render(text, 1, color)
 
@@ -16,6 +19,9 @@ class Assets:
                 pos = (pos[0], pos[1] - text_label.get_height()//2)
 
             config.CANVAS.blit(text_label, pos)
+
+        def drawSurface(label, pos):
+            config.CANVAS.blit(label, pos)
 
     class image:
         def load(root_path, image_path):

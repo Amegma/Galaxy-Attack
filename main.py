@@ -132,14 +132,14 @@ def main():
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
                 if mouse_btn.isOver():
-                    mouse_btn.outline = "onover"
+                    mouse_btn.outline = True
                 else:
-                    mouse_btn.outline = "default"
+                    mouse_btn.outline = False
 
                 if keyboard_btn.isOver():
-                    keyboard_btn.outline = "onover"
+                    keyboard_btn.outline = True
                 else:
-                    keyboard_btn.outline = "default"
+                    keyboard_btn.outline = False
 
                 if control_btn.isOver():
                     control_btn.outline = True

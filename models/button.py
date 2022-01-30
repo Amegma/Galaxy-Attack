@@ -6,13 +6,13 @@ from constants import Font, Colors
 
 
 class Button:
-    def __init__(self, color, outline_color, pos, size, text='', outline="default"):
+    def __init__(self, color, outline_color, pos, size, text=''):
         self.color = color
         self.outline_color = outline_color
         self.pos = pos  # pos is a tuple (x, y)
         self.size = size  # size is a tuple (width, height)
         self.text = text
-        self.outline = outline
+        self.outline = False
         self.default_outline = pygame.Rect(
             self.pos[0]-5, self.pos[1]-5, self.size[0]+10, self.size[1]+10)
         self.on_over_outline = pygame.Rect(
@@ -24,10 +24,10 @@ class Button:
             self.pos[0], self.pos[1], self.size[0], self.size[1])
         onover_inner_rect = (
             self.pos[0]+1, self.pos[1]+1, self.size[0]-2, self.size[1]-2)
-        inner_rect = onover_inner_rect if self.outline == "onover" else default_inner_rect
+        inner_rect = onover_inner_rect if self.outline == True else default_inner_rect
 
         pygame.draw.rect(config.CANVAS, self.outline_color, self.on_over_outline if self.outline ==
-                         "onover" else self.default_outline, 0, 7)
+                         True else self.default_outline, 0, 7)
 
         pygame.draw.rect(config.CANVAS, self.color, inner_rect, 0, 6)
 

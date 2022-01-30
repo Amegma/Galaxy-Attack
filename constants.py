@@ -94,7 +94,12 @@ class Image:
     MINUS_IMAGE = Assets.image.scale(MINUS_IMAGE, 1/6)
 
     PAUSE_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'pause.png')
-    PAUSE_IMAGE = Assets.image.scale(PAUSE_IMAGE, 1/7)
+    PAUSE_IMAGE = Assets.image.scale(PAUSE_IMAGE, 2/7)
+    PLAY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'play.png')
+    PLAY_IMAGE = Assets.image.scale(PLAY_IMAGE, 2/7)
+
+    HOME_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'home.png')
+    HOME_IMAGE = Assets.image.scale(HOME_IMAGE, 1/3)
 
 
 class Sound:
