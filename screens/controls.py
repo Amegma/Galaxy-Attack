@@ -24,7 +24,7 @@ def controls():
 
         Assets.text.draw(Text.CONTROLS, control_title_font, Colors.BLUE,
                          (config.center_x - 30, 130), True)
-        config.CANVAS.blit(Image.CONTROL_IMAGE, (config.center_x + 95, 120))
+        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 95, 120))
 
         Assets.text.draw('Shoot', control_font, Colors.GREEN,
                          (config.starting_x + 125, 215))

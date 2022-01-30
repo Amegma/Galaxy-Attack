@@ -2,6 +2,7 @@ import pygame
 
 from config import config
 from utils.collide import collide
+from utils.assets import Assets
 
 
 class Laser:
@@ -13,9 +14,8 @@ class Laser:
 
     def draw(self):
         # making laser's coordinates centered in the sprite
-        x_offset, y_offset = self.img.get_size()
-        config.CANVAS.blit(self.img, (config.starting_x +
-                                      self.x-x_offset/2, self.y-y_offset/2))
+        Assets.image.draw(
+            self.img, (config.starting_x + self.x, self.y), True, True)
 
     def move(self, vel):
         self.y += vel

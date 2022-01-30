@@ -25,14 +25,14 @@ def ships():
 
         Assets.text.draw(Text.SHIPS, ships_title_font, Colors.CYAN,
                          (config.center_x, 130), True)
-        config.CANVAS.blit(Image.SHIPS_IMAGE, (config.center_x -
-                                               Image.SHIPS_IMAGE.get_width()//2 - 110, 120))
-        config.CANVAS.blit(Image.SHIPS_IMAGE_2, (config.center_x -
-                                                 Image.SHIPS_IMAGE.get_width()//2 + 110, 129))
+        Assets.image.draw(Image.SHIPS_IMAGE,
+                          (config.center_x - 110, 120), True)
+        Assets.image.draw(Image.SHIPS_IMAGE_2,
+                          (config.center_x + 110, 129), True)
 
         # Name: Easy Spaceship; Health: 100; Damage: 10;
-        config.CANVAS.blit(Image.EASY_SPACE_SHIP, (config.center_x -
-                                                   Image.EASY_SPACE_SHIP.get_width()//2 - 270, 235))
+        Assets.image.draw(Image.EASY_SPACE_SHIP,
+                          (config.center_x - 270, 235), True)
         Assets.text.draw('Easy Spaceship', ships_info_font, Colors.BLUE,
                          (config.center_x - 210, 220))
         Assets.text.draw('Health: 100', ships_info_font,
@@ -41,8 +41,8 @@ def ships():
                          Colors.RED, (config.center_x - 210, 274))
 
         # Name: Medium Spaceship; Health: 100; Damage: 18;
-        config.CANVAS.blit(Image.MEDIUM_SPACE_SHIP, (config.center_x -
-                                                     Image.MEDIUM_SPACE_SHIP.get_width()//2 - 270, 320))
+        Assets.image.draw(Image.MEDIUM_SPACE_SHIP,
+                          (config.center_x - 270, 320), True)
         Assets.text.draw('Medium Spaceship', ships_info_font, Colors.BLUE,
                          (config.center_x - 210, 315))
         Assets.text.draw('Health: 100', ships_info_font,
@@ -51,8 +51,8 @@ def ships():
                          Colors.RED, (config.center_x - 210, 369))
 
         # Name: Hard Spaceship; Health: 100; Damage: 25;
-        config.CANVAS.blit(Image.HARD_SPACE_SHIP, (config.center_x -
-                                                   Image.HARD_SPACE_SHIP.get_width()//2 - 270, 435))
+        Assets.image.draw(Image.HARD_SPACE_SHIP,
+                          (config.center_x - 270, 435), True)
         Assets.text.draw('Hard Spaceship', ships_info_font, Colors.BLUE,
                          (config.center_x - 210, 425))
         Assets.text.draw('Health: 100', ships_info_font,
@@ -61,12 +61,12 @@ def ships():
                          Colors.RED, (config.center_x - 210, 479))
 
         # Name: Your Spaceship; Lives: 5; Health: 100; Damage: 100
-        config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (config.center_x -
-                           Image.PLAYER_SPACE_SHIP.get_width()//2 + 260, 290))
+        Assets.image.draw(Image.PLAYER_SPACE_SHIP,
+                          (config.center_x + 260, 290), True)
         Assets.text.draw('Your Spaceship', ships_info_font, Colors.BLUE,
                          (config.center_x + 70, 285))
         for index in range(1, 6):
-            config.CANVAS.blit(
+            Assets.image.draw(
                 NEW_HEART_IMAGE, (config.center_x + 45 + 25 * index, 312))
         Assets.text.draw('Health: 100', ships_info_font,
                          Colors.GREEN, (config.center_x + 70, 339))
@@ -74,8 +74,7 @@ def ships():
                          Colors.RED, (config.center_x + 70, 366))
 
         # Name: Boss Spaceship; Health: 1980; Damage: 100;
-        config.CANVAS.blit(Image.BOSS_SHIP, (config.center_x -
-                           Image.BOSS_SHIP.get_width()//2, 450))
+        Assets.image.draw(Image.BOSS_SHIP, (config.center_x, 450), True)
         Assets.text.draw('Boss Spaceship', ships_info_font, Colors.BLUE,
                          (config.center_x + 150, 525))
         Assets.text.draw('Health: 1980', ships_info_font,

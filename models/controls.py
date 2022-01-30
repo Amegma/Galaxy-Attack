@@ -48,16 +48,16 @@ class AudioControls:
         control_font = pygame.font.Font(Font.neue_font, 30)
 
         if self.muted:
-            config.CANVAS.blit(Image.MUTE_ICON,
-                               (config.starting_x + 20, config.ending_y - 52))
+            Assets.image.draw(
+                Image.MUTE_ICON, (config.starting_x+20, config.ending_y-52))
             vol_lbl_text = " --"
         else:
-            config.CANVAS.blit(Image.VOL_ICON,
-                               (config.starting_x + 20, config.ending_y - 52))
+            Assets.image.draw(
+                Image.VOL_ICON, (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
         Assets.text.draw(vol_lbl_text, control_font, Colors.WHITE,
-                  (config.starting_x + 70, config.ending_y - 57))
+                         (config.starting_x + 70, config.ending_y - 57))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)

@@ -1,4 +1,5 @@
 from config import config
+from utils.assets import Assets
 
 
 class ScrollBackground():
@@ -21,9 +22,8 @@ class ScrollBackground():
             self.bgY2 = - self.rectBGimg.height
 
     def render(self):
-        x = config.center_x - self.rectBGimg.width / 2
-        config.CANVAS.blit(self.bgimage, (x, self.bgY1))
-        config.CANVAS.blit(self.bgimage, (x, self.bgY2))
+        Assets.image.draw(self.bgimage, (config.center_x, self.bgY1), True)
+        Assets.image.draw(self.bgimage, (config.center_x, self.bgY2), True)
 
 
 bg_obj = ScrollBackground(config.BG)

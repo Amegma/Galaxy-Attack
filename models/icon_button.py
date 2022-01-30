@@ -21,13 +21,13 @@ class IconButton:
         if self.outline == True:
             outlineImage(self.image, self.new_pos)
 
-        config.CANVAS.blit(self.image, self.rect)
+        Assets.image.draw(self.image, self.rect)
 
         subtitle_font = pygame.font.Font(Font.neue_font, 20)
 
         if self.subtitle != '':
             Assets.text.draw(self.subtitle, subtitle_font, Colors.WHITE,
-                      (self.pos[0], self.pos[1] + 35), True)
+                             (self.pos[0], self.pos[1] + 35), True)
 
     def isOver(self):
         return self.rect.collidepoint(pygame.mouse.get_pos())

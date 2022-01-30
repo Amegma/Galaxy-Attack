@@ -2,6 +2,7 @@ import pygame
 
 from config import config
 from constants import Colors
+from utils.assets import Assets
 
 
 def outlineImage(image, pos):
@@ -12,15 +13,15 @@ def outlineImage(image, pos):
         mask_surf.set_at(pixel, Colors.WHITE)
     mask_surf.set_colorkey((0, 0, 0))
 
-    config.CANVAS.blit(mask_surf, (pos[0], pos[1]+2))
-    config.CANVAS.blit(mask_surf, (pos[0], pos[1]+1))
-    config.CANVAS.blit(mask_surf, (pos[0], pos[1]-1))
-    config.CANVAS.blit(mask_surf, (pos[0], pos[1]-2))
-    config.CANVAS.blit(mask_surf, (pos[0]+2, pos[1]))
-    config.CANVAS.blit(mask_surf, (pos[0]+1, pos[1]))
-    config.CANVAS.blit(mask_surf, (pos[0]-1, pos[1]))
-    config.CANVAS.blit(mask_surf, (pos[0]-2, pos[1]))
-    config.CANVAS.blit(mask_surf, (pos[0]+1, pos[1]+1))
-    config.CANVAS.blit(mask_surf, (pos[0]+1, pos[1]-1))
-    config.CANVAS.blit(mask_surf, (pos[0]-1, pos[1]+1))
-    config.CANVAS.blit(mask_surf, (pos[0]-1, pos[1]-1))
+    Assets.image.draw(mask_surf, (pos[0], pos[1]+2))
+    Assets.image.draw(mask_surf, (pos[0], pos[1]+1))
+    Assets.image.draw(mask_surf, (pos[0], pos[1]-1))
+    Assets.image.draw(mask_surf, (pos[0], pos[1]-2))
+    Assets.image.draw(mask_surf, (pos[0]+2, pos[1]))
+    Assets.image.draw(mask_surf, (pos[0]+1, pos[1]))
+    Assets.image.draw(mask_surf, (pos[0]-1, pos[1]))
+    Assets.image.draw(mask_surf, (pos[0]-2, pos[1]))
+    Assets.image.draw(mask_surf, (pos[0]+1, pos[1]+1))
+    Assets.image.draw(mask_surf, (pos[0]+1, pos[1]-1))
+    Assets.image.draw(mask_surf, (pos[0]-1, pos[1]+1))
+    Assets.image.draw(mask_surf, (pos[0]-1, pos[1]-1))

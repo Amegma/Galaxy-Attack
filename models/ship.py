@@ -1,5 +1,6 @@
 import pygame
 
+from utils.assets import Assets
 from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg
@@ -28,9 +29,8 @@ class Ship:
             laser.draw()
 
         # making ship's coordinates centered in the sprite
-        x_offset, y_offset = self.ship_img.get_size()
-        config.CANVAS.blit(self.ship_img, (config.starting_x+self.x -
-                                           x_offset/2, self.y-y_offset/2))
+        Assets.image.draw(
+            self.ship_img, (config.starting_x+self.x, self.y), True, True)
 
     def move_lasers(self, vel, obj):
         self.coolDown()

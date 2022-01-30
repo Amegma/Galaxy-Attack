@@ -41,7 +41,7 @@ def main():
     control_btn = IconButton(
         Image.CONTROL_IMAGE, (config.starting_x + 65, 53), Text.CONTROLS)
     ships_btn = IconButton(
-        Image.SHIPS_IMAGE, (config.starting_x+65, 165), Text.SHIPS)
+        Image.SHIPS_IMAGE, (config.starting_x + 65, 165), Text.SHIPS)
     trophy_btn = IconButton(
         Image.TROPHY_IMAGE, (config.ending_x - 65, 55), Text.SCOREBOARD)
     settings_btn = IconButton(
@@ -58,13 +58,10 @@ def main():
         slow_bg_obj.render()
 
         # Ships
-        config.CANVAS.blit(Image.BOSS_SHIP, (config.center_x -
-                           Image.BOSS_SHIP.get_width()//2, 110))
-        config.CANVAS.blit(Image.FLAME_LASER, (config.center_x -
-                           Image.FLAME_LASER.get_width()//2, 360))
-        config.CANVAS.blit(Image.PLAYER_SPACE_SHIP, (config.center_x-46, 575))
-        config.CANVAS.blit(Image.PLAYER_LASER, (config.center_x -
-                           Image.PLAYER_LASER.get_width()//2, 490))
+        Assets.image.draw(Image.BOSS_SHIP, (config.center_x, 110), True)
+        Assets.image.draw(Image.FLAME_LASER, (config.center_x, 360), True)
+        Assets.image.draw(Image.PLAYER_SPACE_SHIP, (config.center_x-46, 575))
+        Assets.image.draw(Image.PLAYER_LASER, (config.center_x, 490), True)
 
         mouse_btn.draw()
         keyboard_btn.draw()
@@ -88,8 +85,7 @@ def main():
 
         exit_btn.draw()
 
-        config.CANVAS.blit(Image.TITLE_LOGO, (config.center_x -
-                           Image.TITLE_LOGO.get_width()//2, 50))
+        Assets.image.draw(Image.TITLE_LOGO, (config.center_x, 50), True)
 
         pygame.display.update()
         config.clock.tick(config.FPS)  # capping frame rate to 60

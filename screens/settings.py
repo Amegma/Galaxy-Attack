@@ -25,16 +25,16 @@ def settings():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SETTINGS, settings_title_font, Colors.YELLOW,
-                  (config.center_x, 130), True)
-        config.CANVAS.blit(Image.TOOLS_IMAGE, (config.center_x -
-                                               Image.TOOLS_IMAGE.get_width()//2 - 150, 120))
-        config.CANVAS.blit(Image.TOOLBOX_IMAGE, (config.center_x -
-                                                 Image.TOOLBOX_IMAGE.get_width()//2 + 150, 129))
+                         (config.center_x, 130), True)
+        Assets.image.draw(Image.TOOLS_IMAGE,
+                          (config.center_x - 150, 120), True)
+        Assets.image.draw(Image.TOOLBOX_IMAGE,
+                          (config.center_x + 150, 129), True)
 
         Assets.text.draw('VOLUME', settings_left_font, Colors.GREEN,
-                  (config.center_x - 160, 240), True)
+                         (config.center_x - 160, 240), True)
         Assets.text.draw(f'{audio_cfg.volume}', settings_right_font, Colors.WHITE,
-                  (config.center_x + 155, 240), True)
+                         (config.center_x + 155, 240), True)
 
         go_back_btn.draw()
 

@@ -25,7 +25,7 @@ def score_board():
 
         Assets.text.draw(Text.SCOREBOARD_2, score_title_font, Colors.GREEN,
                          (config.center_x - 30, 168), True)
-        config.CANVAS.blit(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
+        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
 
         if len(score_list) == 0:
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,

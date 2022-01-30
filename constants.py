@@ -27,11 +27,10 @@ class Path:
 
 class Font:
     # FONT VARS
-    edit_undo_font = resource_path(
-        os.path.join(Path.FONT_PATH, 'edit_undo.ttf'))
-    neue_font = resource_path(os.path.join(Path.FONT_PATH, 'neue.ttf'))
-    karmatic_arcade_font = resource_path(
-        os.path.join(Path.FONT_PATH, 'karmatic_arcade.ttf'))
+    edit_undo_font = Assets.font.load(Path.FONT_PATH, 'edit_undo.ttf')
+    neue_font = Assets.font.load(Path.FONT_PATH, 'neue.ttf')
+    karmatic_arcade_font = Assets.font.load(
+        Path.FONT_PATH, 'karmatic_arcade.ttf')
 
 
 class Image:
@@ -121,7 +120,7 @@ class Colors:
     GREEN2 = (0, 209, 0)
     RED = (255, 0, 0)
     YELLOW = (255, 255, 0)
-    CYAN = (0, 255, 255)  # CYAN
+    CYAN = (0, 255, 255)
     MAGENTA = (255, 0, 255)
     PURPLE = (131, 1, 123)
     ORANGE = (238, 98, 17)

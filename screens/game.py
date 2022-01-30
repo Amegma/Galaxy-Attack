@@ -58,28 +58,28 @@ def game(isMouse=False):
 
         # Lives
         for index in range(1, lives + 1):
-            config.CANVAS.blit(
-                Image.HEART_IMAGE, (config.starting_x + 37 * index - 10, 30))
+            Assets.image.draw(Image.HEART_IMAGE,
+                              (config.starting_x + 37 * index - 10, 30))
 
         # Draw Text
         Assets.text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
-                  (config.starting_x + 35, 75))
+                         (config.starting_x + 35, 75))
         Assets.text.draw(f'{player.get_score()}', sub_font, Colors.GREEN,
-                  (config.ending_x - 40, 20), True)
+                         (config.ending_x - 40, 20), True)
 
         if win:
             score_list.append(player.get_score())
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN2,
-                      (config.center_x, 350), True)
+                             (config.center_x, 350), True)
 
         if lost:
             score_list.append(player.get_score())
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
-                      (config.center_x, 350), True)
+                             (config.center_x, 350), True)
 
         if level >= 10 and boss_entry:
             Assets.text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
-                      (config.center_x, 350), True)
+                             (config.center_x, 350), True)
 
         # explosion group
         explosion_group.draw(config.CANVAS)
@@ -198,10 +198,10 @@ def paused(player):
     sub_font = pygame.font.Font(Font.neue_font, 40)
 
     Assets.text.draw('Game Paused', main_font, Colors.CYAN,
-              (config.center_x, 350), True)
+                     (config.center_x, 350), True)
 
     Assets.text.draw('Press [p] to unpause', sub_font, Colors.BLUE,
-              (config.center_x, 400), True)
+                     (config.center_x, 400), True)
 
     while pause:
         for event in pygame.event.get():
