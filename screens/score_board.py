@@ -47,6 +47,11 @@ def score_board():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
+
+            if event.type == pygame.VIDEORESIZE:
+                if not display_cfg.fullscreen:
+                    config.update(event.w, event.h)
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
@@ -55,6 +60,8 @@ def score_board():
                 if event.key == pygame.K_MINUS:
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
+                    config.update(
+                        config.monitor_size[0], config.monitor_size[1])
                     display_cfg.toggle_full_screen()
                 if event.key == pygame.K_BACKSPACE:
                     run = False

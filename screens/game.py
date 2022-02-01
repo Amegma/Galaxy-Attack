@@ -210,13 +210,14 @@ def game(isMouse=False):
 def paused(player, isMouse):
     main_font = pygame.font.Font(Font.edit_undo_font, 60)
 
-    Assets.text.draw('Game Paused', main_font, Colors.CYAN,
-                     (config.center_x, 300), True)
+    pause_label = Assets.text.render('Paused', main_font, Colors.CYAN)
+    Assets.text.drawSurface(
+        pause_label, (config.center_x - pause_label.get_width()//2, 300))
 
     play_2_btn = IconButton(
-        Image.PLAY_IMAGE_2, (config.center_x-106, 400), '')
+        Image.PLAY_IMAGE_2, (config.center_x-84, 400), '')
     home_btn = IconButton(
-        Image.HOME_IMAGE, (config.center_x+91, 400), '')
+        Image.HOME_IMAGE, (config.center_x+66, 400), '')
 
     home_btn.draw()
     play_2_btn.draw()

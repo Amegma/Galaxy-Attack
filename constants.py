@@ -79,10 +79,10 @@ class Image:
     TOOLS_IMAGE = Assets.image.scale(TOOLS_IMAGE, 1/4)
     TOOLS_IMAGE = pygame.transform.rotate(TOOLS_IMAGE, -45)
 
-    GO_BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back2.png')
+    GO_BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back_arrow.png')
     GO_BACK_IMAGE = Assets.image.scale(GO_BACK_IMAGE, 6/25)
 
-    EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'ExitButton.png')
+    EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'exit_button.png')
     EXIT_IMAGE = Assets.image.scale(EXIT_IMAGE, 1/3)
 
     # Other Images
@@ -102,6 +102,12 @@ class Image:
 
     HOME_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'home.png')
     HOME_IMAGE = Assets.image.scale(HOME_IMAGE, 2/5)
+
+    NEXT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'next_button.png')
+    NEXT_IMAGE = Assets.image.scale(NEXT_IMAGE, 1/3)
+
+    BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back_button.png')
+    BACK_IMAGE = Assets.image.scale(BACK_IMAGE, 1/3)
 
 
 class Sound:

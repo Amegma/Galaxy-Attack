@@ -17,6 +17,8 @@ def controls():
     keys_font = pygame.font.Font(Font.neue_font, 30)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
+    back_btn = IconButton(Image.BACK_IMAGE, (config.center_x - 30, 60))
+    next_btn = IconButton(Image.NEXT_IMAGE, (config.center_x + 95, 60))
 
     while run:
         slow_bg_obj.update()
@@ -71,6 +73,8 @@ def controls():
         Assets.text.draw('[f]', keys_font, Colors.RED,
                          (config.starting_x + 470, 655))
 
+        back_btn.draw()
+        next_btn.draw()
         go_back_btn.draw()
 
         audio_cfg.display_volume()
@@ -82,6 +86,11 @@ def controls():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
+
+            if event.type == pygame.VIDEORESIZE:
+                if not display_cfg.fullscreen:
+                    config.update(event.w, event.h)
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     audio_cfg.toggle_mute()
@@ -90,6 +99,8 @@ def controls():
                 if event.key == pygame.K_MINUS:
                     audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
+                    config.update(
+                        config.monitor_size[0], config.monitor_size[1])
                     display_cfg.toggle_full_screen()
                 if event.key == pygame.K_BACKSPACE:
                     run = False
@@ -106,6 +117,16 @@ def controls():
                     go_back_btn.outline = True
                 else:
                     go_back_btn.outline = False
+
+                if back_btn.isOver():
+                    back_btn.outline = True
+                else:
+                    back_btn.outline = False
+
+                if next_btn.isOver():
+                    next_btn.outline = True
+                else:
+                    next_btn.outline = False
 
         # keys = pygame.key.get_pressed()
         # if keys[pygame.K_BACKSPACE]:
