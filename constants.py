@@ -34,8 +34,7 @@ class Font:
 
 
 class Image:
-    TITLE_LOGO = Assets.image.load(Path.GRAPHICS_PATH, 'title_logo.png')
-    TITLE_LOGO = Assets.image.scale(TITLE_LOGO, 2/7)
+    TITLE_LOGO = Assets.image.scale(Path.GRAPHICS_PATH, 'title_logo.png', 2/7)
 
     # Load Enemy Ships
     EASY_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'easy.png')
@@ -43,8 +42,7 @@ class Image:
     HARD_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'hard.png')
     BOSS_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'boss.png')
 
-    UFO_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'ufo.png')
-    UFO_SPACE_SHIP = Assets.image.scale(UFO_SPACE_SHIP, 1/7)
+    UFO_SPACE_SHIP = Assets.image.scale(Path.GRAPHICS_PATH, 'ufo.png', 1/7)
 
     # Load Player
     PLAYER_SPACE_SHIP = Assets.image.load(
@@ -64,53 +62,40 @@ class Image:
     VOL_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'audio.png')
     MUTE_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'mute.png')
 
-    DEMON_ICON = Assets.image.load(Path.GRAPHICS_PATH, 'demon.png')
-    DEMON_ICON = Assets.image.scale(DEMON_ICON, 1/11)
+    DEMON_ICON = Assets.image.scale(Path.GRAPHICS_PATH, 'demon.png', 1/11)
 
     # Screen Images
     CONTROL_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'joystick.png')
     TROPHY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'trophy.png')
-    SHIPS_IMAGE = Assets.image.scale(MEDIUM_SPACE_SHIP, 5/6)
-    SHIPS_IMAGE_2 = Assets.image.scale(HARD_SPACE_SHIP, 3/4)
-    TOOLBOX_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'toolbox.png')
-    TOOLBOX_IMAGE = Assets.image.scale(TOOLBOX_IMAGE, 1/2)
+    SHIPS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'medium.png', 5/6)
+    SHIPS_IMAGE_2 = Assets.image.scale(Path.GRAPHICS_PATH, 'hard.png', 3/4)
+    TOOLBOX_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'toolbox.png', 1/2)
 
-    TOOLS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'tools.png')
-    TOOLS_IMAGE = Assets.image.scale(TOOLS_IMAGE, 1/4)
+    TOOLS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'tools.png', 1/4)
     TOOLS_IMAGE = pygame.transform.rotate(TOOLS_IMAGE, -45)
 
-    GO_BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back_arrow.png')
-    GO_BACK_IMAGE = Assets.image.scale(GO_BACK_IMAGE, 6/25)
+    GO_BACK_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'back_arrow.png', 6/25)
 
-    EXIT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'exit_button.png')
-    EXIT_IMAGE = Assets.image.scale(EXIT_IMAGE, 1/3)
+    EXIT_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'exit_button.png', 1/3)
 
     # Other Images
     HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
 
-    PLUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'plus.png')
-    PLUS_IMAGE = Assets.image.scale(PLUS_IMAGE, 1/6)
-    MINUS_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'minus.png')
-    MINUS_IMAGE = Assets.image.scale(MINUS_IMAGE, 1/6)
+    PLUS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'plus.png', 1/6)
+    MINUS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'minus.png', 1/6)
 
-    PAUSE_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'pause.png')
-    PAUSE_IMAGE = Assets.image.scale(PAUSE_IMAGE, 2/7)
-    PLAY_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'play.png')
-    PLAY_IMAGE = Assets.image.scale(PLAY_IMAGE, 2/7)
-    PLAY_IMAGE_2 = Assets.image.load(Path.GRAPHICS_PATH, 'play.png')
-    PLAY_IMAGE_2 = Assets.image.scale(PLAY_IMAGE_2, 1/2.9)
+    PAUSE_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'pause.png', 2/7)
+    PLAY_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'play.png', 2/7)
+    PLAY_IMAGE_2 = Assets.image.scale(Path.GRAPHICS_PATH, 'play.png', 1/2.9)
 
-    HOME_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'home.png')
-    HOME_IMAGE = Assets.image.scale(HOME_IMAGE, 2/5)
+    HOME_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'home.png', 2/5)
 
-    NEXT_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'next_button.png')
-    NEXT_IMAGE = Assets.image.scale(NEXT_IMAGE, 1/3)
+    NEXT_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'next_button.png', 1/3)
 
-    BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back_button.png')
-    BACK_IMAGE = Assets.image.scale(BACK_IMAGE, 1/3)
+    BACK_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'back_button.png', 1/3)
 
-    WASD_KEYS = Assets.image.load(Path.GRAPHICS_PATH, 'wasd_keys.png')
-    WASD_KEYS = Assets.image.scale(WASD_KEYS, 1/2)
+    WASD_KEYS = Assets.image.scale(Path.GRAPHICS_PATH, 'wasd_keys.png', 1/2)
 
 
 class Sound:

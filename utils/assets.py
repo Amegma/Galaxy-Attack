@@ -27,7 +27,10 @@ class Assets:
         def load(root_path, image_path):
             return pygame.image.load(resource_path(os.path.join(root_path, image_path)))
 
-        def scale(image, factor):
+        def scale(root_path, image_path, factor):
+            image = pygame.image.load(resource_path(
+                os.path.join(root_path, image_path)))
+
             return pygame.transform.scale(image, (image.get_width()*factor, image.get_height()*factor))
 
         def draw(image, pos, isCenterX=False, isCenterY=False):
