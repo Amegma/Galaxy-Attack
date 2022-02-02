@@ -12,6 +12,9 @@ from constants import Image, Font, Colors, Text
 def controls():
     run = True
 
+    current_page = 1
+    total_pages = 2
+
     control_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     control_font = pygame.font.Font(Font.neue_font, 30)
     keys_font = pygame.font.Font(Font.neue_font, 30)
@@ -20,14 +23,30 @@ def controls():
     back_btn = IconButton(Image.BACK_IMAGE, (config.center_x - 30, 60))
     next_btn = IconButton(Image.NEXT_IMAGE, (config.center_x + 95, 60))
 
-    while run:
-        slow_bg_obj.update()
-        slow_bg_obj.render()
+    def pageOne():
+        Assets.text.draw('Shoot', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 215))
+        Assets.text.draw('[spacebar]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 215))
 
-        Assets.text.draw(Text.CONTROLS, control_title_font, Colors.BLUE,
-                         (config.center_x - 30, 130), True)
-        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 95, 120))
+        Assets.text.draw('Move Left', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 270))
+        Assets.text.draw('[left] or [a]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 270))
 
+        Assets.text.draw('Move Right', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 325))
+        Assets.text.draw('[right] or [d]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 325))
+
+        Assets.text.draw('Move Down', control_font, Colors.GREEN,
+                         (config.starting_x + 125, 380))
+        Assets.text.draw('[down] or [s]', keys_font, Colors.RED,
+                         (config.starting_x + 470, 380))
+
+        Assets.image.draw(Image.WASD_KEYS, (config.center_x, 500))
+
+    def pageTwo():
         Assets.text.draw('Shoot', control_font, Colors.GREEN,
                          (config.starting_x + 125, 215))
         Assets.text.draw('[spacebar]', keys_font, Colors.RED,
@@ -73,6 +92,19 @@ def controls():
         Assets.text.draw('[f]', keys_font, Colors.RED,
                          (config.starting_x + 470, 655))
 
+    while run:
+        slow_bg_obj.update()
+        slow_bg_obj.render()
+
+        if current_page == 2:
+            pageTwo()
+        else:
+            pageOne()
+
+        Assets.text.draw(Text.CONTROLS, control_title_font, Colors.BLUE,
+                         (config.center_x - 30, 130), True)
+        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 95, 120))
+
         back_btn.draw()
         next_btn.draw()
         go_back_btn.draw()
@@ -110,6 +142,16 @@ def controls():
                 if event.button == 1:
                     if go_back_btn.isOver():
                         run = False
+                    if back_btn.isOver():
+                        if current_page == 1:
+                            current_page = total_pages
+                        else:
+                            current_page -= 1
+                    if next_btn.isOver():
+                        if current_page == total_pages:
+                            current_page = 1
+                        else:
+                            current_page += 1
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
@@ -127,7 +169,3 @@ def controls():
                     next_btn.outline = True
                 else:
                     next_btn.outline = False
-
-        # keys = pygame.key.get_pressed()
-        # if keys[pygame.K_BACKSPACE]:
-        #     run = False

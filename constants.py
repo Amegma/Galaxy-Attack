@@ -109,6 +109,9 @@ class Image:
     BACK_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'back_button.png')
     BACK_IMAGE = Assets.image.scale(BACK_IMAGE, 1/3)
 
+    WASD_KEYS = Assets.image.load(Path.GRAPHICS_PATH, 'wasd_keys.png')
+    WASD_KEYS = Assets.image.scale(WASD_KEYS, 1/2)
+
 
 class Sound:
     PLAYER_LASER_SOUND = Assets.sound.load(Path.SOUND_PATH, 'ownlaser.wav')
