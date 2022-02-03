@@ -16,7 +16,7 @@ def score_board():
     score_list.sort()
     score_list.reverse()
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE)
 
     run = True
     while run:
@@ -37,7 +37,7 @@ def score_board():
                              (config.center_x-20, 250 + i * 40), True)
             i += 1
 
-        go_back_btn.draw()
+        go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
         audio_cfg.display_volume()
         config.clock.tick(config.FPS)

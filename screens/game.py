@@ -17,7 +17,7 @@ from constants import Path, Image, score_list, Font, Colors
 
 pause = False
 
-play_btn = IconButton(Image.PLAY_IMAGE, (config.center_x, 45))
+play_btn = IconButton(Image.PLAY_IMAGE)
 
 
 def game(isMouse=False):
@@ -47,7 +47,7 @@ def game(isMouse=False):
     win = False
     boss_entry = True
 
-    pause_btn = IconButton(Image.PAUSE_IMAGE, (config.center_x, 45))
+    pause_btn = IconButton(Image.PAUSE_IMAGE)
 
     explosion_group.empty()
 
@@ -61,9 +61,9 @@ def game(isMouse=False):
             enemyShip.draw()
 
         if pause == True:
-            play_btn.draw()
+            play_btn.draw((config.center_x, 45), True, True)
         else:
-            pause_btn.draw()
+            pause_btn.draw((config.center_x, 45), True, True)
 
         # Lives
         for index in range(1, lives + 1):
@@ -214,15 +214,13 @@ def paused(player, isMouse):
     Assets.text.drawSurface(
         pause_label, (config.center_x - pause_label.get_width()//2, 300))
 
-    play_2_btn = IconButton(
-        Image.PLAY_IMAGE_2, (config.center_x-84, 400), '')
-    home_btn = IconButton(
-        Image.HOME_IMAGE, (config.center_x+66, 400), '')
-
-    home_btn.draw()
-    play_2_btn.draw()
+    play_2_btn = IconButton(Image.PLAY_IMAGE_2)
+    home_btn = IconButton(Image.HOME_IMAGE)
 
     while pause:
+        home_btn.draw((config.center_x+66, 400), True, True)
+        play_2_btn.draw((config.center_x-84, 400), True, True)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

@@ -96,6 +96,16 @@ class Image:
     BACK_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'back_button.png', 1/3)
 
     WASD_KEYS = Assets.image.scale(Path.GRAPHICS_PATH, 'wasd_keys.png', 1/2)
+    ARROW_KEYS = Assets.image.scale(Path.GRAPHICS_PATH, 'arrow_keys.png', 1/2)
+    BACKSPACE_KEY = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'backspace_key.png', 1/2)
+    SPACEBAR_KEY = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'spacebar_key.png', 1/2)
+    PLUS_KEY = Assets.image.scale(Path.GRAPHICS_PATH, 'plus_key.png', 1/2)
+    MINUS_KEY = Assets.image.scale(Path.GRAPHICS_PATH, 'minus_key.png', 1/2)
+    P_KEY = Assets.image.scale(Path.GRAPHICS_PATH, 'p_key.png', 1/2)
+    F_KEY = Assets.image.scale(Path.GRAPHICS_PATH, 'f_key.png', 1/2)
+    M_KEY = Assets.image.scale(Path.GRAPHICS_PATH, 'mute_key.png', 1/2)
 
 
 class Sound:

@@ -19,32 +19,13 @@ def controls():
     control_font = pygame.font.Font(Font.neue_font, 30)
     keys_font = pygame.font.Font(Font.neue_font, 30)
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
-    back_btn = IconButton(Image.BACK_IMAGE, (config.center_x - 30, 60))
-    next_btn = IconButton(Image.NEXT_IMAGE, (config.center_x + 95, 60))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE)
+    back_btn = IconButton(Image.BACK_IMAGE)
+    next_btn = IconButton(Image.NEXT_IMAGE)
 
     def pageOne():
-        Assets.text.draw('Shoot', control_font, Colors.GREEN,
-                         (config.starting_x + 125, 215))
-        Assets.text.draw('[spacebar]', keys_font, Colors.RED,
-                         (config.starting_x + 470, 215))
-
-        Assets.text.draw('Move Left', control_font, Colors.GREEN,
-                         (config.starting_x + 125, 270))
-        Assets.text.draw('[left] or [a]', keys_font, Colors.RED,
-                         (config.starting_x + 470, 270))
-
-        Assets.text.draw('Move Right', control_font, Colors.GREEN,
-                         (config.starting_x + 125, 325))
-        Assets.text.draw('[right] or [d]', keys_font, Colors.RED,
-                         (config.starting_x + 470, 325))
-
-        Assets.text.draw('Move Down', control_font, Colors.GREEN,
-                         (config.starting_x + 125, 380))
-        Assets.text.draw('[down] or [s]', keys_font, Colors.RED,
-                         (config.starting_x + 470, 380))
-
-        Assets.image.draw(Image.WASD_KEYS, (config.center_x, 500))
+        Assets.image.draw(Image.WASD_KEYS, (config.center_x-50, 200))
+        Assets.image.draw(Image.ARROW_KEYS, (config.center_x+50, 200))
 
     def pageTwo():
         Assets.text.draw('Shoot', control_font, Colors.GREEN,
@@ -102,12 +83,13 @@ def controls():
             pageOne()
 
         Assets.text.draw(Text.CONTROLS, control_title_font, Colors.BLUE,
-                         (config.center_x - 30, 130), True)
-        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 95, 120))
+                         (config.center_x, 130), True)
+        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 125, 120))
 
-        back_btn.draw()
-        next_btn.draw()
-        go_back_btn.draw()
+        go_back_btn.draw((config.starting_x + 65, 50), True, True)
+        back_btn.draw(
+            (config.center_x-Image.BACK_IMAGE.get_width()-30, config.ending_y-125))
+        next_btn.draw((config.center_x + 30, config.ending_y - 125))
 
         audio_cfg.display_volume()
 

@@ -34,7 +34,7 @@ class Button:
         if self.text != '':
             font = pygame.font.Font(Font.neue_font, 40)
             Assets.text.draw(self.text, font, Colors.WHITE,
-                      (self.pos[0] + self.size[0]/2, self.pos[1] + self.size[1]/2), True, True)
+                             (self.pos[0] + self.size[0]/2, self.pos[1] + self.size[1]/2), True, True)
 
     def isOver(self):
         return self.rect.collidepoint(pygame.mouse.get_pos())

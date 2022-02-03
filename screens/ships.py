@@ -13,7 +13,7 @@ def ships():
     ships_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     ships_info_font = pygame.font.Font(Font.neue_font, 22)
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE)
 
     NEW_HEART_IMAGE = pygame.transform.scale(
         Image.HEART_IMAGE, (Image.HEART_IMAGE.get_width()*3/4, Image.HEART_IMAGE.get_height()*3/4))
@@ -82,7 +82,7 @@ def ships():
         Assets.text.draw('Damage: 100', ships_info_font,
                          Colors.RED, (config.center_x + 150, 579))
 
-        go_back_btn.draw()
+        go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
         audio_cfg.display_volume()
         config.clock.tick(config.FPS)
@@ -123,7 +123,3 @@ def ships():
                     go_back_btn.outline = True
                 else:
                     go_back_btn.outline = False
-
-            # keys = pygame.key.get_pressed()
-            # if keys[pygame.K_BACKSPACE]:
-            #     run = False

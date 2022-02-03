@@ -38,21 +38,15 @@ def main():
                        (config.center_x - 210, config.center_y + 42), (195, 66), "MOUSE")
     keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
                           (config.center_x + 15, config.center_y + 42), (195, 66), "KEYBOARD")
-    control_btn = IconButton(
-        Image.CONTROL_IMAGE, (config.starting_x + 65, 53), Text.CONTROLS)
-    ships_btn = IconButton(
-        Image.SHIPS_IMAGE, (config.starting_x + 65, 165), Text.SHIPS)
-    trophy_btn = IconButton(
-        Image.TROPHY_IMAGE, (config.ending_x - 65, 55), Text.SCOREBOARD)
-    settings_btn = IconButton(
-        Image.TOOLBOX_IMAGE, (config.ending_x - 65, 165), Text.SETTINGS)
+    control_btn = IconButton(Image.CONTROL_IMAGE, Text.CONTROLS)
+    ships_btn = IconButton(Image.SHIPS_IMAGE, Text.SHIPS)
+    trophy_btn = IconButton(Image.TROPHY_IMAGE, Text.SCOREBOARD)
+    settings_btn = IconButton(Image.TOOLBOX_IMAGE, Text.SETTINGS)
 
-    exit_btn = IconButton(
-        Image.EXIT_IMAGE, (config.ending_x - 75, config.ending_y - 40))
+    exit_btn = IconButton(Image.EXIT_IMAGE)
 
     run = True
     while run:
-        # print(config.ending_x, config.ending_y)
         pygame.mouse.set_visible(True)
         slow_bg_obj.update()
         slow_bg_obj.render()
@@ -70,20 +64,20 @@ def main():
                          (config.center_x, config.center_y-10), True, True)
 
         # Control Page
-        control_btn.draw()
+        control_btn.draw((config.starting_x + 65, 53), True, True)
 
         # ScoreBoard Page
-        trophy_btn.draw()
+        trophy_btn.draw((config.ending_x - 65, 55), True, True)
 
         # Settings Page
-        settings_btn.draw()
+        settings_btn.draw((config.ending_x - 65, 165), True, True)
 
         # Ships Page
-        ships_btn.draw()
+        ships_btn.draw((config.starting_x + 65, 165), True, True)
 
         audio_cfg.display_volume()
 
-        exit_btn.draw()
+        exit_btn.draw((config.ending_x - 75, config.ending_y - 40), True, True)
 
         Assets.image.draw(Image.TITLE_LOGO, (config.center_x, 50), True)
 

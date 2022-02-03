@@ -14,10 +14,10 @@ def settings():
     settings_right_font = pygame.font.Font(Font.edit_undo_font, 50)
     settings_left_font = pygame.font.Font(Font.edit_undo_font, 46)
 
-    go_back_btn = IconButton(Image.GO_BACK_IMAGE, (config.starting_x + 65, 50))
+    go_back_btn = IconButton(Image.GO_BACK_IMAGE)
 
-    plus_btn = IconButton(Image.PLUS_IMAGE, (config.center_x + 235, 260))
-    minus_btn = IconButton(Image.MINUS_IMAGE, (config.center_x + 70, 260))
+    plus_btn = IconButton(Image.PLUS_IMAGE)
+    minus_btn = IconButton(Image.MINUS_IMAGE)
 
     run = True
     while run:
@@ -36,11 +36,10 @@ def settings():
         Assets.text.draw(f'{audio_cfg.volume}', settings_right_font, Colors.WHITE,
                          (config.center_x + 155, 240), True)
 
-        go_back_btn.draw()
+        go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
-        minus_btn.draw()
-
-        plus_btn.draw()
+        plus_btn.draw((config.center_x + 235, 260), True, True)
+        minus_btn.draw((config.center_x + 70, 260), True, True)
 
         # audio_cfg.display_volume()
         config.clock.tick(config.FPS)

@@ -6,23 +6,25 @@ from utils.assets import Assets
 
 
 class IconButton:
-    def __init__(self, image, pos, subtitle='', usePos=False, outline=False):
+    def __init__(self, image, subtitle='', outline=False):
         self.image = image
-        self.pos = pos
-        self.new_pos = (pos[0] - image.get_width()//2,
-                        pos[1] - image.get_height()//2)
         self.outline = outline
         self.subtitle = subtitle
-        if usePos == True:
-            self.rect = pygame.Rect(
-                self.pos[0], self.pos[1], self.image.get_width(), self.image.get_height())
-        else:
-            self.rect = pygame.Rect(
-                self.new_pos[0], self.new_pos[1], self.image.get_width(), self.image.get_height())
+        self.rect = pygame.Rect(
+            0, 0, self.image.get_width(), self.image.get_height())
 
-    def draw(self):
+    def draw(self, pos, isCenterX=False, isCenterY=False):
+        new_pos = pos
+        if isCenterX == True:
+            new_pos = (new_pos[0] - self.image.get_width()//2, new_pos[1])
+        if isCenterY == True:
+            new_pos = (new_pos[0], new_pos[1] - self.image.get_height()//2)
+
         if self.outline == True:
-            outlineImage(self.image, self.new_pos)
+            outlineImage(self.image, new_pos)
+
+        self.rect = pygame.Rect(
+            new_pos[0], new_pos[1], self.image.get_width(), self.image.get_height())
 
         Assets.image.draw(self.image, self.rect)
 
@@ -30,7 +32,7 @@ class IconButton:
 
         if self.subtitle != '':
             Assets.text.draw(self.subtitle, subtitle_font, Colors.WHITE,
-                             (self.pos[0], self.pos[1] + 35), True)
+                             (pos[0], pos[1] + 35), True)
 
     def isOver(self):
         return self.rect.collidepoint(pygame.mouse.get_pos())
