@@ -17,6 +17,7 @@ def controls():
 
     control_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     control_font = pygame.font.Font(Font.neue_font, 30)
+    control_font_2 = pygame.font.Font(Font.neue_font, 40)
     keys_font = pygame.font.Font(Font.neue_font, 30)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
@@ -24,8 +25,14 @@ def controls():
     next_btn = IconButton(Image.NEXT_IMAGE)
 
     def pageOne():
-        Assets.image.draw(Image.WASD_KEYS, (config.center_x-50, 200))
-        Assets.image.draw(Image.ARROW_KEYS, (config.center_x+50, 200))
+
+        Assets.text.draw('MOVE', control_title_font, Colors.GREEN,
+                         (config.center_x-150, 250), True)
+        Assets.text.draw('OR', control_font_2, Colors.WHITE,
+                         (config.center_x, 445), True)
+        Assets.image.draw(Image.MOUSE, (config.center_x+80, 200))
+        Assets.image.draw(Image.WASD_KEYS, (config.center_x-260, 440))
+        Assets.image.draw(Image.ARROW_KEYS, (config.center_x+50, 440))
 
     def pageTwo():
         Assets.text.draw('Shoot', control_font, Colors.GREEN,
@@ -83,8 +90,8 @@ def controls():
             pageOne()
 
         Assets.text.draw(Text.CONTROLS, control_title_font, Colors.BLUE,
-                         (config.center_x, 130), True)
-        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 125, 120))
+                         (config.center_x, 100), True)
+        Assets.image.draw(Image.CONTROL_IMAGE, (config.center_x + 125, 90))
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
         back_btn.draw(

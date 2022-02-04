@@ -95,6 +95,12 @@ class Image:
 
     BACK_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'back_button.png', 1/3)
 
+    MOUSE = Assets.image.scale(Path.GRAPHICS_PATH, 'mouse.png', 1/2)
+    LEFT_MOUSE_CLICK = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'left_click_mouse.png', 1/2)
+    RIGHT_MOUSE_CLICK = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'right_click_mouse.png', 1/2)
+
     WASD_KEYS = Assets.image.scale(Path.GRAPHICS_PATH, 'wasd_keys.png', 1/2)
     ARROW_KEYS = Assets.image.scale(Path.GRAPHICS_PATH, 'arrow_keys.png', 1/2)
     BACKSPACE_KEY = Assets.image.scale(
