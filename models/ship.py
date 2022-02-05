@@ -12,6 +12,7 @@ class Ship:
     CoolDown = 25
     boss_max_health = 99
     SCORE = 0
+    KILLS = 0
 
     def __init__(self, x, y, health=100):
         self.x = x
@@ -63,6 +64,9 @@ class Ship:
 
     def get_score(self):
         return self.SCORE
+
+    def get_kills(self):
+        return self.KILLS
 
 
 class Player(Ship):
@@ -137,14 +141,17 @@ class Player(Ship):
             else:
                 for obj in objs:
                     if laser.collision(obj):
-                        self.SCORE += 50
                         if obj.ship_type == 'boss':
                             if self.boss_max_health - 10 <= 0:
+                                self.SCORE += 1000
+                                self.KILLS += 1
                                 objs.remove(obj)
                                 self.boss_max_health = 100
                             else:
                                 self.boss_max_health -= 10
                         else:
+                            self.SCORE += 50
+                            self.KILLS += 1
                             # enemy ship death explosion
                             explosion = Explosion(obj.x, obj.y)
                             explosion_group.add(explosion)

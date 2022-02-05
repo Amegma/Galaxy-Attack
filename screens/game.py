@@ -9,7 +9,6 @@ from models.controls import audio_cfg, display_cfg
 from models.icon_button import IconButton
 from utils.collide import collide
 from utils.assets import Assets
-from utils.outlineImage import outlineImage
 from .background import bg_obj
 
 from config import config
@@ -37,7 +36,7 @@ def game(isMouse=False):
     wave_length = 0
     enemy_vel = 1
 
-    player = Player(300, 585, mouse_movement=isMouse)
+    player = Player(config.center_x, 585, mouse_movement=isMouse)
     if isMouse == True:
         pygame.mouse.set_visible(False)
     elif isMouse == False:
@@ -78,12 +77,38 @@ def game(isMouse=False):
         Assets.text.drawSurface(
             score_label, (config.ending_x - score_label.get_width() - 30, 20))
 
+        kills = player.get_kills()
+        leftIdx = 0
+        if kills >= 100:
+            leftIdx = 1
+
+        Assets.image.draw(Image.SKULL_IMAGE,
+                          (config.ending_x - Image.SKULL_IMAGE.get_width() - 85 - leftIdx*15, 82))
+        kills_label = Assets.text.render(
+            f'{kills}', sub_font, Colors.RED)
+        Assets.text.drawSurface(
+            kills_label, (config.ending_x - kills_label.get_width() - 30, 75))
+
         if win:
-            score_list.append(player.get_score())
+            score_obj = {
+                "status": True,
+                "level": level,
+                "score": player.get_score(),
+                "kills": player.get_kills(),
+            }
+            print(score_obj)
+            score_list.append(score_obj)
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
 
         if lost:
+            score_obj = {
+                "status": False,
+                "level": level,
+                "score": player.get_score(),
+                "kills": player.get_kills(),
+            }
+            print(score_obj)
             score_list.append(player.get_score())
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
@@ -107,6 +132,7 @@ def game(isMouse=False):
                 lives -= 1
                 player.health = 100
         else:
+            print('Death Level:', level)
             lost = True
             redraw_window()
             time.sleep(3)
@@ -118,6 +144,7 @@ def game(isMouse=False):
             time.sleep(2)
             boss_entry = False
         elif level > 10:
+            print('WON', level)
             win = True
             redraw_window()
             time.sleep(3)
@@ -179,6 +206,7 @@ def game(isMouse=False):
 
             if collide(enemy, player):
                 player.SCORE += 50
+                player.KILLS += 1
                 if enemy.ship_type == 'boss':
                     if enemy.boss_max_health - 5 <= 0:
                         # note: this is not seen as game is paused as soon as boss health reaches zero

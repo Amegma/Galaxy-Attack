@@ -81,6 +81,7 @@ class Image:
 
     # Other Images
     HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
+    SKULL_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'skull.png', 1/58)
 
     PLUS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'plus.png', 1/6)
     MINUS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'minus.png', 1/6)
