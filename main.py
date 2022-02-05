@@ -34,10 +34,8 @@ def main():
 
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
-    mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
-                       (config.center_x - 210, config.center_y + 42), (195, 66), "MOUSE")
-    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE,
-                          (config.center_x + 15, config.center_y + 42), (195, 66), "KEYBOARD")
+    mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MOUSE")
+    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "KEYBOARD")
     control_btn = IconButton(Image.CONTROL_IMAGE, Text.CONTROLS)
     ships_btn = IconButton(Image.SHIPS_IMAGE, Text.SHIPS)
     trophy_btn = IconButton(Image.TROPHY_IMAGE, Text.SCOREBOARD)
@@ -57,8 +55,10 @@ def main():
         Assets.image.draw(Image.PLAYER_SPACE_SHIP, (config.center_x-46, 575))
         Assets.image.draw(Image.PLAYER_LASER, (config.center_x, 490), True)
 
-        mouse_btn.draw()
-        keyboard_btn.draw()
+        mouse_btn.draw(
+            (config.center_x - 210, config.center_y + 42), (195, 66))
+        keyboard_btn.draw(
+            (config.center_x + 15, config.center_y + 42), (195, 66))
 
         Assets.text.draw('Start Game', title_font, Colors.WHITE,
                          (config.center_x, config.center_y-10), True, True)
