@@ -96,7 +96,6 @@ def game(isMouse=False):
                 "score": player.get_score(),
                 "kills": player.get_kills(),
             }
-            print(score_obj)
             score_list.append(score_obj)
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
@@ -108,8 +107,7 @@ def game(isMouse=False):
                 "score": player.get_score(),
                 "kills": player.get_kills(),
             }
-            print(score_obj)
-            score_list.append(player.get_score())
+            score_list.append(score_obj)
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
@@ -132,7 +130,6 @@ def game(isMouse=False):
                 lives -= 1
                 player.health = 100
         else:
-            print('Death Level:', level)
             lost = True
             redraw_window()
             time.sleep(3)
@@ -144,7 +141,6 @@ def game(isMouse=False):
             time.sleep(2)
             boss_entry = False
         elif level > 10:
-            print('WON', level)
             win = True
             redraw_window()
             time.sleep(3)

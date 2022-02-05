@@ -13,8 +13,7 @@ def score_board():
     score_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     score_font = pygame.font.Font(Font.neue_font, 35)
 
-    score_list.sort()
-    score_list.reverse()
+    scores = sorted(score_list, key=lambda item: item['score'], reverse=True)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
 
@@ -24,17 +23,27 @@ def score_board():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SCOREBOARD, score_title_font, Colors.GREEN,
-                         (config.center_x - 30, 168), True, False, True)
-        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
+                         (config.center_x - 30, 100), True, False, True)
+        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 100))
 
-        if len(score_list) == 0:
+        if len(scores) == 0:
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
-                             (config.center_x, 250), True)
+                             (config.center_x, 190), True)
 
         i = 0
-        for score in score_list[:5]:
-            Assets.text.draw(str(score), score_font, Colors.CYAN,
-                             (config.center_x-20, 250 + i * 40), True)
+        for item in scores[:5]:
+            if item['status']:
+                Assets.image.draw(
+                    Image.WON_IMAGE, (config.center_x-245, 220 + i*100), True, True)
+            else:
+                Assets.image.draw(Image.SKULL_IMAGE_2,
+                                  (config.center_x-245, 220 + i*100), True, True)
+            Assets.text.draw(str(item['level']), score_font, Colors.CYAN,
+                             (config.center_x-105, 200 + i*100), True)
+            Assets.text.draw(str(item['kills']), score_font, Colors.RED,
+                             (config.center_x+52, 200 + i*100), True)
+            Assets.text.draw(str(item['score']), score_font, Colors.YELLOW,
+                             (config.center_x+222, 200 + i*100), True)
             i += 1
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
