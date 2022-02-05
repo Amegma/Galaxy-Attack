@@ -23,8 +23,8 @@ def score_board():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        Assets.text.draw(Text.SCOREBOARD_2, score_title_font, Colors.GREEN,
-                         (config.center_x - 30, 168), True)
+        Assets.text.draw(Text.SCOREBOARD, score_title_font, Colors.GREEN,
+                         (config.center_x - 30, 168), True, False, True)
         Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
 
         if len(score_list) == 0:
@@ -41,7 +41,7 @@ def score_board():
 
         audio_cfg.display_volume()
         config.clock.tick(config.FPS)
-        pygame.display.update()
+        pygame.display.flip()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

@@ -25,7 +25,7 @@ def settings():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SETTINGS, settings_title_font, Colors.YELLOW,
-                         (config.center_x, 130), True)
+                         (config.center_x, 130), True, False, True)
         Assets.image.draw(Image.TOOLS_IMAGE,
                           (config.center_x - 150, 120), True)
         Assets.image.draw(Image.TOOLBOX_IMAGE,
@@ -43,7 +43,7 @@ def settings():
 
         # audio_cfg.display_volume()
         config.clock.tick(config.FPS)
-        pygame.display.update()
+        pygame.display.flip()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

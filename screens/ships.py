@@ -24,7 +24,7 @@ def ships():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SHIPS, ships_title_font, Colors.CYAN,
-                         (config.center_x, 100), True)
+                         (config.center_x, 100), True, False, True)
         Assets.image.draw(Image.SHIPS_IMAGE,
                           (config.center_x - 110, 90), True)
         Assets.image.draw(Image.SHIPS_IMAGE_2,
@@ -86,7 +86,7 @@ def ships():
 
         audio_cfg.display_volume()
         config.clock.tick(config.FPS)
-        pygame.display.update()
+        pygame.display.flip()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

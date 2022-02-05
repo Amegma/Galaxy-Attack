@@ -97,7 +97,7 @@ def game(isMouse=False):
         explosion_group.update()
 
         audio_cfg.display_volume()
-        pygame.display.update()
+        pygame.display.flip()
         config.clock.tick(config.FPS)
 
     while player.run:
@@ -257,7 +257,7 @@ def paused(player, isMouse):
                     unpause()
                     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
-        pygame.display.update()
+        pygame.display.flip()
         config.clock.tick(15)
 
 

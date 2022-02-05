@@ -81,7 +81,7 @@ def main():
 
         Assets.image.draw(Image.TITLE_LOGO, (config.center_x, 50), True)
 
-        pygame.display.update()
+        pygame.display.flip()
         config.clock.tick(config.FPS)  # capping frame rate to 60
 
         for event in pygame.event.get():
