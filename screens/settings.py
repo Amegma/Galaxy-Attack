@@ -6,40 +6,42 @@ from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
 from utils.assets import Assets
 from config import config
-from constants import Image, score_list, Font, Text, Colors
+from constants import Image, Font, Colors, Text
 
 
-def score_board():
-    score_title_font = pygame.font.Font(Font.edit_undo_font, 50)
-    score_font = pygame.font.Font(Font.neue_font, 35)
-
-    score_list.sort()
-    score_list.reverse()
+def settings():
+    settings_title_font = pygame.font.Font(Font.edit_undo_font, 50)
+    settings_right_font = pygame.font.Font(Font.edit_undo_font, 50)
+    settings_left_font = pygame.font.Font(Font.edit_undo_font, 46)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
+
+    plus_btn = IconButton(Image.PLUS_IMAGE)
+    minus_btn = IconButton(Image.MINUS_IMAGE)
 
     run = True
     while run:
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        Assets.text.draw(Text.SCOREBOARD, score_title_font, Colors.GREEN,
-                         (config.center_x - 30, 168), True, False, True)
-        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
+        Assets.text.draw(Text.SETTINGS, settings_title_font, Colors.YELLOW,
+                         (config.center_x, 130), True, False, True)
+        Assets.image.draw(Image.TOOLS_IMAGE,
+                          (config.center_x - 150, 120), True)
+        Assets.image.draw(Image.TOOLBOX_IMAGE,
+                          (config.center_x + 150, 129), True)
 
-        if len(score_list) == 0:
-            Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
-                             (config.center_x, 250), True)
-
-        i = 0
-        for score in score_list[:5]:
-            Assets.text.draw(str(score), score_font, Colors.CYAN,
-                             (config.center_x-20, 250 + i * 40), True)
-            i += 1
+        Assets.text.draw('VOLUME', settings_left_font, Colors.GREEN,
+                         (config.center_x - 160, 240), True)
+        Assets.text.draw(f'{audio_cfg.volume}', settings_right_font, Colors.WHITE,
+                         (config.center_x + 155, 240), True)
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
-        audio_cfg.display_volume()
+        plus_btn.draw((config.center_x + 235, 260), True, True)
+        minus_btn.draw((config.center_x + 70, 260), True, True)
+
+        # audio_cfg.display_volume()
         config.clock.tick(config.FPS)
         pygame.display.flip()
 
@@ -53,12 +55,6 @@ def score_board():
                     config.update(event.w, event.h)
 
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_m:
-                    audio_cfg.toggle_mute()
-                if event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
-                    audio_cfg.inc_volume(5)
-                if event.key == pygame.K_MINUS:
-                    audio_cfg.dec_volume(5)
                 if event.key == pygame.K_f:
                     config.update(
                         config.monitor_size[0], config.monitor_size[1])
@@ -71,6 +67,10 @@ def score_board():
                 if event.button == 1:
                     if go_back_btn.isOver():
                         run = False
+                    if plus_btn.isOver():
+                        audio_cfg.inc_volume(5)
+                    if minus_btn.isOver():
+                        audio_cfg.dec_volume(5)
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:

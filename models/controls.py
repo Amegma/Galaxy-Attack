@@ -1,14 +1,14 @@
-import os
 import pygame
 
-from config import Config
-from constants import Image, soundList, Font
+from utils.assets import Assets
+from config import config
+from constants import Image, soundList, Font, Colors
 
 
 class AudioControls:
     def __init__(self, soundList):
         self.soundList = soundList
-        self.volume = 100
+        self.volume = 0
         self.muted = True if self.volume == 0 else False
         self.prev_volume = -1
 
@@ -44,18 +44,20 @@ class AudioControls:
             self.prev_volume = self.volume
             self.set_volume(0)
 
-    def display_volume(self, CANVAS):
+    def display_volume(self):
         control_font = pygame.font.Font(Font.neue_font, 30)
 
         if self.muted:
-            CANVAS.blit(Image.MUTE_ICON, (Config.starting_x + 20, 695))
+            Assets.image.draw(
+                Image.MUTE_ICON, (config.starting_x+20, config.ending_y-52))
             vol_lbl_text = " --"
         else:
-            CANVAS.blit(Image.VOL_ICON, (Config.starting_x + 20, 695))
+            Assets.image.draw(
+                Image.VOL_ICON, (config.starting_x + 20, config.ending_y - 52))
             vol_lbl_text = str(self.volume).rjust(3, " ")
 
-        vol_label = control_font.render(vol_lbl_text, 1, (255, 255, 255))
-        CANVAS.blit(vol_label, (Config.starting_x + 70, 695))
+        Assets.text.draw(vol_lbl_text, control_font, Colors.WHITE,
+                         (config.starting_x + 70, config.ending_y - 57))
 
     def play_music(self, path):
         pygame.mixer.music.load(path)
@@ -63,15 +65,18 @@ class AudioControls:
 
 
 class DisplayControls:
-    def toggle_full_screen():
-        screen = pygame.display.get_surface()
-        if (screen.get_flags() & pygame.FULLSCREEN):
-            pygame.display.set_mode((750, 750))
+    def __init__(self):
+        self.fullscreen = False
+
+    def toggle_full_screen(self):
+        self.fullscreen = not self.fullscreen
+        if self.fullscreen:
+            config.CANVAS = pygame.display.set_mode(
+                config.monitor_size, pygame.FULLSCREEN)
         else:
-            info = pygame.display.Info()
-            pygame.display.set_mode(
-                (info.current_w, info.current_h), pygame.FULLSCREEN)
+            config.CANVAS = pygame.display.set_mode(
+                (config.WIDTH, config.HEIGHT), pygame.RESIZABLE)
 
 
 audio_cfg = AudioControls(soundList)
-display_cfg = DisplayControls
+display_cfg = DisplayControls()
