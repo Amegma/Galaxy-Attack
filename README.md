@@ -2,7 +2,7 @@
 
 # Galaxy Attack
 
-This project is an inspiration of an Atari game which is Space Invaders with some creativity of my own.
+This project comes under an open-source gaming organization called [Amegma](https://github.com/Amegma), and it is an inspiration of an arcade game which was Atari Space Invaders
 
 [Demo Game Video](https://youtu.be/ejA89NtTH2k)
 
@@ -10,7 +10,7 @@ This project is an inspiration of an Atari game which is Space Invaders with som
 
 - Python
 - Framework - PyGame
-- Other modules - Time, os & random
+- Other modules - time, os, sys, ctypes, etc.
 
 ## Guidelines to setup
 
@@ -19,13 +19,22 @@ This project is an inspiration of an Atari game which is Space Invaders with som
 - Python should be installed: `Python version > 3.6`
 - Pygame should be installed: `Pygame version > 1.9.5`
 
-### Execute
+### Run the game
+```
+python <file_path>/main.py
+```
 
-`python <file_path>/main.py`
+### Create a release
+```
+pyinstaller.exe .\main.spec --onefile --noconsole
+```
 
 ## DEMO
 
 #### IMAGES:
 
-<img src="/images/start.png" width=340px /><img src="/images/game.png" width=340px />
-<img src="/images/controls.png" width=340px /><img src="/images/scoreboard.png" width=340px />
+<img src="/images/home.png" width=340px /><img src="/images/game2.png" width=340px />
+<img src="/images/scoreboard2.png" width=340px /><img src="/images/paused.png" width=340px />
+<img src="/images/settings.png" width=340px /><img src="/images/ships.png" width=340px />
+<img src="/images/controls1.png" width=340px /><img src="/images/controls2.png" width=340px />
+<img src="/images/controls3.png" width=340px /><img src="/images/controls4.png" width=340px />

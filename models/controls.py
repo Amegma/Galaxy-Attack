@@ -8,7 +8,7 @@ from constants import Image, soundList, Font, Colors
 class AudioControls:
     def __init__(self, soundList):
         self.soundList = soundList
-        self.volume = 0
+        self.volume = 100
         self.muted = True if self.volume == 0 else False
         self.prev_volume = -1
 
