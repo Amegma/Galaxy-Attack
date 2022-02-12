@@ -4,17 +4,15 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
+from models.scores import scores
 from utils.assets import Assets
 from config import config
-from constants import Image, score_list, Font, Text, Colors
+from constants import Image, Font, Text, Colors
 
 
 def score_board():
     score_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     score_font = pygame.font.Font(Font.neue_font, 35)
-
-    score_list.sort()
-    score_list.reverse()
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
 
@@ -24,18 +22,33 @@ def score_board():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SCOREBOARD, score_title_font, Colors.GREEN,
-                         (config.center_x - 30, 168), True, False, True)
-        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 163))
+                         (config.center_x, 90), True, False, True)
+        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 160, 90))
 
-        if len(score_list) == 0:
+        if len(scores.get_scores()) == 0:
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
-                             (config.center_x, 250), True)
+                             (config.center_x, 180), True)
+        else:
+            Assets.image.draw(Image.LEVELS_IMAGE,
+                              (config.center_x-105, 160), True)
+            Assets.image.draw(Image.KILLS_IMAGE,
+                              (config.center_x+52, 160), True)
+            Assets.image.draw(Image.SCORE_IMAGE,
+                              (config.center_x+222, 160), True)
 
-        i = 0
-        for score in score_list[:5]:
-            Assets.text.draw(str(score), score_font, Colors.CYAN,
-                             (config.center_x-20, 250 + i * 40), True)
-            i += 1
+            for i, item in enumerate(scores.get_top_5()):
+                if item['status']:
+                    Assets.image.draw(
+                        Image.WON_IMAGE, (config.center_x-245, 240 + i*100), True, True)
+                else:
+                    Assets.image.draw(Image.SKULL_IMAGE_2,
+                                      (config.center_x-245, 240 + i*100), True, True)
+                Assets.text.draw(str(item['level']), score_font, Colors.CYAN,
+                                 (config.center_x-105, 220 + i*100), True)
+                Assets.text.draw(str(item['kills']), score_font, Colors.RED,
+                                 (config.center_x+52, 220 + i*100), True)
+                Assets.text.draw(str(item['score']), score_font, Colors.YELLOW,
+                                 (config.center_x+222, 220 + i*100), True)
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
 

@@ -4,8 +4,6 @@ import os
 from utils.resource_path import resource_path
 from utils.assets import Assets
 
-score_list = []
-
 # list of all game sounds
 soundList = []
 
@@ -80,7 +78,11 @@ class Image:
     EXIT_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'exit_button.png', 1/3)
 
     # Other Images
-    HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
+    HEART_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'heart.png', 1)
+    STAR_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'star.png', 1/4)
+    SKULL_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'skull.png', 1/58)
+    SKULL_IMAGE_2 = Assets.image.scale(Path.GRAPHICS_PATH, 'skull.png', 1/54)
+    WON_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'won.png', 5/20)
 
     PLUS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'plus.png', 1/6)
     MINUS_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'minus.png', 1/6)
@@ -90,10 +92,14 @@ class Image:
     PLAY_IMAGE_2 = Assets.image.scale(Path.GRAPHICS_PATH, 'play.png', 1/2.9)
 
     HOME_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'home.png', 2/5)
-
     NEXT_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'next_button.png', 1/3)
-
     BACK_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'back_button.png', 1/3)
+    LEVELS_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'levels_button.png', 1/3)
+    SCORE_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'score_button.png', 1/3)
+    KILLS_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'kills_button.png', 1/3)
 
     MOUSE = Assets.image.scale(Path.GRAPHICS_PATH, 'mouse.png', 1/2)
     LEFT_MOUSE_CLICK = Assets.image.scale(

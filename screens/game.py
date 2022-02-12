@@ -6,14 +6,14 @@ import random
 from models.ship import Player, Enemy
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
+from models.scores import scores
 from models.icon_button import IconButton
 from utils.collide import collide
 from utils.assets import Assets
-from utils.outlineImage import outlineImage
 from .background import bg_obj
 
 from config import config
-from constants import Path, Image, score_list, Font, Colors
+from constants import Path, Image, Font, Colors
 
 pause = False
 
@@ -23,7 +23,6 @@ play_btn = IconButton(Image.PLAY_IMAGE)
 def game(isMouse=False):
     global pause
     lives = 5
-    level = 0
     laser_vel = 10
 
     sub_font = pygame.font.Font(Font.neue_font, 40)
@@ -37,7 +36,7 @@ def game(isMouse=False):
     wave_length = 0
     enemy_vel = 1
 
-    player = Player(300, 585, mouse_movement=isMouse)
+    player = Player(config.center_x, 585, mouse_movement=isMouse)
     if isMouse == True:
         pygame.mouse.set_visible(False)
     elif isMouse == False:
@@ -68,27 +67,49 @@ def game(isMouse=False):
         # Lives
         for index in range(1, lives + 1):
             Assets.image.draw(Image.HEART_IMAGE,
-                              (config.starting_x + 37 * index - 10, 30))
+                              (config.starting_x + 37 * index - 7, 30))
 
         # Draw Text
-        Assets.text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
-                         (config.starting_x + 35, 75))
+        Assets.text.draw(f'{player.get_level()} / 10', sub_small_font, Colors.CYAN,
+                         (config.starting_x + 33, 75))
+
+        score = player.get_score()
+        leftScoreIdx = 0
+        if score >= 100 and score < 1000:
+            leftScoreIdx = 1
+        elif score >= 1000:
+            leftScoreIdx = 2
+
         score_label = Assets.text.render(
-            f'{player.get_score()}', sub_font, Colors.GREEN)
+            f'{score}', sub_font, Colors.GREEN)
         Assets.text.drawSurface(
             score_label, (config.ending_x - score_label.get_width() - 30, 20))
+        Assets.image.draw(Image.STAR_IMAGE,
+                          (config.ending_x - Image.SKULL_IMAGE.get_width() - 85 - leftScoreIdx*23, 26))
+
+        kills = player.get_kills()
+        leftKillsIdx = 0
+        if kills >= 100:
+            leftKillsIdx = 1
+
+        Assets.image.draw(Image.SKULL_IMAGE,
+                          (config.ending_x - Image.SKULL_IMAGE.get_width() - 85 - leftKillsIdx*15, 82))
+        kills_label = Assets.text.render(
+            f'{kills}', sub_font, Colors.RED)
+        Assets.text.drawSurface(
+            kills_label, (config.ending_x - kills_label.get_width() - 30, 75))
 
         if win:
-            score_list.append(player.get_score())
+            scores.append(True, player.get_level(), player.get_score(), player.get_kills())
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
 
         if lost:
-            score_list.append(player.get_score())
+            scores.append(False, player.get_level(), player.get_score(), player.get_kills())
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
-        if level >= 10 and boss_entry:
+        if player.get_level() >= 10 and boss_entry:
             Assets.text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
@@ -113,25 +134,25 @@ def game(isMouse=False):
             player.run = False
             pygame.mouse.set_visible(True)
 
-        if level == 10 and boss_entry:
+        if player.get_level() == 10 and boss_entry:
             redraw_window()
             time.sleep(2)
             boss_entry = False
-        elif level > 10:
+        elif player.get_level() > 10:
             win = True
             redraw_window()
             time.sleep(3)
             player.run = False
 
         if len(enemies) == 0:
-            level += 1
+            player.set_level()
             wave_length += 4
 
-            for i in range(wave_length if level < 10 else 1):
+            for i in range(wave_length if player.get_level() < 10 else 1):
                 enemies.append(Enemy(
                     random.randrange(50, config.WIDTH - 100),
                     random.randrange(-1200, -100),
-                    random.choice(['easy', 'medium', 'hard']) if level < 10 else 'boss')
+                    random.choice(['easy', 'medium', 'hard']) if player.get_level() < 10 else 'boss')
                 )
 
         for event in pygame.event.get():
@@ -179,6 +200,7 @@ def game(isMouse=False):
 
             if collide(enemy, player):
                 player.SCORE += 50
+                player.KILLS += 1
                 if enemy.ship_type == 'boss':
                     if enemy.boss_max_health - 5 <= 0:
                         # note: this is not seen as game is paused as soon as boss health reaches zero
@@ -241,6 +263,7 @@ def paused(player, isMouse):
                             pygame.mouse.set_visible(True)
                         unpause()
                     if home_btn.isOver():
+                        scores.append(False, player.get_level(), player.get_score(), player.get_kills())
                         player.run = False
                         unpause()
                         audio_cfg.play_music(Path.MENU_MUSIC_PATH)
@@ -253,6 +276,7 @@ def paused(player, isMouse):
                         pygame.mouse.set_visible(True)
                     unpause()
                 if event.key == pygame.K_BACKSPACE:
+                    scores.append(False, player.get_level(), player.get_score(), player.get_kills())
                     player.run = False
                     unpause()
                     audio_cfg.play_music(Path.MENU_MUSIC_PATH)

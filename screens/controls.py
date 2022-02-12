@@ -1,4 +1,3 @@
-from email.policy import default
 import pygame
 import sys
 
@@ -19,9 +18,7 @@ def controls():
     control_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     control_title_font_2 = pygame.font.Font(Font.edit_undo_font, 45)
     control_title_font_3 = pygame.font.Font(Font.edit_undo_font, 40)
-    control_font = pygame.font.Font(Font.neue_font, 30)
-    control_font_2 = pygame.font.Font(Font.neue_font, 40)
-    keys_font = pygame.font.Font(Font.neue_font, 30)
+    control_font = pygame.font.Font(Font.neue_font, 40)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
     back_btn = IconButton(Image.BACK_IMAGE)
@@ -39,7 +36,7 @@ def controls():
 
         Assets.text.draw('KEYBOARD', control_title_font_2, Colors.MAGENTA,
                          (config.center_x-265, 380))
-        Assets.text.draw('OR', control_font_2, Colors.WHITE,
+        Assets.text.draw('OR', control_font, Colors.WHITE,
                          (config.center_x-20, 445), True)
         Assets.image.draw(Image.WASD_KEYS, (config.center_x-280, 440))
         Assets.image.draw(Image.ARROW_KEYS, (config.center_x+30, 440))
@@ -56,7 +53,7 @@ def controls():
         Assets.text.draw('KEYBOARD', control_title_font_2, Colors.CYAN,
                          (config.center_x-265, 380))
         Assets.image.draw(Image.SPACEBAR_KEY, (config.center_x-20, 470))
-        Assets.text.draw('SPACEBAR', control_font_2, Colors.WHITE,
+        Assets.text.draw('SPACEBAR', control_font, Colors.WHITE,
                          (config.center_x-265, 460))
 
     def returnControlPage():
@@ -73,7 +70,7 @@ def controls():
         Assets.text.draw('KEYBOARD', control_title_font_2, Colors.ORANGE,
                          (config.center_x-265, 380))
         Assets.image.draw(Image.BACKSPACE_KEY, (config.center_x-20, 470))
-        Assets.text.draw('BACKSPACE', control_font_2, Colors.WHITE,
+        Assets.text.draw('BACKSPACE', control_font, Colors.WHITE,
                          (config.center_x-265, 460))
 
     def otherControlsPage():

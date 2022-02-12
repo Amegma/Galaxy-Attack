@@ -6,9 +6,9 @@ from utils.assets import Assets
 
 
 class IconButton:
-    def __init__(self, image, subtitle='', outline=False):
+    def __init__(self, image, subtitle=''):
         self.image = image
-        self.outline = outline
+        self.outline = False
         self.subtitle = subtitle
         self.rect = pygame.Rect(
             0, 0, self.image.get_width(), self.image.get_height())
