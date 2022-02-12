@@ -22,7 +22,6 @@ play_btn = IconButton(Image.PLAY_IMAGE)
 def game(isMouse=False):
     global pause
     lives = 5
-    level = 0
     laser_vel = 10
 
     sub_font = pygame.font.Font(Font.neue_font, 40)
@@ -70,7 +69,7 @@ def game(isMouse=False):
                               (config.starting_x + 37 * index - 7, 30))
 
         # Draw Text
-        Assets.text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
+        Assets.text.draw(f'{player.get_level()} / 10', sub_small_font, Colors.CYAN,
                          (config.starting_x + 33, 75))
 
         score = player.get_score()
@@ -102,7 +101,7 @@ def game(isMouse=False):
         if win:
             score_obj = {
                 "status": True,
-                "level": level,
+                "level": player.get_level(),
                 "score": player.get_score(),
                 "kills": player.get_kills(),
             }
@@ -113,7 +112,7 @@ def game(isMouse=False):
         if lost:
             score_obj = {
                 "status": False,
-                "level": level,
+                "level": player.get_level(),
                 "score": player.get_score(),
                 "kills": player.get_kills(),
             }
@@ -121,7 +120,7 @@ def game(isMouse=False):
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
-        if level >= 10 and boss_entry:
+        if player.get_level() >= 10 and boss_entry:
             Assets.text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
@@ -146,25 +145,25 @@ def game(isMouse=False):
             player.run = False
             pygame.mouse.set_visible(True)
 
-        if level == 10 and boss_entry:
+        if player.get_level() == 10 and boss_entry:
             redraw_window()
             time.sleep(2)
             boss_entry = False
-        elif level > 10:
+        elif player.get_level() > 10:
             win = True
             redraw_window()
             time.sleep(3)
             player.run = False
 
         if len(enemies) == 0:
-            level += 1
+            player.set_level()
             wave_length += 4
 
-            for i in range(wave_length if level < 10 else 1):
+            for i in range(wave_length if player.get_level() < 10 else 1):
                 enemies.append(Enemy(
                     random.randrange(50, config.WIDTH - 100),
                     random.randrange(-1200, -100),
-                    random.choice(['easy', 'medium', 'hard']) if level < 10 else 'boss')
+                    random.choice(['easy', 'medium', 'hard']) if player.get_level() < 10 else 'boss')
                 )
 
         for event in pygame.event.get():
@@ -275,6 +274,13 @@ def paused(player, isMouse):
                             pygame.mouse.set_visible(True)
                         unpause()
                     if home_btn.isOver():
+                        score_obj = {
+                            "status": False,
+                            "level": player.get_level(),
+                            "score": player.get_score(),
+                            "kills": player.get_kills(),
+                        }
+                        score_list.append(score_obj)
                         player.run = False
                         unpause()
                         audio_cfg.play_music(Path.MENU_MUSIC_PATH)
@@ -287,6 +293,13 @@ def paused(player, isMouse):
                         pygame.mouse.set_visible(True)
                     unpause()
                 if event.key == pygame.K_BACKSPACE:
+                    score_obj = {
+                        "status": False,
+                        "level": player.get_level(),
+                        "score": player.get_score(),
+                        "kills": player.get_kills(),
+                    }
+                    score_list.append(score_obj)
                     player.run = False
                     unpause()
                     audio_cfg.play_music(Path.MENU_MUSIC_PATH)

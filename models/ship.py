@@ -5,15 +5,10 @@ from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg
 from config import config
-from constants import Path, Image, Colors, Sound
+from constants import Path, Image, Colors, Sound, score_list
 
 
 class Ship:
-    CoolDown = 25
-    boss_max_health = 99
-    SCORE = 0
-    KILLS = 0
-
     def __init__(self, x, y, health=100):
         self.x = x
         self.y = y
@@ -22,6 +17,11 @@ class Ship:
         self.laser_img = None
         self.lasers = []
         self.cool_down_counter = 0
+        self.CoolDown = 25
+        self.boss_max_health = 99
+        self.SCORE = 0
+        self.KILLS = 0
+        self.level = 0
 
     def draw(self):
         # drawing lasers before the ship so that it doesn't appea
@@ -67,6 +67,12 @@ class Ship:
 
     def get_kills(self):
         return self.KILLS
+
+    def get_level(self):
+        return self.level
+
+    def set_level(self):
+        self.level += 1
 
 
 class Player(Ship):
@@ -123,6 +129,13 @@ class Player(Ship):
             self.shoot()
         # Return to main page
         if button[2] or keys[pygame.K_BACKSPACE]:
+            score_obj = {
+                "status": False,
+                "level": self.level,
+                "score": self.get_score(),
+                "kills": self.get_kills(),
+            }
+            score_list.append(score_obj)
             audio_cfg.play_music(Path.MENU_MUSIC_PATH)
             self.run = False
 
