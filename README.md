@@ -2,7 +2,7 @@
 
 # Galaxy Attack
 
-This project is an inspiration of an Atari game which is Space Invaders with some creativity of my own.
+This project comes under an open-source gaming organization called [Amegma](https://github.com/Amegma), and it is an inspiration of an arcade game which was Atari Space Invaders
 
 [Demo Game Video](https://youtu.be/ejA89NtTH2k)
 
