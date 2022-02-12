@@ -1,4 +1,5 @@
-from constants import BG
+from config import config
+from utils.assets import Assets
 
 
 class ScrollBackground():
@@ -20,13 +21,10 @@ class ScrollBackground():
         if self.bgY2 >= self.rectBGimg.height:
             self.bgY2 = - self.rectBGimg.height
 
-    def render(self, CANVAS):
-        screen_rect = CANVAS.get_rect()
-        centerx = screen_rect.centerx
-        x = centerx - self.rectBGimg.width / 2
-        CANVAS.blit(self.bgimage, (x, self.bgY1))
-        CANVAS.blit(self.bgimage, (x, self.bgY2))
+    def render(self):
+        Assets.image.draw(self.bgimage, (config.center_x, self.bgY1), True)
+        Assets.image.draw(self.bgimage, (config.center_x, self.bgY2), True)
 
 
-bg_obj = ScrollBackground(BG)
-slow_bg_obj = ScrollBackground(BG, 1.5)
+bg_obj = ScrollBackground(config.BG)
+slow_bg_obj = ScrollBackground(config.BG, 1.5)

@@ -1,7 +1,9 @@
 import pygame
-from screens.background import slow_bg_obj
 
+from config import config
 from utils.collide import collide
+from utils.assets import Assets
+
 
 class Laser:
     def __init__(self, x, y, img):
@@ -10,14 +12,10 @@ class Laser:
         self.img = img
         self.mask = pygame.mask.from_surface(self.img)
 
-    def draw(self, window):
+    def draw(self):
         # making laser's coordinates centered in the sprite
-        background_width = slow_bg_obj.rectBGimg.width
-        screen_rect = window.get_rect()
-        center_x = screen_rect.centerx
-        starting_x = center_x - background_width//2
-        x_offset, y_offset = self.img.get_size()
-        window.blit(self.img, (starting_x+self.x-x_offset/2, self.y-y_offset/2))
+        Assets.image.draw(
+            self.img, (config.starting_x + self.x, self.y), True, True)
 
     def move(self, vel):
         self.y += vel

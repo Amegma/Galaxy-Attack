@@ -1,8 +1,8 @@
 import os
 import pygame
 
-from utils.resource_path import resource_path
-from constants import EXPLOSION_PATH, EXPLODE_SOUND, LASER_HIT_SOUND
+from utils.assets import Assets
+from constants import Path, Sound
 
 explosion_group = pygame.sprite.Group()
 
@@ -12,8 +12,7 @@ class Explosion(pygame.sprite.Sprite):
         super().__init__()
         self.images = []
         for num in range(0, num_frames):
-            img = pygame.image.load(resource_path(os.path.join(
-                EXPLOSION_PATH, f"tile{num:03}.png")))
+            img = Assets.image.load(Path.EXPLOSION_PATH, f"tile{num:03}.png")
             img = pygame.transform.scale(img, (size, size))
             self.images.append(img)
         self.index = 0
@@ -23,9 +22,9 @@ class Explosion(pygame.sprite.Sprite):
         self.counter = 0
         # different sound based on explosion size
         if size < 40:
-            LASER_HIT_SOUND.play()
+            Sound.LASER_HIT_SOUND.play()
         else:
-            EXPLODE_SOUND.play()
+            Sound.EXPLODE_SOUND.play()
 
     def update(self):
         explosion_speed = 4
