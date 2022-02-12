@@ -10,7 +10,7 @@ This project comes under an open-source gaming organization called [Amegma](http
 
 - Python
 - Framework - PyGame
-- Other modules - Time, os & random
+- Other modules - time, os, sys, ctypes, etc.
 
 ## Guidelines to setup
 
