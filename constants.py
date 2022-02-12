@@ -94,10 +94,14 @@ class Image:
     PLAY_IMAGE_2 = Assets.image.scale(Path.GRAPHICS_PATH, 'play.png', 1/2.9)
 
     HOME_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'home.png', 2/5)
-
     NEXT_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'next_button.png', 1/3)
-
     BACK_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'back_button.png', 1/3)
+    LEVELS_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'levels_button.png', 1/3)
+    SCORE_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'score_button.png', 1/3)
+    KILLS_IMAGE = Assets.image.scale(
+        Path.GRAPHICS_PATH, 'kills_button.png', 1/3)
 
     MOUSE = Assets.image.scale(Path.GRAPHICS_PATH, 'mouse.png', 1/2)
     LEFT_MOUSE_CLICK = Assets.image.scale(

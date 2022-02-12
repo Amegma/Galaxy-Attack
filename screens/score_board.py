@@ -23,26 +23,33 @@ def score_board():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SCOREBOARD, score_title_font, Colors.GREEN,
-                         (config.center_x - 30, 100), True, False, True)
-        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 100))
+                         (config.center_x - 30, 90), True, False, True)
+        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 90))
 
         if len(scores) == 0:
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
-                             (config.center_x, 190), True)
+                             (config.center_x, 180), True)
+        else:
+            Assets.image.draw(Image.LEVELS_IMAGE,
+                              (config.center_x-105, 160), True)
+            Assets.image.draw(Image.KILLS_IMAGE,
+                              (config.center_x+52, 160), True)
+            Assets.image.draw(Image.SCORE_IMAGE,
+                              (config.center_x+222, 160), True)
 
-        for i, item in enumerate(scores[:5]):
-            if item['status']:
-                Assets.image.draw(
-                    Image.WON_IMAGE, (config.center_x-245, 220 + i*100), True, True)
-            else:
-                Assets.image.draw(Image.SKULL_IMAGE_2,
-                                  (config.center_x-245, 220 + i*100), True, True)
-            Assets.text.draw(str(item['level']), score_font, Colors.CYAN,
-                             (config.center_x-105, 200 + i*100), True)
-            Assets.text.draw(str(item['kills']), score_font, Colors.RED,
-                             (config.center_x+52, 200 + i*100), True)
-            Assets.text.draw(str(item['score']), score_font, Colors.YELLOW,
-                             (config.center_x+222, 200 + i*100), True)
+            for i, item in enumerate(scores[:5]):
+                if item['status']:
+                    Assets.image.draw(
+                        Image.WON_IMAGE, (config.center_x-245, 240 + i*100), True, True)
+                else:
+                    Assets.image.draw(Image.SKULL_IMAGE_2,
+                                      (config.center_x-245, 240 + i*100), True, True)
+                Assets.text.draw(str(item['level']), score_font, Colors.CYAN,
+                                 (config.center_x-105, 220 + i*100), True)
+                Assets.text.draw(str(item['kills']), score_font, Colors.RED,
+                                 (config.center_x+52, 220 + i*100), True)
+                Assets.text.draw(str(item['score']), score_font, Colors.YELLOW,
+                                 (config.center_x+222, 220 + i*100), True)
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
