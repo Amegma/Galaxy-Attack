@@ -4,16 +4,15 @@ import sys
 from .background import slow_bg_obj
 from models.icon_button import IconButton
 from models.controls import audio_cfg, display_cfg
+from models.scores import scores
 from utils.assets import Assets
 from config import config
-from constants import Image, score_list, Font, Text, Colors
+from constants import Image, Font, Text, Colors
 
 
 def score_board():
     score_title_font = pygame.font.Font(Font.edit_undo_font, 50)
     score_font = pygame.font.Font(Font.neue_font, 35)
-
-    scores = sorted(score_list, key=lambda item: item['score'], reverse=True)
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
 
@@ -26,7 +25,7 @@ def score_board():
                          (config.center_x - 30, 90), True, False, True)
         Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 90))
 
-        if len(scores) == 0:
+        if len(scores.get_scores()) == 0:
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
                              (config.center_x, 180), True)
         else:
@@ -37,7 +36,7 @@ def score_board():
             Assets.image.draw(Image.SCORE_IMAGE,
                               (config.center_x+222, 160), True)
 
-            for i, item in enumerate(scores[:5]):
+            for i, item in enumerate(scores.get_top_5()):
                 if item['status']:
                     Assets.image.draw(
                         Image.WON_IMAGE, (config.center_x-245, 240 + i*100), True, True)

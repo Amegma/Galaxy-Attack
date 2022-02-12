@@ -6,13 +6,14 @@ import random
 from models.ship import Player, Enemy
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
+from models.scores import scores
 from models.icon_button import IconButton
 from utils.collide import collide
 from utils.assets import Assets
 from .background import bg_obj
 
 from config import config
-from constants import Path, Image, score_list, Font, Colors
+from constants import Path, Image, Font, Colors
 
 pause = False
 
@@ -99,24 +100,12 @@ def game(isMouse=False):
             kills_label, (config.ending_x - kills_label.get_width() - 30, 75))
 
         if win:
-            score_obj = {
-                "status": True,
-                "level": player.get_level(),
-                "score": player.get_score(),
-                "kills": player.get_kills(),
-            }
-            score_list.append(score_obj)
+            scores.append(True, player.get_level(), player.get_score(), player.get_kills())
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
 
         if lost:
-            score_obj = {
-                "status": False,
-                "level": player.get_level(),
-                "score": player.get_score(),
-                "kills": player.get_kills(),
-            }
-            score_list.append(score_obj)
+            scores.append(False, player.get_level(), player.get_score(), player.get_kills())
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
@@ -274,13 +263,7 @@ def paused(player, isMouse):
                             pygame.mouse.set_visible(True)
                         unpause()
                     if home_btn.isOver():
-                        score_obj = {
-                            "status": False,
-                            "level": player.get_level(),
-                            "score": player.get_score(),
-                            "kills": player.get_kills(),
-                        }
-                        score_list.append(score_obj)
+                        scores.append(False, player.get_level(), player.get_score(), player.get_kills())
                         player.run = False
                         unpause()
                         audio_cfg.play_music(Path.MENU_MUSIC_PATH)
@@ -293,13 +276,7 @@ def paused(player, isMouse):
                         pygame.mouse.set_visible(True)
                     unpause()
                 if event.key == pygame.K_BACKSPACE:
-                    score_obj = {
-                        "status": False,
-                        "level": player.get_level(),
-                        "score": player.get_score(),
-                        "kills": player.get_kills(),
-                    }
-                    score_list.append(score_obj)
+                    scores.append(False, player.get_level(), player.get_score(), player.get_kills())
                     player.run = False
                     unpause()
                     audio_cfg.play_music(Path.MENU_MUSIC_PATH)

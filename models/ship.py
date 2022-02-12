@@ -4,8 +4,9 @@ from utils.assets import Assets
 from models.laser import Laser
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg
+from models.scores import scores
 from config import config
-from constants import Path, Image, Colors, Sound, score_list
+from constants import Path, Image, Colors, Sound
 
 
 class Ship:
@@ -131,11 +132,11 @@ class Player(Ship):
         if button[2] or keys[pygame.K_BACKSPACE]:
             score_obj = {
                 "status": False,
-                "level": self.level,
+                "level": self.get_level(),
                 "score": self.get_score(),
                 "kills": self.get_kills(),
             }
-            score_list.append(score_obj)
+            scores.append(False, self.get_level(), self.get_score(), self.get_kills())
             audio_cfg.play_music(Path.MENU_MUSIC_PATH)
             self.run = False
 

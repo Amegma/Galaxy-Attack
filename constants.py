@@ -4,8 +4,6 @@ import os
 from utils.resource_path import resource_path
 from utils.assets import Assets
 
-score_list = []
-
 # list of all game sounds
 soundList = []
 
