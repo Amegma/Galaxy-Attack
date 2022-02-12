@@ -67,23 +67,33 @@ def game(isMouse=False):
         # Lives
         for index in range(1, lives + 1):
             Assets.image.draw(Image.HEART_IMAGE,
-                              (config.starting_x + 37 * index - 10, 30))
+                              (config.starting_x + 37 * index - 7, 30))
 
         # Draw Text
         Assets.text.draw(f'{level} / 10', sub_small_font, Colors.CYAN,
-                         (config.starting_x + 35, 75))
+                         (config.starting_x + 33, 75))
+
+        score = player.get_score()
+        leftScoreIdx = 0
+        if score >= 100 and score < 1000:
+            leftScoreIdx = 1
+        elif score >= 1000:
+            leftScoreIdx = 2
+
         score_label = Assets.text.render(
-            f'{player.get_score()}', sub_font, Colors.GREEN)
+            f'{score}', sub_font, Colors.GREEN)
         Assets.text.drawSurface(
             score_label, (config.ending_x - score_label.get_width() - 30, 20))
+        Assets.image.draw(Image.STAR_IMAGE,
+                          (config.ending_x - Image.SKULL_IMAGE.get_width() - 85 - leftScoreIdx*23, 26))
 
         kills = player.get_kills()
-        leftIdx = 0
+        leftKillsIdx = 0
         if kills >= 100:
-            leftIdx = 1
+            leftKillsIdx = 1
 
         Assets.image.draw(Image.SKULL_IMAGE,
-                          (config.ending_x - Image.SKULL_IMAGE.get_width() - 85 - leftIdx*15, 82))
+                          (config.ending_x - Image.SKULL_IMAGE.get_width() - 85 - leftKillsIdx*15, 82))
         kills_label = Assets.text.render(
             f'{kills}', sub_font, Colors.RED)
         Assets.text.drawSurface(

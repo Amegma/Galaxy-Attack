@@ -30,8 +30,7 @@ def score_board():
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
                              (config.center_x, 190), True)
 
-        i = 0
-        for item in scores[:5]:
+        for i, item in enumerate(scores[:5]):
             if item['status']:
                 Assets.image.draw(
                     Image.WON_IMAGE, (config.center_x-245, 220 + i*100), True, True)
@@ -44,7 +43,6 @@ def score_board():
                              (config.center_x+52, 200 + i*100), True)
             Assets.text.draw(str(item['score']), score_font, Colors.YELLOW,
                              (config.center_x+222, 200 + i*100), True)
-            i += 1
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
 

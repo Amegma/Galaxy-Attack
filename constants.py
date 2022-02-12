@@ -80,7 +80,8 @@ class Image:
     EXIT_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'exit_button.png', 1/3)
 
     # Other Images
-    HEART_IMAGE = Assets.image.load(Path.GRAPHICS_PATH, 'heart.png')
+    HEART_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'heart.png', 1)
+    STAR_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'star.png', 1/4)
     SKULL_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'skull.png', 1/58)
     SKULL_IMAGE_2 = Assets.image.scale(Path.GRAPHICS_PATH, 'skull.png', 1/54)
     WON_IMAGE = Assets.image.scale(Path.GRAPHICS_PATH, 'won.png', 5/20)
