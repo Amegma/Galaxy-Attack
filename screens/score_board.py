@@ -22,8 +22,8 @@ def score_board():
         slow_bg_obj.render()
 
         Assets.text.draw(Text.SCOREBOARD, score_title_font, Colors.GREEN,
-                         (config.center_x - 30, 90), True, False, True)
-        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 130, 90))
+                         (config.center_x, 90), True, False, True)
+        Assets.image.draw(Image.TROPHY_IMAGE, (config.center_x + 160, 90))
 
         if len(scores.get_scores()) == 0:
             Assets.text.draw('You Haven\'t Played Yet!', score_font, Colors.CYAN,
