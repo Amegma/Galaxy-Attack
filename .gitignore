@@ -8,3 +8,4 @@ todo.md
 build/
 dist/
 gen_assets_string.py
+.venv/
