@@ -16,7 +16,7 @@ This project comes under an open-source gaming organization called [Amegma](http
 
 ### Prerequisites
 
-- Python should be installed: `Python version > 3.6`
+- Python should be installed: `Python version > 3.10`
 - Pygame should be installed: `Pygame version > 1.9.5`
 
 ### Run the game
