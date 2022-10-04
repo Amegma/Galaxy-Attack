@@ -37,17 +37,17 @@ def score_board():
                               (config.center_x+222, 160), True)
 
             for i, item in enumerate(scores.get_top_5()):
-                if item['status']:
+                if item.status:
                     Assets.image.draw(
                         Image.WON_IMAGE, (config.center_x-245, 240 + i*100), True, True)
                 else:
                     Assets.image.draw(Image.SKULL_IMAGE_2,
                                       (config.center_x-245, 240 + i*100), True, True)
-                Assets.text.draw(str(item['level']), score_font, Colors.CYAN,
+                Assets.text.draw(str(item.level), score_font, Colors.CYAN,
                                  (config.center_x-105, 220 + i*100), True)
-                Assets.text.draw(str(item['kills']), score_font, Colors.RED,
+                Assets.text.draw(str(item.kills), score_font, Colors.RED,
                                  (config.center_x+52, 220 + i*100), True)
-                Assets.text.draw(str(item['score']), score_font, Colors.YELLOW,
+                Assets.text.draw(str(item.score), score_font, Colors.YELLOW,
                                  (config.center_x+222, 220 + i*100), True)
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
