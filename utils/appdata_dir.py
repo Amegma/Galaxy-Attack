@@ -5,7 +5,7 @@ Inspired from: https://stackoverflow.com/a/61901696/10120928
 import sys
 from os import getenv
 from pathlib import Path
-from config import config
+import constants
 
 
 def _user_data_dir():
@@ -37,8 +37,7 @@ def app_data_dir() -> Path:
 	Return the AppData Dir for current project.
 	Creates it if it doesn't exist.
 	"""
-	app_name = config.TITLE
-	dir = _user_data_dir() / app_name
+	dir = _user_data_dir() / constants.APP_NAME
 	dir.mkdir(parents=True, exist_ok=True)
 	return dir
 
