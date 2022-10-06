@@ -125,6 +125,7 @@ class Sound:
     ENEMY_LASER_SOUND = Assets.sound.load(Path.SOUND_PATH, 'enemylaser.wav')
     EXPLODE_SOUND = Assets.sound.load(Path.SOUND_PATH, 'explode.wav')
     LASER_HIT_SOUND = Assets.sound.load(Path.SOUND_PATH, 'laser_hit.wav')
+    GAME_OVER_SOUND = Assets.sound.load(Path.SOUND_PATH, 'gameover.wav')
 
 
 # adding sounds to the list
@@ -132,6 +133,7 @@ soundList.append(Sound.PLAYER_LASER_SOUND)
 soundList.append(Sound.ENEMY_LASER_SOUND)
 soundList.append(Sound.EXPLODE_SOUND)
 soundList.append(Sound.LASER_HIT_SOUND)
+soundList.append(Sound.GAME_OVER_SOUND)
 
 
 class Colors:
