@@ -20,7 +20,6 @@ class Config:
             (self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
 
         self.monitor_size = pygame.display.Info().current_w, pygame.display.Info().current_h
-        # print(pygame.display.Info())
 
         # Set Background Dimensions
         self.BG = pygame.transform.scale(
