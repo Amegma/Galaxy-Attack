@@ -13,7 +13,7 @@ from utils.assets import Assets
 from .background import bg_obj
 
 from config import config
-from constants import Path, Image, Font, Colors
+from constants import Path, Image, Font, Colors, Sound
 
 pause = False
 
@@ -106,6 +106,7 @@ def game(isMouse=False):
 
         if lost:
             scores.append(False, player.get_level(), player.get_score(), player.get_kills())
+            Sound.GAME_OVER_SOUND.play()
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
