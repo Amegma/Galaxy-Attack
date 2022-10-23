@@ -26,7 +26,7 @@ python <file_path>/main.py
 
 ### Create a release
 ```
-pyinstaller.exe .\main.spec --onefile --noconsole
+pyinstaller.exe .\main.spec
 ```
 
 ## DEMO
