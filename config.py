@@ -16,9 +16,10 @@ class Config:
         self.backgroundImage = pygame.image.load(resource_path(
             os.path.join('assets', 'graphics', 'background-black-wide.png')))
 
-        windows_user = ctypes.windll.user32
-        self.monitor_size = (windows_user.GetSystemMetrics(0),
-                             windows_user.GetSystemMetrics(1))
+        self.CANVAS = pygame.display.set_mode(
+            (self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
+
+        self.monitor_size = pygame.display.Info().current_w, pygame.display.Info().current_h
 
         # Set Background Dimensions
         self.BG = pygame.transform.scale(
@@ -27,10 +28,7 @@ class Config:
         self.FPS = 60
         self.clock = pygame.time.Clock()
 
-        # print(pygame.display.Info())
-        self.CANVAS = pygame.display.set_mode(
-            (self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
-
+        
         self.screen_rect = self.CANVAS.get_rect()
         self.center_x = self.screen_rect.centerx
         self.starting_x = 0
