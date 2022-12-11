@@ -1,0 +1,47 @@
+name: Github Release
+
+# Controls when the workflow will run
+on:
+  release:
+    types: [published]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  release:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+        cache: 'pip'
+    - run: |
+        pip3 install -r requirements.txt pyinstaller
+        pyinstaller main.spec
+
+    - name: Create Github Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: dist/main.exe
+        allowUpdates: true
+        omitBodyDuringUpdate: true
+        omitDraftDuringUpdate: true
+        omitNameDuringUpdate: true
+        omitPrereleaseDuringUpdate: true
+
+    - name: Save EXE to Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: EXE
+        path: dist/main.exe

@@ -9,7 +9,7 @@ from utils.appdata_dir import db_path
 
 class Db:
 
-	def __init__(self, file_path: Path | str) -> None:
+	def __init__(self, file_path: 'Path | str') -> None:
 		self.con = sqlite3.connect(file_path)
 		self._init_db()
 
