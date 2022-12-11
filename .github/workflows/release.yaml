@@ -40,8 +40,8 @@ jobs:
         omitNameDuringUpdate: true
         omitPrereleaseDuringUpdate: true
 
-    - name: Save APK to Artifacts
+    - name: Save EXE to Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: APK
+        name: EXE
         path: dist/main.exe
